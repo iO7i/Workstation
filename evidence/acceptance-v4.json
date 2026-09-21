@@ -1,0 +1,357 @@
+{
+  "version": "0.4.0-alpha.1",
+  "cases": [
+    {
+      "id": "V4-001",
+      "area": "identity",
+      "required_behavior": "Reject reused PID with changed creation time; do not bind stale parent lineage.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-002",
+      "area": "identity",
+      "required_behavior": "An observed executable-file digest is not loaded-image provenance; unknown cannot authorize actions.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-003",
+      "area": "identity",
+      "required_behavior": "Managed protocol session binding and configured hook ancestry agree on project/session scope.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-004",
+      "area": "identity",
+      "required_behavior": "Ambiguous/shared hook ancestors remain nonexclusive and protected.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-005",
+      "area": "identity",
+      "required_behavior": "Incomplete global process coverage cannot prove an orphan or disposal safety.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-006",
+      "area": "health",
+      "required_behavior": "Required or contradictory evidence unknown produces insufficient evidence, not confirmed root cause.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-007",
+      "area": "health",
+      "required_behavior": "Stale health/profile data and changed installation digest invalidate old correlations.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-008",
+      "area": "health",
+      "required_behavior": "Unsupported version/protocol returns an explicit unsupported result without fallback shell execution.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-009",
+      "area": "workspace",
+      "required_behavior": "Dirty tracked, untracked or ignored content blocks cleanup even with manual quiescence.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-010",
+      "area": "workspace",
+      "required_behavior": "Local-only commits, work in progress, submodules and missing coverage remain protected.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-011",
+      "area": "workspace",
+      "required_behavior": "Expired/unreleased primary session is uncertain and blocks cleanup.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-012",
+      "area": "workspace",
+      "required_behavior": "Main worktree, bare repository and locked worktree removal are refused.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-013",
+      "area": "workspace",
+      "required_behavior": "Work Item/worktree/branch/file overlap is reported without killing or switching owners.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-014",
+      "area": "workspace",
+      "required_behavior": "Changed HEAD/status/path identity after preview invalidates removal.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-015",
+      "area": "workspace",
+      "required_behavior": "Preservation ref is created only with zero-old/no-overwrite semantics and survives failures.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-016",
+      "area": "workspace",
+      "required_behavior": "Nonforce removal cannot delete a branch or invoke broad prune.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-017",
+      "area": "workspace",
+      "required_behavior": "Destination parent identity replacement, broken link and access denied never mean empty.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-018",
+      "area": "workspace",
+      "required_behavior": "Worktrunk uses exact empty config and declines remote CI/summary collection or project hook execution.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-019",
+      "area": "workspace",
+      "required_behavior": "Created worktree is verified against requested repository/HEAD/branch; partial creation not automatically destroyed.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-020",
+      "area": "chronicle",
+      "required_behavior": "Configured lifecycle events are scoped and idempotent where applicable; turn-end does not end a session.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-021",
+      "area": "chronicle",
+      "required_behavior": "Same external session ID in different project/vendor cannot merge history or authority.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-022",
+      "area": "chronicle",
+      "required_behavior": "Hook-reported decisions are proposals, never silently accepted.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-023",
+      "area": "atlas",
+      "required_behavior": "Local credential rotation failure before/after file write preserves existing head or records an orphan encrypted file.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-024",
+      "area": "atlas",
+      "required_behavior": "Compare-and-swap rejects concurrent/stale secret-version transitions.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-025",
+      "area": "atlas",
+      "required_behavior": "Revoked head cannot fall through to a legacy ciphertext resolver.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-026",
+      "area": "atlas",
+      "required_behavior": "Credential generation change invalidates pending effects in the affected environment.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-027",
+      "area": "atlas",
+      "required_behavior": "Wrong user/machine/tampered DPAPI value fails; recovery status distinguishes metadata from decryptability.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-028",
+      "area": "atlas",
+      "required_behavior": "Reports, MCP, plans, arguments, journal errors and share output contain no injected secret canary.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-029",
+      "area": "capabilities",
+      "required_behavior": "Existing availability is based on fresh scoped profile evidence, not mere catalog membership.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-030",
+      "area": "capabilities",
+      "required_behavior": "Adoption produces separate resource/decision proposals without applying or accepting them.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-031",
+      "area": "capabilities",
+      "required_behavior": "Revision changes invalidate applicability; saved/dismissed feedback stays appropriately scoped.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-032",
+      "area": "economics",
+      "required_behavior": "Copilot unknown/unlimited quota and missing/reset-changing timestamp do not produce a fabricated runway.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-033",
+      "area": "economics",
+      "required_behavior": "Account-isolated caches cannot mix two integrations with the same provider or label.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-034",
+      "area": "economics",
+      "required_behavior": "Claude missing statusline window stays unknown; cost remains estimated not subscription debit.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-035",
+      "area": "economics",
+      "required_behavior": "Gemini cumulative session tokens never appear as remaining subscription or context capacity.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-036",
+      "area": "economics",
+      "required_behavior": "Bad/negative/nonfinite numeric fields are rejected without recording raw provider text.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-037",
+      "area": "protocol",
+      "required_behavior": "Copilot Content-Length rejects duplicate/oversized/truncated frames and noncorrelated results.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-038",
+      "area": "protocol",
+      "required_behavior": "Unexpected protocol revision or permission/options response rejects continuation before prompt.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-039",
+      "area": "protocol",
+      "required_behavior": "Configured providers cannot invoke arbitrary host tools; unadvertised ACP load/auth/mode remains unsupported.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-040",
+      "area": "protocol",
+      "required_behavior": "Resume binds the exact project/workspace identity and does not displace an existing primary.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-041",
+      "area": "protocol",
+      "required_behavior": "Failure/timeout preserves uncertain ownership and does not declare tests or Work Item done.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-042",
+      "area": "archive",
+      "required_behavior": "Only old terminal records are archived; running/indeterminate entries stay in active storage.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-043",
+      "area": "archive",
+      "required_behavior": "Crash before/after each archive write/transaction is recoverable without losing logical history.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-044",
+      "area": "archive",
+      "required_behavior": "Tampered/missing archive pack or entry digest fails hydration rather than hiding data loss.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-045",
+      "area": "archive",
+      "required_behavior": "Backup database and archive companions restore together into a new home only.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-046",
+      "area": "archive",
+      "required_behavior": "Archive file/count limits stop optional archival; approved records and required backups are preserved.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-047",
+      "area": "shared",
+      "required_behavior": "Fresh install, v1/v2/v3 to v4 migration, failure rollback and source manifest remain coherent.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-048",
+      "area": "shared",
+      "required_behavior": "13 read-only MCP tools and cached context perform no external effects or unexpected scans.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-049",
+      "area": "shared",
+      "required_behavior": "Windows lock/job/pipe teardown, Unicode/reparse/ACL coexistence and no C fallback pass on actual host.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    },
+    {
+      "id": "V4-050",
+      "area": "release",
+      "required_behavior": "Authenticated real multi-agent task and quota exercises are explicitly authorized and independently reported.",
+      "status": "not_executed_user_certification_hold",
+      "scope": "future_product_or_integration_gate"
+    }
+  ],
+  "executed": 0,
+  "not_a_pass_count": true
+}

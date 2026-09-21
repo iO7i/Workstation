@@ -1,0 +1,18 @@
+{
+  "response": "SYNTHETIC_ASSISTANT_CONTENT_CANARY_DO_NOT_RETAIN",
+  "stats": {
+    "models": {
+      "synthetic-model": {
+        "tokens": {
+          "input": 100,
+          "prompt": 200,
+          "candidates": 20,
+          "total": 220,
+          "cached": 100,
+          "thoughts": 0,
+          "tool": 0
+        }
+      }
+    }
+  }
+}

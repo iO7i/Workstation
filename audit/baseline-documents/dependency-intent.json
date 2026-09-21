@@ -1,0 +1,11 @@
+{
+  "version": "0.4.0-alpha.1",
+  "direct_pins_source": "Cargo.toml",
+  "new_external_runtime_dependencies": [],
+  "database_schema": 4,
+  "workspace_crates": 3,
+  "real_resolved_graph": null,
+  "sbom": null,
+  "certification_required": "Resolve with Cargo, review advisories/licenses and pin actual CLI binaries/protocol revisions later.",
+  "not_a_fake_lock_or_resolved_sbom": true
+}

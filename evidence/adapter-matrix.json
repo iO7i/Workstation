@@ -1,0 +1,323 @@
+{
+    "version":  "0.4.0-alpha.4",
+    "derivation":  "Source declarations plus Phase 2 native evidence; each row remains operation-specific.",
+    "adapters":  [
+                     {
+                         "adapter":  "Codex",
+                         "implemented_operations":  [
+                                                        "version_probe",
+                                                        "thread_list",
+                                                        "quota_read",
+                                                        "new_turn",
+                                                        "native_resume"
+                                                    ],
+                         "unsupported_operations":  [
+                                                        "private_desktop_db_repair_certification",
+                                                        "clean_continuation_completion_not_yet_certified"
+                                                    ],
+                         "primary_sources":  [
+                                                 "https://developers.openai.com/codex/app-server/"
+                                             ],
+                         "tested_versions":  [
+                                                 "codex-cli 0.155.0-alpha.2.6"
+                                             ],
+                         "runtime_status":  "native_partial_certified",
+                         "proof_kind":  "exact_pin_version_app_server_quota_scoped_sessions_and_real_partial_continuation"
+                     },
+                     {
+                         "adapter":  "Claude",
+                         "implemented_operations":  [
+                                                        "version_probe",
+                                                        "json_print_continuation",
+                                                        "native_resume",
+                                                        "lifecycle_import",
+                                                        "statusline_import",
+                                                        "configured_statusline_hook"
+                                                    ],
+                         "unsupported_operations":  [
+                                                        "exact_independent_subscription_poll"
+                                                    ],
+                         "primary_sources":  [
+                                                 "https://code.claude.com/docs/en/cli-reference",
+                                                 "https://code.claude.com/docs/en/hooks"
+                                             ],
+                         "tested_versions":  [
+                                                 "2.1.223 (Claude Code)"
+                                             ],
+                         "runtime_status":  "native_version_pass_continuation_blocked_not_logged_in",
+                         "proof_kind":  "exact_pin_version_and_real_session_binding_before_auth_failure"
+                     },
+                     {
+                         "adapter":  "CursorAcp",
+                         "implemented_operations":  [
+                                                        "version_probe",
+                                                        "acp_new",
+                                                        "acp_load_if_advertised",
+                                                        "acp_prompt"
+                                                    ],
+                         "unsupported_operations":  [
+                                                        "individual_quota_api"
+                                                    ],
+                         "primary_sources":  [
+                                                 "https://cursor.com/docs/cli/acp"
+                                             ],
+                         "tested_versions":  [
+                                                 "Cursor editor 2.3.34"
+                                             ],
+                         "runtime_status":  "blocked_missing_cursor_agent_cli",
+                         "proof_kind":  "editor_inventory_only"
+                     },
+                     {
+                         "adapter":  "GrokAcp",
+                         "implemented_operations":  [
+                                                        "version_probe",
+                                                        "acp_new",
+                                                        "acp_load_if_advertised",
+                                                        "acp_prompt"
+                                                    ],
+                         "unsupported_operations":  [
+                                                        "subscription_quota_api"
+                                                    ],
+                         "primary_sources":  [
+                                                 "https://docs.x.ai/build/cli/headless-scripting"
+                                             ],
+                         "tested_versions":  [
+                                                 "grok 0.2.112 (9bbd559437) [stable]"
+                                             ],
+                         "runtime_status":  "native_protocol_health_pass_continuation_blocked_not_signed_in",
+                         "proof_kind":  "exact_pin_version_acp_initialize_and_advertised_auth_method_ids",
+                         "observed_auth_method_ids":  [
+                                                          "grok.com"
+                                                      ]
+                     },
+                     {
+                         "adapter":  "GeminiAcp",
+                         "implemented_operations":  [
+                                                        "version_probe",
+                                                        "acp_initialize",
+                                                        "acp_new",
+                                                        "acp_resume_if_advertised",
+                                                        "acp_list_if_advertised",
+                                                        "acp_prompt",
+                                                        "lifecycle_hook",
+                                                        "session_metrics_import"
+                                                    ],
+                         "unsupported_operations":  [
+                                                        "read_only_plan_guarantee",
+                                                        "consumer_quota_api"
+                                                    ],
+                         "primary_sources":  [
+                                                 "https://geminicli.com/docs/cli/acp-mode/",
+                                                 "https://geminicli.com/docs/hooks/",
+                                                 "https://geminicli.com/docs/cli/headless/"
+                                             ],
+                         "tested_versions":  [
+
+                                             ],
+                         "runtime_status":  "unverified_source_only",
+                         "proof_kind":  "declarative_source_matrix_not_application_output"
+                     },
+                     {
+                         "adapter":  "OpenCode",
+                         "implemented_operations":  [
+                                                        "version_probe",
+                                                        "acp_initialize",
+                                                        "acp_new",
+                                                        "acp_resume_if_advertised",
+                                                        "acp_list_if_advertised",
+                                                        "acp_prompt"
+                                                    ],
+                         "unsupported_operations":  [
+                                                        "consumer_quota_api",
+                                                        "unregistered_native_session_resume"
+                                                    ],
+                         "primary_sources":  [
+                                                 "https://opencode.ai/docs/acp/"
+                                             ],
+                         "tested_versions":  [
+
+                                             ],
+                         "runtime_status":  "unverified_source_only",
+                         "proof_kind":  "declarative_source_matrix_not_application_output"
+                     },
+                     {
+                         "adapter":  "Cline",
+                         "implemented_operations":  [
+                                                        "version_probe",
+                                                        "acp_initialize",
+                                                        "acp_new",
+                                                        "acp_resume_if_advertised",
+                                                        "acp_list_if_advertised",
+                                                        "acp_prompt"
+                                                    ],
+                         "unsupported_operations":  [
+                                                        "consumer_quota_api",
+                                                        "automatic_doctor_fix"
+                                                    ],
+                         "primary_sources":  [
+                                                 "https://github.com/cline/cline/blob/main/docs/usage/acp.mdx"
+                                             ],
+                         "tested_versions":  [
+
+                                             ],
+                         "runtime_status":  "unverified_source_only",
+                         "proof_kind":  "declarative_source_matrix_not_application_output"
+                     },
+                     {
+                         "adapter":  "Copilot",
+                         "implemented_operations":  [
+                                                        "version_probe",
+                                                        "pinned_stdio_sdk_wire_v3",
+                                                        "account_quota_read",
+                                                        "model_prices_read",
+                                                        "session_list",
+                                                        "new_turn",
+                                                        "native_resume",
+                                                        "lifecycle_event_import"
+                                                    ],
+                         "unsupported_operations":  [
+                                                        "protocol_versions_other_than_3",
+                                                        "telemetry_identity_verification",
+                                                        "all_vscode_extension_state"
+                                                    ],
+                         "primary_sources":  [
+                                                 "https://github.com/github/copilot-sdk",
+                                                 "https://docs.github.com/en/copilot/how-tos/copilot-sdk/features/usage-and-billing"
+                                             ],
+                         "tested_versions":  [
+
+                                             ],
+                         "runtime_status":  "unverified_source_only",
+                         "proof_kind":  "declarative_source_matrix_not_application_output"
+                     },
+                     {
+                         "adapter":  "Worktrunk",
+                         "implemented_operations":  [
+                                                        "version_probe",
+                                                        "schema2_local_list",
+                                                        "exact_approved_worktree_create_no_hooks"
+                                                    ],
+                         "unsupported_operations":  [
+                                                        "merge_rebase",
+                                                        "branch_deleting_remove",
+                                                        "project_hook_automation"
+                                                    ],
+                         "primary_sources":  [
+                                                 "https://worktrunk.dev/list/",
+                                                 "https://worktrunk.dev/switch/"
+                                             ],
+                         "tested_versions":  [
+
+                                             ],
+                         "runtime_status":  "unverified_source_only",
+                         "proof_kind":  "declarative_source_matrix_not_application_output"
+                     },
+                     {
+                         "adapter":  "Doppler",
+                         "implemented_operations":  [
+                                                        "version_probe",
+                                                        "one_secret_resolution"
+                                                    ],
+                         "unsupported_operations":  [
+                                                        "secret_mutations",
+                                                        "account_creation"
+                                                    ],
+                         "primary_sources":  [
+                                                 "https://docs.doppler.com/docs/accessing-secrets"
+                                             ],
+                         "tested_versions":  [
+
+                                             ],
+                         "runtime_status":  "unverified_source_only",
+                         "proof_kind":  "declarative_source_matrix_not_application_output"
+                     },
+                     {
+                         "adapter":  "OnePassword",
+                         "implemented_operations":  [
+                                                        "version_probe",
+                                                        "one_secret_resolution"
+                                                    ],
+                         "unsupported_operations":  [
+                                                        "vault_administration"
+                                                    ],
+                         "primary_sources":  [
+                                                 "https://developer.1password.com/docs/cli/reference/commands/read/"
+                                             ],
+                         "tested_versions":  [
+
+                                             ],
+                         "runtime_status":  "unverified_source_only",
+                         "proof_kind":  "declarative_source_matrix_not_application_output"
+                     },
+                     {
+                         "adapter":  "Docker",
+                         "implemented_operations":  [
+                                                        "version_probe",
+                                                        "local_engine_probe",
+                                                        "scoped_offline_runtime_quarantine"
+                                                    ],
+                         "unsupported_operations":  [
+                                                        "global_wsl_shutdown",
+                                                        "data_reset"
+                                                    ],
+                         "primary_sources":  [
+                                                 "https://docs.docker.com/engine/manage-resources/contexts/"
+                                             ],
+                         "tested_versions":  [
+                                                 "Docker CLI/server 29.8.0"
+                                             ],
+                         "runtime_status":  "native_read_only_certified",
+                         "proof_kind":  "exact_pin_version_explicit_local_engine_and_live_repair_refusal"
+                     },
+                     {
+                         "adapter":  "Roo",
+                         "implemented_operations":  [
+                                                        "version_probe",
+                                                        "explicit_installation_inventory"
+                                                    ],
+                         "unsupported_operations":  [
+                                                        "native_continuation",
+                                                        "live_quota"
+                                                    ],
+                         "tested_versions":  [
+
+                                             ],
+                         "runtime_status":  "reference_or_inventory_only",
+                         "proof_kind":  "declarative_source_default"
+                     },
+                     {
+                         "adapter":  "Windsurf",
+                         "implemented_operations":  [
+                                                        "version_probe",
+                                                        "explicit_installation_inventory"
+                                                    ],
+                         "unsupported_operations":  [
+                                                        "native_continuation",
+                                                        "live_quota"
+                                                    ],
+                         "tested_versions":  [
+
+                                             ],
+                         "runtime_status":  "reference_or_inventory_only",
+                         "proof_kind":  "declarative_source_default"
+                     },
+                     {
+                         "adapter":  "Entire",
+                         "implemented_operations":  [
+                                                        "version_probe",
+                                                        "explicit_installation_inventory"
+                                                    ],
+                         "unsupported_operations":  [
+                                                        "native_continuation",
+                                                        "live_quota"
+                                                    ],
+                         "tested_versions":  [
+
+                                             ],
+                         "runtime_status":  "reference_or_inventory_only",
+                         "proof_kind":  "declarative_source_default"
+                     }
+                 ],
+    "source":  "crates/workstation-core/src/integrations.rs",
+    "warning":  "Static capabilities are declarations. Runtime evidence is operation-specific; blocked or partial operations are not promoted to support."
+}

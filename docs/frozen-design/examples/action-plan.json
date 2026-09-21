@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "id": "plan-demo",
+  "finding_id": "finding-offline-registry-demo",
+  "host_id": "host-demo",
+  "user_sid": "S-1-5-21-FIXTURE",
+  "policy_revision": "policy-1",
+  "rule_version": "1.0",
+  "created_at": "2026-09-18T10:00:00Z",
+  "expires_at": "2026-09-18T10:10:00Z",
+  "digest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "required_privilege": "user",
+  "evidence_ids": [
+    "obs-registry-demo"
+  ],
+  "protected_target_ids": [
+    "attachments-payloads-demo"
+  ],
+  "precondition_ids": [
+    "known-version",
+    "app-closed",
+    "same-target-identity",
+    "validated-backup-space"
+  ],
+  "postcondition_ids": [
+    "original-attachment-paths-preserved",
+    "registry-reset-recorded"
+  ],
+  "actions": [
+    {
+      "kind": "backup_known_file",
+      "compiled_operation_id": "codex.registry.backup",
+      "target_id": "registry-demo",
+      "identity_digest": "1111111111111111111111111111111111111111111111111111111111111111",
+      "impact": "reversible_file_state",
+      "requires_backup": true,
+      "timeout_seconds": 5
+    }
+  ],
+  "max_attempts": 1,
+  "on_unknown": "block",
+  "approval_required": true,
+  "network_allowed": false
+}

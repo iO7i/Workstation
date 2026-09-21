@@ -1,0 +1,126 @@
+{
+  "overall": "PARTIAL",
+  "full_slice2_green": false,
+  "cases": [
+    {
+      "id": "foundation-native",
+      "requirement": "Rust compilation, lock, Clippy, Windows baseline",
+      "status": "not_run",
+      "evidence_or_blocker": "No compiler/Windows/MSVC available"
+    },
+    {
+      "id": "schema-upgrade",
+      "requirement": "Preserve R0 state and explicit migration",
+      "status": "sql_tested_rust_unrun",
+      "evidence_or_blocker": "56 database tests include migration/rollback/FK/concurrency"
+    },
+    {
+      "id": "storage-home",
+      "requirement": "No C fallback/reparse/native ACL",
+      "status": "source_existing_native_unrun",
+      "evidence_or_blocker": "Baseline gates retained; native required"
+    },
+    {
+      "id": "workspaces",
+      "requirement": "Dirty/untracked/ignored/local-only protection",
+      "status": "linux_git_recipe_tested",
+      "evidence_or_blocker": "12 actual Git recipe tests; Rust worker/native unrun"
+    },
+    {
+      "id": "workspaces-content",
+      "requirement": "Byte-identical working tree freshness",
+      "status": "not_supported",
+      "evidence_or_blocker": "Metadata digest has a same-size+mtime blind spot; content recheck mandatory"
+    },
+    {
+      "id": "health",
+      "requirement": "Live first-class vendor diagnostic adapters",
+      "status": "partial",
+      "evidence_or_blocker": "Candidate roots + generic typed symptom classifier; no version-certified vendor parser"
+    },
+    {
+      "id": "repairs",
+      "requirement": "Docker/Codex mutation and interruption certification",
+      "status": "blocked",
+      "evidence_or_blocker": "Plan records/checks only; no enabled executor"
+    },
+    {
+      "id": "atlas",
+      "requirement": "Environment-scoped resource lookup",
+      "status": "sql_tested_rust_unrun",
+      "evidence_or_blocker": "No production fallback, separate confirmation claims"
+    },
+    {
+      "id": "vault",
+      "requirement": "DPAPI native and credentialed tasks",
+      "status": "source_only",
+      "evidence_or_blocker": "No Windows execution; credentialed task runner disabled"
+    },
+    {
+      "id": "chronicle",
+      "requirement": "Supersession/retroactive/conflict authority",
+      "status": "sql_tested",
+      "evidence_or_blocker": "Exact shipped query and triggers exercised"
+    },
+    {
+      "id": "capabilities",
+      "requirement": "Offline focus/catalog/scoped feedback",
+      "status": "partial",
+      "evidence_or_blocker": "27 purpose-reviewed entries, schema checks and Rust implementation; runtime unrun"
+    },
+    {
+      "id": "economics",
+      "requirement": "Resets/stale/meter-separated estimates",
+      "status": "reference_tested",
+      "evidence_or_blocker": "28 reference tests and shared Rust vectors; no live quota"
+    },
+    {
+      "id": "model-economics",
+      "requirement": "Licensed imports/Pareto/simulations",
+      "status": "reference_and_source",
+      "evidence_or_blocker": "No external benchmark score redistribution or automatic switching"
+    },
+    {
+      "id": "continuity",
+      "requirement": "Checkpoint/roster/packet-only",
+      "status": "source_and_sql",
+      "evidence_or_blocker": "Metadata constraint tests; no actual agent handoff"
+    },
+    {
+      "id": "continuity-live",
+      "requirement": "Codex -> Grok -> other agent demonstration",
+      "status": "blocked",
+      "evidence_or_blocker": "No connected agent executables/accounts"
+    },
+    {
+      "id": "mcp",
+      "requirement": "Read-only scoped stdio",
+      "status": "source_static_checked",
+      "evidence_or_blocker": "Rust protocol/integration tests authored; native not executed"
+    },
+    {
+      "id": "privacy",
+      "requirement": "Secret canaries and sanitized outputs",
+      "status": "partial",
+      "evidence_or_blocker": "Schema/static and Git file canaries; actual Rust MCP/vault tests unrun"
+    },
+    {
+      "id": "backup",
+      "requirement": "Backup/new-home restore",
+      "status": "sql_tested_rust_unrun",
+      "evidence_or_blocker": "SQLite backup executed, native wrapper unrun; ciphertext excluded"
+    },
+    {
+      "id": "performance",
+      "requirement": "Context/doctor/MCP p95 targets",
+      "status": "not_certified",
+      "evidence_or_blocker": "Tiny SQL timing demo is not app performance"
+    },
+    {
+      "id": "packaging",
+      "requirement": "Runnable clean Windows release",
+      "status": "not_run",
+      "evidence_or_blocker": "Source ZIP only; no fabricated executable or resolved SBOM"
+    }
+  ]
+}

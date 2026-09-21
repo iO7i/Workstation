@@ -1,0 +1,24 @@
+{
+    "version":  "0.4.0-alpha.4",
+    "status":  "passed_native_gate",
+    "implementation_commit":  "4627a85ffc2b5a7e338fc7e53c03307f0ccf4feb",
+    "toolchain":  {
+                      "rust":  "1.97.1",
+                      "target":  "x86_64-pc-windows-msvc",
+                      "visual_studio":  "17.14.37628.2",
+                      "msvc":  "19.44.35228",
+                      "vc_tools":  "14.44.35207",
+                      "windows_sdk":  "10.0.26100.0"
+                  },
+    "binary_sha256":  "e1ff0d0dc33e7c28658a04b8a9d2c06d284fbc524856a8790d27bc3684d7c509",
+    "binary_bytes":  12380160,
+    "lockfile_sha256":  "3c1f63681bff3634b4e4a0d000e8bbb26ea305d418466d341960ee532359a41b",
+    "sqlite":  "3.53.2",
+    "format":  "passed",
+    "check":  "passed",
+    "clippy":  "passed",
+    "rust_tests":  "321/321",
+    "release":  "passed",
+    "windows_smokes":  "2/2",
+    "signed":  false
+}

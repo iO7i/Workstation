@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://workstation.invalid/contracts/action-plan.schema.json",
+  "title": "Workstation action-plan v1",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+    },
+    "finding_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+    },
+    "host_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+    },
+    "user_sid": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "policy_revision": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "rule_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "required_privilege": {
+      "type": "string",
+      "enum": [
+        "user",
+        "elevated"
+      ]
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+      },
+      "maxItems": 256
+    },
+    "protected_target_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+      },
+      "maxItems": 256
+    },
+    "precondition_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+      },
+      "maxItems": 256
+    },
+    "postcondition_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+      },
+      "maxItems": 256
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "backup_known_file",
+              "quarantine_runtime_in_place",
+              "restore_known_file",
+              "vendor_lifecycle",
+              "remove_reproducible_cache",
+              "git_worktree_remove_nonforce",
+              "update_own_metadata",
+              "stop_process_instance"
+            ]
+          },
+          "compiled_operation_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+          },
+          "target_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+          },
+          "identity_digest": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "impact": {
+            "type": "string",
+            "enum": [
+              "reversible_file_state",
+              "irreversible_process_stop",
+              "reproducible_cache_removal",
+              "recoverable_deletion",
+              "metadata_only"
+            ]
+          },
+          "requires_backup": {
+            "type": "boolean"
+          },
+          "timeout_seconds": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 120
+          }
+        },
+        "required": [
+          "kind",
+          "compiled_operation_id",
+          "target_id",
+          "identity_digest",
+          "impact",
+          "requires_backup",
+          "timeout_seconds"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 8,
+      "minItems": 1
+    },
+    "max_attempts": {
+      "const": 1
+    },
+    "on_unknown": {
+      "const": "block"
+    },
+    "approval_required": {
+      "const": true
+    },
+    "network_allowed": {
+      "const": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "finding_id",
+    "host_id",
+    "user_sid",
+    "policy_revision",
+    "rule_version",
+    "created_at",
+    "expires_at",
+    "digest",
+    "required_privilege",
+    "evidence_ids",
+    "protected_target_ids",
+    "precondition_ids",
+    "postcondition_ids",
+    "actions",
+    "max_attempts",
+    "on_unknown",
+    "approval_required",
+    "network_allowed"
+  ],
+  "additionalProperties": false
+}

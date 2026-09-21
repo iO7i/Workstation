@@ -1,0 +1,108 @@
+{
+  "schema_version": "workstation.r0.v1",
+  "operation": "doctor",
+  "run_id": "example-envelope",
+  "observed_at": "2026-09-18T12:00:00.000Z",
+  "status": "partial",
+  "coverage": "partial",
+  "data": {
+    "schema_version": "workstation.r0.v1",
+    "run_id": "example-only-not-an-executed-scan",
+    "observed_at": "2026-09-18T12:00:00.000Z",
+    "installation_id": "synthetic-installation",
+    "platform": "windows",
+    "coverage": "partial",
+    "storage": [
+      {
+        "root": {
+          "id": "codex-example",
+          "path": "D:\\Example\\Codex",
+          "kind": "codex"
+        },
+        "observed_at": "2026-09-18T12:00:00.000Z",
+        "coverage": "partial",
+        "logical_entry_bytes": 536870912,
+        "allocated_bytes": null,
+        "files": 100,
+        "directories": 10,
+        "visited_entries": 112,
+        "skipped_links_or_placeholders": 2,
+        "io_errors": 0,
+        "notes": [
+          "REPARSE_OR_PLACEHOLDER_SKIPPED"
+        ],
+        "delta_since_previous_complete_bytes": null
+      }
+    ],
+    "disks": [
+      {
+        "target": "D:\\Example",
+        "coverage": "complete",
+        "available_bytes": 107374182400,
+        "total_bytes": 536870912000
+      }
+    ],
+    "processes": {
+      "observed_at": "2026-09-18T12:00:00.000Z",
+      "coverage": "partial",
+      "enumerated_count": 234,
+      "selected": [
+        {
+          "pid": 1234,
+          "parent_pid_observed": 1000,
+          "birth_filetime_100ns": null,
+          "executable_name": "node.exe",
+          "working_set_bytes": 12345678,
+          "private_commit_bytes": null,
+          "coverage": "partial",
+          "ownership": "unknown",
+          "disposition": "protected"
+        }
+      ],
+      "notes": [
+        "SYNTHETIC_EXAMPLE_NOT_LIVE_EVIDENCE"
+      ]
+    },
+    "workspaces": [
+      {
+        "project_id": "example",
+        "observed_at": "2026-09-18T12:00:00.000Z",
+        "coverage": "complete",
+        "worktrees": [
+          {
+            "path": "D:\\Example\\repo",
+            "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "branch": "refs/heads/main",
+            "detached": false,
+            "bare": false,
+            "locked": false,
+            "prunable": false,
+            "disposition": "protected",
+            "content_coverage": "unsupported"
+          }
+        ],
+        "notes": [
+          "REGISTRATION_ONLY_CONTENT_AND_SESSION_OWNERSHIP_UNKNOWN"
+        ]
+      }
+    ],
+    "findings": [
+      {
+        "code": "storage.incomplete_coverage",
+        "severity": "warning",
+        "target_id": "codex-example",
+        "explanation": "Some entries were not inspected; bytes are not a complete total.",
+        "next_action": "Review coverage. Do not delete unknown files.",
+        "repair_available": false
+      }
+    ],
+    "not_inspected": [
+      "session ownership",
+      "worktree contents and unique commits",
+      "secrets and transcripts"
+    ],
+    "saved": false
+  },
+  "warnings": [],
+  "errors": []
+}

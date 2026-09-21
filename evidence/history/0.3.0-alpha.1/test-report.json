@@ -1,0 +1,12 @@
+{
+  "version": "0.3.0-alpha.1",
+  "application_tests_executed": 0,
+  "rust_tests_executed": 0,
+  "windows_tests_executed": 0,
+  "provider_integrations_exercised": 0,
+  "real_agents_launched": 0,
+  "repairs_executed": 0,
+  "authored_rust_test_annotations": 202,
+  "historical_results": "evidence/historical/0.2.0-alpha.1; do not count as this source passing",
+  "status": "not_run_by_explicit_delivery_sequence"
+}

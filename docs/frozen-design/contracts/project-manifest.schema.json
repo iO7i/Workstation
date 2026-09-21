@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://workstation.invalid/contracts/project-manifest.schema.json",
+  "title": "Workstation project-manifest v1",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "project": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "repository_paths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4096
+      },
+      "maxItems": 256
+    },
+    "environments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "criticality": {
+            "type": "string",
+            "enum": [
+              "local",
+              "development",
+              "staging",
+              "production",
+              "other"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "criticality"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 256
+    },
+    "resource_hints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "environment_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "location": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          }
+        },
+        "required": [
+          "environment_id",
+          "kind",
+          "label",
+          "location"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 256
+    },
+    "decision_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4096
+      },
+      "maxItems": 256
+    },
+    "suggested_capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+      },
+      "maxItems": 256
+    }
+  },
+  "required": [
+    "schema_version",
+    "project",
+    "repository_paths",
+    "environments",
+    "resource_hints",
+    "decision_files",
+    "suggested_capabilities"
+  ],
+  "additionalProperties": false
+}

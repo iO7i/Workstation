@@ -1,0 +1,8 @@
+{
+  "id": "docker-current-runtime-error",
+  "family": "docker_socket",
+  "fresh_error": true,
+  "active_owner": false,
+  "correct_registry_checked": null,
+  "contents_inspected": false
+}

@@ -1,0 +1,77 @@
+{
+  "version": "0.4.0-alpha.1",
+  "baseline": {
+    "file": "workstation-0.3.0-alpha.1-implementation-source.zip",
+    "sha256": "e6e9cbcce501424ceec13e8540d13b114be387bd96d56b3f0204e69aca254ea2",
+    "baseline_import_commit": "7ec1146"
+  },
+  "status": "IMPLEMENTED_SOURCE_UNVERIFIED",
+  "product_completion_percentage": null,
+  "scoped_source_milestone": {
+    "denominator": 52,
+    "source_implemented": 48,
+    "partial": 1,
+    "reference_only": 3,
+    "equivalent_points": 48.5,
+    "percent": 93.2692,
+    "definition": "Coarse equal-credit family tally within each explicit plan-scoped row, not all literal meanings of broad historical titles.",
+    "not_effort_correctness_or_readiness": true
+  },
+  "source_inventory": {
+    "rust_files": 66,
+    "rust_lines": 6498,
+    "authored_test_annotations": 283,
+    "named_authored_tests_in_inventory": 283
+  },
+  "database_schema": 4,
+  "seven_modules": [
+    "Health",
+    "Workspaces",
+    "Chronicle",
+    "Resource Atlas",
+    "Capabilities",
+    "Economics",
+    "Continuity"
+  ],
+  "windows_device_calls": 0,
+  "authenticated_provider_calls": 0,
+  "live_agent_executions": 0,
+  "tests_executed_this_delivery": 0,
+  "application_compiled": false,
+  "application_executed": false,
+  "windows_files_or_tasks_changed": false,
+  "executable_included": false,
+  "cargo_lock_included": false,
+  "certification_requires_new_user_green_light": true,
+  "remaining_source_gaps": [
+    "Roo/Windsurf native continuation",
+    "Infisical/Bitwarden secret execution",
+    "Generic automatic specialist installer (deliberately excluded)",
+    "Licensed live benchmark feed",
+    "Automatic session/handle attribution for arbitrary uninstrumented vendor sessions",
+    "Universal per-version defect corpus",
+    "Portable DPAPI export and remote token-administration workflows",
+    "Consumer subscription APIs not provided by vendors"
+  ],
+  "performed": "Public primary-source research, source/schema/test/document authoring, source inspection and package/member integrity operations only.",
+  "not_claimed": [
+    "Successful Rust compilation",
+    "Successful native tests",
+    "Safe operation proved on a real worktree",
+    "Successful provider authentication",
+    "Real cross-agent handoff",
+    "Correct quotas for actual accounts",
+    "Recoverable real-user DPAPI secrets",
+    "Full product 93% complete by effort or acceptance"
+  ],
+  "feature_ledger": "IMPLEMENTATION-LEDGER.json",
+  "new_acceptance_matrix": "evidence/acceptance-v4.json",
+  "source_state": {
+    "implementation_commit": "119aaed81130dc705d0fe7a79262dc46975ea631",
+    "source_and_docs_commit": "d41cc6e889992fc6e35ff0539917d33c80ba59ab",
+    "baseline_import_commit": "7ec1146b858390e205c821c75438dc900c59e677",
+    "final_package_metadata_generated_after_commit": true,
+    "source_changes_committed": true,
+    "history_included_as": "evidence/git-log.txt"
+  }
+}

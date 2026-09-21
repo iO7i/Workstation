@@ -1,0 +1,18 @@
+{
+    "version":  "0.4.0-alpha.4",
+    "baseline_version":  "0.4.0-alpha.2",
+    "baseline_archive_sha256":  "5e7d05bf66a88ec7db539c8b0d15d1a2cc13835de8cfd222c95fde1fdf4bbb94",
+    "baseline_archive_exact_match":  true,
+    "implementation_commit":  "4627a85ffc2b5a7e338fc7e53c03307f0ccf4feb",
+    "evidence_commit":  "reported_in_release_manifest_to_avoid_self_reference",
+    "source_changes_committed":  true,
+    "application_compiled":  true,
+    "rust_tests_executed":  321,
+    "rust_tests_passed":  321,
+    "windows_smoke_suites_passed":  2,
+    "final_binary_sha256":  "e1ff0d0dc33e7c28658a04b8a9d2c06d284fbc524856a8790d27bc3684d7c509",
+    "final_lockfile_sha256":  "3c1f63681bff3634b4e4a0d000e8bbb26ea305d418466d341960ee532359a41b",
+    "certification_status":  "PARTIAL_NATIVE_CERTIFICATION",
+    "successful_cross_agent_completion":  false,
+    "exact_member_contents":  "SOURCE-MANIFEST.sha256"
+}

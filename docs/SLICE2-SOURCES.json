@@ -1,0 +1,66 @@
+{
+  "reviewed_on": "2026-09-18",
+  "source_review_is_not_runtime_certification": true,
+  "sources": [
+    {
+      "title": "Codex App Server",
+      "url": "https://developers.openai.com/codex/app-server",
+      "use": "Documented account/rate-limit shapes; explicit import only."
+    },
+    {
+      "title": "Claude statusline",
+      "url": "https://code.claude.com/docs/en/statusline",
+      "use": "Optional rate_limits, context_window and estimated cost; no claim of invoices."
+    },
+    {
+      "title": "MCP lifecycle",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle",
+      "use": "Initialization and protocol negotiation; fixed 2025 versions only."
+    },
+    {
+      "title": "MCP transports",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/transports",
+      "use": "Line-delimited JSON-RPC stdio, no stdout diagnostic logs."
+    },
+    {
+      "title": "Git worktree",
+      "url": "https://git-scm.com/docs/git-worktree",
+      "use": "Machine-readable worktree list; registration is not disposal authority."
+    },
+    {
+      "title": "Git status",
+      "url": "https://git-scm.com/docs/git-status",
+      "use": "Porcelain and ignored/untracked visibility; optional locks disabled."
+    },
+    {
+      "title": "Git revision list",
+      "url": "https://git-scm.com/docs/git-rev-list",
+      "use": "Local-only commit observations without fetch."
+    },
+    {
+      "title": "DPAPI",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/dpapi/nf-dpapi-cryptprotectdata",
+      "use": "User-scope at-rest protection; no same-user agent sandbox."
+    },
+    {
+      "title": "SQLite Backup",
+      "url": "https://www.sqlite.org/backup.html",
+      "use": "Consistent stepped metadata backup, no live .db-only copy."
+    },
+    {
+      "title": "Windows Job Objects",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects",
+      "use": "Owned collector cleanup, not adopting existing agent processes."
+    },
+    {
+      "title": "Doppler CLI",
+      "url": "https://docs.doppler.com/docs/cli",
+      "use": "Reference location only; no credential material requested."
+    },
+    {
+      "title": "1Password refs",
+      "url": "https://developer.1password.com/docs/cli/secret-references",
+      "use": "Reference syntax, no reveal/provider execution."
+    }
+  ]
+}

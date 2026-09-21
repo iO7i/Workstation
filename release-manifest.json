@@ -1,0 +1,14 @@
+{
+  "version": "0.5.0-alpha.1",
+  "artifact_type": "source_candidate",
+  "scope": "durable_runtime_schema_v5",
+  "base_commit": "59fa1b6b152aadd93d56ca3b7a03944d8e6f7fe7",
+  "implementation_state": "uncommitted_release_candidate",
+  "executable_included": false,
+  "dependency_lock_included": true,
+  "signature": "unsigned",
+  "runtime_evidence": "evidence/runtime-v5-build-report.json",
+  "limitations": "docs/DURABLE-RUNTIME-LIMITATIONS.md",
+  "data_state_included": false,
+  "live_provider_certification": "separate_partial_evidence_only"
+}

@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://workstation.invalid/contracts/finding.schema.json",
+  "title": "Workstation finding v1",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+    },
+    "fingerprint_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+    },
+    "fingerprint_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "target_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+      },
+      "maxItems": 256
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+      },
+      "maxItems": 256
+    },
+    "contradicting_evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+      },
+      "maxItems": 256
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "info",
+        "warning",
+        "critical"
+      ]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "confirmed",
+        "supported",
+        "suspected",
+        "unknown"
+      ]
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "open",
+        "protected",
+        "blocked",
+        "resolved",
+        "unknown",
+        "dismissed"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4096
+      },
+      "maxItems": 256
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "repair_availability": {
+      "type": "string",
+      "enum": [
+        "none",
+        "plan_only",
+        "requires_offline",
+        "approved_recipe"
+      ]
+    },
+    "root_cause_status": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "workaround_only",
+        "upstream_fixed_version_verified"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "fingerprint_id",
+    "fingerprint_version",
+    "target_ids",
+    "evidence_ids",
+    "contradicting_evidence_ids",
+    "severity",
+    "confidence",
+    "state",
+    "summary",
+    "limitations",
+    "observed_at",
+    "repair_availability",
+    "root_cause_status"
+  ],
+  "additionalProperties": false
+}

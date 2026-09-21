@@ -1,0 +1,20 @@
+{
+  "id": "example-doppler",
+  "project_id": "example",
+  "environment": "dev",
+  "adapter": "doppler",
+  "executable": "D:/Tools/Doppler/doppler.exe",
+  "executable_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "version_text": "REPLACE_WITH_ACTUAL_VERSION_AFTER_AUTHORIZATION",
+  "inherit_env": [
+    "PATH",
+    "USERPROFILE",
+    "LOCALAPPDATA",
+    "APPDATA"
+  ],
+  "configuration": {},
+  "authentication": {
+    "DOPPLER_TOKEN": "example-doppler-token"
+  },
+  "observed_at": 1789768800
+}

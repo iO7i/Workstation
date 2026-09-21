@@ -1,0 +1,18 @@
+{
+  "id": "example-cursor",
+  "project_id": "example",
+  "environment": "dev",
+  "adapter": "cursor_acp",
+  "executable": "D:/Tools/Cursor/agent.exe",
+  "executable_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "version_text": "REPLACE_WITH_ACTUAL_VERSION_AFTER_AUTHORIZATION",
+  "inherit_env": [
+    "PATH",
+    "USERPROFILE",
+    "LOCALAPPDATA",
+    "APPDATA"
+  ],
+  "configuration": {},
+  "authentication": {},
+  "observed_at": 1789768800
+}

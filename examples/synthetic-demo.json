@@ -1,0 +1,106 @@
+{
+  "provenance": {
+    "data": "synthetic",
+    "execution": "Python SQLite + independent reference oracle",
+    "rust_application_executed": false,
+    "real_agents_launched": false,
+    "providers_contacted": false
+  },
+  "modules": 7,
+  "work": {
+    "state": "paused",
+    "primary_session": "grok-reported",
+    "source": "explicit synthetic insertion",
+    "lease_at_time_200": "ownership_uncertain_not_abandoned"
+  },
+  "chronicle": {
+    "decision_valid_150_known_150": [
+      "initial"
+    ],
+    "decision_valid_250_known_250": [
+      "initial"
+    ],
+    "decision_valid_250_known_350": [
+      "superseding"
+    ],
+    "explanation": "Retrospective acceptance cannot rewrite what was known before it was recorded."
+  },
+  "atlas": {
+    "dev": [
+      {
+        "name": "Reserved example endpoint",
+        "locator": "https://example.org",
+        "environment": "dev",
+        "source_kind": "user_approved",
+        "provider_verified": false
+      }
+    ],
+    "prod": [],
+    "environment_fallback": false
+  },
+  "economics_reference": {
+    "remaining": 80.0,
+    "confidence": "low",
+    "horizons": [
+      {
+        "label": "10m",
+        "observed_span_seconds": 600,
+        "rate_per_second": 0.002777777777777778,
+        "capacity_at_current_pace_seconds": 28800.0,
+        "exhaustion_after_seconds": 28800.0
+      },
+      {
+        "label": "1h",
+        "observed_span_seconds": 3600,
+        "rate_per_second": 0.002777777777777778,
+        "capacity_at_current_pace_seconds": 28800.0,
+        "exhaustion_after_seconds": 28800.0
+      },
+      {
+        "label": "6h",
+        "observed_span_seconds": 3600,
+        "rate_per_second": 0.002777777777777778,
+        "capacity_at_current_pace_seconds": 28800.0,
+        "exhaustion_after_seconds": 28800.0
+      },
+      {
+        "label": "observed_window_baseline",
+        "observed_span_seconds": 3600,
+        "rate_per_second": 0.002777777777777778,
+        "capacity_at_current_pace_seconds": 28800.0,
+        "exhaustion_after_seconds": 28800.0
+      },
+      {
+        "label": "ewma_1h_half_life",
+        "observed_span_seconds": 3600,
+        "rate_per_second": 0.002777777777777778,
+        "capacity_at_current_pace_seconds": 28800.0,
+        "exhaustion_after_seconds": 28800.0
+      },
+      {
+        "label": "blended",
+        "observed_span_seconds": 3600,
+        "rate_per_second": 0.002777777777777778,
+        "capacity_at_current_pace_seconds": 28800.0,
+        "exhaustion_after_seconds": 28800.0
+      }
+    ]
+  },
+  "capabilities": {
+    "catalog_entry_count": 27,
+    "catalog_review": "purpose only",
+    "certified_integrations": 0
+  },
+  "continuity": {
+    "mode": "packet_only_source_implemented",
+    "real_cross_agent_handoff": "not_executed"
+  },
+  "sql_integrity": "ok",
+  "performance_reference_only": {
+    "operation": "exact temporal decision SQL on a tiny synthetic database",
+    "samples": 100,
+    "p95_ms": 0.013080999906378565,
+    "median_ms": 0.006377999852702487,
+    "not_native_context_or_mcp_performance": true
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Workstation R0 envelope",
+  "description": "First-slice contract, not the full FS-1.0 product contract.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "workstation.r0.v1"
+    },
+    "operation": {
+      "enum": [
+        "init",
+        "discover",
+        "root",
+        "project",
+        "doctor",
+        "report",
+        "backup",
+        "replay_fixture",
+        "build_info"
+      ]
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "observed_at": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "partial",
+        "check_failed",
+        "blocked"
+      ]
+    },
+    "coverage": {
+      "enum": [
+        "complete",
+        "partial",
+        "denied",
+        "unsupported",
+        "timed_out"
+      ]
+    },
+    "data": {},
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 1000
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 1000
+    }
+  },
+  "required": [
+    "schema_version",
+    "operation",
+    "run_id",
+    "observed_at",
+    "status",
+    "coverage",
+    "data",
+    "warnings",
+    "errors"
+  ]
+}

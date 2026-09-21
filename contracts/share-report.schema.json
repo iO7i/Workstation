@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Workstation R0 share-report",
+  "description": "First-slice contract, not the full FS-1.0 product contract.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "workstation.r0.v1"
+    },
+    "product": {
+      "const": "workstation-r0"
+    },
+    "observed_at": {
+      "type": "string"
+    },
+    "coverage": {
+      "enum": [
+        "complete",
+        "partial",
+        "denied",
+        "unsupported",
+        "timed_out"
+      ]
+    },
+    "roots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "enum": [
+              "codex",
+              "claude",
+              "cursor",
+              "vscode",
+              "docker",
+              "workspace",
+              "other"
+            ]
+          },
+          "coverage": {
+            "enum": [
+              "complete",
+              "partial",
+              "denied",
+              "unsupported",
+              "timed_out"
+            ]
+          },
+          "logical_entry_bytes": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "skipped_count": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "kind",
+          "coverage",
+          "logical_entry_bytes",
+          "skipped_count"
+        ]
+      },
+      "maxItems": 24
+    },
+    "selected_process_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "process_coverage": {
+      "enum": [
+        "complete",
+        "partial",
+        "denied",
+        "unsupported",
+        "timed_out"
+      ]
+    },
+    "worktree_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "finding_codes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "disk.low_available_space",
+          "storage.incomplete_coverage",
+          "storage.observed_growth"
+        ]
+      },
+      "maxItems": 1000
+    },
+    "omitted": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 1000
+    }
+  },
+  "required": [
+    "schema_version",
+    "product",
+    "observed_at",
+    "coverage",
+    "roots",
+    "selected_process_count",
+    "process_coverage",
+    "worktree_count",
+    "finding_codes",
+    "omitted"
+  ]
+}

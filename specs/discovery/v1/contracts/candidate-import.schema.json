@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FS-1.0-D1 candidate-import: R4 design contract",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "existing_capability",
+              "tool",
+              "integration",
+              "skill",
+              "workflow",
+              "documentation",
+              "reference_implementation",
+              "dataset",
+              "benchmark"
+            ]
+          },
+          "canonical_url": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 600,
+            "format": "uri",
+            "pattern": "^https://[^\\s@?#]+(?:#[^\\s]*)?$"
+          },
+          "needs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "parallel_work",
+                "interface_review",
+                "accessibility_review",
+                "reproducible_evaluation",
+                "decision_context",
+                "credential_location",
+                "runtime_recovery",
+                "storage_attribution"
+              ]
+            },
+            "maxItems": 8,
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 600
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 300
+            },
+            "maxItems": 8,
+            "minItems": 1
+          },
+          "claimed_platforms": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "windows",
+                "macos",
+                "linux",
+                "platform_neutral"
+              ]
+            },
+            "maxItems": 4,
+            "uniqueItems": true
+          },
+          "claimed_cost": {
+            "type": "string",
+            "enum": [
+              "free",
+              "paid",
+              "unknown",
+              "not_applicable"
+            ]
+          },
+          "claimed_revision": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "title",
+          "kind",
+          "canonical_url",
+          "needs",
+          "description",
+          "limitations",
+          "claimed_platforms",
+          "claimed_cost",
+          "claimed_revision"
+        ]
+      },
+      "maxItems": 50,
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "candidates"
+  ]
+}

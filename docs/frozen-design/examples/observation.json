@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "id": "obs-demo",
+  "host_id": "host-demo",
+  "scan_id": "scan-demo",
+  "target_id": "object-demo",
+  "collector": {
+    "id": "windows.processes",
+    "version": "fixture-1"
+  },
+  "observed_at": "2026-09-18T10:00:00Z",
+  "coverage": "partial",
+  "scope": {
+    "requested": [
+      "registered agent descendants"
+    ],
+    "completed": [
+      "accessible current-user processes"
+    ],
+    "skipped": [
+      "access-denied process instance"
+    ]
+  },
+  "evidence_type": "process.private_commit",
+  "measurements": [
+    {
+      "name": "private_commit",
+      "value": 134217728,
+      "unit": "bytes"
+    }
+  ],
+  "limitations": [
+    "Incomplete ownership evidence: diagnostic-only."
+  ],
+  "source_id": null
+}

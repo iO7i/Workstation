@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "candidates": [
+    {
+      "title": "Synthetic interface-review reference",
+      "kind": "documentation",
+      "canonical_url": "https://example.org/workstation-fixtures/interface-review",
+      "needs": [
+        "interface_review",
+        "accessibility_review"
+      ],
+      "description": "A synthetic checklist reference used to test contextual matching; not a real recommendation.",
+      "limitations": [
+        "Synthetic test resource. No effectiveness or vendor compatibility has been established."
+      ],
+      "claimed_platforms": [
+        "platform_neutral"
+      ],
+      "claimed_cost": "unknown",
+      "claimed_revision": null
+    }
+  ]
+}

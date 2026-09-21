@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-09-18",
+  "scope": "primary_reference_research_no_native_certification",
+  "sources": [
+    {
+      "id": "S4-01",
+      "title": "Copilot usage and billing metrics",
+      "url": "https://docs.github.com/en/copilot/how-tos/copilot-sdk/features/usage-and-billing",
+      "used_for": "account.getQuota, models.list, context event fields; credits, requests and dollars remain distinct.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    },
+    {
+      "id": "S4-02",
+      "title": "Copilot generated RPC",
+      "url": "https://raw.githubusercontent.com/github/copilot-sdk/main/nodejs/src/generated/rpc.ts",
+      "used_for": "Public generated wire request/result shapes including connect and experimental permissions/options APIs. Moving main branch is NOT a pinned certification version.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    },
+    {
+      "id": "S4-03",
+      "title": "Copilot SDK client",
+      "url": "https://raw.githubusercontent.com/github/copilot-sdk/main/nodejs/src/client.ts",
+      "used_for": "Owned headless stdio launcher and Content-Length transport; reviewed source informs adapter, not a tested SDK dependency.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    },
+    {
+      "id": "S4-04",
+      "title": "Copilot SDK session",
+      "url": "https://raw.githubusercontent.com/github/copilot-sdk/main/nodejs/src/session.ts",
+      "used_for": "Session events, lifecycle and permission flow; metadata-only projection.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    },
+    {
+      "id": "S4-05",
+      "title": "ACP v1 schema",
+      "url": "https://raw.githubusercontent.com/agentclientprotocol/agent-client-protocol/main/schema/v1/schema.json",
+      "used_for": "Capability negotiation; load/list/mode/auth remain conditional rather than assumed parity.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    },
+    {
+      "id": "S4-06",
+      "title": "Gemini ACP",
+      "url": "https://geminicli.com/docs/cli/acp-mode/",
+      "used_for": "Explicit --acp transport; actual installed capabilities still checked.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    },
+    {
+      "id": "S4-07",
+      "title": "Gemini hooks",
+      "url": "https://geminicli.com/docs/hooks/",
+      "used_for": "SessionStart/SessionEnd and turn/tool/compaction metadata; optional user setup only.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    },
+    {
+      "id": "S4-08",
+      "title": "Gemini headless",
+      "url": "https://geminicli.com/docs/cli/headless/",
+      "used_for": "Session/model cumulative token data; not a live subscription quota or current context measurement.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    },
+    {
+      "id": "S4-09",
+      "title": "OpenCode ACP",
+      "url": "https://opencode.ai/docs/acp/",
+      "used_for": "opencode acp and supported session operations; no current-account exercise.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    },
+    {
+      "id": "S4-10",
+      "title": "Cline ACP",
+      "url": "https://github.com/cline/cline/blob/main/docs/usage/acp.mdx",
+      "used_for": "--acp, opt-in auto-approval flag, native persisted sessions and client permission handling.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    },
+    {
+      "id": "S4-11",
+      "title": "Claude statusline",
+      "url": "https://code.claude.com/docs/en/statusline",
+      "used_for": "five_hour/seven_day used_percentage and resets_at; fields may be absent. Configured reported input is not a separately authenticated API query.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    },
+    {
+      "id": "S4-12",
+      "title": "Claude hooks",
+      "url": "https://code.claude.com/docs/en/hooks",
+      "used_for": "Normalize lifecycle metadata; Stop/turn-end is not SessionEnd.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    },
+    {
+      "id": "S4-13",
+      "title": "Worktrunk list",
+      "url": "https://worktrunk.dev/list/",
+      "used_for": "Schema2 local output and selectable data collection; no cleanup authority inferred.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    },
+    {
+      "id": "S4-14",
+      "title": "Worktrunk switch",
+      "url": "https://worktrunk.dev/switch/",
+      "used_for": "Exact worktree creation with explicit config/no-hooks/no-cd; do not delegate broad background branch deletion.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    },
+    {
+      "id": "S4-15",
+      "title": "Worktrunk configuration",
+      "url": "https://worktrunk.dev/config/",
+      "used_for": "Project hooks and custom commands are untrusted executable configuration; scoped empty config.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    },
+    {
+      "id": "S4-16",
+      "title": "Codex App Server",
+      "url": "https://developers.openai.com/codex/app-server/",
+      "used_for": "Inherited supported thread/account interfaces; no private Desktop format assumption.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    },
+    {
+      "id": "S4-17",
+      "title": "Git worktree",
+      "url": "https://git-scm.com/docs/git-worktree",
+      "used_for": "Authoritative NUL listing and non-force removal; retain branch/ref and coordinate external writers.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    },
+    {
+      "id": "S4-18",
+      "title": "Git status",
+      "url": "https://git-scm.com/docs/git-status",
+      "used_for": "Tracked/untracked/ignored distinction; complete clean status alone is not disposal authority.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    },
+    {
+      "id": "S4-19",
+      "title": "Windows process identity",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/process-handles-and-identifiers",
+      "used_for": "Reusable PIDs require creation-qualified identity. Source inspection, not a Windows test.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    },
+    {
+      "id": "S4-20",
+      "title": "Windows DPAPI",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/dpapi/nf-dpapi-cryptprotectdata",
+      "used_for": "User-scope encryption at rest is not same-user malware isolation or portable password-vault backup.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    },
+    {
+      "id": "S4-21",
+      "title": "Windows Job Objects",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects",
+      "used_for": "Owned subprocess lifecycle only; no attaching a killer job to arbitrary agent sessions.",
+      "runtime_versions_tested": [],
+      "review_kind": "documentation_or_public_source",
+      "content_not_bundled": true
+    }
+  ],
+  "limitations": [
+    "Moving documentation/source is not a compatibility guarantee.",
+    "Exact product binaries, dependency graph, vendor authentication and native behavior were not exercised.",
+    "Inherited direct dependency pins still require a genuine Cargo resolver and advisory/license review."
+  ]
+}

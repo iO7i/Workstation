@@ -1,0 +1,10 @@
+{
+  "operation": "operation",
+  "request": {
+    "operation": "worktree_create",
+    "source_workspace_id": "fixture-source",
+    "destination": "D:/fixture/worktrees/new-feature",
+    "branch": "feature/example",
+    "integration_id": "fixture-worktrunk"
+  }
+}

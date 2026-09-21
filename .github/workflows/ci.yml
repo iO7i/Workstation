@@ -1,0 +1,45 @@
+name: Rust source gates
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native:
+    strategy:
+      matrix:
+        os: [windows-2025, ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Require the real committed dependency lock
+        shell: pwsh
+        run: |
+          if (-not (Test-Path Cargo.lock)) {
+            throw 'Source bootstrap required: resolve reviewed dependencies, generate and commit Cargo.lock. CI never invents one.'
+          }
+      - name: Install pinned compiler in isolated CI runner
+        run: rustup toolchain install 1.97.1 --profile minimal --component rustfmt --component clippy
+      - name: Format
+        run: cargo +1.97.1 fmt --all -- --check
+      - name: Check
+        run: cargo +1.97.1 check --workspace --all-targets --all-features --locked
+      - name: Lint
+        run: cargo +1.97.1 clippy --workspace --all-targets --all-features --locked -- -D warnings
+      - name: Rust tests
+        run: cargo +1.97.1 test --workspace --all-features --locked
+      - name: Release build
+        run: cargo +1.97.1 build --release --package workstation-cli --locked
+      - name: Windows isolated smoke
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: ./scripts/windows-smoke.ps1 -Executable ./target/release/workstation.exe -ScratchParent $env:RUNNER_TEMP
+
+      - name: Windows control-plane smoke
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: ./scripts/control-smoke.ps1 -Executable ./target/release/workstation.exe -ScratchParent $env:RUNNER_TEMP

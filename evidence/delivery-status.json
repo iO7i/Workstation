@@ -1,0 +1,16 @@
+{
+    "version":  "0.4.0-alpha.4",
+    "phase":  "phase2_native_certification",
+    "status":  "PARTIAL_NATIVE_CERTIFICATION",
+    "implementation_commit":  "4627a85ffc2b5a7e338fc7e53c03307f0ccf4feb",
+    "schema":  4,
+    "rust_tests":  "321/321 passed",
+    "windows_smokes":  "2/2 passed",
+    "rustsec_vulnerabilities":  0,
+    "native_defects_fixed":  2,
+    "real_cross_agent_completion":  0,
+    "destructive_repairs_applied":  0,
+    "signed":  false,
+    "completion_percentage":  null,
+    "note":  "Implementation-family percentages are not certification percentages."
+}

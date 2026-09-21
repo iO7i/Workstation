@@ -1,0 +1,25 @@
+test_all_cargo_manifests_parse (__main__.ArtifactChecks.test_all_cargo_manifests_parse) ... ok
+test_all_json_is_parseable (__main__.ArtifactChecks.test_all_json_is_parseable) ... ok
+test_direct_dependency_pins_are_explicit (__main__.ArtifactChecks.test_direct_dependency_pins_are_explicit) ... ok
+test_examples_match_declared_contracts (__main__.ArtifactChecks.test_examples_match_declared_contracts) ... ok
+test_incidents_are_structured_synthetic_inputs (__main__.ArtifactChecks.test_incidents_are_structured_synthetic_inputs) ... ok
+test_no_future_privileged_or_secret_commands_in_cli (__main__.ArtifactChecks.test_no_future_privileged_or_secret_commands_in_cli) ... ok
+test_reference_git_recipe_preserves_dirty_ignored_files (__main__.ArtifactChecks.test_reference_git_recipe_preserves_dirty_ignored_files) ... ok
+test_reference_sqlite_backup_restores_metadata (__main__.ArtifactChecks.test_reference_sqlite_backup_restores_metadata) ... ok
+test_retention_sql_keeps_twenty_newest (__main__.ArtifactChecks.test_retention_sql_keeps_twenty_newest) ... ok
+test_schema_executes_and_integrity_is_ok (__main__.ArtifactChecks.test_schema_executes_and_integrity_is_ok) ... ok
+test_schema_rejects_duplicate_root (__main__.ArtifactChecks.test_schema_rejects_duplicate_root) ... ok
+test_schema_rejects_invalid_root_kind (__main__.ArtifactChecks.test_schema_rejects_invalid_root_kind) ... ok
+test_schema_rejects_malformed_snapshot_json (__main__.ArtifactChecks.test_schema_rejects_malformed_snapshot_json) ... ok
+test_schema_rejects_oversized_snapshot (__main__.ArtifactChecks.test_schema_rejects_oversized_snapshot) ... ok
+test_schemas_are_valid (__main__.ArtifactChecks.test_schemas_are_valid) ... ok
+test_share_contract_rejects_unexpected_sensitive_fields (__main__.ArtifactChecks.test_share_contract_rejects_unexpected_sensitive_fields) ... ok
+test_share_example_has_no_private_identifiers (__main__.ArtifactChecks.test_share_example_has_no_private_identifiers) ... ok
+test_snapshot_contract_rejects_offered_repair (__main__.ArtifactChecks.test_snapshot_contract_rejects_offered_repair) ... ok
+test_snapshot_contract_rejects_unprotected_process (__main__.ArtifactChecks.test_snapshot_contract_rejects_unprotected_process) ... ok
+test_three_crate_workspace (__main__.ArtifactChecks.test_three_crate_workspace) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.289s
+
+OK

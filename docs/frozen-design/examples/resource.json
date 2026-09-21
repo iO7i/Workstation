@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "id": "resource-demo",
+  "project_id": "project-demo",
+  "environment_id": "environment-dev",
+  "kind": "endpoint",
+  "label": "Example development API",
+  "provider": null,
+  "provider_object_id": null,
+  "endpoint": "https://api.example.invalid",
+  "secret_reference_ids": [],
+  "authority": "proposed",
+  "source_ids": [
+    "source-manifest-demo"
+  ],
+  "last_verification": null
+}

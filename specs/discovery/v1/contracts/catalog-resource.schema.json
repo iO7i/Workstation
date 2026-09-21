@@ -1,0 +1,377 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FS-1.0-D1 catalog-resource: R4 design contract",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[a-z0-9][a-z0-9._-]{0,99}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "existing_capability",
+        "tool",
+        "integration",
+        "skill",
+        "workflow",
+        "documentation",
+        "reference_implementation",
+        "dataset",
+        "benchmark"
+      ]
+    },
+    "canonical_url": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 600,
+      "format": "uri",
+      "pattern": "^https://[^\\s@?#]+(?:#[^\\s]*)?$"
+    },
+    "needs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "parallel_work",
+          "interface_review",
+          "accessibility_review",
+          "reproducible_evaluation",
+          "decision_context",
+          "credential_location",
+          "runtime_recovery",
+          "storage_attribution"
+        ]
+      },
+      "maxItems": 8,
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 600
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 300
+      },
+      "maxItems": 8,
+      "minItems": 1
+    },
+    "equivalence_key": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[a-z0-9][a-z0-9._-]{0,99}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "platforms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "windows",
+              "macos",
+              "linux",
+              "platform_neutral"
+            ]
+          },
+          "maxItems": 4,
+          "uniqueItems": true
+        },
+        "cost": {
+          "type": "string",
+          "enum": [
+            "free",
+            "paid",
+            "unknown",
+            "not_applicable"
+          ]
+        },
+        "requires_network": {
+          "type": "boolean"
+        },
+        "privacy": {
+          "type": "string",
+          "enum": [
+            "local",
+            "external",
+            "unknown"
+          ]
+        },
+        "version_requirements": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "maxItems": 8
+        },
+        "evidence_status": {
+          "type": "string",
+          "enum": [
+            "documented",
+            "unknown"
+          ]
+        }
+      },
+      "required": [
+        "platforms",
+        "cost",
+        "requires_network",
+        "privacy",
+        "version_requirements",
+        "evidence_status"
+      ]
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "documented",
+            "unknown",
+            "mixed"
+          ]
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 600,
+              "format": "uri",
+              "pattern": "^https://[^\\s@?#]+(?:#[^\\s]*)?$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "scope",
+        "source_url"
+      ]
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "reviewed",
+            "unverified"
+          ]
+        },
+        "reviewed_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 40,
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reviewed_revision": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "fresh_for_days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 365
+        },
+        "scope_note": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        }
+      },
+      "required": [
+        "status",
+        "reviewed_at",
+        "reviewed_revision",
+        "fresh_for_days",
+        "scope_note"
+      ]
+    },
+    "adoption": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "reference_only",
+            "certified_adapter"
+          ]
+        },
+        "adapter_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100,
+              "pattern": "^[a-z0-9][a-z0-9._-]{0,99}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "mode",
+        "adapter_id"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "title",
+    "kind",
+    "canonical_url",
+    "needs",
+    "description",
+    "limitations",
+    "equivalence_key",
+    "compatibility",
+    "license",
+    "review",
+    "adoption"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "adoption": {
+            "properties": {
+              "mode": {
+                "const": "reference_only"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "adoption": {
+            "properties": {
+              "adapter_id": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adoption": {
+            "properties": {
+              "mode": {
+                "const": "certified_adapter"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "adoption": {
+            "properties": {
+              "adapter_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100,
+                "pattern": "^[a-z0-9][a-z0-9._-]{0,99}$"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "review": {
+            "properties": {
+              "status": {
+                "const": "reviewed"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "review": {
+            "properties": {
+              "reviewed_at": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 40,
+                "format": "date-time"
+              },
+              "reviewed_revision": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

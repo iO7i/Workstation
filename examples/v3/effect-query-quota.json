@@ -1,0 +1,5 @@
+{
+  "operation": "query",
+  "integration_id": "example-codex",
+  "query": "codex_quota"
+}

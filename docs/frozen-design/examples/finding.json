@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "id": "finding-demo",
+  "fingerprint_id": "agents.retained-helper-candidate",
+  "fingerprint_version": "1.0",
+  "target_ids": [
+    "object-demo"
+  ],
+  "evidence_ids": [
+    "obs-demo"
+  ],
+  "contradicting_evidence_ids": [],
+  "severity": "warning",
+  "confidence": "suspected",
+  "state": "protected",
+  "summary": "A helper outlived an observed parent; ownership remains uncertain.",
+  "limitations": [
+    "An idle shared server could be legitimate."
+  ],
+  "observed_at": "2026-09-18T10:00:00Z",
+  "repair_availability": "none",
+  "root_cause_status": "unknown"
+}

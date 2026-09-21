@@ -1,0 +1,20 @@
+{
+  "id": "example-grok",
+  "project_id": "example",
+  "environment": "dev",
+  "adapter": "grok_acp",
+  "executable": "D:/Tools/Grok/grok.exe",
+  "executable_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "version_text": "REPLACE_WITH_ACTUAL_VERSION_AFTER_AUTHORIZATION",
+  "inherit_env": [
+    "PATH",
+    "USERPROFILE",
+    "LOCALAPPDATA",
+    "APPDATA"
+  ],
+  "configuration": {},
+  "authentication": {
+    "XAI_API_KEY": "example-xai-key"
+  },
+  "observed_at": 1789768800
+}

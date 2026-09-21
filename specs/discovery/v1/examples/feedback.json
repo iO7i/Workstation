@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "feedback_id": "feedback-example",
+  "project_id": "example-project",
+  "resource_id": "example-interface-review",
+  "need": "interface_review",
+  "disposition": "dismissed",
+  "recorded_at": "2026-09-18T00:00:00Z",
+  "until": null,
+  "reason": "Synthetic project-scoped feedback.",
+  "outcome": "not_recorded",
+  "evidence_ref": null,
+  "catalog_revision": "fixture-r1"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "docker-old-error-healthy-owner",
+  "family": "docker_socket",
+  "fresh_error": false,
+  "active_owner": true,
+  "correct_registry_checked": null,
+  "contents_inspected": false
+}

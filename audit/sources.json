@@ -1,0 +1,60 @@
+{
+  "reviewed_at_utc": "2026-09-18T22:03:57.437363+00:00",
+  "sources": [
+    {
+      "id": "R1",
+      "title": "Git update-index flags",
+      "url": "https://git-scm.com/docs/git-update-index",
+      "used_for": "Assume-unchanged and skip-worktree semantics; actual deletion behavior reproduced separately in fixtures."
+    },
+    {
+      "id": "R2",
+      "title": "Rust canonicalize",
+      "url": "https://doc.rust-lang.org/stable/std/fs/fn.canonicalize.html",
+      "used_for": "Windows canonicalization produces extended-length path syntax."
+    },
+    {
+      "id": "R3",
+      "title": "SQLite PRAGMA integrity_check",
+      "url": "https://www.sqlite.org/pragma.html#pragma_integrity_check",
+      "used_for": "Foreign-key errors require foreign_key_check; structural integrity is not FK integrity."
+    },
+    {
+      "id": "R4",
+      "title": "RustSec time advisory",
+      "url": "https://rustsec.org/advisories/RUSTSEC-2026-0009.html",
+      "used_for": "RFC2822 stack exhaustion; patched >=0.3.47; current reachability not established."
+    },
+    {
+      "id": "R5",
+      "title": "time 0.3.47 crate metadata",
+      "url": "https://docs.rs/crate/time/0.3.47",
+      "used_for": "Published patch-floor version; no dependency resolution run."
+    },
+    {
+      "id": "R6",
+      "title": "RustSec rustls advisory",
+      "url": "https://rustsec.org/advisories/RUSTSEC-2026-0285.html",
+      "used_for": "Affected >=0.23.13,<0.23.45; unresolved transitive graph prevents exposure conclusion."
+    },
+    {
+      "id": "R7",
+      "title": "Rust Child",
+      "url": "https://doc.rust-lang.org/std/process/struct.Child.html",
+      "used_for": "Dropping a Child is not a general descendant cleanup guarantee."
+    },
+    {
+      "id": "R8",
+      "title": "Codex App Server",
+      "url": "https://developers.openai.com/codex/app-server",
+      "used_for": "Public protocol reviewed; no local server or authenticated calls."
+    },
+    {
+      "id": "R9",
+      "title": "SQLite WAL",
+      "url": "https://www.sqlite.org/wal.html",
+      "used_for": "Backup consistency and local-WAL constraints; existing patched-runtime gate retained."
+    }
+  ],
+  "external_evidence_scope": "primary documentation and targeted advisories; no full dependency/vulnerability certification"
+}

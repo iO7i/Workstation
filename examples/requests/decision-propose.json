@@ -1,0 +1,17 @@
+{
+  "operation": "decision_propose",
+  "id": "decision-1",
+  "project_id": "example",
+  "topic": "metadata",
+  "scope": "all",
+  "statement": "Use local SQLite for the control-plane metadata",
+  "rationale": "One native application, bounded local persistence",
+  "alternatives": [
+    "Separate service"
+  ],
+  "consequences": [
+    "Native backup gate remains mandatory"
+  ],
+  "predecessor": null,
+  "effective_at": 0
+}

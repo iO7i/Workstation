@@ -1,0 +1,203 @@
+{
+  "scope": "FS-1.0-D1",
+  "implementation_stage": "R4",
+  "certification_stage": "R5",
+  "cases": [
+    {
+      "id": "D1-001",
+      "title": "Relevant opportunity",
+      "required_behavior": "Approved need and source evidence produce a contextual card; an unrelated project is quiet.",
+      "current_artifact_coverage": "reference_policy",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-002",
+      "title": "No inferred defect",
+      "required_behavior": "Technology inventory without approved needs does not invent a task, deficiency or recommendation.",
+      "current_artifact_coverage": "reference_policy",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-003",
+      "title": "Existing equivalent",
+      "required_behavior": "Prefer a relevant, applicable existing capability; shared need alone is not equivalence.",
+      "current_artifact_coverage": "reference_policy",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-004",
+      "title": "Unknown inventory",
+      "required_behavior": "Partial/denied inspection yields unknown, not absent.",
+      "current_artifact_coverage": "reference_policy",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-005",
+      "title": "Three-card limit",
+      "required_behavior": "At most three cards; do not fill empty results with weak or popular candidates.",
+      "current_artifact_coverage": "reference_policy",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-006",
+      "title": "Constraints and decisions",
+      "required_behavior": "Known platform, privacy, price or accepted-decision conflicts suppress candidates.",
+      "current_artifact_coverage": "reference_policy",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-007",
+      "title": "Unknown compatibility",
+      "required_behavior": "Unknown price/version/license/applicability is disclosed; never install-ready.",
+      "current_artifact_coverage": "reference_policy_partial",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-008",
+      "title": "Scoped dismissal",
+      "required_behavior": "Dismissal remains local to project/need, including known canonical aliases and new catalog revisions.",
+      "current_artifact_coverage": "reference_policy",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-009",
+      "title": "Snooze and feedback order",
+      "required_behavior": "Honor snooze expiry, latest explicit local feedback and timezone; ignore future records.",
+      "current_artifact_coverage": "reference_policy",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-010",
+      "title": "Offline and empty catalog",
+      "required_behavior": "Offline normal context remains usable; empty catalog yields no invented matches.",
+      "current_artifact_coverage": "reference_policy_partial",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-011",
+      "title": "Review freshness",
+      "required_behavior": "Stale review visible; no future review establishes current approval.",
+      "current_artifact_coverage": "reference_policy",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-012",
+      "title": "No adoption inference",
+      "required_behavior": "Downloading/saving/adopting is not observed benefit or acceptance of a project decision.",
+      "current_artifact_coverage": "reference_policy_partial",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-013",
+      "title": "Scoped outcomes",
+      "required_behavior": "Useful/not-useful/inconclusive trial applies only to exact project, need and reviewed resource revision.",
+      "current_artifact_coverage": "reference_policy",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-014",
+      "title": "Disclosed research brief",
+      "required_behavior": "Default brief excludes private IDs/paths/secrets/history; explicit disclosure approval binds its digest.",
+      "current_artifact_coverage": "schema_only",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-015",
+      "title": "Candidate trust boundary",
+      "required_behavior": "Strict bounded input; importer assigns IDs/unverified/reference-only locally; input cannot claim review or authority.",
+      "current_artifact_coverage": "schema_only",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-016",
+      "title": "Malicious text inert",
+      "required_behavior": "Prompt injection, shell text, HTML and terminal controls stay escaped data; no execution/fetch/activation.",
+      "current_artifact_coverage": "not_implemented",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-017",
+      "title": "Import resource limits",
+      "required_behavior": "Reject oversized/deep/invalid/duplicate payloads and interrupted writes without data loss.",
+      "current_artifact_coverage": "schema_only",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-018",
+      "title": "Read-only MCP",
+      "required_behavior": "Cache/sanitized draft only; no import, feedback, plan approval, secret, installation or account tools.",
+      "current_artifact_coverage": "not_implemented",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-019",
+      "title": "Atlas/Chronicle separation",
+      "required_behavior": "Feedback cannot silently create accepted decisions or replace chosen environment resources.",
+      "current_artifact_coverage": "not_implemented",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-020",
+      "title": "Integration revision change",
+      "required_behavior": "Changed source/content/target invalidates approval; reference-only resource has no executable adapter.",
+      "current_artifact_coverage": "not_implemented",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-021",
+      "title": "Context latency",
+      "required_behavior": "No search/network/scanner/model on cached context path; optional cards do not block diagnosis.",
+      "current_artifact_coverage": "not_implemented",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-022",
+      "title": "Resource-specific licensing",
+      "required_behavior": "Mixed repository licensing is scoped to the selected resource; no repository-wide safety badge.",
+      "current_artifact_coverage": "schema_only",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-023",
+      "title": "Catalog curation",
+      "required_behavior": "20–30 actual initial resources have current review records and limitations; fixtures do not count.",
+      "current_artifact_coverage": "not_implemented",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-024",
+      "title": "R0 preservation",
+      "required_behavior": "R0 Rust/build/applied schema/runtime contracts preserved; no live catalog or new runtime dependencies.",
+      "current_artifact_coverage": "artifact_integrity",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-025",
+      "title": "Canonical collision",
+      "required_behavior": "Untrusted import cannot shadow reviewed resource, reset dismissal or bypass canonical deduplication.",
+      "current_artifact_coverage": "reference_policy_partial",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-026",
+      "title": "Own retention",
+      "required_behavior": "Bound reviewed/unreviewed catalog/disposition storage without erasing approved history or requiring a daemon.",
+      "current_artifact_coverage": "not_implemented",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-027",
+      "title": "Reference only is useful",
+      "required_behavior": "Docs, skills, datasets and benchmarks can be described without executable integrations.",
+      "current_artifact_coverage": "reference_policy",
+      "product_test_status": "not_run_product"
+    },
+    {
+      "id": "D1-028",
+      "title": "Unavailable browsing",
+      "required_behavior": "Denied/no online handoff remains a usable local workflow and never causes hidden network attempts.",
+      "current_artifact_coverage": "not_implemented",
+      "product_test_status": "not_run_product"
+    }
+  ]
+}

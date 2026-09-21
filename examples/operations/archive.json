@@ -1,0 +1,8 @@
+{
+  "operation": "operation",
+  "request": {
+    "operation": "journal_archive",
+    "before": 1789689600,
+    "limit": 50
+  }
+}

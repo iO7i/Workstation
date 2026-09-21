@@ -1,0 +1,1339 @@
+diff --git a/Cargo.toml b/Cargo.toml
+index ddc9e48..84fd7d9 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -3,7 +3,7 @@ members = ["crates/workstation-core", "crates/workstation-platform", "crates/wor
+ resolver = "2"
+ 
+ [workspace.package]
+-version = "0.4.0-alpha.1"
++version = "0.4.0-alpha.2"
+ edition = "2021"
+ rust-version = "1.97"
+ license = "MIT"
+@@ -15,7 +15,7 @@ serde_json = { version = "=1.0.151", features = ["arbitrary_precision"] }
+ clap = { version = "=4.6.6", features = ["derive", "env"] }
+ rusqlite = { version = "=0.40.2", features = ["bundled", "backup"] }
+ uuid = { version = "=1.24.0", features = ["v4"] }
+-time = { version = "=0.3.44", features = ["formatting", "parsing"] }
++time = { version = "=0.3.47", features = ["formatting", "parsing"] }
+ tempfile = "=3.27.0"
+ sha2 = "=0.10.9"
+ windows-sys = { version = "=0.61.2", features = [
+diff --git a/crates/workstation-core/src/continuity.rs b/crates/workstation-core/src/continuity.rs
+index 56933f2..c02101f 100644
+--- a/crates/workstation-core/src/continuity.rs
++++ b/crates/workstation-core/src/continuity.rs
+@@ -23,8 +23,9 @@ pub fn collisions(roster:&[RosterEntry])->Vec<Collision>{
+     }out
+ }
+ pub fn lease_state(entry:&RosterEntry,now:i64)-> &'static str {
++    if timestamp(now).is_err()||timestamp(entry.session.last_observed).is_err()||entry.session.last_observed>now||entry.lease_until.is_some_and(|t|timestamp(t).is_err())||entry.session.ended_at.is_some_and(|t|timestamp(t).is_err()||t>now){return "ownership_uncertain";}
+     if entry.session.ended_at.is_some(){"reported_ended"}
+-    else if entry.lease_until.is_some_and(|t|t<now)||now-entry.session.last_observed>900 {"ownership_uncertain"}
++    else if entry.lease_until.is_some_and(|t|t<=now)||now-entry.session.last_observed>900 {"ownership_uncertain"}
+     else {"recently_reported_not_exclusive_lock"}
+ }
+ pub fn validate_stamp(stamp:&WorkspaceStamp)->Check<()> {
+@@ -34,7 +35,7 @@ pub fn validate_stamp(stamp:&WorkspaceStamp)->Check<()> {
+     timestamp(stamp.observed_at)?;lines(&stamp.blockers)
+ }
+ pub fn revalidate_checkpoint(cp:&Checkpoint,live:&WorkspaceStamp,now:i64)->Check<()> {
+-    validate_stamp(live)?;
++    timestamp(now)?;timestamp(cp.recorded_at)?;validate_stamp(&cp.workspace)?;validate_stamp(live)?;
+     if now<cp.recorded_at||now-live.observed_at>60||live.observed_at>now{return Err("LIVE_OBSERVATION_REQUIRED");}
+     if cp.workspace.coverage!=Coverage::Complete||live.coverage!=Coverage::Complete{return Err("HANDOFF_COVERAGE_INCOMPLETE");}
+     if cp.workspace.project_id!=live.project_id||cp.workspace.workspace_id!=live.workspace_id||cp.workspace.directory_identity!=live.directory_identity||cp.workspace.path!=live.path||cp.workspace.head!=live.head||cp.workspace.branch!=live.branch||cp.workspace.status_digest!=live.status_digest{return Err("HANDOFF_STALE");}
+@@ -75,3 +76,12 @@ pub fn handoff(cp:&Checkpoint,live:&WorkspaceStamp,target:&str,roster:&[RosterEn
+     #[test]fn ended_session_not_active_collision(){let mut b=session("b");b.session.ended_at=Some(105);assert!(collisions(&[session("a"),b]).is_empty());}
+     #[test]fn other_project_not_collision(){let mut b=session("b");b.session.project_id="other".into();assert!(collisions(&[session("a"),b]).is_empty());}
+ }
++
++#[cfg(test)]mod audit_lease_tests{
++ use super::*;
++ fn entry()->RosterEntry{RosterEntry{session:Session{id:"s".into(),project_id:"p".into(),agent:"a".into(),external_id:"vendor".into(),adapter_version:"fixture".into(),role:"worker".into(),workspace_id:None,last_observed:100,ended_at:None,coverage:Coverage::Partial},work_id:None,role:"primary".into(),lease_until:Some(200)}}
++ #[test]fn future_activity_is_not_current_ownership(){assert_eq!(lease_state(&entry(),99),"ownership_uncertain");}
++ #[test]fn exact_expiry_is_uncertain(){assert_eq!(lease_state(&entry(),200),"ownership_uncertain");}
++ #[test]fn extreme_activity_cannot_overflow(){let mut e=entry();e.session.last_observed=i64::MIN;assert_eq!(lease_state(&e,100),"ownership_uncertain");}
++ #[test]fn future_end_does_not_release_current_work(){let mut e=entry();e.session.ended_at=Some(201);assert_eq!(lease_state(&e,100),"ownership_uncertain");}
++}
+diff --git a/crates/workstation-core/src/discovery.rs b/crates/workstation-core/src/discovery.rs
+index a2669fc..0c96dc0 100644
+--- a/crates/workstation-core/src/discovery.rs
++++ b/crates/workstation-core/src/discovery.rs
+@@ -27,6 +27,8 @@ impl Capability {
+   control::id(&self.id)?;control::text(&self.title,128)?;control::safe_locator(&self.source,false)?;control::text(&self.purpose,600)?;
+   if !["existing_capability","tool","integration","mcp_server","skill","workflow","documentation","reference_implementation","dataset","benchmark"].contains(&self.kind.as_str()){return Err("RESOURCE_KIND_INVALID");}
+   control::text(&self.review_revision,128)?;control::text(&self.license_scope,400)?;
++  if self.title.trim().is_empty()||self.purpose.trim().is_empty()||self.license_scope.trim().is_empty()||self.review_revision.trim().is_empty(){return Err("CATALOG_MEANINGFUL_METADATA_REQUIRED");}
++  if let Some(e)=&self.equivalence{control::id(e)?;}
+   if self.platforms.len()>4||self.platforms.iter().any(|p|!["windows","linux","macos","platform_neutral"].contains(&p.as_str())){return Err("PLATFORM_METADATA_INVALID");}
+   control::lines(&self.needs)?;control::lines(&self.limitations)?;control::timestamp(self.reviewed_at)?;
+   if self.adoption_mode!="reference_only"{return Err("NO_EXECUTABLE_CATALOG_ACTION");}
+@@ -37,6 +39,8 @@ impl Capability {
+ }
+ pub fn validate_feedback(f:&Feedback)->Check<()> {
+  for s in [&f.id,&f.project_id,&f.resource_id,&f.need]{control::id(s)?;}control::timestamp(f.recorded_at)?;
++ if let Some(t)=f.until{control::timestamp(t)?;}
++ for value in [&f.evidence_ref,&f.revision].into_iter().flatten(){control::text(value,512)?;if value.trim().is_empty(){return Err("TRIAL_EVIDENCE_REQUIRED");}}
+  if !["saved","dismissed","snoozed","evaluated","adopted"].contains(&f.disposition.as_str()){return Err("FEEDBACK_STATE");}
+  if f.disposition=="snoozed"&&!f.until.is_some_and(|t|t>f.recorded_at){return Err("SNOOZE_TIME_REQUIRED");}
+  if f.outcome!="not_recorded"&&(f.disposition!="evaluated"||f.evidence_ref.is_none()||f.revision.is_none()){return Err("TRIAL_EVIDENCE_REQUIRED");}
+@@ -104,3 +108,8 @@ pub fn research_brief(focus:&Focus)->serde_json::Value{
+  #[test]fn plaintext_token_not_catalog(){let c=CandidateInput{title:"test".into(),kind:"doc".into(),source:"https://token@example.org".into(),needs:vec!["a".into()],purpose:"a".into(),limitations:vec!["b".into()]};assert!(c.into_unverified("id".into(),1).is_err());}
+  #[test]fn handoff_brief_omits_evidence_and_private_inventory(){let f=Focus{needs:vec!["tests".into()],free_only:true,local_only:true,platform:"windows".into(),existing:vec!["private-project".into()],blocked:vec![],evidence_ref:"private-evidence".into()};let s=research_brief(&f).to_string();assert!(!s.contains("private"));}
+ }
++
++#[cfg(test)]mod audit_feedback_tests{
++ use super::*;
++ #[test]fn empty_trial_reference_is_not_evidence(){let f=Feedback{id:"f".into(),project_id:"p".into(),resource_id:"r".into(),need:"n".into(),disposition:"evaluated".into(),until:None,outcome:"useful".into(),evidence_ref:Some("".into()),revision:Some("v1".into()),recorded_at:1};assert!(validate_feedback(&f).is_err());}
++}
+diff --git a/crates/workstation-core/src/economics.rs b/crates/workstation-core/src/economics.rs
+index f84bf12..72cd113 100644
+--- a/crates/workstation-core/src/economics.rs
++++ b/crates/workstation-core/src/economics.rs
+@@ -46,8 +46,13 @@ pub struct Runway {
+     pub as_of:i64, pub coverage:Coverage, pub estimate_label:String, pub confidence:String,
+     pub horizons:Vec<Horizon>, pub notes:Vec<String>,
+ }
++fn finite_ratio(numerator:f64,denominator:f64)->Option<f64>{
++ if !numerator.is_finite()||!denominator.is_finite()||denominator<=0.0{return None;}
++ let ratio=numerator/denominator;ratio.is_finite().then_some(ratio)
++}
+ fn horizon(label:&str, rate:Option<f64>, remaining:Option<f64>, reset_in:Option<i64>, span:i64)->Horizon {
+-    let eta=match(rate,remaining){(_,Some(r))if r<=0.0=>Some(0.0),(Some(b),Some(r))if b>0.0=>Some(r/b),_=>None};
++    let eta=match(rate,remaining){(_,Some(r))if r<=0.0=>Some(0.0),(Some(b),Some(r))if b>0.0=>finite_ratio(r,b),_=>None};
++    let rate=rate.filter(|v|v.is_finite());
+     Horizon {label:label.into(),observed_span_seconds:span,rate_per_second:rate,exhaustion_after_seconds:if eta.zip(reset_in).is_some_and(|(e,r)|e>=r as f64){None}else{eta},
+         capacity_at_current_pace_seconds:eta,headroom_to_reset_seconds:eta.zip(reset_in).map(|(e,r)|(e-r as f64).max(0.0)),
+         exhaustion_before_reset:eta.zip(reset_in).map(|(e,r)|e<(r.max(0)as f64)),
+@@ -111,18 +116,22 @@ pub fn forecast(samples:&[QuotaSample],now:i64)->Check<Runway> {
+ 
+ #[derive(Debug,Clone,Serialize,Deserialize)]
+ #[serde(deny_unknown_fields)]
+-pub struct Cycle { pub provider:String,pub bucket:String,pub window_id:String,pub utilization:f64,pub complete:bool,pub evidence_ref:String }
++pub struct Cycle { pub provider:String,#[serde(default)] pub account_alias:Option<String>,pub bucket:String,pub window_id:String,pub utilization:f64,pub complete:bool,pub evidence_ref:String }
+ pub fn plan_fit(cycles:&[Cycle])->Check<serde_json::Value>{
+     if cycles.len()>128{return Err("CYCLE_LIMIT");}
+-    let mut values=Vec::new();let mut ids=std::collections::BTreeSet::new();let mut stream=None;
++    let mut values=Vec::new();let mut ids=std::collections::BTreeSet::new();let mut stream=None;let mut unknown_account=false;
+     for c in cycles{
+         if !c.utilization.is_finite()||c.utilization<0.0||c.evidence_ref.is_empty(){return Err("CYCLE_INVALID");}
++        control::id(&c.provider)?;control::id(&c.bucket)?;control::text(&c.window_id,128)?;control::text(&c.evidence_ref,512)?;
++        if c.window_id.is_empty(){return Err("CYCLE_IDENTITY_REQUIRED");}
+         if !c.complete{continue;}
+-        let key=(&c.provider,&c.bucket);if stream.as_ref().is_some_and(|s|*s!=key){return Err("MIXED_CYCLES");}stream=Some(key);
++        let Some(account)=&c.account_alias else{unknown_account=true;continue;};control::id(account)?;
++        let key=(&c.provider,account,&c.bucket);if stream.as_ref().is_some_and(|s|*s!=key){return Err("MIXED_CYCLES");}stream=Some(key);
+         if !ids.insert(&c.window_id){return Err("DUPLICATE_CYCLE");}values.push(c.utilization);
+     }
++    if unknown_account{return Ok(serde_json::json!({"status":"unknown","reason":"explicit_account_identity_required"}));}
+     if values.len()<3{return Ok(serde_json::json!({"status":"unknown","reason":"three_complete_cycles_required"}));}
+-    values.sort_by(f64::total_cmp);let n=values.len();let median=if n%2==1{values[n/2]}else{(values[n/2-1]+values[n/2])/2.0};
++    values.sort_by(f64::total_cmp);let n=values.len();let median=if n%2==1{values[n/2]}else{values[n/2-1]/2.0+values[n/2]/2.0};
+     let exceeded=values.iter().filter(|&&x|x>=1.0).count();
+     let status=if exceeded>=2{"repeatedly_exceeded"}else if median<0.3{"underutilized"}else if median<0.8{"comfortable"}else{"tight"};
+     Ok(serde_json::json!({"status":status,"median_utilization":median,"complete_cycles":n,"advisory_only":true,"does_not_recommend_extra_spending":true}))
+@@ -137,12 +146,12 @@ pub struct ModelMetric {
+ pub fn pareto(models:&[ModelMetric])->Check<serde_json::Value>{
+     if models.len()>500{return Err("MODEL_LIMIT");}
+     let mut names=std::collections::BTreeSet::new();
+-    for m in models{control::text(&m.model,128)?;control::text(&m.source,512)?;if m.model.is_empty()||m.source.is_empty()||!names.insert(&m.model){return Err("MODEL_IDENTITY_INVALID");}if !m.quality.is_finite()||!m.task_cost_usd.is_finite()||m.task_cost_usd<0.0||m.latency_ms.is_some_and(|x|!x.is_finite()||x<0.0){return Err("MODEL_METRIC_INVALID");}
++    for m in models{control::text(&m.model,128)?;control::text(&m.source,512)?;control::text(&m.benchmark,256)?;control::text(&m.revision,256)?;if m.model.is_empty()||m.source.is_empty()||m.benchmark.is_empty()||m.revision.is_empty()||!names.insert(&m.model){return Err("MODEL_IDENTITY_INVALID");}if !m.quality.is_finite()||!m.task_cost_usd.is_finite()||m.task_cost_usd<0.0||m.latency_ms.is_some_and(|x|!x.is_finite()||x<0.0){return Err("MODEL_METRIC_INVALID");}
+         if m.license_state!="permitted_local_use"{return Err("BENCHMARK_LICENSE_NOT_PERMITTED");}}
+     let eligible:Vec<_>=models.iter().filter(|m|m.available).collect();
+     if let Some(first)=eligible.first(){if eligible.iter().any(|m|m.benchmark!=first.benchmark||m.revision!=first.revision){return Err("INCOMPARABLE_BENCHMARKS");}}
+     let frontier:Vec<_>=eligible.iter().filter(|a|!eligible.iter().any(|b|b.quality>=a.quality&&b.task_cost_usd<=a.task_cost_usd&&(b.quality>a.quality||b.task_cost_usd<a.task_cost_usd))).map(|m|m.model.clone()).collect();
+-    Ok(serde_json::json!({"frontier":frontier,"value_density_heuristic":eligible.iter().map(|m|serde_json::json!({"model":m.model,"index_points_per_usd":if m.task_cost_usd>0.0&&m.quality>=0.0{Some(m.quality/m.task_cost_usd)}else{None}})).collect::<Vec<_>>(),"dimensions":["higher_quality","lower_task_cost_usd"],"note":"Benchmark quality is an index, not ratio-scale intelligence. No subscription quota conversion performed."}))
++    Ok(serde_json::json!({"frontier":frontier,"value_density_heuristic":eligible.iter().map(|m|serde_json::json!({"model":m.model,"index_points_per_usd":if m.task_cost_usd>0.0&&m.quality>=0.0{finite_ratio(m.quality,m.task_cost_usd)}else{None}})).collect::<Vec<_>>(),"dimensions":["higher_quality","lower_task_cost_usd"],"note":"Benchmark quality is an index, not ratio-scale intelligence. No subscription quota conversion performed."}))
+ }
+ #[derive(Debug,Clone,Serialize,Deserialize)]
+ #[serde(deny_unknown_fields)]
+@@ -150,11 +159,13 @@ pub struct ScenarioBucket {pub id:String,pub unit:String,pub remaining:f64,pub c
+ pub fn counterfactual(buckets:&[ScenarioBucket],assumptions:&[String])->Check<serde_json::Value>{
+     if buckets.is_empty()||buckets.len()>20||assumptions.is_empty(){return Err("SCENARIO_ASSUMPTIONS_REQUIRED");}control::lines(assumptions)?;
+     let mut seen=std::collections::BTreeSet::new();let mut rows=vec![];
+-    for b in buckets{if !seen.insert(&b.id)||[b.remaining,b.current_rate_per_second,b.proposed_rate_multiplier].iter().any(|v|!v.is_finite()||*v<0.0)||b.proposed_rate_multiplier>10.0||b.resets_in_seconds.is_some_and(|x|!x.is_finite()||x<0.0){return Err("SCENARIO_INVALID");}
+-        let eta=|rate:f64|if b.remaining==0.0{Some(0.0)}else if rate>0.0{Some(b.remaining/rate)}else{None};
+-        let current=eta(b.current_rate_per_second);let proposed=eta(b.current_rate_per_second*b.proposed_rate_multiplier);
++    for b in buckets{control::id(&b.id)?;control::text(&b.unit,32)?;if b.unit.is_empty(){return Err("SCENARIO_UNIT_REQUIRED");}if !seen.insert(&b.id)||[b.remaining,b.current_rate_per_second,b.proposed_rate_multiplier].iter().any(|v|!v.is_finite()||*v<0.0)||b.proposed_rate_multiplier>10.0||b.resets_in_seconds.is_some_and(|x|!x.is_finite()||x<0.0){return Err("SCENARIO_INVALID");}
++        let eta=|rate:f64|if b.remaining==0.0{Some(0.0)}else if rate>0.0{finite_ratio(b.remaining,rate)}else{None};
++        let proposed_rate=b.current_rate_per_second*b.proposed_rate_multiplier;
++        if !proposed_rate.is_finite()||(b.current_rate_per_second>0.0&&b.proposed_rate_multiplier>0.0&&proposed_rate==0.0){return Err("SCENARIO_RATE_OUT_OF_RANGE");}
++        let current=eta(b.current_rate_per_second);let proposed=eta(proposed_rate);
+         rows.push(serde_json::json!({"bucket":b.id,"unit":b.unit,"current_seconds":current,"proposed_seconds":proposed,
+-            "estimated_extension_seconds":current.zip(proposed).map(|(a,c)|c-a),"exhausts_before_reset":proposed.zip(b.resets_in_seconds).map(|(a,r)|a<r),"beyond_reset_unsupported":proposed.zip(b.resets_in_seconds).is_some_and(|(a,r)|a>=r)}));
++            "estimated_extension_seconds":current.zip(proposed).and_then(|(a,c)|{let d=c-a;d.is_finite().then_some(d)}),"exhausts_before_reset":proposed.zip(b.resets_in_seconds).map(|(a,r)|a<r),"beyond_reset_unsupported":proposed.zip(b.resets_in_seconds).is_some_and(|(a,r)|a>=r)}));
+     }
+     Ok(serde_json::json!({"simulation_only":true,"automatic_switching":false,"assumptions":assumptions,"buckets":rows,
+         "warning":"No additive combined-quota claim. Multipliers are explicit assumptions, not measured routing conversions; no forecast after a reset."}))
+@@ -256,3 +267,13 @@ pub fn select_models(request:&SelectionRequest)->Check<serde_json::Value>{
+  }
+  Ok(serde_json::json!({"candidates":candidates.iter().map(|m|&m.model).collect::<Vec<_>>(),"criterion":request.criterion,"threshold":request.quality_threshold,"pareto":frontier,"automatic_switching":false,"data_source":"explicit_licensed_import"}))
+ }
++
++#[cfg(test)]mod audit_numeric_tests{
++ use super::*;
++ #[test]fn ratio_overflow_is_unknown_not_infinity(){assert_eq!(finite_ratio(1e15,1e-310),None);assert_eq!(finite_ratio(10.0,2.0),Some(5.0));}
++ #[test]fn finite_inputs_cannot_produce_overflow_rate(){let b=ScenarioBucket{id:"b".into(),unit:"credits".into(),remaining:1.0,current_rate_per_second:1e308,proposed_rate_multiplier:10.0,resets_in_seconds:None};assert!(counterfactual(&[b],&["synthetic assumption".into()]).is_err());}
++ fn cycle(account:Option<&str>,n:usize)->Cycle{Cycle{provider:"p".into(),account_alias:account.map(str::to_owned),bucket:"b".into(),window_id:format!("w{n}"),utilization:0.2,complete:true,evidence_ref:"synthetic".into()}}
++ #[test]fn unidentified_plan_fit_is_unknown(){let v=(0..3).map(|n|cycle(None,n)).collect::<Vec<_>>();assert_eq!(plan_fit(&v).unwrap()["reason"],"explicit_account_identity_required");}
++ #[test]fn plan_fit_rejects_mixed_accounts(){assert!(plan_fit(&[cycle(Some("a"),1),cycle(Some("b"),2),cycle(Some("a"),3)]).is_err());}
++ #[test]fn safe_even_median_does_not_overflow(){let v=(0..4).map(|n|{let mut c=cycle(Some("a"),n);c.utilization=1e308;c}).collect::<Vec<_>>();assert!(plan_fit(&v).unwrap()["median_utilization"].as_f64().unwrap().is_finite());}
++}
+diff --git a/crates/workstation-core/src/effects.rs b/crates/workstation-core/src/effects.rs
+index f8960aa..152bc17 100644
+--- a/crates/workstation-core/src/effects.rs
++++ b/crates/workstation-core/src/effects.rs
+@@ -2,7 +2,7 @@
+ use crate::control::{self,Check};
+ use serde::{Serialize,Deserialize};
+ use super::integrations::{digest,ApprovedTask};
+-pub const EFFECT_POLICY:&str="workstation.effects.v4";
++pub const EFFECT_POLICY:&str="workstation.effects.v4.audit1";
+ #[derive(Debug,Clone,Copy,PartialEq,Eq,Serialize,Deserialize)]
+ #[serde(rename_all="snake_case")]
+ pub enum RepairKind{CodexAttachmentRegistry,DockerRuntime,DockerSecretsRuntime}
+diff --git a/crates/workstation-core/src/health_rules.rs b/crates/workstation-core/src/health_rules.rs
+index 2f784cb..25e14f8 100644
+--- a/crates/workstation-core/src/health_rules.rs
++++ b/crates/workstation-core/src/health_rules.rs
+@@ -16,10 +16,14 @@ pub struct Fingerprint {
+ pub struct Match {pub id:String,pub status:String,pub classification:String,pub missing:Vec<String>,pub contradictions:Vec<String>,pub repair_authorized:bool,pub root_cause_fixed:bool}
+ pub fn evaluate(rules:&[Fingerprint],product:&str,platform:&str,version:&str,signals:&[Signal],now:i64)->Check<Vec<Match>>{
+  control::timestamp(now)?;if rules.len()>100||signals.len()>256{return Err("FINGERPRINT_BUDGET");}
+- let mut index=BTreeMap::new();for s in signals{control::id(&s.id)?;control::text(&s.source,200)?;if index.insert(&s.id,s).is_some(){return Err("CONFLICTING_SIGNAL_IDENTITY");}}
++ let mut index=BTreeMap::new();for s in signals{control::id(&s.id)?;control::text(&s.source,200)?;control::timestamp(s.observed_at)?;if index.insert(&s.id,s).is_some(){return Err("CONFLICTING_SIGNAL_IDENTITY");}}
+  let mut ids=BTreeSet::new();let mut out=vec![];
+  for r in rules{
+   control::id(&r.id)?;if !ids.insert(&r.id)||r.requires.is_empty()||r.requires.len()>32||r.contradicts.len()>32||!(1..=3600).contains(&r.freshness_seconds){return Err("INVALID_FINGERPRINT");}
++  control::text(&r.product,100)?;control::text(&r.classification,256)?;
++  if r.platforms.len()>8||r.applicable_versions.len()>100||r.sources.len()>16{return Err("FINGERPRINT_METADATA_BUDGET");}
++  for value in r.platforms.iter().chain(&r.applicable_versions){control::text(value,128)?;}
++  for value in r.requires.iter().chain(&r.contradicts){control::id(value)?;}
+   if r.product!=product && r.product!="any"{continue;}if !r.platforms.iter().any(|p|p==platform){continue;}
+   // Empty applicability is a generic symptom rule, never proof of a specific vendor defect.
+   let applicable=r.applicable_versions.is_empty()||r.applicable_versions.iter().any(|v|v==version);
+@@ -38,3 +42,7 @@ pub fn evaluate(rules:&[Fingerprint],product:&str,platform:&str,version:&str,sig
+  #[test]fn contradictory_signal_blocks_match(){let s=|id:&str|Signal{id:id.into(),value:true,source:"observation".into(),observed_at:10,coverage:Coverage::Complete};let x=evaluate(&[rule()],"codex","windows","v1",&[s("growth"),s("migration")],10).unwrap();assert_eq!(x[0].status,"contradicted");}
+  #[test]fn future_signal_not_current_evidence(){let s=Signal{id:"growth".into(),value:true,source:"observation".into(),observed_at:11,coverage:Coverage::Complete};assert_eq!(evaluate(&[rule()],"codex","windows","v1",&[s],10).unwrap()[0].status,"insufficient_evidence");}
+ }
++
++#[cfg(test)]mod audit_signal_tests{use super::*;
++ #[test]fn extreme_signal_time_rejected_before_subtraction(){let signal=Signal{id:"growth".into(),value:true,source:"reported".into(),observed_at:i64::MIN,coverage:Coverage::Complete};assert!(evaluate(&[],"codex","windows","v1",&[signal],10).is_err());}
++}
+diff --git a/crates/workstation-core/src/operations.rs b/crates/workstation-core/src/operations.rs
+index a3633fb..b4f0a40 100644
+--- a/crates/workstation-core/src/operations.rs
++++ b/crates/workstation-core/src/operations.rs
+@@ -16,7 +16,7 @@ pub enum Operation {
+  WorktreeCreate{integration_id:Option<String>,integration_digest:Option<String>,destination:String,branch:String,base_commit:String,repository_identity:String,source_workspace_id:String,git_sha256:String,destination_parent_identity:String},
+  SecretRotate{resource_id:String,previous_version:Option<String>},
+  SecretRevoke{resource_id:String,expected_version:String},
+- JournalArchive{before:i64,limit:u32},
++ JournalArchive{before:i64,limit:u32,#[serde(default)] selection_digest:String},
+ }
+ impl Operation{pub fn validate(&self)->Check<()>{match self{
+  Self::WorkspaceCleanup{target}=>target.validate(),
+@@ -26,7 +26,7 @@ impl Operation{pub fn validate(&self)->Check<()>{match self{
+   match(integration_id,integration_digest){(Some(i),Some(d))=>{control::id(i)?;digest(d)?;},(None,None)=>{},_=>return Err("INTEGRATION_PIN_INCOMPLETE")};Ok(())},
+  Self::SecretRotate{resource_id,previous_version}=>{control::id(resource_id)?;if let Some(v)=previous_version{control::id(v)?;}Ok(())},
+  Self::SecretRevoke{resource_id,expected_version}=>{control::id(resource_id)?;control::id(expected_version)},
+- Self::JournalArchive{before,limit}=>{control::timestamp(*before)?;if !(1..=100).contains(limit){return Err("ARCHIVE_LIMIT");}Ok(())},
++ Self::JournalArchive{before,limit,selection_digest}=>{digest(selection_digest)?;control::timestamp(*before)?;if !(1..=100).contains(limit){return Err("ARCHIVE_LIMIT");}Ok(())},
+  }}}
+ pub fn branch_name(s:&str)->Check<()>{control::text(s,128)?;if s.is_empty()||s.starts_with('-')||s.starts_with('/')||s.ends_with('/')||s.ends_with('.')||s.ends_with(".lock")||s.contains("..")||s.contains("@{")||s.contains("//")||!s.bytes().all(|x|x.is_ascii_alphanumeric()||b"-_/".contains(&x)){return Err("BRANCH_NAME_INVALID");}Ok(())}
+ pub fn state_projection(d:&WorkspaceDetail)->serde_json::Value{serde_json::json!({"identity":d.stamp.directory_identity,"path":d.stamp.path,"head":d.stamp.head,"branch":d.stamp.branch,"status_digest":d.stamp.status_digest,"dirty":d.stamp.dirty,"untracked":d.stamp.untracked,"ignored":d.stamp.ignored,"local_only_commits":d.stamp.local_only_commits,"blockers":d.stamp.blockers,"repository_identity":d.repository_identity,"main":d.main_worktree,"locked":d.locked,"coverage":d.path_coverage,"checkout_filters_present":d.checkout_filters_present})}
+diff --git a/crates/workstation-core/src/ownership.rs b/crates/workstation-core/src/ownership.rs
+index 98083de..b2ae99a 100644
+--- a/crates/workstation-core/src/ownership.rs
++++ b/crates/workstation-core/src/ownership.rs
+@@ -17,21 +17,30 @@ pub struct OwnershipInput{pub observed_at:i64,pub process_coverage:Coverage,pub
+ #[derive(Debug,Clone,Serialize,Deserialize)]
+ pub struct OwnershipRow{pub process:ProcessKey,pub sessions:Vec<String>,pub relation:String,pub retained_candidate:bool,pub protected:bool,pub reasons:Vec<String>}
+ pub fn correlate(input:&OwnershipInput)->Check<Vec<OwnershipRow>>{
+- if input.processes.len()>4096||input.previous.len()>4096||input.bindings.len()>8192{return Err("OWNERSHIP_BUDGET");}
++ if input.processes.len()>4096||input.previous.len()>4096||input.bindings.len()>8192||input.ended_sessions.len()>8192{return Err("OWNERSHIP_BUDGET");}
+  control::timestamp(input.observed_at)?;let mut index=BTreeMap::new();
+  for p in &input.processes{if p.key.created==0||p.key.host.is_empty()||p.key.boot.is_empty(){return Err("PROCESS_BIRTH_ID_REQUIRED");}if p.parent.as_ref().is_some_and(|a|a.host!=p.key.host||a.boot!=p.key.boot||a.created>p.key.created||a==&p.key){return Err("INVALID_PARENT_BIRTH_IDENTITY");}if index.insert(p.key.clone(),p).is_some(){return Err("DUPLICATE_PROCESS_IDENTITY");}}
+- let previous:BTreeMap<_,_>=input.previous.iter().map(|p|(p.key.clone(),p)).collect();let mut rows=vec![];
++ let mut previous=BTreeMap::new();
++ for p in &input.previous{if previous.insert(p.key.clone(),p).is_some(){return Err("DUPLICATE_PREVIOUS_PROCESS_IDENTITY");}}
++ let mut bindings:BTreeMap<ProcessKey,Vec<&Binding>>=BTreeMap::new();
++ for b in &input.bindings{
++  control::id(&b.session_id)?;control::timestamp(b.seen_at)?;control::timestamp(b.expires_at)?;control::text(&b.source,128)?;
++  if b.expires_at<b.seen_at{return Err("BINDING_TIME_INVALID");}
++  if b.seen_at<=input.observed_at&&b.expires_at>=input.observed_at{bindings.entry(b.process.clone()).or_default().push(b);}
++ }
++ for(s,t)in &input.ended_sessions{control::id(s)?;control::timestamp(*t)?;}
++ let mut rows=vec![];
+  for p in &input.processes{
+   let mut sessions=BTreeSet::new();let mut reasons=vec![];let mut shared=false;
+   let mut cursor=Some(&p.key);let mut visited=BTreeSet::new();let mut supported=true;
+   while let Some(key)=cursor{
+    if !visited.insert(key.clone())||visited.len()>64{supported=false;reasons.push("lineage_cycle_or_depth".into());break;}
+-   for b in input.bindings.iter().filter(|b|&b.process==key&&b.seen_at<=input.observed_at&&b.expires_at>=input.observed_at){
++   for b in bindings.get(key).into_iter().flatten(){
+     control::id(&b.session_id)?;sessions.insert(b.session_id.clone());shared|=b.shared;
+    }
+    match index.get(key){Some(parent)=>{if parent.coverage!=Coverage::Complete{supported=false;}cursor=parent.parent.as_ref();},None=>{supported=false;break;}}
+   }
+-  let explicitly_bound=input.bindings.iter().any(|b|b.process==p.key&&b.source=="observed_owned_child_and_protocol_session"&&b.seen_at<=input.observed_at&&b.expires_at>=input.observed_at)&&p.executable_digest.is_some();
++  let explicitly_bound=bindings.get(&p.key).is_some_and(|v|v.iter().any(|b|b.source=="observed_owned_child_and_protocol_session"))&&p.executable_digest.is_some();
+   let ended=!sessions.is_empty()&&sessions.iter().all(|s|input.ended_sessions.get(s).is_some_and(|t|*t<=input.observed_at-60));
+   let retained=input.process_coverage==Coverage::Complete&&p.coverage==Coverage::Complete&&explicitly_bound&&ended&&!shared&&previous.get(&p.key).is_some_and(|old|old.executable_digest.is_some()&&old.executable_digest==p.executable_digest&&old.coverage==Coverage::Complete);
+   if retained{reasons.push("same_process_observed_after_explicit_session_end_review_required".into());}
+@@ -64,3 +73,8 @@ pub fn hook_ancestor(graph:&crate::host_graph::HostGraph,caller_pid:u32,integrat
+  }
+  if matching.len()==1{Ok(matching.into_iter().next())}else{Ok(None)}
+ }
++
++#[cfg(test)]mod audit_binding_tests{
++ use super::*;
++ #[test]fn invalid_binding_time_is_not_silently_ignored(){let key=ProcessKey{host:"h".into(),boot:"b".into(),pid:1,created:1};let x=OwnershipInput{observed_at:100,process_coverage:Coverage::Partial,processes:vec![],bindings:vec![Binding{process:key,session_id:"s".into(),source:"reported".into(),shared:true,seen_at:200,expires_at:100}],ended_sessions:BTreeMap::new(),previous:vec![]};assert!(correlate(&x).is_err());}
++}
+diff --git a/crates/workstation-core/src/render.rs b/crates/workstation-core/src/render.rs
+index ae09a86..47fc9b8 100644
+--- a/crates/workstation-core/src/render.rs
++++ b/crates/workstation-core/src/render.rs
+@@ -50,7 +50,7 @@ pub fn html_escape(s: &str) -> String {
+ pub fn human_report(s: &Snapshot) -> String {
+     let mut out = String::new();
+     let _ = writeln!(out, "WORKSTATION R0 | observed {} | {:?}", terminal_safe(&s.observed_at), s.coverage);
+-    let _ = writeln!(out, "Read-only assessment. No cleanup or repairs are implemented.\n");
++    let _ = writeln!(out, "Read-only snapshot. No cleanup or repairs were performed by this assessment.\n");
+     for d in &s.disks {
+         let free = d.available_bytes.map(|n| format!("{:.2} GiB available", n as f64 / 1024_f64.powi(3))).unwrap_or_else(|| "available space unknown".into());
+         let _ = writeln!(out, "DISK {}: {} [{:?}]", terminal_safe(&d.target), free, d.coverage);
+diff --git a/crates/workstation-core/src/workspace_policy.rs b/crates/workstation-core/src/workspace_policy.rs
+index bd9b251..c13db1d 100644
+--- a/crates/workstation-core/src/workspace_policy.rs
++++ b/crates/workstation-core/src/workspace_policy.rs
+@@ -51,22 +51,35 @@ pub fn relative_path(s: &str) -> Check<String> {
+     Ok(s)
+ }
+ fn key(s: &str) -> String { s.replace('\\', "/").to_ascii_lowercase() }
++#[cfg(test)]
+ fn overlap(a: &str,b: &str)->bool { let a=key(a);let b=key(b);a==b||a.starts_with(&(b.clone()+"/"))||b.starts_with(&(a+"/")) }
++// O(path depth * log n) instead of comparing/allocating every path pair.
++fn indexed_overlap(path:&str,others:&BTreeSet<String>)->bool{
++ if others.contains(path){return true;}
++ if path.match_indices('/').any(|(i,_)|others.contains(&path[..i])){return true;}
++ let prefix=format!("{path}/");
++ others.range(prefix.clone()..).next().is_some_and(|x|x.starts_with(&prefix))
++}
+ /// A stale lease remains a possibly-active writer. Reviewers/observers are not auto-killed.
+ pub fn conflicts(actors: &[WorkspaceActor], now: i64) -> Check<Vec<WorkspaceConflict>> {
+     control::timestamp(now)?;
+     if actors.len()>256 { return Err("ROSTER_LIMIT"); }
+-    let mut ids=BTreeSet::new();
++    let mut ids=BTreeSet::new();let mut path_bytes=0usize;let mut indexed=Vec::new();
+     for a in actors {
+         control::id(&a.session_id)?;control::id(&a.project_id)?;
++        control::timestamp(a.last_observed)?;if let Some(t)=a.lease_until{control::timestamp(t)?;}
++        if !["primary","reviewer","observer"].contains(&a.role.as_str()){return Err("ACTOR_ROLE_INVALID");}
+         if !ids.insert((&a.session_id,&a.work_id,&a.workspace_id)) {return Err("DUPLICATE_ACTOR");}
+         if a.paths.len()>512 {return Err("PATH_OVERLAP_BUDGET");}
+-        for p in &a.paths {relative_path(p)?;}
++        let mut normalized=BTreeSet::new();
++        for p in &a.paths {relative_path(p)?;path_bytes=path_bytes.checked_add(p.len()).ok_or("PATH_OVERLAP_BUDGET")?;
++            if path_bytes>4*1024*1024{return Err("PATH_OVERLAP_BUDGET");}normalized.insert(key(p));}
++        indexed.push(normalized);
+     }
+     let mut result=Vec::new();
+     for (n,a) in actors.iter().enumerate() {
+         if a.ended || a.role=="observer" {continue;}
+-        for b in &actors[n+1..] {
++        for (j,b) in actors.iter().enumerate().skip(n+1) {
+             if b.ended || b.role=="observer" || a.session_id==b.session_id {continue;}
+             let same_repo=a.repository_identity.is_some() && a.repository_identity==b.repository_identity;
+             let same_workspace=a.project_id==b.project_id && a.workspace_id.is_some() && a.workspace_id==b.workspace_id;
+@@ -74,7 +87,7 @@ pub fn conflicts(actors: &[WorkspaceActor], now: i64) -> Check<Vec<WorkspaceConf
+             let same_branch=same_repo && a.branch.is_some() && a.branch==b.branch;
+             let mut paths=BTreeSet::new();
+             if same_repo || same_workspace {
+-                for p in &a.paths { if b.paths.iter().any(|q|overlap(p,q)) {paths.insert(p.clone());} }
++                for p in &a.paths { if indexed_overlap(&key(p),&indexed[j]) {paths.insert(p.clone());if paths.len()==32{break;}} }
+             }
+             let (kind,risk)=if same_work {(ConflictKind::SameWorkItem,"high")}
+                 else if same_workspace {(ConflictKind::SameWorkspace,"high")}
+@@ -104,7 +117,7 @@ pub struct CleanupContext {
+ pub struct CleanupEligibility {pub disposition:String,pub blockers:Vec<String>,pub required_preservation:Vec<String>,pub automatic_delete_authorized:bool}
+ pub fn cleanup_eligibility(c:&CleanupContext,now:i64)->Check<CleanupEligibility>{
+     control::timestamp(now)?;
+-    let s=&c.detail.stamp;let mut b=BTreeSet::new();
++    let s=&c.detail.stamp;control::timestamp(s.observed_at)?;let mut b=BTreeSet::new();
+     if c.detail.main_worktree || c.detail.bare {b.insert("main_or_bare_checkout".into());}
+     if c.detail.locked {b.insert("git_worktree_locked".into());}
+     if !c.observations_complete || c.detail.path_coverage!=Coverage::Complete || s.coverage!=Coverage::Complete {b.insert("incomplete_evidence".into());}
+@@ -131,3 +144,13 @@ pub fn cleanup_eligibility(c:&CleanupContext,now:i64)->Check<CleanupEligibility>
+  #[test]fn parent_path_overlap(){assert!(overlap("src/Auth","src/auth/token.rs"));assert!(!overlap("src/a","src/abc"));}
+  #[test]fn reject_path_traversal(){for p in ["../a","C:/file","/root","a/./b"]{assert!(relative_path(p).is_err());}}
+ }
++
++#[cfg(test)]mod audit_collision_tests{
++ use super::*;
++ #[test]fn prefix_index_handles_lexical_interlopers(){let set=["a","a-b"].into_iter().map(str::to_owned).collect();assert!(indexed_overlap("a/x",&set));assert!(!indexed_overlap("abc",&set));}
++ #[test]fn prefix_index_matches_pairwise_reference(){let paths=["a","a/x","a-b","a.b","src/auth","src/auth/token.rs","src/abc","z"];
++  for mask in 0..(1usize<<paths.len()){let set:BTreeSet<String>=paths.iter().enumerate().filter(|(i,_)|mask&(1<<i)!=0).map(|(_,x)|x.to_string()).collect();
++   for a in &paths{assert_eq!(indexed_overlap(a,&set),set.iter().any(|b|overlap(a,b)));}}
++ }
++ #[test]fn negative_workspace_time_is_rejected(){let bad=WorkspaceActor{session_id:"a".into(),work_id:None,project_id:"p".into(),workspace_id:None,repository_identity:None,branch:None,paths:vec![],paths_complete:false,role:"primary".into(),ended:false,lease_until:None,last_observed:i64::MIN};assert!(conflicts(&[bad],1).is_err());}
++}
+diff --git a/crates/workstation-core/tests/implementation_v4.rs b/crates/workstation-core/tests/implementation_v4.rs
+index edbbc14..5b41dca 100644
+--- a/crates/workstation-core/tests/implementation_v4.rs
++++ b/crates/workstation-core/tests/implementation_v4.rs
+@@ -31,7 +31,7 @@ fn actor(id:&str,workspace:&str)->WorkspaceActor{WorkspaceActor{session_id:id.in
+ #[test]fn future_catalog_and_install_are_not_implicit_health(){assert!(capabilities(Adapter::Roo).unsupported.contains(&"native_continuation".to_owned()));}
+ #[test]fn worktree_destination_parent_is_required(){let op=json!({"operation":"worktree_create","integration_id":null,"integration_digest":null,"destination":"D:/w","branch":"feature","base_commit":"a".repeat(40),"repository_identity":"repo","source_workspace_id":"w","git_sha256":"b".repeat(64)});assert!(serde_json::from_value::<Operation>(op).is_err());}
+ #[test]fn branch_option_injection_rejected(){for b in ["--force","x..y","x.lock","x@{y}","/x"]{assert!(branch_name(b).is_err());}}
+-#[test]fn archive_budget_rejected(){assert!(Operation::JournalArchive{before:100,limit:101}.validate().is_err());}
++#[test]fn archive_budget_rejected(){assert!(Operation::JournalArchive{before:100,limit:101,selection_digest:"a".repeat(64)}.validate().is_err());}
+ #[test]fn secret_revoke_requires_exact_version(){let x=json!({"operation":"secret_revoke","resource_id":"s"});assert!(serde_json::from_value::<Operation>(x).is_err());}
+ fn rule()->Fingerprint{Fingerprint{id:"test".into(),product:"any".into(),platforms:vec!["windows".into()],applicable_versions:vec!["fixture-v1".into()],requires:vec!["growth".into()],contradicts:vec!["update".into()],freshness_seconds:60,severity:"warning".into(),classification:"symptom_only".into(),sources:vec![],repair_recipe:None}}
+ fn signal(id:&str,value:bool)->Signal{Signal{id:id.into(),value,source:"fixture".into(),observed_at:100,coverage:Coverage::Complete}}
+diff --git a/crates/workstation-platform/src/acp_driver.rs b/crates/workstation-platform/src/acp_driver.rs
+index 5c3f31b..bf24985 100644
+--- a/crates/workstation-platform/src/acp_driver.rs
++++ b/crates/workstation-platform/src/acp_driver.rs
+@@ -45,6 +45,9 @@ pub fn query(store:&Store,i:&Integration,kind:QueryKind)->Result<Value>{
+ }
+ fn same_directory(a:&str,b:&str)->bool{match(crate::external::path_identity(std::path::Path::new(a)),crate::external::path_identity(std::path::Path::new(b))){(Ok(x),Ok(y))=>x==y,_=>false}}
+ pub fn continue_once<F:FnMut(&str,Option<(u32,u64)>)->Result<()>>(store:&Store,i:&Integration,cwd:&str,prompt:&str,resume:Option<&str>,permission:&str,timeout:u32,mut on_session:F)->Result<Value>{
++ if i.adapter==Adapter::GeminiAcp && permission=="read_only" {
++  return Err(Error::new("GEMINI_READONLY_MODE_NOT_RELIABLY_SUPPORTED"));
++ }
+  let(mut rpc,hello)=connect(store,i,cwd,timeout,permission=="allow_once")?;
+  authenticate(&mut rpc,&hello,i)?;
+  let mut params=json!({"cwd":cwd,"mcpServers":[]});
+@@ -62,7 +65,6 @@ pub fn continue_once<F:FnMut(&str,Option<(u32,u64)>)->Result<()>>(store:&Store,i
+  if permission=="read_only"{
+   // Gemini describes its plan mode as incomplete. Do not use a label as proof
+   // of read-only enforcement; require an explicitly approved write-capable plan instead.
+-  if i.adapter==Adapter::GeminiAcp{return Err(Error::new("GEMINI_READONLY_MODE_NOT_RELIABLY_SUPPORTED"));}
+   let modes=response.pointer("/modes/availableModes").and_then(Value::as_array).ok_or(Error::new("ACP_READONLY_MODE_NOT_ADVERTISED"))?;
+   let plan=modes.iter().find_map(|m|m.get("id").and_then(Value::as_str).filter(|v|*v=="plan"));
+   let Some(plan)=plan else{return Err(Error::new("ACP_PLAN_MODE_NOT_AVAILABLE"));};
+diff --git a/crates/workstation-platform/src/control_store.rs b/crates/workstation-platform/src/control_store.rs
+index 061a017..564a940 100644
+--- a/crates/workstation-platform/src/control_store.rs
++++ b/crates/workstation-platform/src/control_store.rs
+@@ -14,6 +14,15 @@ fn err(_:rusqlite::Error)->Error{Error::new("CONTROL_DATABASE_REJECTED")}
+ fn check<T>(r:Check<T>)->Result<T>{r.map_err(Error::new)}
+ fn encode<T:Serialize>(x:&T)->Result<String>{serde_json::to_string(x).map_err(|_|Error::new("CONTROL_ENCODING"))}
+ fn decode<T:serde::de::DeserializeOwned>(x:&str)->Result<T>{serde_json::from_str(x).map_err(|_|Error::new("CONTROL_RECORD_INVALID"))}
++fn optional_context<T:Serialize>(name:&str,result:Result<T>,failures:&mut Vec<Value>)->Value {
++ match result.and_then(|value|serde_json::to_value(value).map_err(|_|Error::new("CONTEXT_SECTION_ENCODING"))) {
++  Ok(value)=>value,
++  Err(error)=>{
++   failures.push(json!({"section":name,"coverage":"partial","error_code":error.code}));
++   json!({"coverage":"partial","available":false,"error_code":error.code,"query_separately":true})
++  }
++ }
++}
+ fn report_evidence(source:&str,at:i64)->Evidence{Evidence{kind:EvidenceKind::AgentReported,source:source.into(),at,coverage:Coverage::Partial}}
+ fn require_project(c:&Connection,project:&str)->Result<()>{
+  check(id(project))?;if !c.query_row("SELECT EXISTS(SELECT 1 FROM projects WHERE id=?1)",[project],|r|r.get::<_,bool>(0)).map_err(err)?{return Err(Error::new("PROJECT_NOT_REGISTERED"));}Ok(())
+@@ -145,6 +154,9 @@ impl Store {
+     }json!({"imported":count,"review_status":"unverified","activated":false})},
+    Record::CandidateReview{id:candidate_id,expected_digest,mut reviewed}=>{kind="capability_reviewed";let old:(String,String)=tx.query_row("SELECT source_digest,canonical_url FROM capability_candidates WHERE id=?1",[&candidate_id],|r|Ok((r.get(0)?,r.get(1)?))).map_err(err)?;
+     if old.0!=expected_digest||reviewed.id!=candidate_id||reviewed.source!=old.1{return Err(Error::new("CANDIDATE_REVIEW_CHANGED"));}
++    let builtins:Vec<Capability>=decode(include_str!("../../../catalog/resources.json"))?;
++    let reviewed_others:i64=tx.query_row("SELECT count(*) FROM capability_candidates WHERE review_status='reviewed' AND id!=?1",[&candidate_id],|r|r.get(0)).map_err(err)?;
++    if builtins.len() as i64+reviewed_others>=100{return Err(Error::new("CATALOG_REVIEW_CAPACITY"));}
+     reviewed.review_status="reviewed".into();reviewed.reviewed_at=at;check(reviewed.validate())?;
+     tx.execute("UPDATE capability_candidates SET review_status='reviewed',payload=?1,source_digest=?2 WHERE id=?3 AND source_digest=?4",params![encode(&reviewed)?,sha(encode(&reviewed)?.as_bytes()),candidate_id,expected_digest]).map_err(err)?;
+     json!({"reviewed":candidate_id,"adoption_mode":"reference_only"})},
+@@ -217,10 +229,14 @@ impl Store {
+    if let Some(id)=item.get("resource_id").and_then(Value::as_str){if !focus.existing.iter().any(|v|v==id){focus.existing.push(id.into());}}
+   }}
+   let mut catalog:Vec<Capability>=decode(include_str!("../../../catalog/resources.json"))?;
+-  let extra:Vec<Capability>=load_json_all(&self.conn,"SELECT payload FROM capability_candidates WHERE review_status='reviewed' ORDER BY id LIMIT 77",76)?;
++  let capacity=100usize.checked_sub(catalog.len()).ok_or(Error::new("BUILTIN_CATALOG_LIMIT"))?;
++  let mut query=self.conn.prepare("SELECT payload FROM capability_candidates WHERE review_status='reviewed' ORDER BY id LIMIT ?1").map_err(err)?;
++  let rows=query.query_map([(capacity+1) as i64],|row|row.get::<_,String>(0)).map_err(err)?;
++  let mut extra=Vec::<Capability>::new();for row in rows{extra.push(decode(&row.map_err(err)?)?);}
++  let catalog_omitted=extra.len()>capacity;extra.truncate(capacity);
+   catalog.extend(extra);let feedback=self.feedback_rows(project)?;
+   let cards=check(discovery::recommend(project,&focus,&catalog,&feedback,at))?;
+-  Ok(json!({"useful_discoveries":cards,"source":"local_catalog","cached_inventory":observed_availability,"network_calls":0,"research_brief":discovery::research_brief(&focus)}))
++  Ok(json!({"useful_discoveries":cards,"source":"local_catalog","catalog_capacity_exceeded":catalog_omitted,"cached_inventory":observed_availability,"network_calls":0,"research_brief":discovery::research_brief(&focus)}))
+  }
+  fn feedback_rows(&self,project:&str)->Result<Vec<Feedback>>{
+   let mut q=self.conn.prepare("SELECT id,project_id,resource_id,need,disposition,until_time,outcome,evidence_ref,revision,recorded_at FROM capability_feedback WHERE project_id=?1 ORDER BY recorded_at DESC,id LIMIT 1001").map_err(err)?;
+@@ -232,12 +248,18 @@ impl Store {
+   let tx=self.conn.unchecked_transaction().map_err(err)?;
+   let at=epoch();let works=self.work_items(project)?;let roster=self.roster(project)?;let decisions=self.decisions(project,at,at)?;
+   let resources=match environment{Some(e)=>self.resources(project,e)?,None=>vec![]};
+-  let discovery=self.suggestions(project,at)?;let economics=self.economics(project,at)?;let integrations=self.integration_summary(project)?;
++  let mut optional_failures=Vec::new();
++  let discovery=optional_context("useful_discoveries",self.suggestions(project,at),&mut optional_failures);
++  let economics=optional_context("economics",self.economics(project,at),&mut optional_failures);
++  let integrations=optional_context("integrations",self.integration_summary(project),&mut optional_failures);
++  let health_profiles=if self.schema_version()?>=4 {optional_context("health_profiles",self.cached_observation(project,"health-v4"),&mut optional_failures)}else{Value::Null};
++  let graph=optional_context("workspace_graph",self.graph_context(project),&mut optional_failures);
++  let events=optional_context("recent_events",self.timeline(project,None),&mut optional_failures);
+   let latest=self.latest()?;let workspaces=self.workspace_latest(project)?;
+   let limits=latest.as_ref().map(|s|json!({"observed_at":s.observed_at,"coverage":s.coverage,"findings":s.findings.len(),"fresh_check_performed":false})).unwrap_or(json!({"status":"unknown","reason":"no_health_snapshot"}));
+   let mut packet=json!({"schema_version":CONTROL_SCHEMA,"project_id":project,"environment":environment,"generated_at":at,"coverage":"partial",
+    "work_items":works,"agent_roster":roster,"workspaces":workspaces,"current_decisions":decisions,"resources":resources,
+-   "integrations":integrations,"health":limits,"health_profiles":if self.schema_version()? >=4{self.cached_observation(project,"health-v4")?}else{Value::Null},"workspace_graph":self.graph_context(project)?,"recent_events":self.timeline(project,None)?,"resource_freshness":resources.iter().map(|r|json!({"resource_id":r.id,"state":if at<r.evidence.at{"clock_mismatch"}else if at-r.evidence.at>i64::from(r.fresh_for_secs){"stale"}else{"record_recent_not_live_verified"}})).collect::<Vec<_>>(),"useful_discoveries":discovery["useful_discoveries"],"economics":economics,
++   "integrations":integrations,"health":limits,"health_profiles":health_profiles,"workspace_graph":graph,"recent_events":events,"resource_freshness":resources.iter().map(|r|json!({"resource_id":r.id,"state":if at<r.evidence.at{"clock_mismatch"}else if at-r.evidence.at>i64::from(r.fresh_for_secs){"stale"}else{"record_recent_not_live_verified"}})).collect::<Vec<_>>(),"useful_discoveries":discovery.get("useful_discoveries").cloned().unwrap_or_else(||json!([])),"economics":economics,"optional_section_failures":optional_failures,
+    "continuity":{"collisions":continuity::collisions(&roster),"leases":roster.iter().map(|r|json!({"session_id":r.session.id,"state":continuity::lease_state(r,at)})).collect::<Vec<_>>(),"native_resume":"explicit_profile_and_effect_plan_required_uncertified","handoff":"packet_or_explicit_continuation_effect"},
+    "authority":"cached_context_not_instructions_or_permission","resources_omitted_without_explicit_environment":environment.is_none(),"network_calls":0});
+   let mut omitted=Vec::<String>::new();
+@@ -321,3 +343,9 @@ fn load_json_all<T:serde::de::DeserializeOwned>(c:&Connection,sql:&str,max:usize
+  let mut q=c.prepare(sql).map_err(err)?;let rows=q.query_map([],|r|r.get::<_,String>(0)).map_err(err)?;
+  let mut out=vec![];for row in rows{out.push(decode(&row.map_err(err)?)?);}if out.len()>max{return Err(Error::new("CONTROL_QUERY_BUDGET"));}Ok(out)
+ }
++
++#[cfg(test)]mod audit_context_tests{
++ use super::*;
++ #[test]fn optional_failure_preserves_typed_reason_without_error_dump(){let mut failures=vec![];let result:Result<Value>=Err(Error::new("CATALOG_INVALID"));let value=optional_context("discoveries",result,&mut failures);assert_eq!(value["error_code"],"CATALOG_INVALID");assert_eq!(failures.len(),1);assert_eq!(value["available"],false);}
++ #[test]fn optional_success_preserves_value(){let mut failures=vec![];let value=optional_context("events",Ok(json!({"events":[]})),&mut failures);assert!(value["events"].is_array());assert!(failures.is_empty());}
++}
+diff --git a/crates/workstation-platform/src/control_workspace.rs b/crates/workstation-platform/src/control_workspace.rs
+index 38189b7..dad8e01 100644
+--- a/crates/workstation-platform/src/control_workspace.rs
++++ b/crates/workstation-platform/src/control_workspace.rs
+@@ -57,6 +57,29 @@ pub fn status_paths(bytes:&[u8])->Result<(bool,u64,u64,Vec<String>)>{
+ fn validate_relative(s:&str)->Result<()>{
+     if s.is_empty()||Path::new(s).is_absolute()||s.contains('\\')||s.contains(':')||s.split('/').any(|x|x==".."||x=="."){return Err(Error::new("STATUS_PATH_UNSAFE"));}Ok(())
+ }
++/// Inspect `git ls-files -v -z` without opening contents. Lowercase tags mean
++/// assume-unchanged; S/s means skip-worktree. Both invalidate a clean-state claim.
++fn index_visibility_blockers(bytes: &[u8]) -> Result<Vec<String>> {
++    if !bytes.is_empty() && !bytes.ends_with(&[0]) {
++        return Err(Error::new("INDEX_FLAGS_TRUNCATED"));
++    }
++    let mut blockers = Vec::new();
++    for record in bytes.split(|b| *b == 0).filter(|r| !r.is_empty()) {
++        if record.len() < 3 || record[1] != b' ' || !b"HSMRCK?hsmrck".contains(&record[0]) {
++            return Err(Error::new("INDEX_FLAGS_UNSUPPORTED"));
++        }
++        if record[0].is_ascii_lowercase() {
++            blockers.push("git_assume_unchanged_content_hidden".into());
++        }
++        if record[0].eq_ignore_ascii_case(&b'S') {
++            blockers.push("git_skip_worktree_content_hidden".into());
++        }
++    }
++    blockers.sort();
++    blockers.dedup();
++    Ok(blockers)
++}
++
+ pub fn capture(project:Project,workspace_id:String,path:PathBuf)->Result<WorkspaceStamp>{
+     control::id(&workspace_id).map_err(Error::new)?;paths::directory(&path)?;
+     let initial=directory_identity(&path)?;
+@@ -67,7 +90,19 @@ pub fn capture(project:Project,workspace_id:String,path:PathBuf)->Result<Workspa
+     let head=selected.head.clone().ok_or_else(||Error::new("WORKSPACE_HEAD_UNKNOWN"))?;
+     let mut stamp=WorkspaceStamp{project_id:project.id.clone(),workspace_id,path:path.to_str().ok_or_else(||Error::new("PATH_ENCODING_UNSUPPORTED"))?.into(),directory_identity:initial.clone(),head:head.clone(),branch:selected.branch.clone(),status_digest:String::new(),dirty:None,untracked:None,ignored:None,local_only_commits:None,blockers:vec![],observed_at:epoch(),coverage:Coverage::Partial};
+     if selected.locked{stamp.blockers.push("git_worktree_locked".into());}
+-    if path.join(".gitmodules").exists(){stamp.blockers.push("submodule_state_not_certified".into());}
++    match fs::symlink_metadata(path.join(".gitmodules")) {
++        Ok(_) => stamp.blockers.push("submodule_state_not_certified".into()),
++        Err(e) if e.kind() == std::io::ErrorKind::NotFound => {},
++        Err(_) => stamp.blockers.push("submodule_marker_unreadable".into()),
++    }
++    let initial_flags = command(&project,&path,&["ls-files","-v","-z"],false)?;
++    stamp.blockers.extend(index_visibility_blockers(&initial_flags)?);
++    for key in ["core.sparseCheckout", "index.sparse"] {
++        let value = command(&project,&path,&["config","--bool","--get",key],true)?;
++        if utf8(&value)?.trim() == "true" {
++            stamp.blockers.push("sparse_checkout_not_certified".into());
++        }
++    }
+     // A clean filter may execute during status. Inspect names only and skip status entirely.
+     let filters=command(&project,&path,&["config","--name-only","--get-regexp",r"^filter\..*\.(clean|process)$"],true)?;
+     let status=if filters.is_empty(){command(&project,&path,&["status","--porcelain=v1","-z","--untracked-files=all","--ignored=matching","--ignore-submodules=all"],false)?}else{stamp.blockers.push("external_git_filter_status_skipped".into());Vec::new()};
+@@ -91,11 +126,20 @@ pub fn capture(project:Project,workspace_id:String,path:PathBuf)->Result<Workspa
+     stamp.local_only_commits=utf8(&local)?.trim().parse().ok();if stamp.local_only_commits.is_none(){stamp.blockers.push("local_commit_count_unknown".into());}
+     for name in ["MERGE_HEAD","CHERRY_PICK_HEAD","REVERT_HEAD","rebase-merge","rebase-apply","BISECT_LOG"]{
+         let p=command(&project,&path,&["rev-parse","--path-format=absolute","--git-path",name],false)?;let p=PathBuf::from(utf8(&p)?.trim());
+-        if fs::symlink_metadata(p).is_ok(){stamp.blockers.push(format!("git_operation_{name}"));}
++        match fs::symlink_metadata(p) {
++            Ok(_) => stamp.blockers.push(format!("git_operation_{name}")),
++            Err(e) if e.kind() == std::io::ErrorKind::NotFound => {},
++            Err(_) => stamp.blockers.push(format!("git_operation_{name}_unreadable")),
++        }
+     }
+     let final_head=command(&project,&path,&["rev-parse","--verify","HEAD"],false)?;
+     if utf8(&final_head)?.trim()!=head||directory_identity(&path)?!=initial{return Err(Error::new("WORKSPACE_CHANGED_DURING_OBSERVATION"));}
+     if filters.is_empty(){let end_status=command(&project,&path,&["status","--porcelain=v1","-z","--untracked-files=all","--ignored=matching","--ignore-submodules=all"],false)?;if end_status!=status{return Err(Error::new("STATUS_CHANGED_DURING_OBSERVATION"));}}
++    let final_flags = command(&project,&path,&["ls-files","-v","-z"],false)?;
++    if final_flags != initial_flags {
++        return Err(Error::new("INDEX_FLAGS_CHANGED_DURING_OBSERVATION"));
++    }
++    digest.update(&initial_flags);
+     stamp.status_digest=format!("{:x}",digest.finalize());stamp.blockers.sort();stamp.blockers.dedup();
+     stamp.coverage=if stamp.blockers.is_empty(){Coverage::Complete}else{Coverage::Partial};
+     // Metadata fingerprint, not a byte-content digest. Same-size/same-mtime edits may evade it.
+@@ -104,6 +148,23 @@ pub fn capture(project:Project,workspace_id:String,path:PathBuf)->Result<Workspa
+ }
+ #[cfg(test)]mod tests{
+     use super::*;
++    #[test] fn ordinary_index_has_no_hidden_state() {
++        assert!(index_visibility_blockers(b"H tracked.txt\0").unwrap().is_empty());
++    }
++    #[test] fn assume_unchanged_blocks_clean_claim() {
++        assert_eq!(index_visibility_blockers(b"h tracked.txt\0").unwrap(),
++            vec!["git_assume_unchanged_content_hidden"]);
++    }
++    #[test] fn skip_worktree_blocks_clean_claim() {
++        assert_eq!(index_visibility_blockers(b"S tracked.txt\0").unwrap(),
++            vec!["git_skip_worktree_content_hidden"]);
++    }
++    #[test] fn combined_index_flags_both_block() {
++        assert_eq!(index_visibility_blockers(b"s tracked.txt\0").unwrap().len(), 2);
++    }
++    #[test] fn truncated_index_flags_are_unknown() {
++        assert!(index_visibility_blockers(b"H tracked.txt").is_err());
++    }
+     #[test]fn ignored_not_clean_disposable(){let(d,u,i,_)=status_paths(b"!! .env\0?? note.txt\0").unwrap();assert!(d);assert_eq!((u,i),(1,1));}
+     #[test]fn rename_has_two_paths(){let(_,_,_,p)=status_paths(b"R  new.txt\0old.txt\0").unwrap();assert_eq!(p.len(),2);}
+     #[test]fn traversal_rejected(){assert!(status_paths(b"?? ../secret\0").is_err());}
+diff --git a/crates/workstation-platform/src/engine.rs b/crates/workstation-platform/src/engine.rs
+index f17aea9..be24e38 100644
+--- a/crates/workstation-platform/src/engine.rs
++++ b/crates/workstation-platform/src/engine.rs
+@@ -50,7 +50,7 @@ fn verify_profile(store:&Store,id:&str,digest:&str,p:&EffectPlan)->Result<Integr
+ pub fn apply(store:&mut Store,id:&str,approval:&str,ack_uncertified:bool)->Result<Receipt>{
+  if !ack_uncertified{return Err(Error::new("UNVERIFIED_RELEASE_EXPLICIT_ACK_REQUIRED"));}
+  // Serialize external effects, not read-only MCP. OS releases lock on a crash; never deletes lock by age.
+- let lock_path=store.home.join("effects.lock");if lock_path.exists(){crate::paths::local_existing(&lock_path)?;}
++ let lock_path=store.home.join("effects.lock");if crate::paths::entry_exists(&lock_path)?{crate::paths::local_existing(&lock_path)?;}
+  let lock=fs::OpenOptions::new().read(true).write(true).create(true).truncate(false).open(lock_path).map_err(|_|Error::new("EFFECT_LOCK_OPEN"))?;
+  lock.try_lock().map_err(|_|Error::new("ANOTHER_EFFECT_RUNNING"))?;
+  let(p,d)=store.effect_plan(id)?;if p.secret_generation_digest!=store.secret_generation_digest(&p.project_id,&p.environment)?{return Err(Error::new("SECRET_GENERATION_CHANGED_SINCE_APPROVAL"));}if p.inherited_paths_digest!=inherited_paths_digest(){return Err(Error::new("INHERITED_PATH_ENVIRONMENT_CHANGED"));}let run=store.begin_effect(&p,&d,approval)?;let start=epoch();
+diff --git a/crates/workstation-platform/src/journal_archive.rs b/crates/workstation-platform/src/journal_archive.rs
+index 12cc5c7..f382b84 100644
+--- a/crates/workstation-platform/src/journal_archive.rs
++++ b/crates/workstation-platform/src/journal_archive.rs
+@@ -11,12 +11,24 @@ struct Entry{kind:String,key:String,digest:String,value:String}
+ #[derive(Debug,Serialize,Deserialize)]#[serde(deny_unknown_fields)]
+ struct Pack{schema_version:u32,project_id:String,created_at:i64,entries:Vec<Entry>}
+ fn db(_:rusqlite::Error)->Error{Error::new("ARCHIVE_DATABASE_REJECTED")}
+-fn directory(home:&Path)->Result<PathBuf>{let d=home.join("archives");if !d.exists(){fs::create_dir(&d).map_err(|_|Error::new("ARCHIVE_DIRECTORY_CREATE"))?;}crate::paths::directory(&d)?;Ok(d)}
++fn directory(home:&Path)->Result<PathBuf>{let d=home.join("archives");if !crate::paths::entry_exists(&d)?{fs::create_dir(&d).map_err(|_|Error::new("ARCHIVE_DIRECTORY_CREATE"))?;}crate::paths::directory(&d)?;Ok(d)}
+ fn read_bytes(path:&Path)->Result<Vec<u8>>{
+  crate::paths::local_existing(path)?;let m=fs::symlink_metadata(path).map_err(|_|Error::new("ARCHIVE_METADATA_UNAVAILABLE"))?;if !m.is_file()||m.len()>PACK_LIMIT as u64{return Err(Error::new("ARCHIVE_SIZE_OR_TYPE"));}
+  let mut bytes=vec![];fs::File::open(path).map_err(|_|Error::new("ARCHIVE_MISSING"))?.take(PACK_LIMIT as u64+1).read_to_end(&mut bytes).map_err(|_|Error::new("ARCHIVE_READ"))?;if bytes.len()>PACK_LIMIT{return Err(Error::new("ARCHIVE_LIMIT"));}Ok(bytes)
+ }
+ fn fixed_name(s:&str)->Result<()>{if s.len()>80||!s.ends_with(".json")||!s.bytes().all(|b|b.is_ascii_alphanumeric()||b"-.".contains(&b)){return Err(Error::new("ARCHIVE_FILENAME_UNSAFE"));}Ok(())}
++// Reserve header/delimiter space before retaining each encoded value. The database
++// bounds individual rows; this additionally bounds aggregate in-memory materialization.
++fn push_bounded(records:&mut Vec<Entry>,used:&mut usize,entry:Entry)->Result<()>{
++ if records.len()>=10000{return Err(Error::new("ARCHIVE_RECORD_BUDGET"));}
++ let bytes=serde_json::to_vec(&entry).map_err(|_|Error::new("ARCHIVE_ENCODING"))?.len();
++ let next=used.checked_add(bytes+1).ok_or(Error::new("ARCHIVE_TOO_LARGE_REDUCE_LIMIT"))?;
++ if next>PACK_LIMIT-4096{return Err(Error::new("ARCHIVE_TOO_LARGE_REDUCE_LIMIT"));}
++ *used=next;records.push(entry);Ok(())
++}
++fn selection_digest(records:&[Entry])->Result<String>{
++ Ok(sha(&serde_json::to_vec(records).map_err(|_|Error::new("ARCHIVE_ENCODING"))?))
++}
+ impl Store{
+  pub fn hydrate_journal(&self,kind:&str,key:&str,current:&str)->Result<String>{
+   let v:Value=serde_json::from_str(current).map_err(|_|Error::new("JOURNAL_JSON_INVALID"))?;
+@@ -25,11 +37,11 @@ impl Store{
+   if !["plan","receipt","step"].contains(&kind){return Err(Error::new("ARCHIVE_KIND_INVALID"));}
+   let id=marker.get("id").and_then(Value::as_str).ok_or(Error::new("ARCHIVE_MARKER_INVALID"))?;
+   let digest=marker.get("sha256").and_then(Value::as_str).ok_or(Error::new("ARCHIVE_MARKER_INVALID"))?;
+-  let row:(String,String,String,String)=self.conn.query_row("SELECT a.id,a.file_name,a.digest,e.content_digest FROM journal_archive_entries e JOIN journal_archives a ON a.id=e.archive_id WHERE e.kind=?1 AND e.record_key=?2",params![kind,key],|r|Ok((r.get(0)?,r.get(1)?,r.get(2)?,r.get(3)?))).map_err(db)?;
++  let row:(String,String,String,String,String,u64)=self.conn.query_row("SELECT a.id,a.file_name,a.digest,e.content_digest,a.project_id,a.byte_count FROM journal_archive_entries e JOIN journal_archives a ON a.id=e.archive_id WHERE e.kind=?1 AND e.record_key=?2",params![kind,key],|r|Ok((r.get(0)?,r.get(1)?,r.get(2)?,r.get(3)?,r.get(4)?,r.get(5)?))).map_err(db)?;
+   if row.0!=id||row.3!=digest{return Err(Error::new("ARCHIVE_REFERENCE_MISMATCH"));}fixed_name(&row.1)?;
+-  let bytes=read_bytes(&self.home.join("archives").join(&row.1))?;if sha(&bytes)!=row.2{return Err(Error::new("ARCHIVE_CHECKSUM_MISMATCH"));}
++  let bytes=read_bytes(&self.home.join("archives").join(&row.1))?;if bytes.len() as u64!=row.5||sha(&bytes)!=row.2{return Err(Error::new("ARCHIVE_CHECKSUM_MISMATCH"));}
+   let pack:Pack=serde_json::from_slice(&bytes).map_err(|_|Error::new("ARCHIVE_FORMAT_INVALID"))?;
+-  if pack.schema_version!=1||pack.entries.len()>10000{return Err(Error::new("ARCHIVE_FORMAT_LIMIT"));}
++  if pack.schema_version!=1||pack.project_id!=row.4||pack.entries.len()>10000{return Err(Error::new("ARCHIVE_FORMAT_LIMIT"));}
+   let items:Vec<_>=pack.entries.iter().filter(|e|e.kind==kind&&e.key==key).collect();if items.len()!=1{return Err(Error::new("ARCHIVE_ENTRY_AMBIGUOUS"));}
+   let e=items[0];if e.digest!=digest||sha(e.value.as_bytes())!=digest{return Err(Error::new("ARCHIVE_ENTRY_CORRUPT"));}Ok(e.value.clone())
+  }
+@@ -39,24 +51,33 @@ impl Store{
+   if rows.len()>128{return Err(Error::new("ARCHIVE_QUERY_LIMIT"));}
+   Ok(json!({"archives":rows,"automatic_deletion":false,"max_archive_bytes":ARCHIVE_LIMIT,"database_bytes_freed":"reusable_pages_not_guaranteed_OS_reclamation"}))
+  }
+- pub fn archive_terminal_journals(&mut self,run:&str,project:&str,before:i64,limit:u32)->Result<Value>{
++ fn terminal_records(&self,project:&str,before:i64,limit:u32)->Result<Vec<Entry>>{
+   self.require_v4()?;if !(1..=100).contains(&limit)||before<0||before>epoch()-3600{return Err(Error::new("ARCHIVE_CUTOFF_OR_LIMIT"));}
+-  let mut records=vec![];let mut selected_runs=vec![];
++  let mut records=vec![];let mut selected_runs=vec![];let mut retained_bytes=0usize;
+   {
+-   let mut q=self.conn.prepare("SELECT p.id,p.payload,r.id,r.receipt FROM effect_plans p JOIN effect_runs r ON r.plan_id=p.id WHERE p.project_id=?1 AND r.state IN ('succeeded','failed','cancelled') AND r.finished_at<?2 AND r.id!=?3 AND NOT EXISTS(SELECT 1 FROM journal_archive_entries e WHERE e.kind='plan' AND e.record_key=p.id) ORDER BY r.finished_at LIMIT ?4").map_err(db)?;
+-   let rows=q.query_map(params![project,before,run,limit],|r|Ok((r.get::<_,String>(0)?,r.get::<_,String>(1)?,r.get::<_,String>(2)?,r.get::<_,Option<String>>(3)?))).map_err(db)?;
++   let mut q=self.conn.prepare("SELECT p.id,p.payload,r.id,r.receipt FROM effect_plans p JOIN effect_runs r ON r.plan_id=p.id WHERE p.project_id=?1 AND r.state IN ('succeeded','failed','cancelled') AND r.finished_at<?2 AND NOT EXISTS(SELECT 1 FROM journal_archive_entries e WHERE e.kind='plan' AND e.record_key=p.id) ORDER BY r.finished_at,r.id LIMIT ?3").map_err(db)?;
++   let rows=q.query_map(params![project,before,limit],|r|Ok((r.get::<_,String>(0)?,r.get::<_,String>(1)?,r.get::<_,String>(2)?,r.get::<_,Option<String>>(3)?))).map_err(db)?;
+    for row in rows{
+     let(plan,payload,execution,receipt)=row.map_err(db)?;
+-    records.push(Entry{kind:"plan".into(),key:plan,digest:sha(payload.as_bytes()),value:payload});
+-    if let Some(receipt)=receipt{records.push(Entry{kind:"receipt".into(),key:execution.clone(),digest:sha(receipt.as_bytes()),value:receipt});}
++    push_bounded(&mut records,&mut retained_bytes,Entry{kind:"plan".into(),key:plan,digest:sha(payload.as_bytes()),value:payload})?;
++    if let Some(receipt)=receipt{push_bounded(&mut records,&mut retained_bytes,Entry{kind:"receipt".into(),key:execution.clone(),digest:sha(receipt.as_bytes()),value:receipt})?;}
+     selected_runs.push(execution);
+    }
+   }
+   for execution in &selected_runs{
+    let mut q=self.conn.prepare("SELECT seq,payload FROM effect_steps WHERE run_id=?1 ORDER BY seq LIMIT 1001").map_err(db)?;
+    let rows=q.query_map([execution],|r|Ok((r.get::<_,i64>(0)?,r.get::<_,String>(1)?))).map_err(db)?;let mut n=0;
+-   for row in rows{let(seq,value)=row.map_err(db)?;n+=1;if n>1000||records.len()>10000{return Err(Error::new("ARCHIVE_RECORD_BUDGET"));}records.push(Entry{kind:"step".into(),key:format!("{execution}:{seq}"),digest:sha(value.as_bytes()),value});}
++   for row in rows{let(seq,value)=row.map_err(db)?;n+=1;if n>1000{return Err(Error::new("ARCHIVE_RECORD_BUDGET"));}push_bounded(&mut records,&mut retained_bytes,Entry{kind:"step".into(),key:format!("{execution}:{seq}"),digest:sha(value.as_bytes()),value})?;}
+   }
++  Ok(records)
++ }
++ /// Binds approval to the exact bounded selection, not merely a cutoff and row count.
++ pub fn journal_selection_digest(&self,project:&str,before:i64,limit:u32)->Result<String>{
++  selection_digest(&self.terminal_records(project,before,limit)?)
++ }
++ pub fn archive_terminal_journals(&mut self,run:&str,project:&str,before:i64,limit:u32,expected_selection:&str)->Result<Value>{
++  let records=self.terminal_records(project,before,limit)?;
++  if selection_digest(&records)?!=expected_selection{return Err(Error::new("ARCHIVE_SELECTION_CHANGED_REPLAN_REQUIRED"));}
+   if records.is_empty(){return Ok(json!({"archived":0,"changed":false}));}
+   let pack=Pack{schema_version:1,project_id:project.into(),created_at:epoch(),entries:records};
+   let bytes=serde_json::to_vec(&pack).map_err(|_|Error::new("ARCHIVE_ENCODING"))?;if bytes.len()>PACK_LIMIT{return Err(Error::new("ARCHIVE_TOO_LARGE_REDUCE_LIMIT"));}
+@@ -92,10 +113,10 @@ pub fn copy_archive_dependencies(conn:&Connection,source_home:&Path,destination:
+  let mut q=conn.prepare("SELECT file_name,digest,byte_count FROM journal_archives ORDER BY id LIMIT 129").map_err(db)?;
+  let rows=q.query_map([],|r|Ok((r.get::<_,String>(0)?,r.get::<_,String>(1)?,r.get::<_,u64>(2)?))).map_err(db)?.collect::<std::result::Result<Vec<_>,_>>().map_err(db)?;
+  if rows.len()>128{return Err(Error::new("BACKUP_ARCHIVE_COUNT_LIMIT"));}if rows.is_empty(){return Ok(vec![]);}
+- if destination.exists(){return Err(Error::new("BACKUP_ARCHIVE_DESTINATION_EXISTS"));}fs::create_dir(destination).map_err(|_|Error::new("BACKUP_ARCHIVE_DIRECTORY"))?;crate::paths::directory(destination)?;
+- let mut summary=vec![];let mut sum=0;
++ if crate::paths::entry_exists(destination)?{return Err(Error::new("BACKUP_ARCHIVE_DESTINATION_EXISTS"));}fs::create_dir(destination).map_err(|_|Error::new("BACKUP_ARCHIVE_DIRECTORY"))?;crate::paths::directory(destination)?;
++ let mut summary=vec![];let mut sum=0u64;
+  for(name,digest,size)in rows{
+-  fixed_name(&name)?;sum+=size;if sum>ARCHIVE_LIMIT{return Err(Error::new("BACKUP_ARCHIVE_BYTES_LIMIT"));}
++  fixed_name(&name)?;sum=sum.checked_add(size).ok_or(Error::new("BACKUP_ARCHIVE_BYTES_LIMIT"))?;if sum>ARCHIVE_LIMIT{return Err(Error::new("BACKUP_ARCHIVE_BYTES_LIMIT"));}
+   let data=read_bytes(&source_home.join("archives").join(&name))?;if data.len() as u64!=size||sha(&data)!=digest{return Err(Error::new("BACKUP_ARCHIVE_SOURCE_MISMATCH"));}
+   let mut out=fs::OpenOptions::new().write(true).create_new(true).open(destination.join(&name)).map_err(|_|Error::new("BACKUP_ARCHIVE_CREATE"))?;
+   out.write_all(&data).and_then(|_|out.sync_all()).map_err(|_|Error::new("BACKUP_ARCHIVE_WRITE"))?;
+@@ -109,9 +130,17 @@ pub fn restore_archive_dependencies(conn:&Connection,backup:&Path,home:&Path)->R
+  let mut q=conn.prepare("SELECT file_name,digest,byte_count FROM journal_archives ORDER BY id LIMIT 129").map_err(db)?;
+  let rows=q.query_map([],|r|Ok((r.get::<_,String>(0)?,r.get::<_,String>(1)?,r.get::<_,u64>(2)?))).map_err(db)?.collect::<std::result::Result<Vec<_>,_>>().map_err(db)?;
+  if rows.len()>128{return Err(Error::new("RESTORE_ARCHIVE_COUNT_LIMIT"));}if rows.is_empty(){return Ok(());}
+- crate::paths::directory(&companion)?;let d=directory(home)?;let mut total=0;
+- for(name,digest,size)in rows{fixed_name(&name)?;total+=size;if total>ARCHIVE_LIMIT{return Err(Error::new("RESTORE_ARCHIVE_BYTES_LIMIT"));}
++ crate::paths::directory(&companion)?;let d=directory(home)?;let mut total=0u64;
++ for(name,digest,size)in rows{fixed_name(&name)?;total=total.checked_add(size).ok_or(Error::new("RESTORE_ARCHIVE_BYTES_LIMIT"))?;if total>ARCHIVE_LIMIT{return Err(Error::new("RESTORE_ARCHIVE_BYTES_LIMIT"));}
+   let bytes=read_bytes(&companion.join(&name))?;if sha(&bytes)!=digest||bytes.len() as u64!=size{return Err(Error::new("RESTORE_ARCHIVE_CORRUPT"));}
+   let mut f=fs::OpenOptions::new().write(true).create_new(true).open(d.join(&name)).map_err(|_|Error::new("RESTORE_ARCHIVE_DESTINATION"))?;f.write_all(&bytes).and_then(|_|f.sync_all()).map_err(|_|Error::new("RESTORE_ARCHIVE_INCOMPLETE"))?;
+  }Ok(())
+ }
++
++#[cfg(test)]mod audit_tests{
++ use super::*;
++ fn entry(value:&str)->Entry{Entry{kind:"step".into(),key:"run:1".into(),digest:sha(value.as_bytes()),value:value.into()}}
++ #[test]fn archive_rejects_aggregate_before_retaining(){let mut entries=vec![];let mut bytes=PACK_LIMIT-4096;assert!(push_bounded(&mut entries,&mut bytes,entry("x")).is_err());assert!(entries.is_empty());}
++ #[test]fn selection_changes_with_payload(){assert_ne!(selection_digest(&[entry("a")]).unwrap(),selection_digest(&[entry("b")]).unwrap());}
++ #[test]fn record_count_is_exact(){let mut entries=(0..10000).map(|_|entry("")).collect();let mut bytes=0;assert!(push_bounded(&mut entries,&mut bytes,entry("")).is_err());}
++}
+diff --git a/crates/workstation-platform/src/operation_runtime.rs b/crates/workstation-platform/src/operation_runtime.rs
+index 4439f67..c2e9ee1 100644
+--- a/crates/workstation-platform/src/operation_runtime.rs
++++ b/crates/workstation-platform/src/operation_runtime.rs
+@@ -32,7 +32,7 @@ pub fn prepare(store:&Store,project:&str,environment:&str,request:Request)->Resu
+   },
+   Request::SecretRotate{resource_id}=>{local_secret_reference(store,project,environment,&resource_id)?;Operation::SecretRotate{previous_version:store.secret_head(&resource_id)?.map(|x|x.0),resource_id}},
+   Request::SecretRevoke{resource_id}=>{local_secret_reference(store,project,environment,&resource_id)?;let(v,s,_)=store.secret_head(&resource_id)?.ok_or(Error::new("LEGACY_SECRET_REQUIRES_VERSION_ADOPTION_FIRST"))?;if s!="active"{return Err(Error::new("SECRET_NOT_ACTIVE"));}Operation::SecretRevoke{resource_id,expected_version:v}},
+-  Request::JournalArchive{before,limit}=>{if before>epoch()-3600{return Err(Error::new("ARCHIVE_REQUIRES_OLD_TERMINAL_RECORDS"));}Operation::JournalArchive{before,limit}},
++  Request::JournalArchive{before,limit}=>{if before>epoch()-3600{return Err(Error::new("ARCHIVE_REQUIRES_OLD_TERMINAL_RECORDS"));}Operation::JournalArchive{before,limit,selection_digest:store.journal_selection_digest(project,before,limit)?}},
+  };op.validate().map_err(Error::new)?;Ok(op)
+ }
+ pub fn execute(store:&mut Store,run:&str,plan:&EffectPlan,op:&Operation)->Result<Value>{
+@@ -54,6 +54,6 @@ pub fn execute(store:&mut Store,run:&str,plan:&EffectPlan,op:&Operation)->Result
+   },
+   Operation::SecretRotate{resource_id,previous_version}=>crate::secret_lifecycle::rotate(store,run,&plan.project_id,&plan.environment,resource_id,previous_version.as_deref()),
+   Operation::SecretRevoke{resource_id,expected_version}=>{local_secret_reference(store,&plan.project_id,&plan.environment,resource_id)?;store.revoke_secret_version(run,resource_id,expected_version)},
+-  Operation::JournalArchive{before,limit}=>store.archive_terminal_journals(run,&plan.project_id,*before,*limit),
++  Operation::JournalArchive{before,limit,selection_digest}=>store.archive_terminal_journals(run,&plan.project_id,*before,*limit,selection_digest),
+  }
+ }
+diff --git a/crates/workstation-platform/src/paths.rs b/crates/workstation-platform/src/paths.rs
+index a0b06b6..d1ba5e6 100644
+--- a/crates/workstation-platform/src/paths.rs
++++ b/crates/workstation-platform/src/paths.rs
+@@ -59,13 +59,28 @@ pub fn directory(path: &Path) -> Result<PathBuf> {
+     Ok(path.to_path_buf())
+ }
+ 
++/// Only NotFound proves absence. A dangling link is an existing entry.
++pub fn entry_exists(path: &Path) -> Result<bool> {
++    match fs::symlink_metadata(path) {
++        Ok(_) => Ok(true),
++        Err(e) if e.kind() == std::io::ErrorKind::NotFound => Ok(false),
++        Err(_) => Err(Error::new("PATH_EXISTENCE_UNKNOWN")),
++    }
++}
++
++pub fn require_absent(path: &Path) -> Result<()> {
++    validate_lexical(path)?;
++    if entry_exists(path)? { return Err(Error::new("TARGET_ALREADY_EXISTS")); }
++    Ok(())
++}
++
+ pub fn prospective_home(path: &Path) -> Result<()> {
+     validate_lexical(path)?;
+     if path.parent().is_none() || path.file_name().is_none() { return Err(Error::new("DRIVE_ROOT_NOT_ALLOWED")); }
+     let parent = path.parent().ok_or_else(|| Error::new("PARENT_REQUIRED"))?;
+     directory(parent)?;
+     for p in parent.ancestors() {
+-        if p.join(".git").exists() { return Err(Error::new("HOME_INSIDE_REPOSITORY")); }
++        if entry_exists(&p.join(".git"))? { return Err(Error::new("HOME_INSIDE_REPOSITORY")); }
+         if let Some(name) = p.file_name().and_then(|n| n.to_str()) {
+             let n = name.to_ascii_lowercase();
+             if n.starts_with("onedrive") || ["dropbox", "google drive", "googledrive", "icloud drive"].contains(&n.as_str()) {
+@@ -78,7 +93,7 @@ pub fn prospective_home(path: &Path) -> Result<()> {
+             if overlaps(path, &PathBuf::from(cloud)) { return Err(Error::new("CLOUD_SYNC_HOME_BLOCKED")); }
+         }
+     }
+-    if fs::symlink_metadata(path).is_ok() { return Err(Error::new("HOME_ALREADY_EXISTS")); }
++    if entry_exists(path)? { return Err(Error::new("HOME_ALREADY_EXISTS")); }
+     Ok(())
+ }
+ 
+@@ -106,6 +121,18 @@ mod tests {
+         let t = tempfile::tempdir().unwrap();
+         assert!(validate_lexical(&t.path().join("../escape")).is_err());
+     }
++    #[test] fn only_missing_entry_is_absent() {
++        let t = tempfile::tempdir().unwrap();
++        assert!(!entry_exists(&t.path().join("missing")).unwrap());
++        assert!(entry_exists(t.path()).unwrap());
++    }
++    #[cfg(unix)]
++    #[test] fn dangling_link_is_not_absent() {
++        let t = tempfile::tempdir().unwrap(); let p = t.path().join("link");
++        std::os::unix::fs::symlink(t.path().join("missing"), &p).unwrap();
++        assert!(entry_exists(&p).unwrap());
++        assert!(require_absent(&p).is_err());
++    }
+     #[test] fn unavailable_home_never_created() {
+         let t = tempfile::tempdir().unwrap(); let p = t.path().join("missing");
+         assert!(select_home(Some(p.clone()), None).is_err()); assert!(!p.exists());
+@@ -129,3 +156,13 @@ mod tests {
+         assert!(local_existing(&link).is_err());
+     }
+ }
++
++/// Reject special files before opening a bounded read. Bounds do not stop FIFO/device opens.
++pub fn regular_file(path:&Path)->Result<()> {
++ local_existing(path)?;let metadata=fs::symlink_metadata(path).map_err(|_|Error::new("FILE_METADATA_UNAVAILABLE"))?;
++ if !metadata.is_file(){return Err(Error::new("REGULAR_FILE_REQUIRED"));}Ok(())
++}
++#[cfg(all(test,unix))]mod audit_regular_file_tests{
++ use super::*;
++ #[test]fn directory_is_not_regular_input(){let t=tempfile::tempdir().unwrap();assert!(regular_file(t.path()).is_err());}
++}
+diff --git a/crates/workstation-platform/src/process_graph.rs b/crates/workstation-platform/src/process_graph.rs
+index 23b43a0..b15b535 100644
+--- a/crates/workstation-platform/src/process_graph.rs
++++ b/crates/workstation-platform/src/process_graph.rs
+@@ -36,6 +36,7 @@ use workstation_core::{host_graph::*,ownership::*,integrations::Integration,Cove
+      let mut name=vec![0u16;32768];let mut n=name.len() as u32;
+      let path=if unsafe{QueryFullProcessImageNameW(h.0,0,name.as_mut_ptr(),&mut n)}!=0{String::from_utf16(&name[..n as usize]).ok()}else{None};
+      let mut matched=vec![];let mut digest=None;
++     let path_readable=path.is_some();
+      if let Some(path)=path{
+       let candidates:Vec<_>=profiles.iter().filter(|p|p.executable.replace('\\',"/").eq_ignore_ascii_case(&path.replace('\\',"/"))).collect();
+       if !candidates.is_empty(){digest=hashes.entry(path.clone()).or_insert_with(||crate::external::hash_file(Path::new(&path)).ok()).clone();
+@@ -46,11 +47,13 @@ use workstation_core::{host_graph::*,ownership::*,integrations::Integration,Cove
+      let mut private=None;let mut io_bytes=None;
+      let query=unsafe{OpenProcess(PROCESS_QUERY_INFORMATION|PROCESS_VM_READ,0,pid)};
+      if !query.is_null(){let q=H(query);let mut memory:PROCESS_MEMORY_COUNTERS_EX=unsafe{zeroed()};memory.cb=size_of::<PROCESS_MEMORY_COUNTERS_EX>() as u32;
+-      if unsafe{K32GetProcessMemoryInfo(q.0,(&mut memory as *mut PROCESS_MEMORY_COUNTERS_EX).cast(),size_of::<PROCESS_MEMORY_COUNTERS_EX>() as u32)}!=0{private=Some(memory.PrivateUsage as u64);}
+-      let mut io:IO_COUNTERS=unsafe{zeroed()};if unsafe{GetProcessIoCounters(q.0,&mut io)}!=0{io_bytes=io.ReadTransferCount.checked_add(io.WriteTransferCount).and_then(|v|v.checked_add(io.OtherTransferCount));}
++      let(mut qc,mut qe,mut qk,mut qu)=(c,c,c,c);
++      let same_birth=unsafe{GetProcessTimes(q.0,&mut qc,&mut qe,&mut qk,&mut qu)}!=0&&ft(qc)==key.created;
++      if same_birth&&unsafe{K32GetProcessMemoryInfo(q.0,(&mut memory as *mut PROCESS_MEMORY_COUNTERS_EX).cast(),size_of::<PROCESS_MEMORY_COUNTERS_EX>() as u32)}!=0{private=Some(memory.PrivateUsage as u64);}
++      let mut io:IO_COUNTERS=unsafe{zeroed()};if same_birth&&unsafe{GetProcessIoCounters(q.0,&mut io)}!=0{io_bytes=io.ReadTransferCount.checked_add(io.WriteTransferCount).and_then(|v|v.checked_add(io.OtherTransferCount));}
+      }
+      parents.insert(pid,entry.th32ParentProcessID);
+-     result.processes.push(ProcessFact{key,parent:None,executable_digest:digest,private_bytes:private,cpu_ticks:Some(ft(k).saturating_add(ft(u))),io_bytes,coverage:Coverage::Complete});
++     result.processes.push(ProcessFact{key,parent:None,executable_digest:digest,private_bytes:private,cpu_ticks:Some(ft(k).saturating_add(ft(u))),io_bytes,coverage:if path_readable&&private.is_some()&&io_bytes.is_some(){Coverage::Complete}else{Coverage::Partial}});
+     }else{result.denied+=1;result.coverage=Coverage::Partial;}
+    }
+   }
+@@ -64,6 +67,7 @@ use workstation_core::{host_graph::*,ownership::*,integrations::Integration,Cove
+    else{p.coverage=Coverage::Partial;}
+   }else if parents.get(&p.key.pid).is_some_and(|id|*id!=0){p.coverage=Coverage::Partial;}
+  }
++ if result.processes.iter().any(|p|p.coverage!=Coverage::Complete){result.coverage=Coverage::Partial;}
+  Ok(result)
+ }
+ #[cfg(not(windows))]pub fn collect(_host:&str,_boot:&str,_profiles:&[Integration])->Result<HostGraph>{
+diff --git a/crates/workstation-platform/src/repairs.rs b/crates/workstation-platform/src/repairs.rs
+index a890ef7..c19cb27 100644
+--- a/crates/workstation-platform/src/repairs.rs
++++ b/crates/workstation-platform/src/repairs.rs
+@@ -89,11 +89,11 @@ pub fn quarantine(store:&mut Store,run:&str,t:&QuarantineTarget)->Result<Value>{
+  let fresh=inspect(Path::new(&t.root),t.kind,Path::new(&t.source_error_path),&t.source_version)?;
+  if serde_json::to_vec(&fresh).ok()!=serde_json::to_vec(t).ok(){return Err(Error::new("REPAIR_TARGET_CHANGED"));}
+  let original=Path::new(&t.target);let name=original.file_name().ok_or(Error::new("TARGET_NAME"))?.to_string_lossy();
+- let backup=original.with_file_name(format!("{name}.workstation-quarantine-{run}"));if fs::symlink_metadata(&backup).is_ok(){return Err(Error::new("QUARANTINE_ALREADY_EXISTS"));}
++ let backup=original.with_file_name(format!("{name}.workstation-quarantine-{run}"));if paths::entry_exists(&backup)?{return Err(Error::new("QUARANTINE_ALREADY_EXISTS"));}
+  store.effect_step(run,"quarantine_exact_runtime_entry","intent",&json!({"original":original,"quarantine":backup,"identity":t.identity,"digest":t.content_digest,"payloads":"not_touched"}))?;
+  // One same-volume rename; never cross-volume copy/delete a reparse point.
+  fs::rename(original,&backup).map_err(|_|Error::new("QUARANTINE_RENAME_FAILED"))?;
+- if fs::symlink_metadata(original).is_ok()||crate::external::path_identity(&backup)?!=t.identity{return Err(Error::new("QUARANTINE_POSTCONDITION_UNCERTAIN"));}
++ if paths::entry_exists(original)?||crate::external::path_identity(&backup)?!=t.identity{return Err(Error::new("QUARANTINE_POSTCONDITION_UNCERTAIN"));}
+  let out=json!({"original":original,"quarantine":backup,"quarantine_identity":t.identity,"source_kind":t.kind,"content_digest":t.content_digest,"restorable":true,"registry_or_runtime_only":true,"root_cause_fixed":false,"application_started":false,"postcondition":"entry_isolated_not_application_recovery_certified"});
+  store.effect_step(run,"quarantine_exact_runtime_entry","completed",&out)?;Ok(out)
+ }
+@@ -103,12 +103,20 @@ pub fn restore(store:&mut Store,run:&str,prior:&Value)->Result<Value>{
+  let kind:RepairKind=serde_json::from_value(prior.get("source_kind").cloned().ok_or(Error::new("RESTORE_KIND"))?).map_err(|_|Error::new("RESTORE_KIND"))?;
+  stopped(kind)?;let original=Path::new(o);let backup=Path::new(q);paths::local_existing(backup)?;
+  if original.parent()!=backup.parent()||!backup.file_name().and_then(|x|x.to_str()).is_some_and(|n|n.contains(".workstation-quarantine-")){return Err(Error::new("RESTORE_PATH_BOUNDARY"));}
+- if fs::symlink_metadata(original).is_ok(){return Err(Error::new("RESTORE_WOULD_OVERWRITE_NEW_STATE"));}
++ paths::validate_lexical(original)?;
++ if paths::entry_exists(original)?{return Err(Error::new("RESTORE_WOULD_OVERWRITE_NEW_STATE"));}
+  if crate::external::path_identity(backup)?!=prior.get("quarantine_identity").and_then(Value::as_str).ok_or(Error::new("RESTORE_IDENTITY"))?{return Err(Error::new("RESTORE_BACKUP_CHANGED"));}
+  let digest=target_digest(backup,kind)?;if prior.get("content_digest").and_then(Value::as_str)!=Some(digest.as_str()){return Err(Error::new("RESTORE_CONTENT_CHANGED"));}
+  store.effect_step(run,"restore_quarantine","intent",&json!({"original":original,"quarantine":backup}))?;
+  fs::rename(backup,original).map_err(|_|Error::new("RESTORE_RENAME_FAILED"))?;
+- Ok(json!({"restored":true,"application_repaired":false,"overwritten":false}))
++ if paths::entry_exists(backup)?
++    || crate::external::path_identity(original)? != prior.get("quarantine_identity").and_then(Value::as_str).ok_or(Error::new("RESTORE_IDENTITY"))?
++    || target_digest(original,kind)? != digest {
++     return Err(Error::new("RESTORE_POSTCONDITION_UNCERTAIN"));
++ }
++ let result=json!({"restored":true,"application_repaired":false,"overwritten":false});
++ store.effect_step(run,"restore_quarantine","completed",&result)?;
++ Ok(result)
+ }
+ 
+ /// Derive only the installed Docker Desktop GUI next to its pinned bundled CLI.
+diff --git a/crates/workstation-platform/src/rpc.rs b/crates/workstation-platform/src/rpc.rs
+index 269e9ee..2a58cc9 100644
+--- a/crates/workstation-platform/src/rpc.rs
++++ b/crates/workstation-platform/src/rpc.rs
+@@ -1,15 +1,26 @@
+ //! Request-correlated JSON-line protocol driver. Unknown server requests fail closed.
+ use crate::{Error,Result,external::Running};
+ use serde_json::{json,Value};
++use std::collections::VecDeque;
+ use workstation_core::control;
+-pub struct Rpc{pub transport:Running,pub usage_summary:Option<Value>,seq:u64,frames:u32,pub notifications:u32,pub denied_permissions:u32,pub allow_once:bool,pub permission_session:Option<String>,pub permission_workspace:Option<std::path::PathBuf>}
++pub struct Rpc{pending_turns:VecDeque<Value>,pub transport:Running,pub usage_summary:Option<Value>,seq:u64,frames:u32,pub notifications:u32,pub denied_permissions:u32,pub allow_once:bool,pub permission_session:Option<String>,pub permission_workspace:Option<std::path::PathBuf>}
+ impl Rpc{
+- pub fn new(transport:Running,allow_once:bool)->Self{Self{transport,usage_summary:None,seq:0,frames:0,notifications:0,denied_permissions:0,allow_once,permission_session:None,permission_workspace:None}}
++ pub fn new(transport:Running,allow_once:bool)->Self{Self{pending_turns:VecDeque::new(),transport,usage_summary:None,seq:0,frames:0,notifications:0,denied_permissions:0,allow_once,permission_session:None,permission_workspace:None}}
+  pub fn notify(&self,method:&str,params:Value)->Result<()>{self.transport.send_json(&json!({"jsonrpc":"2.0","method":method,"params":params}))}
+  pub fn request(&mut self,method:&str,params:Value)->Result<Value>{
+   self.seq+=1;let id=self.seq;self.transport.send_json(&json!({"jsonrpc":"2.0","id":id,"method":method,"params":params}))?;
+   loop{let v=self.frame()?;
+-   if v.get("method").is_some(){self.respond_to_server(&v)?;continue;}
++   if v.get("method").is_some(){
++    // A server may complete a fast turn before replying to turn/start. Preserve
++    // only bounded correlation/status metadata rather than losing the event.
++    if v.get("id").is_none() {
++     if let Some(terminal)=terminal_turn(&v)? {
++      if self.pending_turns.len()>=32{return Err(Error::new("RPC_TERMINAL_QUEUE_LIMIT"));}
++      self.pending_turns.push_back(terminal);
++     }
++    }
++    self.respond_to_server(&v)?;continue;
++   }
+    if v.get("id").and_then(Value::as_u64)!=Some(id){return Err(Error::new("RPC_UNCORRELATED_RESPONSE"));}
+    if v.get("error").is_some(){return Err(Error::new("RPC_REMOTE_REJECTED_DETAILS_SUPPRESSED"));}
+    return v.get("result").cloned().ok_or(Error::new("RPC_RESULT_MISSING"));
+@@ -40,7 +51,7 @@ impl Rpc{
+   self.transport.send_json(&json!({"jsonrpc":"2.0","id":id,"error":{"code":-32601,"message":"Client capability not granted"}}))
+  }
+  pub fn wait_codex_turn(&mut self,thread:&str,turn:&str)->Result<Value>{
+-  loop{let v=self.frame()?;if v.get("method").and_then(Value::as_str)==Some("turn/completed"){
++  loop{let v=match self.pending_turns.pop_front(){Some(v)=>v,None=>self.frame()?};if v.get("method").and_then(Value::as_str)==Some("turn/completed"){
+    if v.pointer("/params/threadId").and_then(Value::as_str)!=Some(thread)||v.pointer("/params/turn/id").and_then(Value::as_str)!=Some(turn){continue;}
+    let status=v.pointer("/params/turn/status").and_then(Value::as_str).ok_or(Error::new("TURN_STATUS_MISSING"))?;
+    if !["completed","interrupted","failed"].contains(&status){return Err(Error::new("TURN_STATUS_UNKNOWN"));}
+@@ -48,6 +59,17 @@ impl Rpc{
+   }self.respond_to_server(&v)?;}
+  }
+ }
++fn terminal_turn(v:&Value)->Result<Option<Value>> {
++ if v.get("method").and_then(Value::as_str)!=Some("turn/completed"){return Ok(None);}
++ let params=v.get("params").ok_or(Error::new("TURN_STATUS_MISSING"))?;
++ let thread=opaque_id(params,"threadId")?;
++ let turn=params.get("turn").ok_or(Error::new("TURN_STATUS_MISSING"))?;
++ let id=opaque_id(turn,"id")?;
++ let status=turn.get("status").and_then(Value::as_str).ok_or(Error::new("TURN_STATUS_MISSING"))?;
++ if !["completed","interrupted","failed"].contains(&status){return Err(Error::new("TURN_STATUS_UNKNOWN"));}
++ Ok(Some(json!({"method":"turn/completed","params":{"threadId":thread,"turn":{"id":id,"status":status}}})))
++}
++
+ pub fn opaque_id(value:&Value,field:&str)->Result<String>{let id=value.get(field).and_then(Value::as_str).ok_or(Error::new("EXTERNAL_ID_MISSING"))?;control::text(id,256).map_err(Error::new)?;if id.trim().is_empty()||id.starts_with('-'){return Err(Error::new("EXTERNAL_ID_INVALID"));}Ok(id.into())}
+ 
+ /// ACP metadata is not a security sandbox. Only explicitly located file read/edit/search
+@@ -59,20 +81,64 @@ fn permission_locations_safe(request:&Value,root:&std::path::Path)->bool{
+  let Some(locations)=request.pointer("/params/toolCall/locations").and_then(Value::as_array)else{return false;};
+  if locations.is_empty()||locations.len()>64{return false;}
+  if crate::paths::directory(root).is_err(){return false;}
+- let Ok(root)=std::fs::canonicalize(root)else{return false;};
+- locations.iter().all(|loc|loc.get("path").and_then(Value::as_str).is_some_and(|p|scoped_file_path(p,&root)))
++ // Keep the validated normal drive spelling. canonicalize() yields a \\?\ path
++ // on Windows, which local_existing intentionally refuses as an input path.
++ locations.iter().all(|loc|loc.get("path").and_then(Value::as_str).is_some_and(|p|scoped_file_path(p,root)))
+ }
+ 
+ /// A policy precheck, not filesystem isolation. No shell, URL, hidden state or secret paths.
+ pub(crate) fn scoped_file_path(p:&str,root:&std::path::Path)->bool{
+  if workstation_core::integrations::absolute_path(p).is_err(){return false;}
+  let path=std::path::Path::new(p);
+- if path.components().any(|c|{let n=c.as_os_str().to_string_lossy().to_ascii_lowercase();n==".git"||n.starts_with(".env")||[".ssh",".aws",".codex",".claude",".cursor",".npmrc","agents.md","claude.md"].contains(&n.as_str())||n.ends_with(".pem")||n.ends_with(".key")}){return false;}
+- let target=if path.exists(){path}else{match path.parent(){Some(parent)=>parent,None=>return false}};
++ if crate::paths::validate_lexical(path).is_err(){return false;}
++ if path.components().any(|c|{let n=c.as_os_str().to_string_lossy().to_ascii_lowercase();n==".git"||n.starts_with(".env")||[".ssh",".aws",".codex",".claude",".cursor",".workstation",".vscode",".npmrc","agents.md","claude.md"].contains(&n.as_str())||n.ends_with(".pem")||n.ends_with(".key")}){return false;}
++ let target = match std::fs::symlink_metadata(path) {
++     Ok(m) if crate::paths::is_redirect_or_placeholder(&m) => return false,
++     Ok(_) => path,
++     Err(e) if e.kind() == std::io::ErrorKind::NotFound => match path.parent() {
++         Some(parent) => parent,
++         None => return false,
++     },
++     Err(_) => return false,
++ };
+  if crate::paths::directory(root).is_err()||crate::paths::local_existing(target).is_err(){return false;}
+  match (std::fs::canonicalize(root),std::fs::canonicalize(target)){(Ok(a),Ok(b))=>b.starts_with(a),_=>false}
+ }
+ #[cfg(test)]mod permission_tests{use super::*;
++ #[test] fn terminal_notification_projection_discards_text_and_errors() {
++  let v=json!({"method":"turn/completed","params":{"threadId":"thread-1","turn":{"id":"turn-1","status":"completed","items":[{"text":"PRIVATE_CONTENT"}],"error":{"message":"PRIVATE_CONTENT"}}}});
++  let projected=terminal_turn(&v).unwrap().unwrap();
++  assert_eq!(projected.pointer("/params/turn/id").and_then(Value::as_str),Some("turn-1"));
++  assert!(!projected.to_string().contains("PRIVATE_CONTENT"));
++ }
++ #[test] fn unrelated_notification_not_retained() {
++  assert!(terminal_turn(&json!({"method":"item/agentMessage/delta","params":{"delta":"text"}})).unwrap().is_none());
++ }
+  #[test]fn no_exec_permission_by_label(){let v=json!({"params":{"toolCall":{"kind":"execute","locations":[{"path":"/tmp"}]}}});assert!(!permission_locations_safe(&v,std::path::Path::new("/tmp")));}
++ #[test] fn ordinary_existing_file_is_in_scope() {
++  let t=tempfile::tempdir().unwrap();let p=t.path().join("ordinary.txt");std::fs::write(&p,b"x").unwrap();
++  assert!(scoped_file_path(p.to_str().unwrap(),t.path()));
++ }
++ #[test] fn new_file_under_existing_parent_is_in_scope() {
++  let t=tempfile::tempdir().unwrap();assert!(scoped_file_path(t.path().join("new.txt").to_str().unwrap(),t.path()));
++ }
++ #[test] fn outside_file_is_denied() {
++  let a=tempfile::tempdir().unwrap();let b=tempfile::tempdir().unwrap();
++  assert!(!scoped_file_path(b.path().join("new.txt").to_str().unwrap(),a.path()));
++ }
++ #[cfg(unix)] #[test] fn dangling_link_is_denied() {
++  let a=tempfile::tempdir().unwrap();let p=a.path().join("new.txt");
++  std::os::unix::fs::symlink("/definitely-missing/secret",&p).unwrap();
++  assert!(!scoped_file_path(p.to_str().unwrap(),a.path()));
++ }
++ #[cfg(windows)] #[test] fn permission_accepts_normal_windows_root_without_verbatim_roundtrip() {
++  let a=tempfile::tempdir().unwrap();let p=a.path().join("ordinary.txt");std::fs::write(&p,b"x").unwrap();
++  let v=json!({"params":{"toolCall":{"kind":"edit","locations":[{"path":p}]}}});
++  assert!(permission_locations_safe(&v,a.path()));
++ }
++ #[cfg(windows)] #[test] fn new_ads_path_is_denied() {
++  let a=tempfile::tempdir().unwrap();let p=a.path().join("missing.txt:stream");
++  assert!(!scoped_file_path(p.to_str().unwrap(),a.path()));
++ }
+  #[test]fn omitted_location_denied(){let v=json!({"params":{"toolCall":{"kind":"edit"}}});assert!(!permission_locations_safe(&v,std::path::Path::new("/tmp")));}
+ }
+diff --git a/crates/workstation-platform/src/secret_lifecycle.rs b/crates/workstation-platform/src/secret_lifecycle.rs
+index 79e482a..99f0095 100644
+--- a/crates/workstation-platform/src/secret_lifecycle.rs
++++ b/crates/workstation-platform/src/secret_lifecycle.rs
+@@ -3,7 +3,7 @@
+ use crate::{Error,Result,storage::Store,vault::SecretBytes,control_store::{epoch,sha}};
+ use serde_json::{Value,json};
+ #[cfg(windows)]use serde::{Serialize,Deserialize};
+-#[cfg(windows)]use std::io::{Read,Write};
++#[cfg(windows)]use std::{io::{Read,Write}, path::Path};
+ #[cfg(windows)]#[derive(Serialize,Deserialize)]#[serde(deny_unknown_fields)]
+ struct BindingV2{schema_version:u32,project:String,environment:String,resource_id:String,version_id:String,secret:Vec<u8>}
+ fn local_resource(store:&Store,project:&str,environment:&str,id:&str)->Result<()> {
+@@ -18,15 +18,15 @@ pub fn rotate(store:&mut Store,run:&str,project:&str,environment:&str,id:&str,ex
+  #[cfg(windows)]{
+   // Secret is entered only now, in a physical hidden console, not in plans or argv.
+   let secret=crate::vault::read_hidden()?;
+-  if secret.0.is_empty()||secret.0.len()>16*1024{return Err(Error::new("SECRET_SIZE_LIMIT"));}
++  if secret.0.is_empty()||secret.0.len()>crate::vault::SECRET_BYTES_LIMIT{return Err(Error::new("SECRET_SIZE_LIMIT"));}
+   let version=crate::new_id();let directory=store.home.join("vault");
+-  if !directory.exists(){std::fs::create_dir(&directory).map_err(|_|Error::new("VAULT_CREATE_FAILED"))?;crate::windows::restrict_home_acl(&directory)?;}
++  if !crate::paths::entry_exists(&directory)?{std::fs::create_dir(&directory).map_err(|_|Error::new("VAULT_CREATE_FAILED"))?;crate::windows::restrict_home_acl(&directory)?;}
+   crate::paths::directory(&directory)?;
+   if std::fs::read_dir(&directory).map_err(|_|Error::new("VAULT_ENUMERATION"))?.take(1025).count()>=1024{return Err(Error::new("VAULT_RETENTION_REVIEW_REQUIRED"));}
+   let mut binding=BindingV2{schema_version:2,project:project.into(),environment:environment.into(),resource_id:id.into(),version_id:version.clone(),secret:secret.0.clone()};
+   let encoded=serde_json::to_vec(&binding);for b in &mut binding.secret{unsafe{std::ptr::write_volatile(b,0)}}
+   let plaintext=SecretBytes(encoded.map_err(|_|Error::new("SECRET_BINDING_ENCODING"))?);
+-  let cipher=crate::vault::native::protect(&plaintext.0)?;
++  let cipher=crate::vault::native::protect(&plaintext.0)?;if cipher.len()>crate::vault::CIPHER_BYTES_LIMIT{return Err(Error::new("VAULT_CIPHER_LIMIT"));}
+   let name=format!("{}.dpapi",sha(format!("local-v2:{project}:{environment}:{id}:{version}").as_bytes()));
+   let path=directory.join(&name);let mut f=std::fs::OpenOptions::new().write(true).create_new(true).open(&path).map_err(|_|Error::new("VERSION_FILE_EXISTS_OR_CREATE_FAILED"))?;
+   f.write_all(&cipher).and_then(|_|f.sync_all()).map_err(|_|Error::new("VAULT_WRITE_INCOMPLETE_PRESERVED"))?;
+@@ -47,11 +47,11 @@ pub(crate) fn resolve(store:&Store,project:&str,environment:&str,id:&str)->Resul
+   let(file,digest):(String,String)=store.conn.query_row("SELECT file_name,cipher_digest FROM secret_versions WHERE resource_id=?1 AND version_id=?2",rusqlite::params![id,version],|r|Ok((r.get(0)?,r.get(1)?))).map_err(|_|Error::new("VAULT_VERSION_METADATA"))?;
+   if Path::new(&file).file_name().and_then(|s|s.to_str())!=Some(file.as_str())||!file.ends_with(".dpapi"){return Err(Error::new("VAULT_VERSION_PATH_INVALID"));}
+   let path=store.home.join("vault").join(file);crate::paths::local_existing(&path)?;
+-  let mut cipher=vec![];std::fs::File::open(&path).map_err(|_|Error::new("VAULT_VERSION_MISSING_REENTRY_REQUIRED"))?.take(65537).read_to_end(&mut cipher).map_err(|_|Error::new("VAULT_VERSION_READ"))?;
+-  if cipher.len()>65536||sha(&cipher)!=digest{return Err(Error::new("VAULT_VERSION_INTEGRITY"));}
++  let mut cipher=vec![];std::fs::File::open(&path).map_err(|_|Error::new("VAULT_VERSION_MISSING_REENTRY_REQUIRED"))?.take(crate::vault::CIPHER_BYTES_LIMIT as u64+1).read_to_end(&mut cipher).map_err(|_|Error::new("VAULT_VERSION_READ"))?;
++  if cipher.len()>crate::vault::CIPHER_BYTES_LIMIT||sha(&cipher)!=digest{return Err(Error::new("VAULT_VERSION_INTEGRITY"));}
+   let plaintext=crate::vault::native::unprotect(&cipher)?;
+   let mut b:BindingV2=serde_json::from_slice(&plaintext.0).map_err(|_|Error::new("VAULT_VERSION_BINDING"))?;
+-  let bytes=SecretBytes(std::mem::take(&mut b.secret));
++  let bytes=SecretBytes(std::mem::take(&mut b.secret));if bytes.0.is_empty()||bytes.0.len()>crate::vault::SECRET_BYTES_LIMIT{return Err(Error::new("VAULT_SECRET_SIZE_LIMIT"));}
+   if b.schema_version!=2||b.project!=project||b.environment!=environment||b.resource_id!=id||b.version_id!=version{return Err(Error::new("VAULT_VERSION_SCOPE_MISMATCH"));}Ok(bytes)
+  }
+ }
+diff --git a/crates/workstation-platform/src/specialists.rs b/crates/workstation-platform/src/specialists.rs
+index f4fea6a..7ad3cc5 100644
+--- a/crates/workstation-platform/src/specialists.rs
++++ b/crates/workstation-platform/src/specialists.rs
+@@ -2,19 +2,19 @@
+ use crate::{Error,Result,storage::Store};
+ use workstation_core::integrations::{Adapter,Integration};
+ use serde_json::{Value,json};
+-use std::{ffi::OsString,fs::{self,OpenOptions},io::Write,time::Duration};
++use std::{ffi::OsString,fs::{self,OpenOptions},io::{Read,Write},time::Duration};
+ /// Own immutable empty config is an input, not permission to load project hooks.
+ pub(crate) fn empty_worktrunk_config(store:&Store)->Result<std::path::PathBuf>{
+  let p=store.home.join("worktrunk-empty.toml");let bytes=b"# Workstation-owned no hooks\n";
+  match OpenOptions::new().write(true).create_new(true).open(&p){Ok(mut f)=>{f.write_all(bytes).map_err(|_|Error::new("WORKTRUNK_CONFIG_WRITE"))?;f.sync_all().map_err(|_|Error::new("WORKTRUNK_CONFIG_SYNC"))?;},Err(e)if e.kind()==std::io::ErrorKind::AlreadyExists=>{},Err(_)=>return Err(Error::new("WORKTRUNK_CONFIG_CREATE"))}
+- crate::paths::local_existing(&p)?;if fs::read(&p).map_err(|_|Error::new("WORKTRUNK_CONFIG_READ"))?!=bytes{return Err(Error::new("WORKTRUNK_CONFIG_CHANGED"));}Ok(p)
++ crate::paths::regular_file(&p)?;let mut content=Vec::new();fs::File::open(&p).map_err(|_|Error::new("WORKTRUNK_CONFIG_READ"))?.take(bytes.len() as u64+1).read_to_end(&mut content).map_err(|_|Error::new("WORKTRUNK_CONFIG_READ"))?;if content!=bytes{return Err(Error::new("WORKTRUNK_CONFIG_CHANGED"));}Ok(p)
+ }
+ pub fn worktrunk_list(store:&Store,i:&Integration)->Result<Value>{
+  if i.adapter!=Adapter::Worktrunk{return Err(Error::new("WORKTRUNK_PROFILE_REQUIRED"));}
+  let p=store.projects()?.into_iter().find(|p|p.id==i.project_id).ok_or(Error::new("PROJECT_MISSING"))?;
+  // Project configuration can define shell-backed custom columns/aliases. Rather than
+  // guessing merge semantics, refuse it for this narrowly non-executing inventory.
+- for name in [".config/wt.toml",".worktrunk.toml","wt.toml"] {if p.path.join(name).exists(){return Err(Error::new("WORKTRUNK_PROJECT_CONFIG_REQUIRES_SEPARATE_REVIEW"));}}
++ for name in [".config/wt.toml",".worktrunk.toml","wt.toml"] {if crate::paths::entry_exists(&p.path.join(name))?{return Err(Error::new("WORKTRUNK_PROJECT_CONFIG_REQUIRES_SEPARATE_REVIEW"));}}
+  let cfg=empty_worktrunk_config(store)?;
+  let args:Vec<OsString>=vec!["--config".into(),cfg.as_os_str().into(),"--config-set".into(),"list.full = false".into(),"--config-set".into(),"list.json-schema = 2".into(),"list".into(),"--format=json".into(),"--no-progressive".into()];
+  let mut env=crate::external::scoped_environment(&store.home,&[],&std::collections::BTreeMap::new())?;
+diff --git a/crates/workstation-platform/src/storage.rs b/crates/workstation-platform/src/storage.rs
+index 24ac916..cf0767c 100644
+--- a/crates/workstation-platform/src/storage.rs
++++ b/crates/workstation-platform/src/storage.rs
+@@ -21,8 +21,13 @@ fn configure(conn: &Connection) -> Result<()> {
+     conn.execute_batch("PRAGMA foreign_keys=ON; PRAGMA trusted_schema=OFF; PRAGMA synchronous=FULL; PRAGMA max_page_count=8192;").map_err(db_err)?;
+     Ok(())
+ }
++fn verify_foreign_keys(conn:&Connection)->Result<()> {
++    let mut q=conn.prepare("PRAGMA foreign_key_check").map_err(db_err)?;
++    if q.query([]).map_err(db_err)?.next().map_err(db_err)?.is_some(){return Err(Error::new("DATABASE_FOREIGN_KEY_INTEGRITY_FAILED"));}Ok(())
++}
+ fn read_config(home: &Path) -> Result<Config> {
+-    let p = home.join("config.json"); paths::local_existing(&p)?;
++    if paths::entry_exists(&home.join("restore.pending"))?{return Err(Error::new("RESTORE_INCOMPLETE_HOME_PROTECTED"));}
++    let p = home.join("config.json"); paths::regular_file(&p)?;
+     let mut b = Vec::new(); fs::File::open(&p).map_err(|_| Error::new("CONFIG_UNREADABLE"))?
+         .take(64 * 1024 + 1).read_to_end(&mut b).map_err(|_| Error::new("CONFIG_UNREADABLE"))?;
+     if b.len() > 64 * 1024 { return Err(Error::new("CONFIG_TOO_LARGE")); }
+@@ -52,8 +57,8 @@ impl Store {
+     }
+     pub fn open_readonly(home:&Path)->Result<Self>{
+         verify_runtime()?;paths::directory(home)?;let config=read_config(home)?;
+-        let db=home.join("workstation.db");paths::local_existing(&db)?;
+-        for name in ["workstation.db-wal","workstation.db-shm"]{let p=home.join(name);if fs::symlink_metadata(&p).is_ok(){paths::local_existing(&p)?;}}
++        let db=home.join("workstation.db");paths::regular_file(&db)?;
++        for name in ["workstation.db-wal","workstation.db-shm"]{let p=home.join(name);if paths::entry_exists(&p)?{paths::local_existing(&p)?;}}
+         if fs::metadata(&db).map_err(|_|Error::new("DATABASE_UNREADABLE"))?.len()>DATABASE_LIMIT{return Err(Error::new("DATABASE_SIZE_LIMIT"));}
+         let conn=Connection::open_with_flags(db,OpenFlags::SQLITE_OPEN_READ_ONLY).map_err(db_err)?;
+         conn.busy_timeout(Duration::from_millis(250)).map_err(db_err)?;
+@@ -66,10 +71,10 @@ impl Store {
+     pub fn open(home: &Path) -> Result<Self> {
+         verify_runtime()?; paths::directory(home)?;
+         let config = read_config(home)?;
+-        let db = home.join("workstation.db"); paths::local_existing(&db)?;
++        let db = home.join("workstation.db"); paths::regular_file(&db)?;
+         for n in ["workstation.db-wal", "workstation.db-shm"] {
+             let p = home.join(n);
+-            if fs::symlink_metadata(&p).is_ok() { paths::local_existing(&p)?; }
++            if paths::entry_exists(&p)? { paths::local_existing(&p)?; }
+         }
+         if fs::metadata(&db).map_err(|_| Error::new("DATABASE_UNREADABLE"))?.len() > DATABASE_LIMIT { return Err(Error::new("DATABASE_SIZE_LIMIT")); }
+         let conn = Connection::open_with_flags(db, OpenFlags::SQLITE_OPEN_READ_WRITE | OpenFlags::SQLITE_OPEN_NO_MUTEX).map_err(db_err)?;
+@@ -82,6 +87,7 @@ impl Store {
+     pub fn health(&self) -> Result<serde_json::Value> {
+         let integrity: String = self.conn.query_row("PRAGMA quick_check(1)", [], |r| r.get(0)).map_err(db_err)?;
+         if integrity != "ok" { return Err(Error::new("DATABASE_INTEGRITY_FAILED")); }
++        verify_foreign_keys(&self.conn)?;
+         let source: String = self.conn.query_row("SELECT sqlite_source_id()", [], |r| r.get(0)).map_err(db_err)?;
+         let journal: String = self.conn.query_row("PRAGMA journal_mode", [], |r| r.get(0)).map_err(db_err)?;
+         if journal != "wal" { return Err(Error::new("DATABASE_JOURNAL_UNEXPECTED")); }
+@@ -154,22 +160,32 @@ impl Store {
+         if expected_sha256.len()!=64||!expected_sha256.bytes().all(|b|b.is_ascii_hexdigit()){return Err(Error::new("BACKUP_DIGEST_REQUIRED"));}
+         let meta=fs::symlink_metadata(source).map_err(|_|Error::new("BACKUP_UNAVAILABLE"))?;
+         if !meta.is_file()||meta.len()>DATABASE_LIMIT{return Err(Error::new("BACKUP_SIZE_OR_TYPE"));}
+-        for suffix in ["-wal","-shm"]{let side=PathBuf::from(format!("{}{suffix}",source.to_string_lossy()));if fs::symlink_metadata(side).is_ok(){return Err(Error::new("RESTORE_REQUIRES_ISOLATED_BACKUP"));}}
+-        let mut f=fs::File::open(source).map_err(|_|Error::new("BACKUP_UNREADABLE"))?;let mut hasher=Sha256::new();let mut bytes=[0u8;16384];
+-        loop{let n=f.read(&mut bytes).map_err(|_|Error::new("BACKUP_UNREADABLE"))?;if n==0{break;}hasher.update(&bytes[..n]);}
++        for suffix in ["-wal","-shm"]{let side=PathBuf::from(format!("{}{suffix}",source.to_string_lossy()));if paths::entry_exists(&side)?{return Err(Error::new("RESTORE_REQUIRES_ISOLATED_BACKUP"));}}
++        let mut f=fs::File::open(source).map_err(|_|Error::new("BACKUP_UNREADABLE"))?;let mut hasher=Sha256::new();let mut bytes=[0u8;16384];let mut consumed=0u64;
++        loop{let n=f.read(&mut bytes).map_err(|_|Error::new("BACKUP_UNREADABLE"))?;if n==0{break;}consumed=consumed.checked_add(n as u64).ok_or(Error::new("BACKUP_SIZE_OR_TYPE"))?;if consumed>DATABASE_LIMIT{return Err(Error::new("BACKUP_SIZE_OR_TYPE"));}hasher.update(&bytes[..n]);}
+         if format!("{:x}",hasher.finalize())!=expected_sha256{return Err(Error::new("BACKUP_DIGEST_MISMATCH"));}
+         let from=Connection::open_with_flags(source,OpenFlags::SQLITE_OPEN_READ_ONLY).map_err(db_err)?;
++        from.busy_timeout(Duration::from_millis(250)).map_err(db_err)?;
++        from.execute_batch("PRAGMA trusted_schema=OFF; PRAGMA query_only=ON;").map_err(db_err)?;
+         let app:i64=from.query_row("PRAGMA application_id",[],|r|r.get(0)).map_err(db_err)?;
+         let v:i64=from.query_row("PRAGMA user_version",[],|r|r.get(0)).map_err(db_err)?;
+         let check:String=from.query_row("PRAGMA integrity_check(1)",[],|r|r.get(0)).map_err(db_err)?;
+         if app!=APPLICATION_ID||![1,2,3,4].contains(&v)||check!="ok"{return Err(Error::new("BACKUP_IDENTITY_OR_INTEGRITY"));}
+-        let mut target=Self::init(home)?;let start=Instant::now();
++        verify_foreign_keys(&from)?;
++        let mut target=Self::init(home)?;
++        let marker=home.join("restore.pending");
++        let mut pending=OpenOptions::new().create_new(true).write(true).open(&marker).map_err(|_|Error::new("RESTORE_MARKER_CREATE_FAILED"))?;
++        pending.write_all(b"Restore in progress. Do not open or use this home before review of a failed restore.\n").and_then(|_|pending.sync_all()).map_err(|_|Error::new("RESTORE_MARKER_WRITE_FAILED"))?;drop(pending);
++        let start=Instant::now();
+         {let copy=Backup::new(&from,&mut target.conn).map_err(db_err)?;
+          loop{if start.elapsed()>Duration::from_secs(5){return Err(Error::new("RESTORE_INCOMPLETE_NEW_HOME_PRESERVED"));}
+           match copy.step(64).map_err(db_err)?{StepResult::Done=>break,StepResult::More|StepResult::Busy|StepResult::Locked=>thread_sleep(),_=>return Err(Error::new("RESTORE_STATUS_UNSUPPORTED"))}}
+         }
+         crate::journal_archive::restore_archive_dependencies(&from,source,home)?;
+-        target.health()?;drop(target);Self::open(home)
++        target.health()?;drop(target);
++        paths::local_existing(&marker)?;
++        fs::remove_file(&marker).map_err(|_|Error::new("RESTORE_MARKER_CLEAR_FAILED"))?;
++        Self::open(home)
+     }
+     pub fn backup(&self) -> Result<PathBuf> {
+         let folder = self.home.join("backups"); paths::directory(&folder)?;
+@@ -194,6 +210,7 @@ impl Store {
+         }
+         let check: String = target.query_row("PRAGMA integrity_check", [], |r| r.get(0)).map_err(db_err)?;
+         if check != "ok" { return Err(Error::new("BACKUP_INTEGRITY_FAILED")); }
++        verify_foreign_keys(&target)?;
+         let archive_dependencies=crate::journal_archive::copy_archive_dependencies(&target,&self.home,&destination.with_extension("archives"))?;
+         drop(target);
+         let mut file = fs::File::open(&destination).map_err(|_| Error::new("BACKUP_READ_FAILED"))?;
+@@ -242,3 +259,12 @@ mod tests {
+ pub fn linked_sqlite_version() -> &'static str { rusqlite::version() }
+ 
+ fn thread_sleep(){std::thread::sleep(Duration::from_millis(10));}
++
++#[cfg(test)]mod audit_restore_tests{
++ use super::*;
++ #[test]fn sqlite_integrity_is_not_foreign_key_integrity(){
++  let c=Connection::open_in_memory().unwrap();c.execute_batch("PRAGMA foreign_keys=OFF;CREATE TABLE parent(id INTEGER PRIMARY KEY);CREATE TABLE child(id INTEGER REFERENCES parent);INSERT INTO child VALUES(42);").unwrap();
++  let check:String=c.query_row("PRAGMA integrity_check",[],|r|r.get(0)).unwrap();assert_eq!(check,"ok");assert!(verify_foreign_keys(&c).is_err());
++ }
++ #[test]fn incomplete_restore_home_refuses_open(){let t=tempfile::tempdir().unwrap();let h=t.path().join("home");drop(Store::init(&h).unwrap());fs::write(h.join("restore.pending"),"pending").unwrap();assert!(Store::open(&h).is_err());assert!(Store::open_readonly(&h).is_err());}
++}
+diff --git a/crates/workstation-platform/src/vault.rs b/crates/workstation-platform/src/vault.rs
+index ff16d43..f2ad1ff 100644
+--- a/crates/workstation-platform/src/vault.rs
++++ b/crates/workstation-platform/src/vault.rs
+@@ -7,6 +7,10 @@ use workstation_core::control::{self,Resource};
+ #[cfg(windows)]use workstation_core::Coverage;
+ use std::path::Path;
+ #[cfg(windows)]use serde::{Serialize,Deserialize};
++pub(crate) const SECRET_BYTES_LIMIT:usize=16*1024;
++// A Vec<u8> serialized as decimal JSON can occupy four bytes per input byte,
++// before binding fields and DPAPI overhead. Read and write bounds must agree.
++pub(crate) const CIPHER_BYTES_LIMIT:usize=128*1024;
+ pub struct SecretBytes(pub(crate) Vec<u8>);
+ impl Drop for SecretBytes{fn drop(&mut self){for b in &mut self.0{unsafe{std::ptr::write_volatile(b,0)}}std::sync::atomic::compiler_fence(std::sync::atomic::Ordering::SeqCst);}}
+ #[cfg(windows)]
+@@ -42,7 +46,7 @@ pub(crate) mod native{
+         for x in &mut wide{unsafe{std::ptr::write_volatile(x,0);}}
+         let string=text.ok_or_else(||Error::new("SECRET_INPUT_FAILED_OR_LIMIT"))?;
+         let mut bytes=SecretBytes(string.into_bytes());while matches!(bytes.0.last(),Some(b'\n'|b'\r')){bytes.0.pop();}
+-        if bytes.0.is_empty()||bytes.0.len()>16*1024{return Err(Error::new("SECRET_INPUT_LIMIT"));}Ok(bytes)
++        if bytes.0.is_empty()||bytes.0.len()>SECRET_BYTES_LIMIT{return Err(Error::new("SECRET_INPUT_LIMIT"));}Ok(bytes)
+     }
+ }
+ #[cfg(windows)]pub fn read_hidden()->Result<SecretBytes>{native::hidden_console()}
+@@ -50,18 +54,18 @@ pub(crate) mod native{
+ /// Explicit local operation. New immutable ciphertext IDs only; no overwrite or rotation claim.
+ pub fn put(store:&mut Store,project:&str,environment:&str,id:&str,secret:SecretBytes)->Result<Resource>{
+     store.require_control()?;control::id(project).map_err(Error::new)?;control::id(environment).map_err(Error::new)?;control::id(id).map_err(Error::new)?;
+-    if secret.0.is_empty()||secret.0.len()>16*1024{return Err(Error::new("SECRET_SIZE_LIMIT"));}
++    if secret.0.is_empty()||secret.0.len()>SECRET_BYTES_LIMIT{return Err(Error::new("SECRET_SIZE_LIMIT"));}
+     // Exact environment must exist; no fallback.
+     let exists:i64=store.conn.query_row("SELECT count(*) FROM environments WHERE project_id=?1 AND name=?2",rusqlite::params![project,environment],|r|r.get(0)).map_err(|_|Error::new("DATABASE_OPERATION_FAILED"))?;
+     if exists!=1{return Err(Error::new("EXPLICIT_ENVIRONMENT_REQUIRED"));}
+     #[cfg(not(windows))]{let _=(project,environment,id,secret);Err(Error::new("DPAPI_WINDOWS_REQUIRED"))}
+     #[cfg(windows)]{
+         use std::{fs,io::Write};
+-        let dir=store.home.join("vault");if !dir.exists(){fs::create_dir(&dir).map_err(|_|Error::new("VAULT_CREATE_FAILED"))?;crate::windows::restrict_home_acl(&dir)?;}
++        let dir=store.home.join("vault");if !paths::entry_exists(&dir)?{fs::create_dir(&dir).map_err(|_|Error::new("VAULT_CREATE_FAILED"))?;crate::windows::restrict_home_acl(&dir)?;}
+         paths::directory(&dir)?;if fs::read_dir(&dir).map_err(|_|Error::new("VAULT_READ_FAILED"))?.take(257).count()>=256{return Err(Error::new("VAULT_COUNT_LIMIT"));}
+         let binding=CipherBinding{schema_version:1,project:project.into(),environment:environment.into(),id:id.into(),secret:secret.0.clone()};
+         let mut binding=binding;let plaintext_result=serde_json::to_vec(&binding);for b in &mut binding.secret{unsafe{std::ptr::write_volatile(b,0);}}
+-        let plaintext=SecretBytes(plaintext_result.map_err(|_|Error::new("SECRET_ENCODING_FAILED"))?);let ciphertext=native::protect(&plaintext.0)?;
++        let plaintext=SecretBytes(plaintext_result.map_err(|_|Error::new("SECRET_ENCODING_FAILED"))?);let ciphertext=native::protect(&plaintext.0)?;if ciphertext.len()>CIPHER_BYTES_LIMIT{return Err(Error::new("VAULT_CIPHER_LIMIT"));}
+         let locator=format!("local://{project}/{environment}/{id}");let name=crate::control_store::sha(locator.as_bytes());let path=dir.join(format!("{name}.dpapi"));
+         let mut f=fs::OpenOptions::new().write(true).create_new(true).open(&path).map_err(|_|Error::new("VAULT_EXISTS_OR_CREATE_FAILED"))?;
+         f.write_all(&ciphertext).and_then(|_|f.sync_all()).map_err(|_|Error::new("VAULT_WRITE_FAILED"))?;
+@@ -79,10 +83,10 @@ pub fn resolve_bound(home:&Path,project:&str,environment:&str,id:&str)->Result<S
+     #[cfg(windows)]{
+         use std::io::Read;
+         let locator=format!("local://{project}/{environment}/{id}");let name=crate::control_store::sha(locator.as_bytes());let path=home.join("vault").join(format!("{name}.dpapi"));paths::local_existing(&path)?;
+-        let mut bytes=Vec::new();std::fs::File::open(path).map_err(|_|Error::new("VAULT_UNAVAILABLE"))?.take(64*1024+1).read_to_end(&mut bytes).map_err(|_|Error::new("VAULT_UNREADABLE"))?;
+-        if bytes.len()>64*1024{return Err(Error::new("VAULT_CIPHER_LIMIT"));}
++        let mut bytes=Vec::new();std::fs::File::open(path).map_err(|_|Error::new("VAULT_UNAVAILABLE"))?.take(CIPHER_BYTES_LIMIT as u64+1).read_to_end(&mut bytes).map_err(|_|Error::new("VAULT_UNREADABLE"))?;
++        if bytes.len()>CIPHER_BYTES_LIMIT{return Err(Error::new("VAULT_CIPHER_LIMIT"));}
+         let decoded=native::unprotect(&bytes)?;let mut binding:CipherBinding=serde_json::from_slice(&decoded.0).map_err(|_|Error::new("VAULT_BINDING_INVALID"))?;
+-        let value=SecretBytes(std::mem::take(&mut binding.secret));
++        let value=SecretBytes(std::mem::take(&mut binding.secret));if value.0.is_empty()||value.0.len()>SECRET_BYTES_LIMIT{return Err(Error::new("VAULT_SECRET_SIZE_LIMIT"));}
+         if binding.schema_version!=1||binding.project!=project||binding.environment!=environment||binding.id!=id{return Err(Error::new("VAULT_ENVIRONMENT_BINDING_MISMATCH"));}Ok(value)
+     }
+ }
+@@ -91,3 +95,8 @@ pub fn resolve_bound(home:&Path,project:&str,environment:&str,id:&str)->Result<S
+     #[test]fn dpapi_roundtrip(){let input=SecretBytes(b"roundtrip-test-only".to_vec());let encrypted=native::protect(&input.0).unwrap();assert_ne!(encrypted,input.0);let output=native::unprotect(&encrypted).unwrap();assert_eq!(output.0,input.0);}
+     #[test]fn dpapi_tamper_rejected(){let mut c=native::protect(b"test").unwrap();let n=c.len()/2;c[n]^=0x44;assert!(native::unprotect(&c).is_err());}
+ }
++
++#[cfg(all(test,windows))]mod audit_cipher_size_tests{
++ use super::*;
++ #[test]fn max_secret_is_within_cipher_read_contract(){let b=CipherBinding{schema_version:1,project:"p".into(),environment:"production".into(),id:"s".into(),secret:vec![255;SECRET_BYTES_LIMIT]};let bytes=serde_json::to_vec(&b).unwrap();assert!(bytes.len()>64*1024);let cipher=native::protect(&bytes).unwrap();assert!(cipher.len()<=CIPHER_BYTES_LIMIT);assert_eq!(native::unprotect(&cipher).unwrap().0,bytes);}
++}
+diff --git a/fixtures/control/plan-cycles.json b/fixtures/control/plan-cycles.json
+index 98bdadd..752d98a 100644
+--- a/fixtures/control/plan-cycles.json
++++ b/fixtures/control/plan-cycles.json
+@@ -5,7 +5,8 @@
+     "window_id": "cycle-0",
+     "utilization": 0.2,
+     "complete": true,
+-    "evidence_ref": "synthetic-fixture"
++    "evidence_ref": "synthetic-fixture",
++    "account_alias": "synthetic-account"
+   },
+   {
+     "provider": "synthetic",
+@@ -13,7 +14,8 @@
+     "window_id": "cycle-1",
+     "utilization": 0.22,
+     "complete": true,
+-    "evidence_ref": "synthetic-fixture"
++    "evidence_ref": "synthetic-fixture",
++    "account_alias": "synthetic-account"
+   },
+   {
+     "provider": "synthetic",
+@@ -21,6 +23,7 @@
+     "window_id": "cycle-2",
+     "utilization": 0.25,
+     "complete": true,
+-    "evidence_ref": "synthetic-fixture"
++    "evidence_ref": "synthetic-fixture",
++    "account_alias": "synthetic-account"
+   }
+ ]
+diff --git a/scripts/build.ps1 b/scripts/build.ps1
+index a1bec37..4804460 100644
+--- a/scripts/build.ps1
++++ b/scripts/build.ps1
+@@ -89,12 +89,12 @@ try {
+     $InfoJson = & $Exe --json build-info
+     if ($LASTEXITCODE -ne 0) { throw 'Build-info probe failed.' }
+     $Info = $InfoJson | ConvertFrom-Json
+-    $Release = Join-Path $Root ('dist\workstation-0.4.0-alpha.1-windows-x64-' + (Get-Date -Format 'yyyyMMdd-HHmmss'))
++    $Release = Join-Path $Root ('dist\workstation-0.4.0-alpha.2-windows-x64-' + (Get-Date -Format 'yyyyMMdd-HHmmss'))
+     $null = New-Item -ItemType Directory -Path $Release -Force
+     Copy-Item -LiteralPath $Exe -Destination $Release
+     Copy-Item -LiteralPath $Lock, (Join-Path $Root 'README.md'), (Join-Path $Root 'LICENSE') -Destination $Release
+     $Manifest = [ordered]@{
+-        version = '0.4.0-alpha.1'
++        version = '0.4.0-alpha.2'
+         scope = 'Seven-module implementation-first candidate; explicit effect and continuation source; live provider/repair certification remains separate'
+         toolchain = $Toolchain
+         build_utc = [DateTime]::UtcNow.ToString('o')

@@ -1,0 +1,46 @@
+[
+  {
+    "model": "balanced",
+    "benchmark": "synthetic-code",
+    "revision": "fixture-v1",
+    "quality": 80,
+    "task_cost_usd": 1,
+    "latency_ms": 1000,
+    "available": true,
+    "license_state": "permitted_local_use",
+    "source": "synthetic-no-third-party-scores"
+  },
+  {
+    "model": "dominated",
+    "benchmark": "synthetic-code",
+    "revision": "fixture-v1",
+    "quality": 70,
+    "task_cost_usd": 2,
+    "latency_ms": 2000,
+    "available": true,
+    "license_state": "permitted_local_use",
+    "source": "synthetic-no-third-party-scores"
+  },
+  {
+    "model": "quality",
+    "benchmark": "synthetic-code",
+    "revision": "fixture-v1",
+    "quality": 90,
+    "task_cost_usd": 3,
+    "latency_ms": 3000,
+    "available": true,
+    "license_state": "permitted_local_use",
+    "source": "synthetic-no-third-party-scores"
+  },
+  {
+    "model": "budget",
+    "benchmark": "synthetic-code",
+    "revision": "fixture-v1",
+    "quality": 60,
+    "task_cost_usd": 0.5,
+    "latency_ms": 500,
+    "available": true,
+    "license_state": "permitted_local_use",
+    "source": "synthetic-no-third-party-scores"
+  }
+]

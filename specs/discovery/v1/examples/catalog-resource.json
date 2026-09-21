@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "id": "example-interface-review",
+  "title": "Synthetic interface-review reference",
+  "kind": "documentation",
+  "canonical_url": "https://example.org/workstation-fixtures/interface-review",
+  "needs": [
+    "interface_review",
+    "accessibility_review"
+  ],
+  "description": "A synthetic checklist reference used to test contextual matching; not a real recommendation.",
+  "limitations": [
+    "Synthetic test resource. No effectiveness or vendor compatibility has been established."
+  ],
+  "equivalence_key": "interface-review-checklist",
+  "compatibility": {
+    "platforms": [
+      "platform_neutral"
+    ],
+    "cost": "free",
+    "requires_network": false,
+    "privacy": "local",
+    "version_requirements": [],
+    "evidence_status": "documented"
+  },
+  "license": {
+    "status": "documented",
+    "scope": "Synthetic fixture licensing metadata only; not a real source license.",
+    "source_url": "https://example.org/workstation-fixtures/license"
+  },
+  "review": {
+    "status": "reviewed",
+    "reviewed_at": "2026-09-18T00:00:00Z",
+    "reviewed_revision": "fixture-r1",
+    "fresh_for_days": 30,
+    "scope_note": "Synthetic review state for tests only, not a real source review."
+  },
+  "adoption": {
+    "mode": "reference_only",
+    "adapter_id": null
+  }
+}

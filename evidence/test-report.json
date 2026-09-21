@@ -1,0 +1,14 @@
+{
+    "version":  "0.4.0-alpha.4",
+    "scope":  "phase2_native_certification",
+    "rust_tests_run":  321,
+    "rust_tests_passed":  321,
+    "rust_tests_failed":  0,
+    "windows_smoke_suites":  2,
+    "windows_smoke_suites_passed":  2,
+    "native_defects_found":  2,
+    "native_defects_fixed":  2,
+    "rustsec_vulnerabilities":  0,
+    "real_continuity_completion":  false,
+    "continuity_control_plane_evidenced":  true
+}

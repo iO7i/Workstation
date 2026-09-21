@@ -1,0 +1,60 @@
+{
+  "items": [
+    {
+      "id": "O01",
+      "priority": "blocking",
+      "title": "Rust compilation, formatting and lint remain unexecuted",
+      "remaining": "Resolve the genuine Cargo graph, run rustfmt/check/Clippy/tests on both targets after approval. Static source inspection is not parsing/type checking."
+    },
+    {
+      "id": "O02",
+      "priority": "high",
+      "title": "Windows filesystem/process/DPAPI behavior remains unverified",
+      "remaining": "Test ACLs, reparse points, Job Object teardown, Windows canonical path variants, real special sockets, low disk and restore crash boundaries. No automatic cleanup should be trusted before this gate."
+    },
+    {
+      "id": "O03",
+      "priority": "high",
+      "title": "Path and executable identity checks are not atomic use operations",
+      "remaining": "Same-user races between hash/identity checking and open/spawn/rename are not eliminated. Stronger handle-relative operations or a narrower threat model must be accepted; no OS isolation/exclusive-worktree claim."
+    },
+    {
+      "id": "O04",
+      "priority": "high",
+      "title": "Live vendor protocol/authentication/permission semantics remain unproved",
+      "remaining": "Exercise exact installed Codex/Claude/ACP/Copilot versions, callbacks, failed launch and partial completion. Public schemas and fabricated fixtures cannot certify vendor behavior."
+    },
+    {
+      "id": "O05",
+      "priority": "high",
+      "title": "Unresolved dependency graph and transitive rustls advisory",
+      "remaining": "No Cargo.lock exists. RUSTSEC-2026-0285 affects rustls >=0.23.13,<0.23.45. Determine actual linkage and audit the resolved graph. Do not assert this package is affected or fixed without resolution."
+    },
+    {
+      "id": "O06",
+      "priority": "medium",
+      "title": "Secret protection is scoped, not end-to-end memory isolation",
+      "remaining": "DPAPI protects at rest. Child programs can disclose injected secrets, same-user code can access them, and all intermediate copies are not guaranteed zeroized. Native secret canary/maximum-size/rotation/recovery tests remain mandatory."
+    },
+    {
+      "id": "O07",
+      "priority": "medium",
+      "title": "Metadata freshness is not byte-identical content proof",
+      "remaining": "Same-size edits with restored modification time can evade the existing handoff metadata digest. Receiving agents must independently inspect content/tests; stronger optional content evidence remains a design decision."
+    },
+    {
+      "id": "O08",
+      "priority": "medium",
+      "title": "Failure injection and performance targets remain unmeasured",
+      "remaining": "Interrupt real archive, repair, secret rotation and restoration after each effect step; test concurrent claims, huge input and low disk. No p95 latency or absolute recovery guarantee is claimed."
+    },
+    {
+      "id": "O09",
+      "priority": "medium",
+      "title": "Code compression reduces human review reliability",
+      "remaining": "Much of the inherited Rust is minified into long lines. Run a real rustfmt pass and review formatted diffs before certification; do not replace that with an improvised formatter."
+    }
+  ],
+  "all_items_open": true,
+  "no_automatic_windows_execution": true
+}

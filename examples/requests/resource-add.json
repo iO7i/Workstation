@@ -1,0 +1,11 @@
+{
+  "operation": "resource_add",
+  "id": "example-url",
+  "project_id": "example",
+  "environment": "dev",
+  "kind": "endpoint",
+  "name": "Reserved example endpoint",
+  "locator": "https://example.org",
+  "provider": null,
+  "fresh_for_secs": 3600
+}

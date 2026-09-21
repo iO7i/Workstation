@@ -1,0 +1,5 @@
+{
+  "operation": "query",
+  "integration_id": "fixture-gemini",
+  "query": "protocol_health"
+}

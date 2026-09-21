@@ -1,0 +1,207 @@
+{
+  "version": "0.2.0-alpha.1",
+  "live_integrations_certified": 0,
+  "entries": [
+    {
+      "product": "Codex Desktop/CLI",
+      "tested_vendor_versions": [],
+      "implemented_source_operations": [
+        "candidate roots/process hints",
+        "manual session registration",
+        "explicit rate-limit JSON normalization"
+      ],
+      "unsupported_or_blocked_operations": [
+        "live App Server connection",
+        "native resume/launch",
+        "registry repair execution"
+      ],
+      "private_format_dependencies": [],
+      "native_executed": false,
+      "last_certified_date": null,
+      "primary_reference": "https://developers.openai.com/codex/app-server",
+      "status": "source_only_or_reference_only"
+    },
+    {
+      "product": "Claude Code/Desktop",
+      "tested_vendor_versions": [],
+      "implemented_source_operations": [
+        "candidate roots/process hints",
+        "manual session registration",
+        "explicit statusline JSON normalization"
+      ],
+      "unsupported_or_blocked_operations": [
+        "live statusline hook",
+        "native resume/launch",
+        "MCP orphan termination"
+      ],
+      "private_format_dependencies": [],
+      "native_executed": false,
+      "last_certified_date": null,
+      "primary_reference": "https://code.claude.com/docs/en/statusline",
+      "status": "source_only_or_reference_only"
+    },
+    {
+      "product": "Cursor",
+      "tested_vendor_versions": [],
+      "implemented_source_operations": [
+        "candidate roots/process hints",
+        "manual session registration"
+      ],
+      "unsupported_or_blocked_operations": [
+        "exact personal quota",
+        "ACP launch/resume",
+        "private database parsing"
+      ],
+      "private_format_dependencies": [],
+      "native_executed": false,
+      "last_certified_date": null,
+      "primary_reference": "https://cursor.com/docs",
+      "status": "source_only_or_reference_only"
+    },
+    {
+      "product": "VS Code/Copilot",
+      "tested_vendor_versions": [],
+      "implemented_source_operations": [
+        "candidate roots/process hints",
+        "manual session registration"
+      ],
+      "unsupported_or_blocked_operations": [
+        "quota API",
+        "terminal lifecycle certification",
+        "session resume"
+      ],
+      "private_format_dependencies": [],
+      "native_executed": false,
+      "last_certified_date": null,
+      "primary_reference": "https://code.visualstudio.com/docs",
+      "status": "source_only_or_reference_only"
+    },
+    {
+      "product": "Grok Build",
+      "tested_vendor_versions": [],
+      "implemented_source_operations": [
+        "manual opaque session metadata",
+        "packet target label"
+      ],
+      "unsupported_or_blocked_operations": [
+        "live quota",
+        "session start/native resume",
+        "ACP"
+      ],
+      "private_format_dependencies": [],
+      "native_executed": false,
+      "last_certified_date": null,
+      "primary_reference": "https://docs.x.ai/",
+      "status": "source_only_or_reference_only"
+    },
+    {
+      "product": "Gemini/OpenCode/Cline/Roo/Windsurf",
+      "tested_vendor_versions": [],
+      "implemented_source_operations": [
+        "manual opaque session metadata",
+        "reference catalog sources"
+      ],
+      "unsupported_or_blocked_operations": [
+        "live agent-specific collectors",
+        "quota polling",
+        "native resume/launch"
+      ],
+      "private_format_dependencies": [],
+      "native_executed": false,
+      "last_certified_date": null,
+      "primary_reference": null,
+      "status": "source_only_or_reference_only"
+    },
+    {
+      "product": "Docker/WSL",
+      "tested_vendor_versions": [],
+      "implemented_source_operations": [
+        "registered storage roots",
+        "explicit symptom input",
+        "blocked typed plan target"
+      ],
+      "unsupported_or_blocked_operations": [
+        "live local endpoint verification",
+        "stale socket recovery",
+        "global WSL shutdown"
+      ],
+      "private_format_dependencies": [],
+      "native_executed": false,
+      "last_certified_date": null,
+      "primary_reference": "https://docs.docker.com/desktop/",
+      "status": "source_only_or_reference_only"
+    },
+    {
+      "product": "Windows DPAPI",
+      "tested_vendor_versions": [],
+      "implemented_source_operations": [
+        "protect/unprotect source",
+        "hidden console source",
+        "provider-neutral local reference"
+      ],
+      "unsupported_or_blocked_operations": [
+        "native tests in this environment",
+        "credentialed execution"
+      ],
+      "private_format_dependencies": [],
+      "native_executed": false,
+      "last_certified_date": null,
+      "primary_reference": "https://learn.microsoft.com/en-us/windows/win32/api/dpapi/nf-dpapi-cryptprotectdata",
+      "status": "source_only_or_reference_only"
+    },
+    {
+      "product": "Doppler/1Password/Infisical/Bitwarden",
+      "tested_vendor_versions": [],
+      "implemented_source_operations": [
+        "reference validation",
+        "reference catalog"
+      ],
+      "unsupported_or_blocked_operations": [
+        "secret resolution",
+        "injection",
+        "account authentication"
+      ],
+      "private_format_dependencies": [],
+      "native_executed": false,
+      "last_certified_date": null,
+      "primary_reference": null,
+      "status": "source_only_or_reference_only"
+    },
+    {
+      "product": "Worktrunk/Entire/Codbash/Context7",
+      "tested_vendor_versions": [],
+      "implemented_source_operations": [
+        "purpose-reviewed catalog references"
+      ],
+      "unsupported_or_blocked_operations": [
+        "installation",
+        "launch",
+        "full session import",
+        "consumer integrations"
+      ],
+      "private_format_dependencies": [],
+      "native_executed": false,
+      "last_certified_date": null,
+      "primary_reference": null,
+      "status": "source_only_or_reference_only"
+    },
+    {
+      "product": "MCP Workstation",
+      "tested_vendor_versions": [],
+      "implemented_source_operations": [
+        "13 read-only source tools",
+        "project/environment scoping",
+        "negotiated 2025 protocol versions"
+      ],
+      "unsupported_or_blocked_operations": [
+        "native protocol execution in this environment",
+        "any mutation"
+      ],
+      "private_format_dependencies": [],
+      "native_executed": false,
+      "last_certified_date": null,
+      "primary_reference": "https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle",
+      "status": "source_only_or_reference_only"
+    }
+  ]
+}

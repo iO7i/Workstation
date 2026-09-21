@@ -1,0 +1,133 @@
+M	.github/workflows/ci.yml
+M	CURRENT-CAPABILITIES.md
+M	Cargo.toml
+A	IMPLEMENTATION-LEDGER.json
+A	IMPLEMENTATION-LEDGER.md
+M	PACKAGE-CHANGES.md
+M	README.md
+M	VALIDATION.md
+A	contracts/integrations/README.md
+A	contracts/integrations/approved-task.schema.json
+A	contracts/integrations/effect-request.schema.json
+A	contracts/integrations/integration-profile.schema.json
+A	contracts/integrations/project-manifest.schema.json
+A	crates/workstation-cli/src/advanced_cli.rs
+M	crates/workstation-cli/src/control_cli.rs
+M	crates/workstation-cli/src/main.rs
+M	crates/workstation-core/Cargo.toml
+A	crates/workstation-core/src/effects.rs
+A	crates/workstation-core/src/integrations.rs
+M	crates/workstation-core/src/lib.rs
+A	crates/workstation-core/src/lifecycle.rs
+M	crates/workstation-core/src/model.rs
+A	crates/workstation-core/src/ownership.rs
+A	crates/workstation-core/src/usage_import.rs
+A	crates/workstation-core/tests/implementation_v3.rs
+M	crates/workstation-platform/Cargo.toml
+A	crates/workstation-platform/src/adapters.rs
+M	crates/workstation-platform/src/control_store.rs
+A	crates/workstation-platform/src/engine.rs
+A	crates/workstation-platform/src/external.rs
+A	crates/workstation-platform/src/http_provider.rs
+A	crates/workstation-platform/src/integration_store.rs
+M	crates/workstation-platform/src/lib.rs
+A	crates/workstation-platform/src/profile_health.rs
+A	crates/workstation-platform/src/project_tools.rs
+A	crates/workstation-platform/src/repairs.rs
+A	crates/workstation-platform/src/rpc.rs
+M	crates/workstation-platform/src/runner.rs
+M	crates/workstation-platform/src/storage.rs
+A	crates/workstation-platform/src/tasks.rs
+M	crates/workstation-platform/src/vault.rs
+A	crates/workstation-platform/tests/integrations_v3.rs
+M	docs/ARCHITECTURE.md
+M	docs/BUILD.md
+A	docs/COMMANDS-V3.md
+A	docs/CONTINUITY-V3.md
+A	docs/ECONOMICS-V3.md
+A	docs/EXECUTION-V3.md
+A	docs/IMPLEMENTATION-FIRST.md
+M	docs/NEXT-BUILDER.md
+M	docs/RECOVERY.md
+A	docs/RESEARCH-V3.md
+M	docs/SCOPE-PRECEDENCE.md
+A	docs/SOURCES-V3.json
+A	docs/historical/0.2.0-alpha.1/CURRENT-CAPABILITIES.md
+A	docs/historical/0.2.0-alpha.1/PACKAGE-CHANGES.md
+A	docs/historical/0.2.0-alpha.1/README.md
+A	docs/historical/0.2.0-alpha.1/VALIDATION.md
+A	docs/historical/0.2.0-alpha.1/evidence/acceptance-report.json
+A	docs/historical/0.2.0-alpha.1/evidence/adapter-matrix.json
+R100	evidence/authored-rust-tests.json	docs/historical/0.2.0-alpha.1/evidence/authored-rust-tests.json
+R100	evidence/baseline-artifact-checks.log	docs/historical/0.2.0-alpha.1/evidence/baseline-artifact-checks.log
+A	docs/historical/0.2.0-alpha.1/evidence/build-report.json
+R100	evidence/changed-files.txt	docs/historical/0.2.0-alpha.1/evidence/changed-files.txt
+R100	evidence/control-tests.json	docs/historical/0.2.0-alpha.1/evidence/control-tests.json
+R100	evidence/control-tests.log	docs/historical/0.2.0-alpha.1/evidence/control-tests.log
+A	docs/historical/0.2.0-alpha.1/evidence/dependency-intent.json
+R100	evidence/fixes-and-limitations.json	docs/historical/0.2.0-alpha.1/evidence/fixes-and-limitations.json
+R100	evidence/git-log.txt	docs/historical/0.2.0-alpha.1/evidence/git-log.txt
+R100	evidence/historical-scope-check.json	docs/historical/0.2.0-alpha.1/evidence/historical-scope-check.json
+R100	evidence/inherited-source-digests.json	docs/historical/0.2.0-alpha.1/evidence/inherited-source-digests.json
+A	docs/historical/0.2.0-alpha.1/evidence/linked-sqlite-version.txt
+R100	evidence/source-state.json	docs/historical/0.2.0-alpha.1/evidence/source-state.json
+R100	validation/BUILD-STATUS.json	docs/historical/0.2.0-alpha.1/validation/BUILD-STATUS.json
+R100	validation/D1-VALIDATION.md	docs/historical/0.2.0-alpha.1/validation/D1-VALIDATION.md
+A	docs/historical/0.2.0-alpha.1/validation/README.md
+R100	validation/VALIDATION.md	docs/historical/0.2.0-alpha.1/validation/VALIDATION.md
+R100	validation/artifact-checks.json	docs/historical/0.2.0-alpha.1/validation/artifact-checks.json
+R100	validation/artifact-checks.log	docs/historical/0.2.0-alpha.1/validation/artifact-checks.log
+R100	validation/discovery-spec-checks.json	docs/historical/0.2.0-alpha.1/validation/discovery-spec-checks.json
+R100	validation/discovery-spec-checks.log	docs/historical/0.2.0-alpha.1/validation/discovery-spec-checks.log
+R100	validation/r0-baseline-preservation.json	docs/historical/0.2.0-alpha.1/validation/r0-baseline-preservation.json
+R100	validation/rust-tests-authored.json	docs/historical/0.2.0-alpha.1/validation/rust-tests-authored.json
+A	evidence/README.md
+M	evidence/acceptance-report.json
+M	evidence/adapter-matrix.json
+M	evidence/build-report.json
+A	evidence/delivery-status.json
+M	evidence/dependency-intent.json
+A	evidence/historical/0.2.0-alpha.1/acceptance-report.json
+A	evidence/historical/0.2.0-alpha.1/adapter-matrix.json
+A	evidence/historical/0.2.0-alpha.1/authored-rust-tests.json
+A	evidence/historical/0.2.0-alpha.1/baseline-artifact-checks.log
+A	evidence/historical/0.2.0-alpha.1/build-report.json
+A	evidence/historical/0.2.0-alpha.1/changed-files.txt
+A	evidence/historical/0.2.0-alpha.1/control-tests.json
+A	evidence/historical/0.2.0-alpha.1/control-tests.log
+A	evidence/historical/0.2.0-alpha.1/dependency-intent.json
+A	evidence/historical/0.2.0-alpha.1/fixes-and-limitations.json
+A	evidence/historical/0.2.0-alpha.1/git-log.txt
+A	evidence/historical/0.2.0-alpha.1/historical-scope-check.json
+A	evidence/historical/0.2.0-alpha.1/inherited-source-digests.json
+A	evidence/historical/0.2.0-alpha.1/linked-sqlite-version.txt
+A	evidence/historical/0.2.0-alpha.1/source-state.json
+M	evidence/linked-sqlite-version.txt
+A	evidence/test-report.json
+A	examples/v3/README.md
+A	examples/v3/effect-continue-codex.json
+A	examples/v3/effect-continue-grok.json
+A	examples/v3/effect-docker-start.json
+A	examples/v3/effect-endpoint.json
+A	examples/v3/effect-openai-costs.json
+A	examples/v3/effect-query-quota.json
+A	examples/v3/effect-repair-codex.json
+A	examples/v3/effect-run-task.json
+A	examples/v3/effect-undo-repair.json
+A	examples/v3/integration-claude.json
+A	examples/v3/integration-codex.json
+A	examples/v3/integration-cursor.json
+A	examples/v3/integration-doppler.json
+A	examples/v3/integration-grok.json
+A	examples/v3/integration-onepassword.json
+A	examples/v3/project-manifest.json
+A	examples/v3/task-pinned-script.json
+A	fixtures/v3/anthropic-costs.json
+A	fixtures/v3/claude-hook.json
+A	fixtures/v3/codex-hook.json
+A	fixtures/v3/copilot-quota.json
+A	schema/003_integrations.sql
+M	scope.json
+M	scripts/build.ps1
+M	scripts/control-smoke.ps1
+M	validation/README.md

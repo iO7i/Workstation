@@ -1,0 +1,16 @@
+{
+  "operation": "focus_set",
+  "project_id": "example",
+  "focus": {
+    "needs": [
+      "parallel_work",
+      "continuity"
+    ],
+    "free_only": true,
+    "local_only": true,
+    "platform": "windows",
+    "existing": [],
+    "blocked": [],
+    "evidence_ref": "explicit-demo-focus"
+  }
+}

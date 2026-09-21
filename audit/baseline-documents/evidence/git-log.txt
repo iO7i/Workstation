@@ -1,0 +1,23 @@
+commit d41cc6e889992fc6e35ff0539917d33c80ba59ab
+Author:     Workstation source builder <builder@workstation.invalid>
+AuthorDate: Fri Sep 18 21:14:52 2026 +0000
+Commit:     Workstation source builder <builder@workstation.invalid>
+CommitDate: Fri Sep 18 21:14:52 2026 +0000
+
+    Document v4 scope, primary sources, authored acceptance gates and certification hold
+
+commit 119aaed81130dc705d0fe7a79262dc46975ea631
+Author:     Workstation source builder <builder@workstation.invalid>
+AuthorDate: Fri Sep 18 21:14:52 2026 +0000
+Commit:     Workstation source builder <builder@workstation.invalid>
+CommitDate: Fri Sep 18 21:14:52 2026 +0000
+
+    Implement v4 ownership, workspace lifecycle, telemetry transports and credential/archive operations
+
+commit 7ec1146b858390e205c821c75438dc900c59e677
+Author:     Workstation Source Builder <builder@example.invalid>
+AuthorDate: Fri Sep 18 20:11:29 2026 +0000
+Commit:     Workstation Source Builder <builder@example.invalid>
+CommitDate: Fri Sep 18 20:11:29 2026 +0000
+
+    Import delivered 0.3.0-alpha.1 baseline; no native execution

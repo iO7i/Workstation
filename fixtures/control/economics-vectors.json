@@ -1,0 +1,811 @@
+[
+  {
+    "name": "constant-10-percent-per-hour",
+    "synthetic": true,
+    "samples": [
+      {
+        "id": "sample-100",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 10,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 100,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 100,
+          "coverage": "complete"
+        }
+      },
+      {
+        "id": "sample-3700",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 20,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 3700,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 3700,
+          "coverage": "complete"
+        }
+      }
+    ],
+    "now": 3700,
+    "expected": {
+      "remaining": 80.0,
+      "blended_seconds": 28800.0,
+      "confidence": "low"
+    }
+  },
+  {
+    "name": "sparse-one-sample",
+    "synthetic": true,
+    "samples": [
+      {
+        "id": "sample-100",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 10,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 100,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 100,
+          "coverage": "complete"
+        }
+      }
+    ],
+    "now": 100,
+    "expected": {
+      "horizons": 0,
+      "remaining": 90.0
+    }
+  },
+  {
+    "name": "changed-reset-window",
+    "synthetic": true,
+    "samples": [
+      {
+        "id": "sample-100",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 90,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 100,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 100,
+          "coverage": "complete"
+        }
+      },
+      {
+        "id": "sample-4000",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-2",
+        "used": 2,
+        "limit": 100.0,
+        "reset_at": 400000,
+        "observed_at": 4000,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 4000,
+          "coverage": "complete"
+        }
+      }
+    ],
+    "now": 4000,
+    "expected": {
+      "horizons": 0,
+      "remaining": 98.0
+    }
+  },
+  {
+    "name": "counter-corrected-down",
+    "synthetic": true,
+    "samples": [
+      {
+        "id": "sample-100",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 90,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 100,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 100,
+          "coverage": "complete"
+        }
+      },
+      {
+        "id": "sample-4000",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 2,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 4000,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 4000,
+          "coverage": "complete"
+        }
+      }
+    ],
+    "now": 4000,
+    "expected": {
+      "horizons": 0,
+      "remaining": 98.0
+    }
+  },
+  {
+    "name": "stale-observation",
+    "synthetic": true,
+    "samples": [
+      {
+        "id": "sample-100",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 1,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 100,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 100,
+          "coverage": "complete"
+        }
+      },
+      {
+        "id": "sample-200",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 2,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 200,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 200,
+          "coverage": "complete"
+        }
+      }
+    ],
+    "now": 2000,
+    "expected": {
+      "horizons": 0
+    }
+  },
+  {
+    "name": "unknown-limit",
+    "synthetic": true,
+    "samples": [
+      {
+        "id": "sample-100",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 1,
+        "limit": null,
+        "reset_at": 200000,
+        "observed_at": 100,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 100,
+          "coverage": "complete"
+        }
+      }
+    ],
+    "now": 100,
+    "expected": {
+      "horizons": 0,
+      "remaining": null
+    }
+  },
+  {
+    "name": "reset-passed",
+    "synthetic": true,
+    "samples": [
+      {
+        "id": "sample-100",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 1,
+        "limit": 100.0,
+        "reset_at": 200,
+        "observed_at": 100,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 100,
+          "coverage": "complete"
+        }
+      }
+    ],
+    "now": 300,
+    "expected": {
+      "horizons": 0
+    }
+  },
+  {
+    "name": "over-quota",
+    "synthetic": true,
+    "samples": [
+      {
+        "id": "sample-100",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 110,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 100,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 100,
+          "coverage": "complete"
+        }
+      }
+    ],
+    "now": 100,
+    "expected": {
+      "remaining": 0.0,
+      "horizons": 0
+    }
+  },
+  {
+    "name": "context-not-subscription",
+    "synthetic": true,
+    "samples": [
+      {
+        "id": "sample-100",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "context",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 1,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 100,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 100,
+          "coverage": "complete"
+        }
+      }
+    ],
+    "now": 100,
+    "expected": {
+      "horizons": 0
+    }
+  },
+  {
+    "name": "dollars-not-subscription",
+    "synthetic": true,
+    "samples": [
+      {
+        "id": "sample-100",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "dollars",
+        "unit": "usd",
+        "window_id": "window-1",
+        "used": 1,
+        "limit": null,
+        "reset_at": 200000,
+        "observed_at": 100,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 100,
+          "coverage": "complete"
+        }
+      }
+    ],
+    "now": 100,
+    "expected": {
+      "horizons": 0,
+      "remaining": null
+    }
+  },
+  {
+    "name": "observation-gap",
+    "synthetic": true,
+    "samples": [
+      {
+        "id": "sample-100",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 10,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 100,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 100,
+          "coverage": "complete"
+        }
+      },
+      {
+        "id": "sample-22000",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 20,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 22000,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 22000,
+          "coverage": "complete"
+        }
+      }
+    ],
+    "now": 22000,
+    "expected": {
+      "horizons": 0
+    }
+  },
+  {
+    "name": "duplicate-times",
+    "synthetic": true,
+    "samples": [
+      {
+        "id": "sample-100",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 1,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 100,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 100,
+          "coverage": "complete"
+        }
+      },
+      {
+        "id": "sample-100",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 2,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 100,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 100,
+          "coverage": "complete"
+        }
+      }
+    ],
+    "now": 100,
+    "expected": {
+      "error": "DUPLICATE_SAMPLE_TIME"
+    }
+  },
+  {
+    "name": "different-account",
+    "synthetic": true,
+    "samples": [
+      {
+        "id": "sample-100",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 1,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 100,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 100,
+          "coverage": "complete"
+        }
+      },
+      {
+        "id": "sample-200",
+        "provider": "synthetic",
+        "account_alias": "other",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 2,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 200,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 200,
+          "coverage": "complete"
+        }
+      }
+    ],
+    "now": 200,
+    "expected": {
+      "error": "MIXED_STREAMS"
+    }
+  },
+  {
+    "name": "negative-usage",
+    "synthetic": true,
+    "samples": [
+      {
+        "id": "sample-100",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": -1,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 100,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 100,
+          "coverage": "complete"
+        }
+      }
+    ],
+    "now": 100,
+    "expected": {
+      "error": "INVALID_USAGE"
+    }
+  },
+  {
+    "name": "unknown-format-unit",
+    "synthetic": true,
+    "samples": [
+      {
+        "id": "sample-100",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "intelligence",
+        "window_id": "window-1",
+        "used": 10,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 100,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 100,
+          "coverage": "complete"
+        }
+      }
+    ],
+    "now": 100,
+    "expected": {
+      "error": "INCOMPATIBLE_METER_UNIT"
+    }
+  },
+  {
+    "name": "zero-burn",
+    "synthetic": true,
+    "samples": [
+      {
+        "id": "sample-100",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 10,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 100,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 100,
+          "coverage": "complete"
+        }
+      },
+      {
+        "id": "sample-3700",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 10,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 3700,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 3700,
+          "coverage": "complete"
+        }
+      }
+    ],
+    "now": 3700,
+    "expected": {
+      "all_eta_null": true
+    }
+  },
+  {
+    "name": "six-linear-samples",
+    "synthetic": true,
+    "samples": [
+      {
+        "id": "sample-100",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 10,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 100,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 100,
+          "coverage": "complete"
+        }
+      },
+      {
+        "id": "sample-820",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 12,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 820,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 820,
+          "coverage": "complete"
+        }
+      },
+      {
+        "id": "sample-1540",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 14,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 1540,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 1540,
+          "coverage": "complete"
+        }
+      },
+      {
+        "id": "sample-2260",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 16,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 2260,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 2260,
+          "coverage": "complete"
+        }
+      },
+      {
+        "id": "sample-2980",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 18,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 2980,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 2980,
+          "coverage": "complete"
+        }
+      },
+      {
+        "id": "sample-3700",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 20,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 3700,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 3700,
+          "coverage": "complete"
+        }
+      }
+    ],
+    "now": 3700,
+    "expected": {
+      "blended_seconds": 28800.0,
+      "confidence": "moderate"
+    }
+  },
+  {
+    "name": "future-only",
+    "synthetic": true,
+    "samples": [
+      {
+        "id": "sample-100",
+        "provider": "synthetic",
+        "account_alias": "demo",
+        "bucket": "weekly",
+        "meter": "subscription",
+        "unit": "percent",
+        "window_id": "window-1",
+        "used": 10,
+        "limit": 100.0,
+        "reset_at": 200000,
+        "observed_at": 100,
+        "precision": "exact",
+        "evidence": {
+          "kind": "observed",
+          "source": "synthetic-fixture-not-provider-data",
+          "at": 100,
+          "coverage": "complete"
+        }
+      }
+    ],
+    "now": 99,
+    "expected": {
+      "error": "NO_NONFUTURE_SAMPLE"
+    }
+  }
+]

@@ -1,0 +1,32 @@
+[package]
+name = "workstation-cli"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "workstation"
+path = "src/main.rs"
+
+[dependencies]
+workstation-core = { path = "../workstation-core" }
+workstation-platform = { path = "../workstation-platform" }
+serde.workspace = true
+serde_json.workspace = true
+clap.workspace = true
+uuid.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+
+[target.'cfg(windows)'.dev-dependencies]
+windows-sys.workspace = true
+
+[features]
+runtime-test-fixtures = []
+
+[[bin]]
+name = "workstation-protocol-fixture"
+path = "tests/fixtures/protocol_agent.rs"
+required-features = ["runtime-test-fixtures"]

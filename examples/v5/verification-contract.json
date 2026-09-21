@@ -1,0 +1,11 @@
+{
+  "allowed_paths": [
+    "src/calc.rs"
+  ],
+  "forbidden_paths": [
+    "tests/calc.rs"
+  ],
+  "task_ids": [
+    "test-calc"
+  ]
+}

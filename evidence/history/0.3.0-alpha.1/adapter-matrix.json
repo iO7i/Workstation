@@ -1,0 +1,258 @@
+{
+  "version": "0.3.0-alpha.1",
+  "status": "source_capabilities_only",
+  "adapters": [
+    {
+      "product": "Codex",
+      "implemented_operations": [
+        "version",
+        "profile_metadata",
+        "app_server_threads",
+        "app_server_quota",
+        "new_turn",
+        "native_resume"
+      ],
+      "unsupported_or_not_implemented": [
+        "full_private_desktop_state_ownership",
+        "certified_attachment_UI_recovery"
+      ],
+      "tested_versions": [],
+      "last_certified_date": null,
+      "certification": "deferred_user_green_light"
+    },
+    {
+      "product": "Claude",
+      "implemented_operations": [
+        "version",
+        "profile_metadata",
+        "metadata_hook_import",
+        "print_json_new",
+        "print_json_resume",
+        "statusline_import"
+      ],
+      "unsupported_or_not_implemented": [
+        "exact_consumer_quota_poll",
+        "full_desktop_process_ownership"
+      ],
+      "tested_versions": [],
+      "last_certified_date": null,
+      "certification": "deferred_user_green_light"
+    },
+    {
+      "product": "Cursor",
+      "implemented_operations": [
+        "version",
+        "acp_new",
+        "acp_load_if_advertised",
+        "acp_prompt"
+      ],
+      "unsupported_or_not_implemented": [
+        "individual_exact_quota",
+        "full_editor_session_database"
+      ],
+      "tested_versions": [],
+      "last_certified_date": null,
+      "certification": "deferred_user_green_light"
+    },
+    {
+      "product": "Grok",
+      "implemented_operations": [
+        "version",
+        "acp_new",
+        "acp_load_if_advertised",
+        "acp_prompt"
+      ],
+      "unsupported_or_not_implemented": [
+        "consumer_quota_poll"
+      ],
+      "tested_versions": [],
+      "last_certified_date": null,
+      "certification": "deferred_user_green_light"
+    },
+    {
+      "product": "Doppler",
+      "implemented_operations": [
+        "version",
+        "single_secret_read"
+      ],
+      "unsupported_or_not_implemented": [
+        "vault_admin",
+        "secret_update"
+      ],
+      "tested_versions": [],
+      "last_certified_date": null,
+      "certification": "deferred_user_green_light"
+    },
+    {
+      "product": "1Password",
+      "implemented_operations": [
+        "version",
+        "single_secret_read"
+      ],
+      "unsupported_or_not_implemented": [
+        "vault_admin",
+        "secret_update"
+      ],
+      "tested_versions": [],
+      "last_certified_date": null,
+      "certification": "deferred_user_green_light"
+    },
+    {
+      "product": "Docker",
+      "implemented_operations": [
+        "version",
+        "local_linux_engine_probe",
+        "offline_runtime_quarantine",
+        "verified_undo",
+        "separate_gui_start"
+      ],
+      "unsupported_or_not_implemented": [
+        "global_wsl_shutdown",
+        "docker_data_reset",
+        "automatic_recovery_loop"
+      ],
+      "tested_versions": [],
+      "last_certified_date": null,
+      "certification": "deferred_user_green_light"
+    },
+    {
+      "product": "OpenAI organization API",
+      "implemented_operations": [
+        "cost_GET",
+        "bounded_pagination",
+        "decimal_USD_normalization"
+      ],
+      "unsupported_or_not_implemented": [
+        "consumer_subscription_quota",
+        "automatic_project_attribution"
+      ],
+      "tested_versions": [],
+      "last_certified_date": null,
+      "certification": "deferred_user_green_light"
+    },
+    {
+      "product": "Anthropic organization API",
+      "implemented_operations": [
+        "cost_report_GET",
+        "bounded_pagination",
+        "decimal_cents_normalization"
+      ],
+      "unsupported_or_not_implemented": [
+        "consumer_subscription_quota",
+        "priority_tier_costs"
+      ],
+      "tested_versions": [],
+      "last_certified_date": null,
+      "certification": "deferred_user_green_light"
+    },
+    {
+      "product": "Copilot SDK",
+      "implemented_operations": [
+        "quota_output_import"
+      ],
+      "unsupported_or_not_implemented": [
+        "live_SDK_client",
+        "native_continuation"
+      ],
+      "tested_versions": [],
+      "last_certified_date": null,
+      "certification": "deferred_user_green_light"
+    },
+    {
+      "product": "Gemini",
+      "implemented_operations": [
+        "explicit_profile",
+        "version_probe",
+        "reference_or_packet_fallback"
+      ],
+      "unsupported_or_not_implemented": [
+        "specialist_workflow_backend",
+        "native_continuation",
+        "live_quota"
+      ],
+      "tested_versions": [],
+      "last_certified_date": null,
+      "certification": "deferred_user_green_light"
+    },
+    {
+      "product": "OpenCode",
+      "implemented_operations": [
+        "explicit_profile",
+        "version_probe",
+        "reference_or_packet_fallback"
+      ],
+      "unsupported_or_not_implemented": [
+        "specialist_workflow_backend",
+        "native_continuation",
+        "live_quota"
+      ],
+      "tested_versions": [],
+      "last_certified_date": null,
+      "certification": "deferred_user_green_light"
+    },
+    {
+      "product": "Cline",
+      "implemented_operations": [
+        "explicit_profile",
+        "version_probe",
+        "reference_or_packet_fallback"
+      ],
+      "unsupported_or_not_implemented": [
+        "specialist_workflow_backend",
+        "native_continuation",
+        "live_quota"
+      ],
+      "tested_versions": [],
+      "last_certified_date": null,
+      "certification": "deferred_user_green_light"
+    },
+    {
+      "product": "Windsurf",
+      "implemented_operations": [
+        "explicit_profile",
+        "version_probe",
+        "reference_or_packet_fallback"
+      ],
+      "unsupported_or_not_implemented": [
+        "specialist_workflow_backend",
+        "native_continuation",
+        "live_quota"
+      ],
+      "tested_versions": [],
+      "last_certified_date": null,
+      "certification": "deferred_user_green_light"
+    },
+    {
+      "product": "Worktrunk",
+      "implemented_operations": [
+        "explicit_profile",
+        "version_probe",
+        "reference_or_packet_fallback"
+      ],
+      "unsupported_or_not_implemented": [
+        "specialist_workflow_backend",
+        "native_continuation",
+        "live_quota"
+      ],
+      "tested_versions": [],
+      "last_certified_date": null,
+      "certification": "deferred_user_green_light"
+    },
+    {
+      "product": "Entire",
+      "implemented_operations": [
+        "explicit_profile",
+        "version_probe",
+        "reference_or_packet_fallback"
+      ],
+      "unsupported_or_not_implemented": [
+        "specialist_workflow_backend",
+        "native_continuation",
+        "live_quota"
+      ],
+      "tested_versions": [],
+      "last_certified_date": null,
+      "certification": "deferred_user_green_light"
+    }
+  ]
+}

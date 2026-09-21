@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "starting_at": "2026-09-17T00:00:00Z",
+      "ending_at": "2026-09-18T00:00:00Z",
+      "results": [
+        {
+          "amount": "123.78912",
+          "currency": "USD"
+        }
+      ]
+    }
+  ],
+  "has_more": false,
+  "next_page": null
+}

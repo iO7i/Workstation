@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "project_id": "example-project",
+  "focus_approved": true,
+  "needs": [
+    "interface_review"
+  ],
+  "evidence_refs": [
+    "approved-task-example"
+  ],
+  "platform": "windows",
+  "constraints": {
+    "free_only": true,
+    "local_only": true,
+    "allow_network_dependency": false,
+    "blocked_resource_ids": []
+  },
+  "inventory": []
+}

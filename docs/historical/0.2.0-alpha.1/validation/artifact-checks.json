@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "kind": "executed_source_artifact_and_reference_recipe_checks",
+  "tests_run": 20,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsed_seconds": 0.415,
+  "python_sqlite_version": "3.46.1",
+  "git_version": "git version 2.47.3",
+  "rust_compilation_executed": false,
+  "rust_tests_executed": false,
+  "windows_tests_executed": false,
+  "limitations": [
+    "JSON Schema examples and SQL recipes were validated independently, not through the Rust binary.",
+    "The host Python SQLite engine is not the bundled Rust SQLite engine.",
+    "The Git command recipe was exercised on temporary Linux fixtures, not on Windows.",
+    "Static source checks do not establish Rust compilation or runtime correctness."
+  ],
+  "failure_details": []
+}

@@ -1,0 +1,1718 @@
+{
+  "version": "0.4.0-alpha.1",
+  "status": "not_executed_user_certification_hold",
+  "rust_files": 66,
+  "rust_lines": 6498,
+  "authored_test_annotations": 283,
+  "named_authored_tests_in_inventory": 283,
+  "tests_run": 0,
+  "passed": 0,
+  "failed": 0,
+  "skipped": 0,
+  "zero_means_not_run_not_pass": true,
+  "rust_tests_run": 0,
+  "windows_tests_run": 0,
+  "provider_tests_run": 0,
+  "application_tests_run": 0,
+  "authored_test_inventory": [
+    {
+      "source": "crates/workstation-cli/src/control_cli.rs",
+      "name": "share_projection_does_not_leak_canaries",
+      "line": 94,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/src/mcp.rs",
+      "name": "oversized_line_rejected",
+      "line": 29,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/src/mcp.rs",
+      "name": "incomplete_frame_rejected",
+      "line": 30,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/src/mcp.rs",
+      "name": "consumes_one_frame",
+      "line": 31,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/cli.rs",
+      "name": "initialization_is_explicit_and_never_overwrites",
+      "line": 16,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/cli.rs",
+      "name": "missing_home_does_not_materialize_a_directory",
+      "line": 25,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/cli.rs",
+      "name": "no_home_is_not_inferred_from_current_directory",
+      "line": 32,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/cli.rs",
+      "name": "doctor_does_not_open_or_echo_scanned_file_contents",
+      "line": 41,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/cli.rs",
+      "name": "cached_report_does_not_invoke_a_new_scan",
+      "line": 65,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/cli.rs",
+      "name": "no_save_does_not_create_a_saved_snapshot",
+      "line": 74,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/cli.rs",
+      "name": "unicode_paths_remain_intact_and_private_html_is_escaped",
+      "line": 82,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/cli.rs",
+      "name": "repository_registration_requires_explicit_trust",
+      "line": 94,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/cli.rs",
+      "name": "collector_success_uses_protocol_not_shell",
+      "line": 101,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/cli.rs",
+      "name": "collector_timeout_is_bounded",
+      "line": 108,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/cli.rs",
+      "name": "collector_flood_is_rejected_and_drained",
+      "line": 116,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/cli.rs",
+      "name": "collector_descendant_does_not_survive_its_job",
+      "line": 124,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/cli.rs",
+      "name": "all_incident_fixtures_are_non_destructive_replays",
+      "line": 137,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/control_cli.rs",
+      "name": "control_requires_explicit_upgrade",
+      "line": 18,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/control_cli.rs",
+      "name": "upgrade_is_idempotent_and_preserves_registered_project",
+      "line": 19,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/control_cli.rs",
+      "name": "record_preview_does_not_create_work",
+      "line": 20,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/control_cli.rs",
+      "name": "mismatched_record_digest_does_not_create_work",
+      "line": 21,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/control_cli.rs",
+      "name": "approved_metadata_is_visible_without_agent_calls",
+      "line": 22,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/control_cli.rs",
+      "name": "unaccepted_decision_is_not_current",
+      "line": 23,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/control_cli.rs",
+      "name": "explicit_environment_has_no_fallback",
+      "line": 24,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/control_cli.rs",
+      "name": "malformed_manifest_cannot_gain_execution_authority",
+      "line": 25,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/control_cli.rs",
+      "name": "obvious_secret_canary_is_not_accepted",
+      "line": 26,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/control_cli.rs",
+      "name": "share_context_omits_project_and_objective",
+      "line": 27,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/control_cli.rs",
+      "name": "mcp_initialize_and_read_cannot_claim_work",
+      "line": 28,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/control_cli.rs",
+      "name": "pure_model_analysis_requires_no_home",
+      "line": 32,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-cli/tests/control_cli.rs",
+      "name": "discovery_requires_focus_not_popularity",
+      "line": 33,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/continuity.rs",
+      "name": "expired_lease_still_protects",
+      "line": 72,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/continuity.rs",
+      "name": "simultaneous_workers_warn",
+      "line": 73,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/continuity.rs",
+      "name": "reviewers_not_second_writer",
+      "line": 74,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/continuity.rs",
+      "name": "ended_session_not_active_collision",
+      "line": 75,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/continuity.rs",
+      "name": "other_project_not_collision",
+      "line": 76,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/control.rs",
+      "name": "no_abandoned_state",
+      "line": 163,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/control.rs",
+      "name": "done_is_terminal",
+      "line": 164,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/control.rs",
+      "name": "active_requires_review_before_done",
+      "line": 165,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/control.rs",
+      "name": "unicode_text_works",
+      "line": 166,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/control.rs",
+      "name": "malicious_id_rejected",
+      "line": 167,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/control.rs",
+      "name": "locator_credentials_rejected",
+      "line": 168,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/control.rs",
+      "name": "no_secret_value_uri",
+      "line": 169,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/control.rs",
+      "name": "dpapi_reference_is_metadata",
+      "line": 170,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/control.rs",
+      "name": "token_query_rejected",
+      "line": 171,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/control.rs",
+      "name": "secret_canary_rejected",
+      "line": 172,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/control.rs",
+      "name": "bidi_rejected",
+      "line": 173,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/diagnostics.rs",
+      "name": "reported_match_never_observed_authority",
+      "line": 52,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/diagnostics.rs",
+      "name": "legitimate_daemon_suppresses_match",
+      "line": 53,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/diagnostics.rs",
+      "name": "unknown_live_dependency_suppresses_match",
+      "line": 54,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/diagnostics.rs",
+      "name": "partial_coverage_does_not_promote_absence",
+      "line": 55,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/diagnostics.rs",
+      "name": "stale_error_is_rejected",
+      "line": 56,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/diagnostics.rs",
+      "name": "active_bootstrap_not_abandoned",
+      "line": 57,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/diagnostics.rs",
+      "name": "remote_docker_not_repair_target",
+      "line": 58,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/diagnostics.rs",
+      "name": "registry_parse_failure_alone_not_enough",
+      "line": 59,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/discovery.rs",
+      "name": "candidate_cannot_supply_approval",
+      "line": 102,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/discovery.rs",
+      "name": "custom_private_need_excluded_from_export",
+      "line": 103,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/discovery.rs",
+      "name": "plaintext_token_not_catalog",
+      "line": 104,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/discovery.rs",
+      "name": "handoff_brief_omits_evidence_and_private_inventory",
+      "line": 105,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/economics.rs",
+      "name": "sparse_is_unknown",
+      "line": 211,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/economics.rs",
+      "name": "known_linear_rate",
+      "line": 212,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/economics.rs",
+      "name": "reset_does_not_bridge",
+      "line": 213,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/economics.rs",
+      "name": "counter_correction_does_not_negative_burn",
+      "line": 214,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/economics.rs",
+      "name": "stale_withholds_eta",
+      "line": 215,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/economics.rs",
+      "name": "no_burn_not_infinite_claim",
+      "line": 216,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/economics.rs",
+      "name": "duplicate_times_rejected",
+      "line": 217,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/economics.rs",
+      "name": "mixed_accounts_rejected",
+      "line": 218,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/economics.rs",
+      "name": "costs_not_quota",
+      "line": 219,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/economics.rs",
+      "name": "unknown_capacity_kept_unknown",
+      "line": 220,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/economics.rs",
+      "name": "overdue_reset_requires_observation",
+      "line": 221,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/economics.rs",
+      "name": "quota_overrun_zero_remaining",
+      "line": 222,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/economics.rs",
+      "name": "nonfinite_input_rejected",
+      "line": 223,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/economics.rs",
+      "name": "plan_fit_needs_three_cycles",
+      "line": 224,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/economics.rs",
+      "name": "licensing_is_not_optional",
+      "line": 225,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/economics.rs",
+      "name": "missing_vendor_window_stays_unknown",
+      "line": 226,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/economics.rs",
+      "name": "imported_json_cannot_be_provider_verified",
+      "line": 227,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/economics.rs",
+      "name": "scenario_requires_assumptions",
+      "line": 228,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/effects.rs",
+      "name": "generic_shell_not_an_effect",
+      "line": 85,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/effects.rs",
+      "name": "authority_extra_key_rejected",
+      "line": 86,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/health_rules.rs",
+      "name": "absent_signal_not_negative_proof",
+      "line": 37,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/health_rules.rs",
+      "name": "contradictory_signal_blocks_match",
+      "line": 38,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/health_rules.rs",
+      "name": "future_signal_not_current_evidence",
+      "line": 39,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/integrations.rs",
+      "name": "no_certification_in_capability",
+      "line": 148,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/integrations.rs",
+      "name": "dynamic_loader_env_not_secret",
+      "line": 149,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/integrations.rs",
+      "name": "database_env_ok",
+      "line": 150,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/integrations.rs",
+      "name": "path_not_relative",
+      "line": 151,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/integrations.rs",
+      "name": "refs_not_paths",
+      "line": 152,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/lifecycle.rs",
+      "name": "prompt_not_copied",
+      "line": 49,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/lifecycle.rs",
+      "name": "stop_is_not_session_end",
+      "line": 50,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/operations.rs",
+      "name": "rejects_options_in_branch",
+      "line": 33,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/operations.rs",
+      "name": "rejects_ref_traversal",
+      "line": 33,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/ownership.rs",
+      "name": "empty_snapshot_not_error",
+      "line": 46,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/ownership.rs",
+      "name": "process_key_distinguishes_pid_reuse",
+      "line": 47,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/plans.rs",
+      "name": "no_generic_shell_action",
+      "line": 32,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/plans.rs",
+      "name": "unknown_input_fields_rejected",
+      "line": 33,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/policy.rs",
+      "name": "ids_are_narrow",
+      "line": 80,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/policy.rs",
+      "name": "missing_coverage_never_green",
+      "line": 85,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/policy.rs",
+      "name": "warnings_do_not_implicitly_fail_complete_check",
+      "line": 91,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/policy.rs",
+      "name": "stale_docker_error_is_not_current_incident",
+      "line": 97,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/policy.rs",
+      "name": "every_seed_incident_is_review_only",
+      "line": 103,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/policy.rs",
+      "name": "partial_sizes_never_produce_growth_deltas",
+      "line": 118,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/policy.rs",
+      "name": "complete_growth_and_clock_reversal_are_distinct",
+      "line": 123,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/protocol.rs",
+      "name": "call_before_ready_blocked",
+      "line": 66,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/protocol.rs",
+      "name": "notifications_no_response",
+      "line": 67,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/protocol.rs",
+      "name": "no_mutation_tools",
+      "line": 68,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/protocol.rs",
+      "name": "arbitrary_paths_rejected",
+      "line": 69,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/protocol.rs",
+      "name": "project_scope_cannot_be_overridden",
+      "line": 70,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/protocol.rs",
+      "name": "unsupported_write_rejected",
+      "line": 71,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/protocol.rs",
+      "name": "callback_errors_bounded",
+      "line": 72,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/render.rs",
+      "name": "html_escapes_active_markup",
+      "line": 90,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/render.rs",
+      "name": "terminal_controls_are_visible",
+      "line": 91,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/render.rs",
+      "name": "unicode_survives",
+      "line": 95,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/telemetry.rs",
+      "name": "gemini_total_not_quota",
+      "line": 32,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/telemetry.rs",
+      "name": "missing_token_is_unknown_not_zero",
+      "line": 33,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/telemetry.rs",
+      "name": "invalid_token_rejected",
+      "line": 34,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/telemetry.rs",
+      "name": "claude_reports_not_bills",
+      "line": 35,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/usage_import.rs",
+      "name": "currency_scales_differ",
+      "line": 66,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/usage_import.rs",
+      "name": "excessive_precision_fails",
+      "line": 67,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/usage_import.rs",
+      "name": "non_numbers_fail",
+      "line": 68,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/usage_import.rs",
+      "name": "quota_not_billing",
+      "line": 69,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/wire.rs",
+      "name": "frame_roundtrip",
+      "line": 35,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/wire.rs",
+      "name": "split_frame_waits",
+      "line": 36,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/wire.rs",
+      "name": "duplicate_length_denied",
+      "line": 37,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/wire.rs",
+      "name": "oversized_declared_length_denied",
+      "line": 38,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/wire.rs",
+      "name": "ndjson_not_silently_accepted",
+      "line": 39,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/wire.rs",
+      "name": "frame_does_not_consume_next",
+      "line": 40,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/workspace_policy.rs",
+      "name": "branch_overlap_is_detected",
+      "line": 128,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/workspace_policy.rs",
+      "name": "expiry_never_removes_actor",
+      "line": 129,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/workspace_policy.rs",
+      "name": "observers_not_writers",
+      "line": 130,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/workspace_policy.rs",
+      "name": "parent_path_overlap",
+      "line": 131,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/src/workspace_policy.rs",
+      "name": "reject_path_traversal",
+      "line": 132,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/control_vectors.rs",
+      "name": "economics_shared_vectors",
+      "line": 6,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/control_vectors.rs",
+      "name": "vendor_wire_fixtures_stay_import_evidence",
+      "line": 18,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/control_vectors.rs",
+      "name": "licensed_synthetic_frontier",
+      "line": 22,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/control_vectors.rs",
+      "name": "plan_profile_never_switches",
+      "line": 23,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/control_vectors.rs",
+      "name": "synthetic_cycle_fit",
+      "line": 24,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/control_vectors.rs",
+      "name": "catalog_entries_are_reference_only",
+      "line": 25,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/control_vectors.rs",
+      "name": "dirty_checkpoint_can_make_packet_without_cleanup",
+      "line": 28,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/control_vectors.rs",
+      "name": "changed_head_blocks_handoff",
+      "line": 29,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/control_vectors.rs",
+      "name": "changed_directory_blocks_handoff",
+      "line": 30,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/control_vectors.rs",
+      "name": "changed_dirty_evidence_blocks_handoff",
+      "line": 31,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/control_vectors.rs",
+      "name": "old_stamp_blocks_handoff",
+      "line": 32,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/control_vectors.rs",
+      "name": "hidden_secret_cannot_enter_summary",
+      "line": 33,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/control_vectors.rs",
+      "name": "expired_plan_blocked",
+      "line": 35,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/control_vectors.rs",
+      "name": "changed_target_invalidates_plan",
+      "line": 36,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/control_vectors.rs",
+      "name": "active_dependencies_stay_protected",
+      "line": 37,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/control_vectors.rs",
+      "name": "valid_plan_still_not_certified",
+      "line": 38,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "plan_roundtrips_with_no_shell",
+      "line": 9,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "expired_plan_denied",
+      "line": 10,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "approval_not_transferable",
+      "line": 11,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "future_clock_denied",
+      "line": 12,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "policy_drift_denied",
+      "line": 13,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "unbounded_expiry_denied",
+      "line": 14,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "profile_auth_is_scoped_to_provider",
+      "line": 15,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "loader_environment_cannot_be_inherited",
+      "line": 16,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "config_values_must_be_paths",
+      "line": 17,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "version_claim_not_certification",
+      "line": 18,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "side_effect_override_rejected",
+      "line": 19,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "process_name_or_age_never_permission",
+      "line": 20,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "shared_service_stays_protected",
+      "line": 21,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "partial_inventory_suppresses_stale_guess",
+      "line": 22,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "explicit_repeat_is_candidate_only",
+      "line": 23,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "pid_reuse_breaks_repeat",
+      "line": 24,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "expired_binding_not_reassigned",
+      "line": 25,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "invalid_parent_birth_rejected",
+      "line": 26,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "hook_stop_not_session_end",
+      "line": 27,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "hook_does_not_read_transcript_path",
+      "line": 28,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "unknown_hook_not_accepted",
+      "line": 29,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "duplicate_cost_window_rejected",
+      "line": 30,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "overlapping_cost_window_rejected",
+      "line": 31,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "high_precision_anthropic_cents_preserved",
+      "line": 32,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "tiny_scientific_usd_preserved",
+      "line": 33,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "precision_loss_is_not_silent",
+      "line": 34,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "extreme_exponent_rejected_without_abs_overflow",
+      "line": 35,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "cost_currency_must_match",
+      "line": 36,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "quota_csv_rejects_code_cells",
+      "line": 37,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "unknown_subscriptions_are_not_invented",
+      "line": 38,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "task_refuses_generic_shell",
+      "line": 39,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "auth_environment_not_configuration",
+      "line": 40,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v3.rs",
+      "name": "untrusted_import_does_not_become_retained_proof",
+      "line": 44,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "cleanup_is_only_plan_eligibility",
+      "line": 9,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "ignored_file_blocks",
+      "line": 10,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "ignored_unknown_blocks",
+      "line": 11,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "dirty_blocks",
+      "line": 12,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "dirty_unknown_blocks",
+      "line": 13,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "untracked_blocks",
+      "line": 14,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "main_checkout_blocks",
+      "line": 15,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "git_lock_blocks",
+      "line": 16,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "unfinished_work_blocks",
+      "line": 17,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "uncertain_session_blocks",
+      "line": 18,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "manual_protection_blocks",
+      "line": 19,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "no_external_quiescence_blocks",
+      "line": 20,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "no_preservation_blocks",
+      "line": 21,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "stale_evidence_blocks",
+      "line": 22,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "future_evidence_blocks",
+      "line": 23,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "partial_evidence_blocks",
+      "line": 24,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "worktree_operation_blocker",
+      "line": 25,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "same_worktree_conflicts",
+      "line": 26,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "same_branch_conflicts_even_without_known_edits",
+      "line": 27,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "overlapping_paths_across_branches_conflict",
+      "line": 28,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "expired_lease_preserves_collision",
+      "line": 29,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "unrelated_repositories_are_not_same_file",
+      "line": 30,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "future_catalog_and_install_are_not_implicit_health",
+      "line": 31,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "worktree_destination_parent_is_required",
+      "line": 32,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "branch_option_injection_rejected",
+      "line": 33,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "archive_budget_rejected",
+      "line": 34,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "secret_revoke_requires_exact_version",
+      "line": 35,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "negative_contradiction_requires_observation",
+      "line": 38,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "version_mismatch_stays_unmatched",
+      "line": 39,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "matched_symptom_not_repair_authority",
+      "line": 40,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "duplicate_signal_ids_rejected",
+      "line": 41,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "quota_buckets_not_inferred_from_gemini_tokens",
+      "line": 42,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "quota_oversize_count_rejected",
+      "line": 43,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "wire_does_not_accept_ndjson_as_framed",
+      "line": 44,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "wire_rejects_truncated_header_duplicate_length",
+      "line": 45,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "hook_has_no_pid_supplied_in_payload",
+      "line": 47,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "partial_hook_ancestry_not_promoted",
+      "line": 48,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-core/tests/implementation_v4.rs",
+      "name": "no_untrusted_hook_gets_owned_binding",
+      "line": 49,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/acp_driver.rs",
+      "name": "gemini_not_cmd_interactive",
+      "line": 80,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/acp_driver.rs",
+      "name": "cline_auto_approval_explicitly_off",
+      "line": 81,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/acp_driver.rs",
+      "name": "windsurf_not_fabricated",
+      "line": 82,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/control_workspace.rs",
+      "name": "ignored_not_clean_disposable",
+      "line": 107,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/control_workspace.rs",
+      "name": "rename_has_two_paths",
+      "line": 108,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/control_workspace.rs",
+      "name": "traversal_rejected",
+      "line": 109,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/control_workspace.rs",
+      "name": "truncated_rejected",
+      "line": 110,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/control_workspace.rs",
+      "name": "secret_content_not_read",
+      "line": 111,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/copilot.rs",
+      "name": "nonfinite_price_unknown",
+      "line": 146,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/copilot.rs",
+      "name": "quota_and_dollars_not_mixed",
+      "line": 147,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/filesystem.rs",
+      "name": "sizes_metadata_without_reading_file_contents",
+      "line": 105,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/filesystem.rs",
+      "name": "budget_makes_partial_not_complete",
+      "line": 111,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/filesystem.rs",
+      "name": "zero_deadline_times_out",
+      "line": 116,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/filesystem.rs",
+      "name": "missing_root_is_not_zero_bytes",
+      "line": 120,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/filesystem.rs",
+      "name": "no_symlink_traversal",
+      "line": 125,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/git.rs",
+      "name": "parses_locked_unicode_and_spaces",
+      "line": 79,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/git.rs",
+      "name": "detached_work_is_protected",
+      "line": 84,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/git.rs",
+      "name": "rejects_truncated_stream",
+      "line": 88,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/git.rs",
+      "name": "rejects_unknown_format",
+      "line": 89,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/git.rs",
+      "name": "rejects_invalid_utf8",
+      "line": 90,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/git.rs",
+      "name": "rejects_human_output",
+      "line": 91,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/git.rs",
+      "name": "bounded_malformed_inputs_never_panic",
+      "line": 92,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/health_scan.rs",
+      "name": "failed_inspection_does_not_claim_executable_changed_or_healthy",
+      "line": 90,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/health_scan.rs",
+      "name": "partial_state_measurement_does_not_produce_size_signal",
+      "line": 91,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/http_provider.rs",
+      "name": "private_addresses_denied",
+      "line": 59,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/paths.rs",
+      "name": "relative_and_parent_paths_rejected",
+      "line": 104,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/paths.rs",
+      "name": "unavailable_home_never_created",
+      "line": 109,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/paths.rs",
+      "name": "explicit_home_wins",
+      "line": 113,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/paths.rs",
+      "name": "roots_must_not_overlap",
+      "line": 117,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/paths.rs",
+      "name": "existing_home_not_overwritten",
+      "line": 122,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/paths.rs",
+      "name": "symlink_component_blocked",
+      "line": 126,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/rpc.rs",
+      "name": "no_exec_permission_by_label",
+      "line": 76,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/rpc.rs",
+      "name": "omitted_location_denied",
+      "line": 77,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/specialists.rs",
+      "name": "rejects_remote_collection",
+      "line": 45,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/specialists.rs",
+      "name": "rejects_bare_array_instead_of_guessing_version",
+      "line": 46,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/specialists.rs",
+      "name": "ignores_commit_subject_and_summaries",
+      "line": 47,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/storage.rs",
+      "name": "runtime_gate_rejects_unpatched_and_withdrawn",
+      "line": 215,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/storage.rs",
+      "name": "init_open_backup",
+      "line": 219,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/storage.rs",
+      "name": "init_does_not_replace_existing_directory",
+      "line": 224,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/storage.rs",
+      "name": "register_and_reject_overlapping_root",
+      "line": 228,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/storage.rs",
+      "name": "opens_only_known_schema",
+      "line": 235,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/vault.rs",
+      "name": "dpapi_roundtrip",
+      "line": 91,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/src/vault.rs",
+      "name": "dpapi_tamper_rejected",
+      "line": 92,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/implementation_v4.rs",
+      "name": "upgrade_reaches_v4",
+      "line": 5,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/implementation_v4.rs",
+      "name": "upgrade_idempotent_v4",
+      "line": 6,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/implementation_v4.rs",
+      "name": "missing_destination_not_unreadable",
+      "line": 7,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/implementation_v4.rs",
+      "name": "directory_not_unused_destination",
+      "line": 8,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/implementation_v4.rs",
+      "name": "file_not_unused_destination",
+      "line": 9,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/implementation_v4.rs",
+      "name": "dangling_symlink_not_unused_destination",
+      "line": 10,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/implementation_v4.rs",
+      "name": "secret_recovery_wrong_environment_rejected",
+      "line": 11,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/implementation_v4.rs",
+      "name": "atlas_never_falls_back",
+      "line": 12,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/implementation_v4.rs",
+      "name": "descriptor_is_not_credential_access",
+      "line": 13,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/implementation_v4.rs",
+      "name": "root_cleanup_not_implicit_plan",
+      "line": 14,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/implementation_v4.rs",
+      "name": "no_uncertified_external_application",
+      "line": 15,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/implementation_v4.rs",
+      "name": "opaque_relative_executable_rejected",
+      "line": 16,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/integrations_v3.rs",
+      "name": "migration_reaches_current_four",
+      "line": 5,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/integrations_v3.rs",
+      "name": "same_schema_upgrade_is_idempotent",
+      "line": 6,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/integrations_v3.rs",
+      "name": "no_profiles_for_unknown_schema",
+      "line": 7,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/integrations_v3.rs",
+      "name": "manifest_forbids_execution_fields",
+      "line": 8,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/integrations_v3.rs",
+      "name": "duplicate_manifest_environments_rejected",
+      "line": 9,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/integrations_v3.rs",
+      "name": "secret_plaintext_locator_is_invalid",
+      "line": 10,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/integrations_v3.rs",
+      "name": "effect_prepare_does_not_enable_unknown_environment",
+      "line": 11,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/integrations_v3.rs",
+      "name": "effect_apply_needs_prerelease_ack",
+      "line": 12,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/integrations_v3.rs",
+      "name": "no_secret_resolution_public_mcp_method",
+      "line": 13,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/integrations_v3.rs",
+      "name": "referenced_task_cannot_bypass_directory_identity",
+      "line": 14,
+      "status": "authored_not_executed"
+    },
+    {
+      "source": "crates/workstation-platform/tests/integrations_v3.rs",
+      "name": "relative_pin_target_rejected",
+      "line": 15,
+      "status": "authored_not_executed"
+    }
+  ],
+  "execution_scope": "Only source/file/archive inspection and document research; no test runner invocation."
+}

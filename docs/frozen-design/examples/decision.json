@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "id": "decision-demo",
+  "project_id": "project-demo",
+  "topic_key": "local.storage.root",
+  "scope": {
+    "environment_id": "environment-dev",
+    "component": null,
+    "branch": null
+  },
+  "status": "proposed",
+  "statement": "Store generated work under a user-selected data root.",
+  "rationale": "Avoid unplanned operating-system disk growth.",
+  "alternatives": [
+    "Keep the default root."
+  ],
+  "consequences": [
+    "Missing data drive must produce an explicit error."
+  ],
+  "source_ids": [
+    "source-user-proposal"
+  ],
+  "predecessor_id": null,
+  "effective_at": "2026-09-20T00:00:00Z",
+  "recorded_at": "2026-09-18T10:00:00Z",
+  "author": "example-user",
+  "approval_id": null
+}

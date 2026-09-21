@@ -1,0 +1,106 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"><title>Workstation synthetic demonstration</title><style>body{font:16px system-ui;max-width:1100px;margin:40px auto;padding:20px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>Workstation — synthetic illustration</h1><p><strong>Not output from a compiled Rust app.</strong> Actual shipped SQL and an independent Python reference were exercised against synthetic inputs. No providers or agents were contacted.</p><pre>{
+  &quot;provenance&quot;: {
+    &quot;data&quot;: &quot;synthetic&quot;,
+    &quot;execution&quot;: &quot;Python SQLite + independent reference oracle&quot;,
+    &quot;rust_application_executed&quot;: false,
+    &quot;real_agents_launched&quot;: false,
+    &quot;providers_contacted&quot;: false
+  },
+  &quot;modules&quot;: 7,
+  &quot;work&quot;: {
+    &quot;state&quot;: &quot;paused&quot;,
+    &quot;primary_session&quot;: &quot;grok-reported&quot;,
+    &quot;source&quot;: &quot;explicit synthetic insertion&quot;,
+    &quot;lease_at_time_200&quot;: &quot;ownership_uncertain_not_abandoned&quot;
+  },
+  &quot;chronicle&quot;: {
+    &quot;decision_valid_150_known_150&quot;: [
+      &quot;initial&quot;
+    ],
+    &quot;decision_valid_250_known_250&quot;: [
+      &quot;initial&quot;
+    ],
+    &quot;decision_valid_250_known_350&quot;: [
+      &quot;superseding&quot;
+    ],
+    &quot;explanation&quot;: &quot;Retrospective acceptance cannot rewrite what was known before it was recorded.&quot;
+  },
+  &quot;atlas&quot;: {
+    &quot;dev&quot;: [
+      {
+        &quot;name&quot;: &quot;Reserved example endpoint&quot;,
+        &quot;locator&quot;: &quot;https://example.org&quot;,
+        &quot;environment&quot;: &quot;dev&quot;,
+        &quot;source_kind&quot;: &quot;user_approved&quot;,
+        &quot;provider_verified&quot;: false
+      }
+    ],
+    &quot;prod&quot;: [],
+    &quot;environment_fallback&quot;: false
+  },
+  &quot;economics_reference&quot;: {
+    &quot;remaining&quot;: 80.0,
+    &quot;confidence&quot;: &quot;low&quot;,
+    &quot;horizons&quot;: [
+      {
+        &quot;label&quot;: &quot;10m&quot;,
+        &quot;observed_span_seconds&quot;: 600,
+        &quot;rate_per_second&quot;: 0.002777777777777778,
+        &quot;capacity_at_current_pace_seconds&quot;: 28800.0,
+        &quot;exhaustion_after_seconds&quot;: 28800.0
+      },
+      {
+        &quot;label&quot;: &quot;1h&quot;,
+        &quot;observed_span_seconds&quot;: 3600,
+        &quot;rate_per_second&quot;: 0.002777777777777778,
+        &quot;capacity_at_current_pace_seconds&quot;: 28800.0,
+        &quot;exhaustion_after_seconds&quot;: 28800.0
+      },
+      {
+        &quot;label&quot;: &quot;6h&quot;,
+        &quot;observed_span_seconds&quot;: 3600,
+        &quot;rate_per_second&quot;: 0.002777777777777778,
+        &quot;capacity_at_current_pace_seconds&quot;: 28800.0,
+        &quot;exhaustion_after_seconds&quot;: 28800.0
+      },
+      {
+        &quot;label&quot;: &quot;observed_window_baseline&quot;,
+        &quot;observed_span_seconds&quot;: 3600,
+        &quot;rate_per_second&quot;: 0.002777777777777778,
+        &quot;capacity_at_current_pace_seconds&quot;: 28800.0,
+        &quot;exhaustion_after_seconds&quot;: 28800.0
+      },
+      {
+        &quot;label&quot;: &quot;ewma_1h_half_life&quot;,
+        &quot;observed_span_seconds&quot;: 3600,
+        &quot;rate_per_second&quot;: 0.002777777777777778,
+        &quot;capacity_at_current_pace_seconds&quot;: 28800.0,
+        &quot;exhaustion_after_seconds&quot;: 28800.0
+      },
+      {
+        &quot;label&quot;: &quot;blended&quot;,
+        &quot;observed_span_seconds&quot;: 3600,
+        &quot;rate_per_second&quot;: 0.002777777777777778,
+        &quot;capacity_at_current_pace_seconds&quot;: 28800.0,
+        &quot;exhaustion_after_seconds&quot;: 28800.0
+      }
+    ]
+  },
+  &quot;capabilities&quot;: {
+    &quot;catalog_entry_count&quot;: 27,
+    &quot;catalog_review&quot;: &quot;purpose only&quot;,
+    &quot;certified_integrations&quot;: 0
+  },
+  &quot;continuity&quot;: {
+    &quot;mode&quot;: &quot;packet_only_source_implemented&quot;,
+    &quot;real_cross_agent_handoff&quot;: &quot;not_executed&quot;
+  },
+  &quot;sql_integrity&quot;: &quot;ok&quot;,
+  &quot;performance_reference_only&quot;: {
+    &quot;operation&quot;: &quot;exact temporal decision SQL on a tiny synthetic database&quot;,
+    &quot;samples&quot;: 100,
+    &quot;p95_ms&quot;: 0.013080999906378565,
+    &quot;median_ms&quot;: 0.006377999852702487,
+    &quot;not_native_context_or_mcp_performance&quot;: true
+  }
+}</pre></html>

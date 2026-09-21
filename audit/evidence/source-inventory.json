@@ -1,0 +1,340 @@
+{
+  "rust_file_count": 66,
+  "rust_line_count": 6853,
+  "authored_rust_test_annotations": 322,
+  "baseline_authored_annotations": 283,
+  "new_authored_annotations": 39,
+  "rust_tests_executed": 0,
+  "files": [
+    {
+      "path": "crates/workstation-cli/src/advanced_cli.rs",
+      "lines": 103,
+      "sha256": "a12fecbc35fa100b5e8d08ee5aefcf20877e84b8a32f26d037a3cc6ec29e0bfe"
+    },
+    {
+      "path": "crates/workstation-cli/src/control_cli.rs",
+      "lines": 95,
+      "sha256": "d8d6fd92926f14bfa348d4e24baaa4d5c8505f823ade16165b23bebb6de04533"
+    },
+    {
+      "path": "crates/workstation-cli/src/main.rs",
+      "lines": 326,
+      "sha256": "1573bec65cc6912dcd3955233756283c60fa585f24f40e0022a17c5573fb9291"
+    },
+    {
+      "path": "crates/workstation-cli/src/mcp.rs",
+      "lines": 32,
+      "sha256": "4cbf7c662628d8b2eed6f9add035493df2cb4b8d89964b299538bff09e5dcd7f"
+    },
+    {
+      "path": "crates/workstation-cli/src/operations_cli.rs",
+      "lines": 74,
+      "sha256": "a4e5a0b9136fed7fc13d8ad3f31ec2708a96753a5898f85faa7dad3b4a292d4f"
+    },
+    {
+      "path": "crates/workstation-cli/tests/cli.rs",
+      "lines": 146,
+      "sha256": "2630b9c78583c8de12ece53678a006dc27a0d5022cc45aae3a9e0950bda30867"
+    },
+    {
+      "path": "crates/workstation-cli/tests/control_cli.rs",
+      "lines": 33,
+      "sha256": "64ce27f74e85f18596c39fd575ae982d5598592cb0b346cd7d3d37483a12694c"
+    },
+    {
+      "path": "crates/workstation-core/src/continuity.rs",
+      "lines": 87,
+      "sha256": "826b9b7a3b1f1751f5984ec53356d18a02b99098ccb6cfe42e3db994d61d0da8"
+    },
+    {
+      "path": "crates/workstation-core/src/control.rs",
+      "lines": 174,
+      "sha256": "401f79416c6199300aad15688612f83deab2ba7a10ffc16f7016a2f03c3ad418"
+    },
+    {
+      "path": "crates/workstation-core/src/diagnostics.rs",
+      "lines": 60,
+      "sha256": "56b6d0c7232fbc084a6dbf9edcb86d11f454e5615aa1de487960cfea3017addb"
+    },
+    {
+      "path": "crates/workstation-core/src/discovery.rs",
+      "lines": 115,
+      "sha256": "88e0119c3d46d7e33f6814aa67166cce3142806d0788b99bf5f62bb5d6aee067"
+    },
+    {
+      "path": "crates/workstation-core/src/economics.rs",
+      "lines": 279,
+      "sha256": "ffc41626c8c1acf550afde86393795079750bdc4e00d9ca9e055bebac27b7205"
+    },
+    {
+      "path": "crates/workstation-core/src/effects.rs",
+      "lines": 87,
+      "sha256": "d046dfb06da9bd220efe9b4ee5811cfccb6aecf16d43fabddfa35d2b85205a33"
+    },
+    {
+      "path": "crates/workstation-core/src/health_rules.rs",
+      "lines": 48,
+      "sha256": "f42798ca95f3b62111d77e88e5505896587b17a5401cc49f14ea2b782c67170b"
+    },
+    {
+      "path": "crates/workstation-core/src/host_graph.rs",
+      "lines": 6,
+      "sha256": "1dc4d39f956b985f8b00badb59067d3bac0998bb404b3c2b901386066a9256ce"
+    },
+    {
+      "path": "crates/workstation-core/src/integrations.rs",
+      "lines": 153,
+      "sha256": "ee054c507f66168cff7526ec3a024def1e8a3dc094b066d483bc0721e72370da"
+    },
+    {
+      "path": "crates/workstation-core/src/lib.rs",
+      "lines": 36,
+      "sha256": "2ccdbbaa5091c63e440b20c5d8b0716966bfb9f22d52b3d52f4143b5ea2f93f9"
+    },
+    {
+      "path": "crates/workstation-core/src/lifecycle.rs",
+      "lines": 51,
+      "sha256": "4f09c8dc23d6ee582e7a4a6619a266576b3ea0b40cb2a2e79089eac0762a4f2c"
+    },
+    {
+      "path": "crates/workstation-core/src/model.rs",
+      "lines": 207,
+      "sha256": "84e6ca79b8624b3d0beaf73724ddcacfe310de3a94cd96753fb80a6ac63ba1cd"
+    },
+    {
+      "path": "crates/workstation-core/src/operations.rs",
+      "lines": 33,
+      "sha256": "4898a72f9dfa3f6f9ae9b553d01f7e0d078c0ea70efaa99e8c2478e1a69645c8"
+    },
+    {
+      "path": "crates/workstation-core/src/ownership.rs",
+      "lines": 80,
+      "sha256": "4136f3979ebceffb2e9f93066a2f0d684bd67d7f60116b2312ba8dd28e3df12f"
+    },
+    {
+      "path": "crates/workstation-core/src/plans.rs",
+      "lines": 34,
+      "sha256": "f21412f42f163b5f7580d83bb47289ab75a1137284a76bf57cd0ae4f6c3d10e5"
+    },
+    {
+      "path": "crates/workstation-core/src/policy.rs",
+      "lines": 130,
+      "sha256": "274f34b7925f70413fc0b2320ccad56875fbb0b6595656de195e93f40591bb55"
+    },
+    {
+      "path": "crates/workstation-core/src/protocol.rs",
+      "lines": 73,
+      "sha256": "a3f5c884a086226ca37b657c6799106b1f7ca4f4eda5ef1872b5f8204b0b0938"
+    },
+    {
+      "path": "crates/workstation-core/src/render.rs",
+      "lines": 96,
+      "sha256": "cf8330d4f27780708ed9dfeff64f2d7f96668c8d51fb289dd944d9f4a818b3f2"
+    },
+    {
+      "path": "crates/workstation-core/src/telemetry.rs",
+      "lines": 36,
+      "sha256": "26733e8596383bea779837e7c2b19fe056b42fc1fd514a3121b493125f44c1b1"
+    },
+    {
+      "path": "crates/workstation-core/src/usage_import.rs",
+      "lines": 70,
+      "sha256": "cec8493b867e8887ea3664af4b43087e8c0ffca1e47d69e128636fd2e5150920"
+    },
+    {
+      "path": "crates/workstation-core/src/wire.rs",
+      "lines": 41,
+      "sha256": "be5f877f77b80e653061c4a49c9c04e59b1eea872c0a283725aaea806419996a"
+    },
+    {
+      "path": "crates/workstation-core/src/workspace_policy.rs",
+      "lines": 156,
+      "sha256": "bbd27f247b0b56e176c23b41d3a05047cb68368ddbeef8fbb802aabb7a4d132a"
+    },
+    {
+      "path": "crates/workstation-core/tests/control_vectors.rs",
+      "lines": 38,
+      "sha256": "2cf8af1655b27defb25e783b9d24acaf70f6911c4e1f6df14b4a9cc781a2272f"
+    },
+    {
+      "path": "crates/workstation-core/tests/implementation_v3.rs",
+      "lines": 44,
+      "sha256": "e7c7b97236cde32ce2c170da0ae0a6bd8edcc0eea0ec2b1df50a8afce42d5fc1"
+    },
+    {
+      "path": "crates/workstation-core/tests/implementation_v4.rs",
+      "lines": 49,
+      "sha256": "afaea5913d0affb273fc4eb5ffcbd1a5a71644dd2dbffc2279af39bd554b364f"
+    },
+    {
+      "path": "crates/workstation-platform/src/acp_driver.rs",
+      "lines": 85,
+      "sha256": "bb383c3724fdc12af58d0eedab29175609781415de1e94d9dfc339d3d9a38a88"
+    },
+    {
+      "path": "crates/workstation-platform/src/adapters.rs",
+      "lines": 93,
+      "sha256": "c88e44383990ea512a2936edb647049820bf17612871943a7092ffba16fe11e5"
+    },
+    {
+      "path": "crates/workstation-platform/src/capability_context.rs",
+      "lines": 45,
+      "sha256": "ad392ce0515904e66c6686c934f2974855f5861c2619bbccaf9c02b1b5670259"
+    },
+    {
+      "path": "crates/workstation-platform/src/control_store.rs",
+      "lines": 351,
+      "sha256": "e45552334ee9a8bf7ee8d6fdf11184839cf4a3e912d0a51dfc0ad10196192b7d"
+    },
+    {
+      "path": "crates/workstation-platform/src/control_workspace.rs",
+      "lines": 173,
+      "sha256": "d25bbb30971fc15192b6cbfd7d7ee882ec825530065e9423a0f6d904d8fd9c45"
+    },
+    {
+      "path": "crates/workstation-platform/src/copilot.rs",
+      "lines": 148,
+      "sha256": "ef22407f4cb4aceb5ca9b67b58b414e35c23a41b0430d1b5afa0a6d71e03105f"
+    },
+    {
+      "path": "crates/workstation-platform/src/engine.rs",
+      "lines": 124,
+      "sha256": "0389495291c6bd2193742d66cd92454ddcfef309904fafa62fada57b636fbd18"
+    },
+    {
+      "path": "crates/workstation-platform/src/external.rs",
+      "lines": 141,
+      "sha256": "109d620364a896ff75acf2e11f814922fac4b92560cf653b2fcd063854e65b1b"
+    },
+    {
+      "path": "crates/workstation-platform/src/filesystem.rs",
+      "lines": 133,
+      "sha256": "20d7214ca9e2f418a9431cfeeb014e2cf4667872fa14a8b52bcd473b99368f13"
+    },
+    {
+      "path": "crates/workstation-platform/src/git.rs",
+      "lines": 104,
+      "sha256": "8790a56434be65d09e8b14e8554b0f33c335d4173e3471a9a4fff24db14f962e"
+    },
+    {
+      "path": "crates/workstation-platform/src/health_scan.rs",
+      "lines": 112,
+      "sha256": "51dc0644e5fe71cfb10cf798f8aa8727e1f89957a81a170b8de5265ca225624c"
+    },
+    {
+      "path": "crates/workstation-platform/src/http_provider.rs",
+      "lines": 60,
+      "sha256": "37d3a7554a28b2d6db10be406a2a36771ddacbeb379c7a1b34784c2ce02d92cd"
+    },
+    {
+      "path": "crates/workstation-platform/src/integration_store.rs",
+      "lines": 169,
+      "sha256": "92b37964c29bf4da9c3922a6db802e78828dd7f2bbedb6525c88359dd8cdcd61"
+    },
+    {
+      "path": "crates/workstation-platform/src/journal_archive.rs",
+      "lines": 146,
+      "sha256": "6ab240e9cc56abde75a511cc6b4e817ebd0caadf74701d2b0feb6b3d6d8db802"
+    },
+    {
+      "path": "crates/workstation-platform/src/lib.rs",
+      "lines": 70,
+      "sha256": "7b5d6aca282bd4e8bf2d50f37c7870ab6415d6242dcb856d97a9557500e5e1fd"
+    },
+    {
+      "path": "crates/workstation-platform/src/operation_runtime.rs",
+      "lines": 59,
+      "sha256": "9c52736d94260428b2f4b4e7df9364c13bd591b0b50024d48ddaf94f16de8a7e"
+    },
+    {
+      "path": "crates/workstation-platform/src/operations_store.rs",
+      "lines": 124,
+      "sha256": "5dd38e6cb400a2ef93ddfa8d51f5909405c5b0ae640cf457478f0d8d4bb06cbc"
+    },
+    {
+      "path": "crates/workstation-platform/src/paths.rs",
+      "lines": 168,
+      "sha256": "03bc9e72e083b18f22a0f28012b48a39a1c8af19299acb2563d53e6ad8cf8e05"
+    },
+    {
+      "path": "crates/workstation-platform/src/process_graph.rs",
+      "lines": 75,
+      "sha256": "bee44b0e8e3866fd81a55b546496d55dabf4e450904f763fef312598194a54a9"
+    },
+    {
+      "path": "crates/workstation-platform/src/profile_health.rs",
+      "lines": 74,
+      "sha256": "dde18ffd61e67a02d3c9d8205f76de59fab14de73500fa208498c735a3baa382"
+    },
+    {
+      "path": "crates/workstation-platform/src/project_tools.rs",
+      "lines": 81,
+      "sha256": "6d0b23fd97062e195085a77808be470b733750319ac4e3361cc16a5c0f1ae541"
+    },
+    {
+      "path": "crates/workstation-platform/src/repairs.rs",
+      "lines": 150,
+      "sha256": "4d35d32d398a8f380f38fc76b94e3ab8a9ce6f7dad614078577003e0a1ecb126"
+    },
+    {
+      "path": "crates/workstation-platform/src/rpc.rs",
+      "lines": 144,
+      "sha256": "4cadc8d86a3f2f1c7ee68677385f9f6dd083912b6490afcaa8c12721f99de0e7"
+    },
+    {
+      "path": "crates/workstation-platform/src/runner.rs",
+      "lines": 110,
+      "sha256": "2534f49b33bfb8c9ed2fbf302c6f89f8110632d6fb9de0c4fd07482391f56c25"
+    },
+    {
+      "path": "crates/workstation-platform/src/secret_lifecycle.rs",
+      "lines": 75,
+      "sha256": "42407c5b16a2a0e6c9c87a5b4386e2529e10321e918e288175ac689d8519ba57"
+    },
+    {
+      "path": "crates/workstation-platform/src/specialists.rs",
+      "lines": 48,
+      "sha256": "b0f01ed7428357baaeef266ad1c8606f768f64ff52829eb0150df8b660ad26a5"
+    },
+    {
+      "path": "crates/workstation-platform/src/storage.rs",
+      "lines": 270,
+      "sha256": "e13585ac596cf45d93d2efe68ff1a40c6248682e170cf32718f4935805d5e64c"
+    },
+    {
+      "path": "crates/workstation-platform/src/tasks.rs",
+      "lines": 81,
+      "sha256": "52790d6d7d710d6d7d1c5cb3025afcc5653f3e7ae11c26fd859e545741e5e8cc"
+    },
+    {
+      "path": "crates/workstation-platform/src/telemetry_store.rs",
+      "lines": 34,
+      "sha256": "c4c4528a647be3f6e9ee6b5df1d813df3f26ab2a3443883632b119bb253ec819"
+    },
+    {
+      "path": "crates/workstation-platform/src/vault.rs",
+      "lines": 102,
+      "sha256": "3b630e95bce39d3868952e0140b420fed73f0564da6a9945be3cd57fa0e0e1c9"
+    },
+    {
+      "path": "crates/workstation-platform/src/windows.rs",
+      "lines": 159,
+      "sha256": "d23f0108956cdfefffd5067b7dd6b89dfb587347b8ba63506f9cf50f8453a299"
+    },
+    {
+      "path": "crates/workstation-platform/src/workspace_lifecycle.rs",
+      "lines": 122,
+      "sha256": "d56a69b50e500e81871a0dd3ed6273325dd8e2a726c0f987eb06f9468e26fa16"
+    },
+    {
+      "path": "crates/workstation-platform/tests/implementation_v4.rs",
+      "lines": 16,
+      "sha256": "fd0c723c793f2f86bfada28cf6ef61102c7aa75635542cbbf9ede7b48de703fc"
+    },
+    {
+      "path": "crates/workstation-platform/tests/integrations_v3.rs",
+      "lines": 15,
+      "sha256": "1338dac727cd2c0bf7bc27507c9ba191ed49094435bb990320de79069224b5f7"
+    }
+  ]
+}

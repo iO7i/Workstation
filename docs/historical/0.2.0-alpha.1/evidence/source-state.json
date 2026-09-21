@@ -1,0 +1,29 @@
+{
+  "version": "0.2.0-alpha.1",
+  "commit": "d6a5dc0001eb356dcf01771b2687e1abe1a9057f",
+  "git_tree_clean_at_export": true,
+  "baseline_commit": "add4db9",
+  "baseline_archive_sha256": "6e8500514058c83c253e89df83b0adcb3a1cb3c301c033824f1f61e5af9983e3",
+  "artifact_kind": "source_candidate_not_native_windows_release",
+  "source_language": "Rust",
+  "runtime_crates": 3,
+  "module_count": 7,
+  "native_built": false,
+  "real_providers": [],
+  "independent_tests": {
+    "run": 116,
+    "passed": 116,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "authored_rust_tests": 141,
+  "executed_rust_tests": 0,
+  "executed_windows_tests": 0,
+  "delivery_metadata_added_after_source_commit": [
+    "evidence/source-state.json",
+    "evidence/git-log.txt",
+    "evidence/changed-files.txt",
+    "SOURCE-MANIFEST.sha256"
+  ]
+}

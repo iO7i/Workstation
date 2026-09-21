@@ -1,0 +1,22 @@
+{
+  "base": "FS-1.0",
+  "accepted_addenda": [
+    {
+      "id": "FS-1.0-D1",
+      "name": "Contextual Resource Discovery",
+      "accepted_on": "2026-09-18",
+      "module": "Capabilities",
+      "implementation_stage": "R4",
+      "certification_stage": "R5",
+      "document": "docs/scope/FS-1.0-D1.md",
+      "current_runtime_status": "not_implemented",
+      "specification_status": "included",
+      "authority_change": false
+    }
+  ],
+  "runtime_slice": "R0-A",
+  "runtime_source_version": "0.1.0-alpha.1",
+  "package_revision": "d1",
+  "module_count": 5,
+  "r0_runtime_change": false
+}

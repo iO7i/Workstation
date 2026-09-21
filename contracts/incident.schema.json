@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Workstation R0 incident",
+  "description": "First-slice contract, not the full FS-1.0 product contract.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "family": {
+      "enum": [
+        "docker_socket",
+        "codex_attachments",
+        "old_workspace"
+      ]
+    },
+    "fresh_error": {
+      "type": "boolean"
+    },
+    "active_owner": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "correct_registry_checked": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "contents_inspected": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "family",
+    "fresh_error",
+    "active_owner",
+    "correct_registry_checked",
+    "contents_inspected"
+  ]
+}

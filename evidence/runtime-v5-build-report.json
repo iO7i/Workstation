@@ -1,0 +1,40 @@
+{
+  "schema_version": "workstation.runtime-v5-build-report.v1",
+  "version": "0.5.0-alpha.1",
+  "recorded_at_utc": "2026-09-21T00:44:58.4926708Z",
+  "platform": "windows-x64",
+  "toolchain": "1.97.1-x86_64-pc-windows-msvc",
+  "base_commit": "59fa1b6b152aadd93d56ca3b7a03944d8e6f7fe7",
+  "source_state": "uncommitted_release_candidate",
+  "network_mode": "offline",
+  "live_provider_calls": 0,
+  "commands": [
+    "cargo fmt --all -- --check",
+    "cargo check --workspace --all-targets --all-features --locked",
+    "cargo clippy --workspace --all-targets --all-features --locked -- -D warnings",
+    "cargo test --workspace --all-features --locked",
+    "cargo build --release --package workstation-cli --locked",
+    "scripts/windows-smoke.ps1",
+    "scripts/control-smoke.ps1"
+  ],
+  "results": {
+    "format": "passed",
+    "check": "passed",
+    "clippy": "passed",
+    "tests": {
+      "result": "passed",
+      "passed": 350,
+      "failed": 0,
+      "durable_end_to_end": 17
+    },
+    "release_build": "passed",
+    "windows_smoke": "passed",
+    "control_smoke": "passed",
+    "rustsec": "passed_local_database_yanked_status_not_checked"
+  },
+  "limitations": [
+    "unsigned binary",
+    "offline fixtures are not live-provider certification",
+    "clean public GitHub Actions run pending repository publication"
+  ]
+}

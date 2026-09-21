@@ -1,0 +1,15 @@
+/target/
+/dist/
+/validation/local-*/
+*.db
+*.db-wal
+*.db-shm
+.env
+.env.*
+*.dpapi
+*.pdb
+.build/
+__pycache__/
+/target/
+/_apply_v5_patch.py
+/docs/DURABLE-RUNTIME-BUILD-BRIEF.md

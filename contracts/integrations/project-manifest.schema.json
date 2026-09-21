@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Workstation 0.3 project-manifest \u2014 authoring contract; runtime validation is also required",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9_.-]+$"
+    },
+    "environments": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 64,
+        "pattern": "^[A-Za-z0-9_.-]+$"
+      },
+      "maxItems": 16
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9_.-]+$"
+          },
+          "environment": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9_.-]+$"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "service",
+              "endpoint",
+              "deployment",
+              "database",
+              "runbook",
+              "secret_reference",
+              "reference"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "locator": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "provider": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "fresh_for_secs": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 31536000
+          }
+        },
+        "required": [
+          "id",
+          "environment",
+          "kind",
+          "name",
+          "locator",
+          "provider",
+          "fresh_for_secs"
+        ]
+      },
+      "maxItems": 64
+    }
+  },
+  "required": [
+    "schema_version",
+    "project_id",
+    "environments",
+    "resources"
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FS-1.0-D1 project-context: R4 design contract",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[a-z0-9][a-z0-9._-]{0,99}$"
+    },
+    "focus_approved": {
+      "type": "boolean"
+    },
+    "needs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "parallel_work",
+          "interface_review",
+          "accessibility_review",
+          "reproducible_evaluation",
+          "decision_context",
+          "credential_location",
+          "runtime_recovery",
+          "storage_attribution"
+        ]
+      },
+      "maxItems": 8,
+      "uniqueItems": true
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100,
+        "pattern": "^[a-z0-9][a-z0-9._-]{0,99}$"
+      },
+      "maxItems": 20,
+      "uniqueItems": true
+    },
+    "platform": {
+      "type": "string",
+      "enum": [
+        "windows",
+        "macos",
+        "linux"
+      ]
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "free_only": {
+          "type": "boolean"
+        },
+        "local_only": {
+          "type": "boolean"
+        },
+        "allow_network_dependency": {
+          "type": "boolean"
+        },
+        "blocked_resource_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[a-z0-9][a-z0-9._-]{0,99}$"
+          },
+          "maxItems": 50,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "free_only",
+        "local_only",
+        "allow_network_dependency",
+        "blocked_resource_ids"
+      ]
+    },
+    "inventory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "resource_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[a-z0-9][a-z0-9._-]{0,99}$"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "available",
+              "absent",
+              "unknown"
+            ]
+          },
+          "coverage": {
+            "type": "string",
+            "enum": [
+              "complete",
+              "partial",
+              "denied",
+              "unsupported",
+              "timed_out"
+            ]
+          }
+        },
+        "required": [
+          "resource_id",
+          "state",
+          "coverage"
+        ]
+      },
+      "maxItems": 100
+    }
+  },
+  "required": [
+    "schema_version",
+    "project_id",
+    "focus_approved",
+    "needs",
+    "evidence_refs",
+    "platform",
+    "constraints",
+    "inventory"
+  ]
+}

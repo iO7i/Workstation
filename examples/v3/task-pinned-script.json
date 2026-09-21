@@ -1,0 +1,23 @@
+{
+  "id": "example-task",
+  "project_id": "example",
+  "environment": "dev",
+  "executable": "D:/Tools/Node/node.exe",
+  "executable_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "cwd": "D:/Repos/Example",
+  "directory_identity": "REPLACE_WITH_OBSERVED_IDENTITY",
+  "args": [
+    "D:/Repos/Example/scripts/maintenance.js"
+  ],
+  "script_pins": [
+    {
+      "path": "D:/Repos/Example/scripts/maintenance.js",
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  ],
+  "secret_bindings": {
+    "DATABASE_URL": "example-db"
+  },
+  "timeout_seconds": 60,
+  "output_policy": "discard"
+}

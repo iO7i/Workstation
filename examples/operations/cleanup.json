@@ -1,0 +1,8 @@
+{
+  "operation": "operation",
+  "request": {
+    "operation": "workspace_cleanup",
+    "workspace_id": "fixture-workspace",
+    "quiescence_acknowledged": true
+  }
+}

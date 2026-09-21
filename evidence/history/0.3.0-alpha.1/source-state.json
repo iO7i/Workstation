@@ -1,0 +1,16 @@
+{
+  "implementation_commit": "0df5cb68d8f179d109e732bf468e556bde1d877e",
+  "baseline_import_commit": "f1189b0e1753364793933fb9b62059868b8bf5c6",
+  "git_history_packaged_as": "evidence/git-log.txt",
+  "package_metadata_generated_after_commit": true,
+  "version": "0.3.0-alpha.1",
+  "rust_source_files": 45,
+  "authored_rust_test_annotations": 202,
+  "code_and_schema_line_changes": {
+    "added": 1649,
+    "removed": 20,
+    "not_a_completion_metric": true
+  },
+  "application_executed": false,
+  "windows_accessed": false
+}

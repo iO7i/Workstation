@@ -1,0 +1,88 @@
+{
+  "total_authored": 141,
+  "executed": 0,
+  "native_windows_executed": 0,
+  "counts_are_annotations_not_a_cargo_test_run": true,
+  "files": [
+    {
+      "file": "crates/workstation-cli/src/control_cli.rs",
+      "test_annotations_authored": 1
+    },
+    {
+      "file": "crates/workstation-cli/src/mcp.rs",
+      "test_annotations_authored": 3
+    },
+    {
+      "file": "crates/workstation-cli/tests/cli.rs",
+      "test_annotations_authored": 13
+    },
+    {
+      "file": "crates/workstation-cli/tests/control_cli.rs",
+      "test_annotations_authored": 13
+    },
+    {
+      "file": "crates/workstation-core/src/continuity.rs",
+      "test_annotations_authored": 5
+    },
+    {
+      "file": "crates/workstation-core/src/control.rs",
+      "test_annotations_authored": 11
+    },
+    {
+      "file": "crates/workstation-core/src/diagnostics.rs",
+      "test_annotations_authored": 8
+    },
+    {
+      "file": "crates/workstation-core/src/discovery.rs",
+      "test_annotations_authored": 4
+    },
+    {
+      "file": "crates/workstation-core/src/economics.rs",
+      "test_annotations_authored": 18
+    },
+    {
+      "file": "crates/workstation-core/src/plans.rs",
+      "test_annotations_authored": 2
+    },
+    {
+      "file": "crates/workstation-core/src/policy.rs",
+      "test_annotations_authored": 7
+    },
+    {
+      "file": "crates/workstation-core/src/protocol.rs",
+      "test_annotations_authored": 7
+    },
+    {
+      "file": "crates/workstation-core/src/render.rs",
+      "test_annotations_authored": 3
+    },
+    {
+      "file": "crates/workstation-core/tests/control_vectors.rs",
+      "test_annotations_authored": 16
+    },
+    {
+      "file": "crates/workstation-platform/src/control_workspace.rs",
+      "test_annotations_authored": 5
+    },
+    {
+      "file": "crates/workstation-platform/src/filesystem.rs",
+      "test_annotations_authored": 5
+    },
+    {
+      "file": "crates/workstation-platform/src/git.rs",
+      "test_annotations_authored": 7
+    },
+    {
+      "file": "crates/workstation-platform/src/paths.rs",
+      "test_annotations_authored": 6
+    },
+    {
+      "file": "crates/workstation-platform/src/storage.rs",
+      "test_annotations_authored": 5
+    },
+    {
+      "file": "crates/workstation-platform/src/vault.rs",
+      "test_annotations_authored": 2
+    }
+  ]
+}

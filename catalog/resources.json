@@ -1,0 +1,691 @@
+[
+  {
+    "id": "worktrunk",
+    "title": "Worktrunk",
+    "kind": "tool",
+    "source": "https://github.com/max-sixty/worktrunk",
+    "needs": [
+      "parallel_work"
+    ],
+    "platforms": [],
+    "cost": "unknown",
+    "privacy": "unknown",
+    "equivalence": null,
+    "purpose": "Specialist CLI for managing worktrees in parallel coding-agent workflows.",
+    "limitations": [
+      "tool compatibility and command effects need a version-specific review",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "entire",
+    "title": "Entire CLI",
+    "kind": "tool",
+    "source": "https://github.com/entireio/cli",
+    "needs": [
+      "decision_context",
+      "continuity"
+    ],
+    "platforms": [],
+    "cost": "unknown",
+    "privacy": "unknown",
+    "equivalence": null,
+    "purpose": "Records coding-agent session provenance alongside Git checkpoints.",
+    "limitations": [
+      "recording may retain prompts; inspect its retention and privacy configuration",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "codbash",
+    "title": "Codbash",
+    "kind": "tool",
+    "source": "https://github.com/vakovalskii/codbash",
+    "needs": [
+      "continuity",
+      "session_navigation"
+    ],
+    "platforms": [],
+    "cost": "unknown",
+    "privacy": "unknown",
+    "equivalence": null,
+    "purpose": "Cross-agent session navigation and management project.",
+    "limitations": [
+      "Workstation does not certify session formats, conversion, or Windows behavior",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "context7",
+    "title": "Context7",
+    "kind": "mcp_server",
+    "source": "https://github.com/upstash/context7",
+    "needs": [
+      "current_documentation"
+    ],
+    "platforms": [],
+    "cost": "unknown",
+    "privacy": "unknown",
+    "equivalence": null,
+    "purpose": "Documentation retrieval integration for supported libraries and frameworks.",
+    "limitations": [
+      "network disclosure and service account requirements need review before connection",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "agent-skills-spec",
+    "title": "Agent Skills specification",
+    "kind": "documentation",
+    "source": "https://agentskills.io/specification",
+    "needs": [
+      "skill_discovery"
+    ],
+    "platforms": [
+      "platform_neutral"
+    ],
+    "cost": "not_applicable",
+    "privacy": "local",
+    "equivalence": null,
+    "purpose": "Defines packaging and structure for interoperable agent skills.",
+    "limitations": [
+      "a valid skill package is not proof of safe behavior",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "vercel-skills",
+    "title": "Vercel agent skills",
+    "kind": "skill",
+    "source": "https://github.com/vercel-labs/agent-skills",
+    "needs": [
+      "interface_review",
+      "accessibility_review"
+    ],
+    "platforms": [],
+    "cost": "unknown",
+    "privacy": "unknown",
+    "equivalence": null,
+    "purpose": "Collection with web-interface and framework guidance for coding agents.",
+    "limitations": [
+      "select and review a specific skill revision; a repository-wide review does not certify scripts",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "wcag-quickref",
+    "title": "WCAG 2.2 quick reference",
+    "kind": "documentation",
+    "source": "https://www.w3.org/WAI/WCAG22/quickref/",
+    "needs": [
+      "accessibility_review"
+    ],
+    "platforms": [
+      "platform_neutral"
+    ],
+    "cost": "not_applicable",
+    "privacy": "local",
+    "equivalence": null,
+    "purpose": "Organized reference for web accessibility criteria and techniques.",
+    "limitations": [
+      "reading guidance does not establish accessibility conformance",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "playwright",
+    "title": "Playwright documentation",
+    "kind": "documentation",
+    "source": "https://playwright.dev/docs/intro",
+    "needs": [
+      "interface_review",
+      "reproducible_evaluation"
+    ],
+    "platforms": [
+      "platform_neutral"
+    ],
+    "cost": "not_applicable",
+    "privacy": "local",
+    "equivalence": null,
+    "purpose": "Browser-testing documentation with test runner and setup guidance.",
+    "limitations": [
+      "browser downloads and test side effects require explicit setup and isolated targets",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "doppler-cli",
+    "title": "Doppler CLI documentation",
+    "kind": "documentation",
+    "source": "https://docs.doppler.com/docs/cli",
+    "needs": [
+      "credential_location"
+    ],
+    "platforms": [
+      "platform_neutral"
+    ],
+    "cost": "not_applicable",
+    "privacy": "local",
+    "equivalence": null,
+    "purpose": "Documents command-line integration with Doppler-managed secrets.",
+    "limitations": [
+      "Workstation stores references only; provider commands and paid plan applicability are not certified",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "onepassword-references",
+    "title": "1Password secret references",
+    "kind": "documentation",
+    "source": "https://developer.1password.com/docs/cli/secret-references",
+    "needs": [
+      "credential_location"
+    ],
+    "platforms": [
+      "platform_neutral"
+    ],
+    "cost": "not_applicable",
+    "privacy": "local",
+    "equivalence": null,
+    "purpose": "Documents references that identify stored secrets without embedding values.",
+    "limitations": [
+      "reference syntax does not grant access or prevent same-user command exfiltration",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "infisical",
+    "title": "Infisical",
+    "kind": "tool",
+    "source": "https://github.com/Infisical/infisical",
+    "needs": [
+      "credential_location"
+    ],
+    "platforms": [],
+    "cost": "unknown",
+    "privacy": "unknown",
+    "equivalence": null,
+    "purpose": "Secrets-management platform with environment-oriented resources.",
+    "limitations": [
+      "licensing/features differ by distribution; no local deployment or connector was exercised",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "bitwarden-secrets",
+    "title": "Bitwarden Secrets Manager overview",
+    "kind": "documentation",
+    "source": "https://bitwarden.com/help/secrets-manager-overview/",
+    "needs": [
+      "credential_location"
+    ],
+    "platforms": [
+      "platform_neutral"
+    ],
+    "cost": "not_applicable",
+    "privacy": "local",
+    "equivalence": null,
+    "purpose": "Overview of secret, project and machine-account concepts.",
+    "limitations": [
+      "plan limits and provider execution need independent review",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "windows-dpapi",
+    "title": "Windows DPAPI reference",
+    "kind": "documentation",
+    "source": "https://learn.microsoft.com/en-us/windows/win32/api/dpapi/nf-dpapi-cryptprotectdata",
+    "needs": [
+      "credential_location"
+    ],
+    "platforms": [
+      "platform_neutral"
+    ],
+    "cost": "not_applicable",
+    "privacy": "local",
+    "equivalence": null,
+    "purpose": "User-scoped encryption-at-rest API documentation.",
+    "limitations": [
+      "not a security boundary against malicious programs running under the same account",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "git-worktree",
+    "title": "Git worktree reference",
+    "kind": "documentation",
+    "source": "https://git-scm.com/docs/git-worktree",
+    "needs": [
+      "parallel_work",
+      "storage_attribution"
+    ],
+    "platforms": [
+      "platform_neutral"
+    ],
+    "cost": "not_applicable",
+    "privacy": "local",
+    "equivalence": null,
+    "purpose": "Canonical Git worktree registration and lifecycle semantics.",
+    "limitations": [
+      "a clean or prunable record is not permission to delete active or ignored content",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "git-status",
+    "title": "Git status reference",
+    "kind": "documentation",
+    "source": "https://git-scm.com/docs/git-status",
+    "needs": [
+      "parallel_work",
+      "continuity"
+    ],
+    "platforms": [
+      "platform_neutral"
+    ],
+    "cost": "not_applicable",
+    "privacy": "local",
+    "equivalence": null,
+    "purpose": "Defines stable status formats, untracked/ignored options and background refresh behavior.",
+    "limitations": [
+      "status alone does not establish local-only commits or cleanup safety",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "sqlite-backup",
+    "title": "SQLite backup API",
+    "kind": "documentation",
+    "source": "https://sqlite.org/backup.html",
+    "needs": [
+      "runtime_recovery"
+    ],
+    "platforms": [
+      "platform_neutral"
+    ],
+    "cost": "not_applicable",
+    "privacy": "local",
+    "equivalence": null,
+    "purpose": "Explains consistent database backup while connections may be active.",
+    "limitations": [
+      "copying only a live WAL database file is not a substitute for a consistent backup",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "mcp-inspector",
+    "title": "MCP Inspector",
+    "kind": "documentation",
+    "source": "https://modelcontextprotocol.io/docs/tools/inspector",
+    "needs": [
+      "integration_debugging"
+    ],
+    "platforms": [
+      "platform_neutral"
+    ],
+    "cost": "not_applicable",
+    "privacy": "local",
+    "equivalence": null,
+    "purpose": "Official guide to inspecting MCP connections and tools.",
+    "limitations": [
+      "launching an inspected server may execute code; use a disposable trusted test target",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "mcp-registry",
+    "title": "MCP Registry overview",
+    "kind": "documentation",
+    "source": "https://modelcontextprotocol.io/registry/about",
+    "needs": [
+      "skill_discovery",
+      "integration_debugging"
+    ],
+    "platforms": [
+      "platform_neutral"
+    ],
+    "cost": "not_applicable",
+    "privacy": "local",
+    "equivalence": null,
+    "purpose": "Explains registry discovery and published MCP server metadata.",
+    "limitations": [
+      "registry presence is not a security or project-suitability certification",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "gitleaks",
+    "title": "Gitleaks",
+    "kind": "tool",
+    "source": "https://github.com/gitleaks/gitleaks",
+    "needs": [
+      "credential_hygiene"
+    ],
+    "platforms": [],
+    "cost": "unknown",
+    "privacy": "unknown",
+    "equivalence": null,
+    "purpose": "Specialist secret-detection tooling for repository hygiene workflows.",
+    "limitations": [
+      "scanner results and exported reports may themselves contain sensitive evidence",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "codex-app-server",
+    "title": "Codex App Server reference",
+    "kind": "documentation",
+    "source": "https://developers.openai.com/codex/app-server",
+    "needs": [
+      "continuity",
+      "quota_visibility"
+    ],
+    "platforms": [
+      "platform_neutral"
+    ],
+    "cost": "not_applicable",
+    "privacy": "local",
+    "equivalence": null,
+    "purpose": "Describes supported local application protocol and account rate-limit payloads.",
+    "limitations": [
+      "documented protocol is not evidence that this installation exposes every optional field",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "claude-statusline",
+    "title": "Claude Code statusline reference",
+    "kind": "documentation",
+    "source": "https://code.claude.com/docs/en/statusline",
+    "needs": [
+      "quota_visibility",
+      "context_runway"
+    ],
+    "platforms": [
+      "platform_neutral"
+    ],
+    "cost": "not_applicable",
+    "privacy": "local",
+    "equivalence": null,
+    "purpose": "Documents local statusline data including optional context, cost and quota fields.",
+    "limitations": [
+      "optional usage fields can be absent; estimated session cost is not a subscription invoice",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "pytest",
+    "title": "pytest documentation",
+    "kind": "documentation",
+    "source": "https://docs.pytest.org/en/stable/",
+    "needs": [
+      "reproducible_evaluation"
+    ],
+    "platforms": [
+      "platform_neutral"
+    ],
+    "cost": "not_applicable",
+    "privacy": "local",
+    "equivalence": null,
+    "purpose": "Guidance on fixtures, assertions and isolated testing.",
+    "limitations": [
+      "a test pass only supports the specific executed cases and environment",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "nextest",
+    "title": "cargo-nextest",
+    "kind": "tool",
+    "source": "https://nexte.st/",
+    "needs": [
+      "reproducible_evaluation"
+    ],
+    "platforms": [],
+    "cost": "unknown",
+    "privacy": "unknown",
+    "equivalence": null,
+    "purpose": "Rust test runner with test isolation and CI-oriented reporting.",
+    "limitations": [
+      "no performance improvement or compatibility is assumed for this project",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "criterion",
+    "title": "Criterion.rs",
+    "kind": "tool",
+    "source": "https://github.com/bheisler/criterion.rs",
+    "needs": [
+      "reproducible_evaluation"
+    ],
+    "platforms": [],
+    "cost": "unknown",
+    "privacy": "unknown",
+    "equivalence": null,
+    "purpose": "Statistics-oriented benchmarking library for Rust code.",
+    "limitations": [
+      "microbenchmarks do not substitute for representative end-to-end workloads",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "adr-tools",
+    "title": "ADR tools",
+    "kind": "tool",
+    "source": "https://github.com/npryce/adr-tools",
+    "needs": [
+      "decision_context"
+    ],
+    "platforms": [],
+    "cost": "unknown",
+    "privacy": "unknown",
+    "equivalence": null,
+    "purpose": "Tools for recording architecture decisions and their history.",
+    "limitations": [
+      "review shell/platform dependencies; Workstation does not run or rewrite ADR tools",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "swe-bench",
+    "title": "SWE-bench",
+    "kind": "benchmark",
+    "source": "https://www.swebench.com/",
+    "needs": [
+      "reproducible_evaluation",
+      "model_selection"
+    ],
+    "platforms": [],
+    "cost": "unknown",
+    "privacy": "unknown",
+    "equivalence": null,
+    "purpose": "Software-engineering evaluation benchmark and methodology references.",
+    "limitations": [
+      "dataset and code licenses must be reviewed individually; no scores or dataset records are redistributed",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  },
+  {
+    "id": "openai-evals",
+    "title": "OpenAI Evals",
+    "kind": "reference_implementation",
+    "source": "https://github.com/openai/evals",
+    "needs": [
+      "reproducible_evaluation",
+      "model_selection"
+    ],
+    "platforms": [],
+    "cost": "unknown",
+    "privacy": "unknown",
+    "equivalence": null,
+    "purpose": "Framework and examples for evaluating model/system behavior.",
+    "limitations": [
+      "running evaluations may incur API cost and requires a task-specific protocol",
+      "Source purpose reviewed only; no integration or demonstrated project benefit is certified."
+    ],
+    "review_status": "reviewed",
+    "review_revision": "purpose-review-2026-09-18",
+    "reviewed_at": 1789689600,
+    "fresh_for_seconds": 2592000,
+    "license_scope": "Link and original short metadata only. Upstream content is not redistributed; resource-specific license permission must be checked before adoption.",
+    "adoption_mode": "reference_only"
+  }
+]

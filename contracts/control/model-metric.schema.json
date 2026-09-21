@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "model": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "benchmark": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "revision": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "quality": {
+      "type": "number"
+    },
+    "task_cost_usd": {
+      "type": "number",
+      "minimum": 0
+    },
+    "latency_ms": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "available": {
+      "type": "boolean"
+    },
+    "license_state": {
+      "type": "string",
+      "enum": [
+        "permitted_local_use",
+        "unknown",
+        "not_permitted"
+      ]
+    },
+    "source": {
+      "type": "string",
+      "maxLength": 512
+    }
+  },
+  "required": [
+    "model",
+    "benchmark",
+    "revision",
+    "quality",
+    "task_cost_usd",
+    "available",
+    "license_state",
+    "source"
+  ]
+}

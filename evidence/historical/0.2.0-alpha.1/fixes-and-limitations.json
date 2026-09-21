@@ -1,0 +1,23 @@
+{
+  "corrected_during_work": [
+    "Build test scratch moved outside repository-rejected homes.",
+    "Parent collector teardown replaced unbounded joins/waits with bounded cleanup status.",
+    "Schema JSON checks use IS to reject absent required work state/version fields.",
+    "Cross-project work/session/workspace/checkpoint constraints added.",
+    "Accepted-decision known-time and successor constraints hardened.",
+    "Snoozed feedback requires non-null future time.",
+    "Post-reset exhaustion estimates withheld; raw capacity duration remains conditional.",
+    "Imported quota sample IDs locally assigned to avoid repeated-import collisions.",
+    "Research export filters to a public need vocabulary; custom private focus omitted.",
+    "Output schema/CLI action mapping and test fixture formats aligned.",
+    "PowerShell smoke uses explicitly named array binding."
+  ],
+  "unresolved": [
+    "No compiler means Rust/cfg/FFI/Clippy defects may remain.",
+    "No native sandbox against hostile same-user software.",
+    "Workspace freshness is metadata-only, not byte-content identity.",
+    "Git executable explicitly chosen but not pinned by digest.",
+    "Live adapters/repair executor/credentialed execution remain disabled or unsupported.",
+    "Historical R0 no-DPAPI validator is inapplicable to the newly authorized DPAPI scope."
+  ]
+}

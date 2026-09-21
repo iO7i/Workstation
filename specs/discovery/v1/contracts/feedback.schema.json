@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FS-1.0-D1 feedback: R4 design contract",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "feedback_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[a-z0-9][a-z0-9._-]{0,99}$"
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[a-z0-9][a-z0-9._-]{0,99}$"
+    },
+    "resource_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[a-z0-9][a-z0-9._-]{0,99}$"
+    },
+    "need": {
+      "type": "string",
+      "enum": [
+        "parallel_work",
+        "interface_review",
+        "accessibility_review",
+        "reproducible_evaluation",
+        "decision_context",
+        "credential_location",
+        "runtime_recovery",
+        "storage_attribution"
+      ]
+    },
+    "disposition": {
+      "type": "string",
+      "enum": [
+        "saved",
+        "dismissed",
+        "snoozed",
+        "evaluated",
+        "adopted"
+      ]
+    },
+    "recorded_at": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40,
+      "format": "date-time"
+    },
+    "until": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40,
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "not_recorded",
+        "useful",
+        "not_useful",
+        "inconclusive"
+      ]
+    },
+    "evidence_ref": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[a-z0-9][a-z0-9._-]{0,99}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "catalog_revision": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "feedback_id",
+    "project_id",
+    "resource_id",
+    "need",
+    "disposition",
+    "recorded_at",
+    "until",
+    "reason",
+    "outcome",
+    "evidence_ref",
+    "catalog_revision"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "disposition": {
+            "const": "snoozed"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "until": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40,
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "enum": [
+              "useful",
+              "not_useful",
+              "inconclusive"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "disposition": {
+            "const": "evaluated"
+          },
+          "evidence_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[a-z0-9][a-z0-9._-]{0,99}$"
+          },
+          "catalog_revision": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          }
+        }
+      }
+    }
+  ]
+}

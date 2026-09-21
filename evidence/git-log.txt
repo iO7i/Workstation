@@ -1,0 +1,5 @@
+implementation commit 4627a85ffc2b5a7e338fc7e53c03307f0ccf4feb
+Workstation 0.4.0-alpha.4 native adapter compatibility
+
+Parent evidence commit b060d9768d6511dcb8579f1c04f2bfb7c77d4f6d
+Final evidence-only commit is reported in release-manifest.json after commit to avoid self-reference.

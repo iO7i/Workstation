@@ -1,0 +1,9 @@
+{
+  "version": "0.3.0-alpha.1",
+  "product_green": false,
+  "status": "implementation_first_uncertified",
+  "current_acceptance_gates_executed": 0,
+  "implementation_ledger": "IMPLEMENTATION-LEDGER.json",
+  "remaining_implementation_is_not_only_testing": true,
+  "windows_phase": "awaiting_user_green_light"
+}

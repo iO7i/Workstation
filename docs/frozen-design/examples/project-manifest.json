@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "project": {
+    "id": "project-demo",
+    "name": "Example application"
+  },
+  "repository_paths": [
+    "."
+  ],
+  "environments": [
+    {
+      "id": "environment-dev",
+      "name": "Development",
+      "criticality": "development"
+    }
+  ],
+  "resource_hints": [
+    {
+      "environment_id": "environment-dev",
+      "kind": "runbook",
+      "label": "Local setup",
+      "location": "docs/local-setup.md"
+    }
+  ],
+  "decision_files": [
+    "docs/decisions/0001-data-root.md"
+  ],
+  "suggested_capabilities": [
+    "worktrunk"
+  ]
+}

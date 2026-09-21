@@ -1,0 +1,7 @@
+{
+  "operation": "repair",
+  "kind": "codex_attachment_registry",
+  "root": "D:/Codex/Home",
+  "error_file": "D:/ExplicitlySelectedFreshLog/error.log",
+  "source_version": "REPLACE_WITH_ACTUAL_VERSION"
+}

@@ -1,0 +1,8 @@
+{
+  "operation": "continue",
+  "integration_id": "example-grok",
+  "checkpoint_id": "REPLACE_CHECKPOINT_ID",
+  "resume_external_id": null,
+  "permission_mode": "allow_once",
+  "timeout_seconds": 300
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "flag": "--assume-unchanged",
+    "status_output": "",
+    "index_output": "h tracked.txt\u0000",
+    "nonforce_remove_returncode": 0,
+    "uncommitted_data_deleted": true
+  },
+  {
+    "flag": "--skip-worktree",
+    "status_output": "",
+    "index_output": "S tracked.txt\u0000",
+    "nonforce_remove_returncode": 0,
+    "uncommitted_data_deleted": true
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "provider": "synthetic",
+    "bucket": "weekly",
+    "window_id": "cycle-0",
+    "utilization": 0.2,
+    "complete": true,
+    "evidence_ref": "synthetic-fixture",
+    "account_alias": "synthetic-account"
+  },
+  {
+    "provider": "synthetic",
+    "bucket": "weekly",
+    "window_id": "cycle-1",
+    "utilization": 0.22,
+    "complete": true,
+    "evidence_ref": "synthetic-fixture",
+    "account_alias": "synthetic-account"
+  },
+  {
+    "provider": "synthetic",
+    "bucket": "weekly",
+    "window_id": "cycle-2",
+    "utilization": 0.25,
+    "complete": true,
+    "evidence_ref": "synthetic-fixture",
+    "account_alias": "synthetic-account"
+  }
+]

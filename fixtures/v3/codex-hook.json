@@ -1,0 +1,8 @@
+{
+  "method": "thread/started",
+  "params": {
+    "thread": {
+      "id": "fixture-thread"
+    }
+  }
+}

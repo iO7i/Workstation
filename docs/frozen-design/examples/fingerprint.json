@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "id": "agents.retained-helper-candidate",
+  "version": "1.0",
+  "platform": "windows",
+  "adapter_id": "generic-process-evidence",
+  "tested_versions": [
+    "synthetic-fixture-only"
+  ],
+  "evidence_all": [
+    "process.birth-identity-observed",
+    "lineage.observed-parent-exit"
+  ],
+  "protect_if": [
+    "ownership.unknown",
+    "session.active-or-unknown",
+    "process.shared-service"
+  ],
+  "severity": "warning",
+  "diagnosis": "Possible retained helper; a dead parent is not sufficient for termination.",
+  "repair_recipe_id": null,
+  "source_ids": [
+    "S06"
+  ],
+  "fixture_ids": [
+    "PROC-02",
+    "PROC-03"
+  ],
+  "unknown_evidence_policy": "diagnostic_only"
+}

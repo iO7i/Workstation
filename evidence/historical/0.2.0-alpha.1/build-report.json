@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0-alpha.1",
+  "status": "NOT_BUILT",
+  "reason": "No rustc/cargo/MSVC/Windows host in authoring environment",
+  "compiled_artifact": null,
+  "cargo_lock": null,
+  "rust_tests_run": 0,
+  "windows_tests_run": 0,
+  "real_providers_exercised": [],
+  "real_cross_agent_handoff": false,
+  "independent_development_authorized": true,
+  "source_baseline_sha256": "6e8500514058c83c253e89df83b0adcb3a1cb3c301c033824f1f61e5af9983e3",
+  "source_candidate_not_windows_release": true
+}

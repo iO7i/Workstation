@@ -1,0 +1,53 @@
+{
+  "delivery_kind": "source_candidate",
+  "scope": "R0-A read-only baseline",
+  "source_version": "0.1.0-alpha.1",
+  "design_basis": "FS-1.0 + FS-1.0-D1",
+  "authoring_host": "Linux",
+  "rustc_path": null,
+  "cargo_path": null,
+  "cargo_dependency_resolution": "NOT_RUN_NETWORK_UNAVAILABLE",
+  "cargo_lockfile": "ABSENT_NOT_FABRICATED",
+  "native_binary": "NOT_BUILT",
+  "rust_tests": "NOT_RUN",
+  "windows_tests": "NOT_RUN",
+  "artifact_checks": {
+    "schema_version": 1,
+    "kind": "executed_source_artifact_and_reference_recipe_checks",
+    "tests_run": 20,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "elapsed_seconds": 0.415,
+    "python_sqlite_version": "3.46.1",
+    "git_version": "git version 2.47.3",
+    "rust_compilation_executed": false,
+    "rust_tests_executed": false,
+    "windows_tests_executed": false,
+    "limitations": [
+      "JSON Schema examples and SQL recipes were validated independently, not through the Rust binary.",
+      "The host Python SQLite engine is not the bundled Rust SQLite engine.",
+      "The Git command recipe was exercised on temporary Linux fixtures, not on Windows.",
+      "Static source checks do not establish Rust compilation or runtime correctness."
+    ],
+    "failure_details": []
+  },
+  "authored_rust_test_count": 46,
+  "full_r0_release_gate": "NOT_PASSED",
+  "signing": "NOT_PERFORMED",
+  "package_revision": "d1",
+  "discovery_amendment": {
+    "id": "FS-1.0-D1",
+    "scope_status": "accepted",
+    "runtime_status": "not_implemented",
+    "implementation_stage": "R4",
+    "certification_stage": "R5",
+    "schemas": 6,
+    "reference_tests": 44,
+    "product_acceptance_cases": 28,
+    "product_acceptance_executed": 0,
+    "native_runtime_change": false,
+    "preserved_baseline_artifacts": 41,
+    "specification_results": "validation/discovery-spec-checks.json"
+  }
+}

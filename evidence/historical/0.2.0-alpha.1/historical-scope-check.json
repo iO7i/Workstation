@@ -1,0 +1,18 @@
+{
+  "baseline": "unchanged R0+D1 archive",
+  "baseline_tests": {
+    "run": 20,
+    "passed": 20,
+    "failed": 0
+  },
+  "legacy_validator_against_slice2": {
+    "run": 20,
+    "passed": 19,
+    "failed": 1,
+    "failure": "test_no_future_privileged_or_secret_commands_in_cli",
+    "reason": "R0 forbids CryptUnprotectData anywhere; Slice 2 explicitly requests DPAPI vault. Historical assertion is unchanged and superseded for current scope, not silently disabled."
+  },
+  "current_suite": "scripts/verify_control.py",
+  "current_native_dpapi_tests": "authored_not_executed",
+  "counts_not_combined": true
+}

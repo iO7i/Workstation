@@ -1,0 +1,168 @@
+crates/workstation-cli/src/mcp.rs:31: #[test]fn consumes_one_frame(){let mut input=std::io::Cursor::new(b"{}\n{}\n".to_vec());assert_eq!(read_line(&mut input).unwrap().unwrap(),b"{}\n");assert!(read_line(&mut input).unwrap().is_some());}
+crates/workstation-core/src/protocol.rs:66: #[test]fn call_before_ready_blocked(){let v=Protocol::default().handle(json!({"jsonrpc":"2.0","id":1,"method":"tools/list"}),|_,_|panic!("no access")).unwrap();assert!(v.get("error").is_some());}
+crates/workstation-core/src/protocol.rs:67: #[test]fn notifications_no_response(){assert!(ready().handle(json!({"jsonrpc":"2.0","method":"notifications/cancelled"}),|_,_|panic!()).is_none());}
+crates/workstation-core/src/protocol.rs:68: #[test]fn no_mutation_tools(){let text=ready().handle(json!({"jsonrpc":"2.0","id":2,"method":"tools/list"}),|_,_|panic!()).unwrap().to_string();assert!(!text.contains("secret_resolve"));assert!(!text.contains("approve_plan"));}
+crates/workstation-core/src/protocol.rs:69: #[test]fn arbitrary_paths_rejected(){let v=ready().handle(json!({"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"health_latest","arguments":{"path":"C:/secret"}}}),|_,_|panic!()).unwrap();assert!(v.get("error").is_some());}
+crates/workstation-core/src/protocol.rs:70: #[test]fn project_scope_cannot_be_overridden(){let v=ready().handle(json!({"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"project_context","arguments":{"project_id":"other"}}}),|_,_|panic!()).unwrap();assert!(v.get("error").is_some());}
+crates/workstation-core/src/protocol.rs:71: #[test]fn unsupported_write_rejected(){let v=ready().handle(json!({"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"assign","arguments":{}}}),|_,_|panic!()).unwrap();assert!(v.get("error").is_some());}
+crates/workstation-core/src/protocol.rs:72: #[test]fn callback_errors_bounded(){let v=ready().handle(json!({"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"health_latest"}}),|_,_|Err("NO_SNAPSHOT")).unwrap();assert_eq!(v["result"]["isError"],true);}
+crates/workstation-platform/src/external.rs:26: let mut env=system_environment();let temp=home.join("scratch");
+crates/workstation-platform/src/external.rs:112:  for t in self.threads.drain(..){if t.is_finished(){let _=t.join();}}
+crates/workstation-core/src/health_rules.rs:37: #[test]fn absent_signal_not_negative_proof(){let x=evaluate(&[rule()],"codex","windows","v1",&[],10).unwrap();assert_eq!(x[0].status,"insufficient_evidence");}
+crates/workstation-core/src/health_rules.rs:38: #[test]fn contradictory_signal_blocks_match(){let s=|id:&str|Signal{id:id.into(),value:true,source:"observation".into(),observed_at:10,coverage:Coverage::Complete};let x=evaluate(&[rule()],"codex","windows","v1",&[s("growth"),s("migration")],10).unwrap();assert_eq!(x[0].status,"contradicted");}
+crates/workstation-core/src/health_rules.rs:39: #[test]fn future_signal_not_current_evidence(){let s=Signal{id:"growth".into(),value:true,source:"observation".into(),observed_at:11,coverage:Coverage::Complete};assert_eq!(evaluate(&[rule()],"codex","windows","v1",&[s],10).unwrap()[0].status,"insufficient_evidence");}
+crates/workstation-cli/src/main.rs:214:                candidates.iter().map(|r| format!("{}: {}", r.id, workstation_core::render::terminal_safe(&r.path.to_string_lossy()))).collect::<Vec<_>>().join("\n"))));
+crates/workstation-platform/src/storage.rs:25:    let p = home.join("config.json"); paths::local_existing(&p)?;
+crates/workstation-platform/src/storage.rs:40:        for d in ["reports", "backups"] { fs::create_dir(home.join(d)).map_err(|_| Error::new("HOME_CREATE_FAILED"))?; }
+crates/workstation-platform/src/storage.rs:43:        let conn = Connection::open(home.join("workstation.db")).map_err(db_err)?;
+crates/workstation-platform/src/storage.rs:47:        let mut f = OpenOptions::new().create_new(true).write(true).open(home.join("config.json"))
+crates/workstation-platform/src/storage.rs:55:        let db=home.join("workstation.db");paths::local_existing(&db)?;
+crates/workstation-platform/src/storage.rs:56:        for name in ["workstation.db-wal","workstation.db-shm"]{let p=home.join(name);if fs::symlink_metadata(&p).is_ok(){paths::local_existing(&p)?;}}
+crates/workstation-platform/src/storage.rs:69:        let db = home.join("workstation.db"); paths::local_existing(&db)?;
+crates/workstation-platform/src/storage.rs:71:            let p = home.join(n);
+crates/workstation-platform/src/storage.rs:175:        let folder = self.home.join("backups"); paths::directory(&folder)?;
+crates/workstation-platform/src/storage.rs:179:        let destination = folder.join(format!("{}.sqlite", new_id()));
+crates/workstation-platform/src/storage.rs:220:        let t = tempfile::tempdir().unwrap(); let home = t.path().join("home");
+crates/workstation-platform/src/storage.rs:221:        let s = Store::init(&home).unwrap(); assert_eq!(s.health().unwrap()["integrity"], "ok");
+crates/workstation-platform/src/storage.rs:222:        assert!(s.backup().unwrap().is_file()); drop(s); assert!(Store::open(&home).is_ok());
+crates/workstation-platform/src/storage.rs:225:        let t = tempfile::tempdir().unwrap(); fs::write(t.path().join("canary"), b"keep").unwrap();
+crates/workstation-platform/src/storage.rs:226:        assert!(Store::init(t.path()).is_err()); assert_eq!(fs::read(t.path().join("canary")).unwrap(), b"keep");
+crates/workstation-platform/src/storage.rs:229:        let t = tempfile::tempdir().unwrap(); let mut s = Store::init(&t.path().join("home")).unwrap();
+crates/workstation-platform/src/storage.rs:230:        let p = t.path().join("data"); fs::create_dir(&p).unwrap(); fs::create_dir(p.join("nested")).unwrap();
+crates/workstation-platform/src/storage.rs:231:        s.register_root(&Root { id: "data".into(), path: p.clone(), kind: RootKind::Other }).unwrap();
+crates/workstation-platform/src/storage.rs:232:        assert!(s.register_root(&Root { id: "nested".into(), path: p.join("nested"), kind: RootKind::Other }).is_err());
+crates/workstation-platform/src/storage.rs:233:        assert_eq!(s.roots().unwrap().len(), 1);
+crates/workstation-platform/src/storage.rs:236:        let t = tempfile::tempdir().unwrap(); let home = t.path().join("home"); let s = Store::init(&home).unwrap();
+crates/workstation-platform/src/storage.rs:237:        s.conn.execute_batch("PRAGMA user_version=99").unwrap(); drop(s);
+crates/workstation-core/src/diagnostics.rs:52: #[test]fn reported_match_never_observed_authority(){let r=classify(&e(),100).unwrap();assert_eq!(r.len(),1);assert!(r[0].protected);assert_eq!(r[0].source_kind,EvidenceKind::AgentReported);assert!(r[0].tested_vendor_versions.is_empty());}
+crates/workstation-core/src/diagnostics.rs:53: #[test]fn legitimate_daemon_suppresses_match(){let mut x=e();x.facts.intentionally_shared_daemon=Some(true);assert!(classify(&x,100).unwrap().is_empty());}
+crates/workstation-core/src/diagnostics.rs:54: #[test]fn unknown_live_dependency_suppresses_match(){let mut x=e();x.facts.live_session_dependency=None;assert!(classify(&x,100).unwrap().is_empty());}
+crates/workstation-core/src/diagnostics.rs:55: #[test]fn partial_coverage_does_not_promote_absence(){let mut x=e();x.coverage=Coverage::Partial;assert!(classify(&x,100).unwrap().is_empty());}
+crates/workstation-core/src/diagnostics.rs:57: #[test]fn active_bootstrap_not_abandoned(){let mut x=e();x.facts=Facts{repeated_runtime_staging:Some(9),bootstrap_running:Some(true),..Facts::default()};assert!(classify(&x,100).unwrap().is_empty());}
+crates/workstation-core/src/diagnostics.rs:58: #[test]fn remote_docker_not_repair_target(){let mut x=e();x.product="docker".into();x.facts=Facts{local_docker_endpoint:Some(false),current_start_error_matches_socket:Some(true),application_stopped:Some(true),..Facts::default()};assert!(classify(&x,100).unwrap().is_empty());}
+crates/workstation-core/src/diagnostics.rs:59: #[test]fn registry_parse_failure_alone_not_enough(){let mut x=e();x.facts=Facts{current_registry_parse_failed:Some(true),..Facts::default()};assert!(classify(&x,100).unwrap().is_empty());}
+crates/workstation-platform/src/rpc.rs:88:  let t=tempfile::tempdir().unwrap();let p=t.path().join("ordinary.txt");std::fs::write(&p,b"x").unwrap();
+crates/workstation-platform/src/rpc.rs:89:  assert!(scoped_file_path(p.to_str().unwrap(),t.path()));
+crates/workstation-platform/src/rpc.rs:92:  let t=tempfile::tempdir().unwrap();assert!(scoped_file_path(t.path().join("new.txt").to_str().unwrap(),t.path()));
+crates/workstation-platform/src/rpc.rs:95:  let a=tempfile::tempdir().unwrap();let b=tempfile::tempdir().unwrap();
+crates/workstation-platform/src/rpc.rs:96:  assert!(!scoped_file_path(b.path().join("new.txt").to_str().unwrap(),a.path()));
+crates/workstation-platform/src/rpc.rs:99:  let a=tempfile::tempdir().unwrap();let p=a.path().join("new.txt");
+crates/workstation-platform/src/rpc.rs:100:  std::os::unix::fs::symlink("/definitely-missing/secret",&p).unwrap();
+crates/workstation-platform/src/rpc.rs:101:  assert!(!scoped_file_path(p.to_str().unwrap(),a.path()));
+crates/workstation-platform/src/rpc.rs:104:  let a=tempfile::tempdir().unwrap();let p=a.path().join("ordinary.txt");std::fs::write(&p,b"x").unwrap();
+crates/workstation-platform/src/rpc.rs:109:  let a=tempfile::tempdir().unwrap();let p=a.path().join("missing.txt:stream");
+crates/workstation-platform/src/rpc.rs:110:  assert!(!scoped_file_path(p.to_str().unwrap(),a.path()));
+crates/workstation-core/src/render.rs:79:    let _ = writeln!(out, "\nNOT INSPECTED: {}", terminal_safe(&s.not_inspected.join(", ")));
+crates/workstation-platform/src/lib.rs:21:        .expect("static timestamp format");
+crates/workstation-platform/src/lib.rs:22:    time::OffsetDateTime::now_utc().format(&fmt).expect("UTC formatting")
+crates/workstation-core/src/ownership.rs:46: #[test]fn empty_snapshot_not_error(){let x=OwnershipInput{observed_at:1,process_coverage:Coverage::Partial,processes:vec![],bindings:vec![],ended_sessions:BTreeMap::new(),previous:vec![]};assert!(correlate(&x).unwrap().is_empty());}
+crates/workstation-platform/src/filesystem.rs:79:        add("codex-default", p.join(".codex"), RootKind::Codex);
+crates/workstation-platform/src/filesystem.rs:80:        add("claude-default", p.join(".claude"), RootKind::Claude);
+crates/workstation-platform/src/filesystem.rs:81:        add("codex-workspaces", p.join("Documents").join("Codex"), RootKind::Workspace);
+crates/workstation-platform/src/filesystem.rs:86:        add("codex-runtime-candidate", p.join("OpenAI").join("Codex"), RootKind::Codex);
+crates/workstation-platform/src/filesystem.rs:87:        add("docker-local-candidate", p.join("Docker"), RootKind::Docker);
+crates/workstation-platform/src/filesystem.rs:91:        add("cursor-candidate", p.join("Cursor"), RootKind::Cursor);
+crates/workstation-platform/src/filesystem.rs:92:        add("vscode-candidate", p.join("Code"), RootKind::Vscode);
+crates/workstation-platform/src/filesystem.rs:106:        let t = tempfile::tempdir().unwrap(); fs::write(t.path().join("a"), b"secret-canary").unwrap();
+crates/workstation-platform/src/filesystem.rs:109:        assert!(!serde_json::to_string(&s).unwrap().contains("secret-canary"));
+crates/workstation-platform/src/filesystem.rs:112:        let t = tempfile::tempdir().unwrap(); for i in 0..5 { fs::write(t.path().join(i.to_string()), b"x").unwrap(); }
+crates/workstation-platform/src/filesystem.rs:117:        let t = tempfile::tempdir().unwrap(); let s = scan(root(t.path()), ScanBudget { deadline_ms: 0, max_entries: 20, max_depth: 8 });
+crates/workstation-platform/src/filesystem.rs:121:        let t = tempfile::tempdir().unwrap(); let s = scan(root(&t.path().join("missing")), ScanBudget::normal());
+crates/workstation-platform/src/filesystem.rs:126:        let t = tempfile::tempdir().unwrap(); let external = tempfile::tempdir().unwrap();
+crates/workstation-platform/src/filesystem.rs:127:        fs::write(external.path().join("private"), vec![b'x'; 800]).unwrap();
+crates/workstation-platform/src/filesystem.rs:128:        std::os::unix::fs::symlink(external.path(), t.path().join("escape")).unwrap();
+crates/workstation-platform/src/acp_driver.rs:80: #[test]fn gemini_not_cmd_interactive(){assert_eq!(arguments(Adapter::GeminiAcp).unwrap(),&["--acp"]);}
+crates/workstation-platform/src/acp_driver.rs:81: #[test]fn cline_auto_approval_explicitly_off(){assert_eq!(arguments(Adapter::Cline).unwrap(),&["--acp","--auto-approve","false"]);}
+crates/workstation-core/src/usage_import.rs:69: #[test]fn quota_not_billing(){let v=json!({"quotaSnapshots":{"chat":{"entitlementRequests":-1,"usedRequests":5,"resetDate":"2026-09-30T00:00:00Z"}}});let r=copilot_quota(&v,"a",100,"fixture").unwrap();assert_eq!(r[0].limit,None);assert_eq!(r[0].meter,Meter::Subscription);}
+crates/workstation-platform/src/paths.rs:83:        if entry_exists(&p.join(".git"))? { return Err(Error::new("HOME_INSIDE_REPOSITORY")); }
+crates/workstation-platform/src/paths.rs:121:        let t = tempfile::tempdir().unwrap();
+crates/workstation-platform/src/paths.rs:122:        assert!(validate_lexical(&t.path().join("../escape")).is_err());
+crates/workstation-platform/src/paths.rs:125:        let t = tempfile::tempdir().unwrap();
+crates/workstation-platform/src/paths.rs:126:        assert!(!entry_exists(&t.path().join("missing")).unwrap());
+crates/workstation-platform/src/paths.rs:127:        assert!(entry_exists(t.path()).unwrap());
+crates/workstation-platform/src/paths.rs:131:        let t = tempfile::tempdir().unwrap(); let p = t.path().join("link");
+crates/workstation-platform/src/paths.rs:132:        std::os::unix::fs::symlink(t.path().join("missing"), &p).unwrap();
+crates/workstation-platform/src/paths.rs:133:        assert!(entry_exists(&p).unwrap());
+crates/workstation-platform/src/paths.rs:137:        let t = tempfile::tempdir().unwrap(); let p = t.path().join("missing");
+crates/workstation-platform/src/paths.rs:141:        let t = tempfile::tempdir().unwrap();
+crates/workstation-platform/src/paths.rs:142:        assert_eq!(select_home(Some(t.path().to_path_buf()), Some("missing".into())).unwrap(), t.path());
+crates/workstation-platform/src/paths.rs:145:        let t = tempfile::tempdir().unwrap();
+crates/workstation-platform/src/paths.rs:146:        assert!(overlaps(t.path(), &t.path().join("a")));
+crates/workstation-platform/src/paths.rs:147:        assert!(!overlaps(&t.path().join("a"), &t.path().join("ab")));
+crates/workstation-platform/src/paths.rs:150:        let t = tempfile::tempdir().unwrap(); assert!(prospective_home(t.path()).is_err());
+crates/workstation-platform/src/paths.rs:154:        let t = tempfile::tempdir().unwrap(); let link = t.path().join("link");
+crates/workstation-platform/src/paths.rs:155:        std::os::unix::fs::symlink(t.path(), &link).unwrap();
+crates/workstation-core/src/workspace_policy.rs:128: #[test]fn branch_overlap_is_detected(){let a=actor("a");let b=actor("b");assert!(!conflicts(&[a,b],2).unwrap().is_empty());}
+crates/workstation-core/src/workspace_policy.rs:129: #[test]fn expiry_never_removes_actor(){let a=actor("a");let b=actor("b");assert!(conflicts(&[a,b],200).unwrap()[0].ownership_uncertain);}
+crates/workstation-core/src/workspace_policy.rs:130: #[test]fn observers_not_writers(){let a=actor("a");let mut b=actor("b");b.role="observer".into();assert!(conflicts(&[a,b],2).unwrap().is_empty());}
+crates/workstation-platform/src/vault.rs:60:        let dir=store.home.join("vault");if !dir.exists(){fs::create_dir(&dir).map_err(|_|Error::new("VAULT_CREATE_FAILED"))?;crate::windows::restrict_home_acl(&dir)?;}
+crates/workstation-platform/src/vault.rs:65:        let locator=format!("local://{project}/{environment}/{id}");let name=crate::control_store::sha(locator.as_bytes());let path=dir.join(format!("{name}.dpapi"));
+crates/workstation-platform/src/vault.rs:81:        let locator=format!("local://{project}/{environment}/{id}");let name=crate::control_store::sha(locator.as_bytes());let path=home.join("vault").join(format!("{name}.dpapi"));paths::local_existing(&path)?;
+crates/workstation-platform/src/vault.rs:91:    #[test]fn dpapi_roundtrip(){let input=SecretBytes(b"roundtrip-test-only".to_vec());let encrypted=native::protect(&input.0).unwrap();assert_ne!(encrypted,input.0);let output=native::unprotect(&encrypted).unwrap();assert_eq!(output.0,input.0);}
+crates/workstation-platform/src/vault.rs:92:    #[test]fn dpapi_tamper_rejected(){let mut c=native::protect(b"test").unwrap();let n=c.len()/2;c[n]^=0x44;assert!(native::unprotect(&c).is_err());}
+crates/workstation-core/src/wire.rs:35: #[test]fn frame_roundtrip(){let v=json!({"jsonrpc":"2.0","id":1,"result":{"ok":true}});let b=encode(&v).unwrap();assert_eq!(decode(&b).unwrap(),Some((b.len(),v)));}
+crates/workstation-core/src/wire.rs:36: #[test]fn split_frame_waits(){let b=encode(&json!({"jsonrpc":"2.0","id":1})).unwrap();assert!(decode(&b[..b.len()-1]).unwrap().is_none());}
+crates/workstation-core/src/wire.rs:40: #[test]fn frame_does_not_consume_next(){let a=encode(&json!({"jsonrpc":"2.0","id":1})).unwrap();let mut b=a.clone();b.extend_from_slice(&a);assert_eq!(decode(&b).unwrap().unwrap().0,a.len());}
+crates/workstation-platform/src/copilot.rs:147: #[test]fn quota_and_dollars_not_mixed(){let q=json!({"quotaSnapshots":{"chat":{"entitlementRequests":100,"usedRequests":1,"resetDate":"2026-10-01T00:00:00Z"}}});let rows=workstation_core::usage_import::copilot_quota(&q,"account",100,"fixture").unwrap();assert_eq!(rows[0].meter,workstation_core::economics::Meter::Subscription);}
+crates/workstation-core/src/economics.rs:211:    #[test]fn sparse_is_unknown(){assert!(forecast(&[s(100,2.0)],100).unwrap().horizons.is_empty());}
+crates/workstation-core/src/economics.rs:212:    #[test]fn known_linear_rate(){let r=forecast(&[s(100,10.0),s(3700,20.0)],3700).unwrap();let b=r.horizons.last().unwrap();assert!((b.exhaustion_after_seconds.unwrap()-28800.0).abs()<1e-6);}
+crates/workstation-core/src/economics.rs:213:    #[test]fn reset_does_not_bridge(){let mut b=s(4000,2.0);b.window_id="w2".into();assert!(forecast(&[s(100,90.0),b],4000).unwrap().horizons.is_empty());}
+crates/workstation-core/src/economics.rs:214:    #[test]fn counter_correction_does_not_negative_burn(){assert!(forecast(&[s(100,90.0),s(4000,2.0)],4000).unwrap().horizons.is_empty());}
+crates/workstation-core/src/economics.rs:215:    #[test]fn stale_withholds_eta(){assert!(forecast(&[s(100,1.0),s(200,2.0)],2000).unwrap().horizons.is_empty());}
+crates/workstation-core/src/economics.rs:216:    #[test]fn no_burn_not_infinite_claim(){let r=forecast(&[s(100,1.0),s(200,1.0)],200).unwrap();assert!(r.horizons.iter().all(|h|h.exhaustion_after_seconds.is_none()));}
+crates/workstation-core/src/economics.rs:219:    #[test]fn costs_not_quota(){let mut a=s(100,1.0);a.meter=Meter::Dollars;a.unit="usd".into();assert!(forecast(&[a],100).unwrap().horizons.is_empty());}
+crates/workstation-core/src/economics.rs:220:    #[test]fn unknown_capacity_kept_unknown(){let mut a=s(100,1.0);a.limit=None;assert!(forecast(&[a],100).unwrap().remaining.is_none());}
+crates/workstation-core/src/economics.rs:221:    #[test]fn overdue_reset_requires_observation(){let mut a=s(100,1.0);a.reset_at=Some(200);assert!(forecast(&[a],300).unwrap().horizons.is_empty());}
+crates/workstation-core/src/economics.rs:222:    #[test]fn quota_overrun_zero_remaining(){assert_eq!(forecast(&[s(100,110.0)],100).unwrap().remaining,Some(0.0));}
+crates/workstation-core/src/economics.rs:224:    #[test]fn plan_fit_needs_three_cycles(){assert_eq!(plan_fit(&[]).unwrap()["status"],"unknown");}
+crates/workstation-core/src/economics.rs:227:    #[test]fn imported_json_cannot_be_provider_verified(){let x=normalize_vendor("claude-statusline-2026-09",&serde_json::json!({"rate_limits":{"five_hour":{"used_percentage":0,"resets_at":200}}}),"fixture","account",100).unwrap();assert_eq!(x[0].evidence.kind,EvidenceKind::AgentReported);assert_eq!(x[0].used,0.0);}
+crates/workstation-core/src/telemetry.rs:32: #[test]fn gemini_total_not_quota(){let x=normalize("gemini-headless-json-2026-09",&json!({"response":"SECRET_CANARY","stats":{"models":{"gemini-fixture":{"tokens":{"prompt":10,"candidates":5,"total":15}}}}}),"fixture","a",100).unwrap();assert!(x.samples.is_empty());assert!(x.metrics["subscription_quota"].is_null());assert!(!serde_json::to_string(&x).unwrap().contains("SECRET_CANARY"));}
+crates/workstation-core/src/telemetry.rs:33: #[test]fn missing_token_is_unknown_not_zero(){let x=normalize("gemini-headless-json-2026-09",&json!({"stats":{"models":{"m":{"tokens":{"total":1}}}}}),"v","a",1).unwrap();assert!(x.metrics["models"][0]["cached"].is_null());}
+crates/workstation-core/src/telemetry.rs:35: #[test]fn claude_reports_not_bills(){let x=normalize("claude-statusline-2026-09",&json!({"rate_limits":{"five_hour":{"used_percentage":50,"resets_at":999}},"cost":{"total_cost_usd":1.1}}),"v","a",100).unwrap();assert_eq!(x.samples.len(),2);assert_eq!(x.samples[1].precision,"estimated");}
+crates/workstation-platform/src/operations_store.rs:28:  let id=if keep{old.as_ref().unwrap().0.clone()}else{crate::new_id()};
+crates/workstation-platform/src/git.rs:81:        let w = parse_worktrees(b.as_bytes()).unwrap(); assert_eq!(w.len(), 1); assert!(w[0].locked);
+crates/workstation-platform/src/git.rs:86:        let w = parse_worktrees(b.as_bytes()).unwrap(); assert!(w[0].detached); assert_eq!(w[0].content_coverage, Coverage::Unsupported);
+crates/workstation-core/src/lifecycle.rs:49: #[test]fn prompt_not_copied(){let v=serde_json::json!({"hook_event_name":"SessionStart","session_id":"s","transcript_path":"PRIVATE","prompt":"PRIVATE"});let r=normalize("claude-hook",&v,"event","project",None,100,"v1").unwrap();assert!(!serde_json::to_string(&r).unwrap().contains("PRIVATE"));}
+crates/workstation-core/src/lifecycle.rs:50: #[test]fn stop_is_not_session_end(){let v=serde_json::json!({"hook_event_name":"Stop","session_id":"s"});assert_eq!(normalize("claude-hook",&v,"e","p",None,1,"v1").unwrap().event,"turn_completed");}
+crates/workstation-platform/src/runner.rs:96:    let input_result = input_writer.join().map_err(|_| Error::new("WORKER_WRITER_FAILED"))?;
+crates/workstation-platform/src/runner.rs:98:    let bytes = out_reader.join().map_err(|_| Error::new("WORKER_READER_FAILED"))?
+crates/workstation-platform/src/runner.rs:100:    let _discarded = err_reader.join().map_err(|_| Error::new("WORKER_READER_FAILED"))?;
+crates/workstation-platform/src/http_provider.rs:59: #[test]fn private_addresses_denied(){for s in ["127.0.0.1","10.0.0.1","169.254.169.254","100.64.0.1","::1","::ffff:127.0.0.1","2001:db8::1"]{assert!(!public_ip(s.parse().unwrap()));}}
+crates/workstation-platform/src/specialists.rs:8: let p=store.home.join("worktrunk-empty.toml");let bytes=b"# Workstation-owned no hooks\n";
+crates/workstation-platform/src/specialists.rs:17: for name in [".config/wt.toml",".worktrunk.toml","wt.toml"] {if p.path.join(name).exists(){return Err(Error::new("WORKTRUNK_PROJECT_CONFIG_REQUIRES_SEPARATE_REVIEW"));}}
+crates/workstation-platform/src/specialists.rs:47: #[test]fn ignores_commit_subject_and_summaries(){let v=json!({"schema":2,"collected":{"ci":false,"summary":false},"items":[{"branch":"main","head":{"sha":"a".repeat(40),"subject":"SECRET_CANARY"},"worktree":{"path":"D:/fixture"}}]});let x=project_list(&v).unwrap();assert!(!x.to_string().contains("SECRET_CANARY"));assert_eq!(x["worktrees"][0]["cleanup"],"protected");}
+crates/workstation-platform/src/journal_archive.rs:14:fn directory(home:&Path)->Result<PathBuf>{let d=home.join("archives");if !d.exists(){fs::create_dir(&d).map_err(|_|Error::new("ARCHIVE_DIRECTORY_CREATE"))?;}crate::paths::directory(&d)?;Ok(d)}
+crates/workstation-platform/src/journal_archive.rs:30:  let bytes=read_bytes(&self.home.join("archives").join(&row.1))?;if sha(&bytes)!=row.2{return Err(Error::new("ARCHIVE_CHECKSUM_MISMATCH"));}
+crates/workstation-platform/src/journal_archive.rs:66:  let archive_id=crate::new_id();let file_name=format!("{archive_id}.json");let path=dir.join(&file_name);let digest=sha(&bytes);
+crates/workstation-platform/src/journal_archive.rs:99:  let data=read_bytes(&source_home.join("archives").join(&name))?;if data.len() as u64!=size||sha(&data)!=digest{return Err(Error::new("BACKUP_ARCHIVE_SOURCE_MISMATCH"));}
+crates/workstation-platform/src/journal_archive.rs:100:  let mut out=fs::OpenOptions::new().write(true).create_new(true).open(destination.join(&name)).map_err(|_|Error::new("BACKUP_ARCHIVE_CREATE"))?;
+crates/workstation-platform/src/journal_archive.rs:114:  let bytes=read_bytes(&companion.join(&name))?;if sha(&bytes)!=digest||bytes.len() as u64!=size{return Err(Error::new("RESTORE_ARCHIVE_CORRUPT"));}
+crates/workstation-platform/src/journal_archive.rs:115:  let mut f=fs::OpenOptions::new().write(true).create_new(true).open(d.join(&name)).map_err(|_|Error::new("RESTORE_ARCHIVE_DESTINATION"))?;f.write_all(&bytes).and_then(|_|f.sync_all()).map_err(|_|Error::new("RESTORE_ARCHIVE_INCOMPLETE"))?;
+crates/workstation-platform/src/secret_lifecycle.rs:22:  let version=crate::new_id();let directory=store.home.join("vault");
+crates/workstation-platform/src/secret_lifecycle.rs:31:  let path=directory.join(&name);let mut f=std::fs::OpenOptions::new().write(true).create_new(true).open(&path).map_err(|_|Error::new("VERSION_FILE_EXISTS_OR_CREATE_FAILED"))?;
+crates/workstation-platform/src/secret_lifecycle.rs:49:  let path=store.home.join("vault").join(file);crate::paths::local_existing(&path)?;
+crates/workstation-platform/src/workspace_lifecycle.rs:41: let empty=store.home.join("git-empty");if !empty.exists(){std::fs::create_dir(&empty).map_err(|_|Error::new("GIT_EMPTY_CREATE"))?;}crate::paths::directory(&empty)?;
+crates/workstation-platform/src/workspace_lifecycle.rs:87: if p.path.join(".gitmodules").exists(){return Err(Error::new("WORKTREE_CREATE_SUBMODULE_POLICY_REQUIRED"));}
+crates/workstation-platform/src/engine.rs:53: let lock_path=store.home.join("effects.lock");if lock_path.exists(){crate::paths::local_existing(&lock_path)?;}
+crates/workstation-platform/src/control_workspace.rs:93:    match fs::symlink_metadata(path.join(".gitmodules")) {
+crates/workstation-platform/src/control_workspace.rs:113:            let file=path.join(&rel);digest.update(rel.as_bytes());
+crates/workstation-platform/src/control_workspace.rs:152:        assert!(index_visibility_blockers(b"H tracked.txt\0").unwrap().is_empty());
+crates/workstation-platform/src/control_workspace.rs:155:        assert_eq!(index_visibility_blockers(b"h tracked.txt\0").unwrap(),
+crates/workstation-platform/src/control_workspace.rs:159:        assert_eq!(index_visibility_blockers(b"S tracked.txt\0").unwrap(),
+crates/workstation-platform/src/control_workspace.rs:163:        assert_eq!(index_visibility_blockers(b"s tracked.txt\0").unwrap().len(), 2);
+crates/workstation-platform/src/control_workspace.rs:168:    #[test]fn ignored_not_clean_disposable(){let(d,u,i,_)=status_paths(b"!! .env\0?? note.txt\0").unwrap();assert!(d);assert_eq!((u,i),(1,1));}
+crates/workstation-platform/src/control_workspace.rs:169:    #[test]fn rename_has_two_paths(){let(_,_,_,p)=status_paths(b"R  new.txt\0old.txt\0").unwrap();assert_eq!(p.len(),2);}
+crates/workstation-platform/src/control_workspace.rs:172:    #[test]fn secret_content_not_read(){let(_,_,i,p)=status_paths(b"!! .env\0").unwrap();assert_eq!(i,1);assert_eq!(p[0],".env");}
+crates/workstation-platform/src/repairs.rs:43:   let expected=std::env::var_os("CODEX_HOME").map(PathBuf::from).or_else(||std::env::var_os("USERPROFILE").map(|p|PathBuf::from(p).join(".codex"))).ok_or(Error::new("CODEX_HOME_UNAVAILABLE"))?;
+crates/workstation-platform/src/repairs.rs:44:   if root!=expected{return Err(Error::new("CODEX_HOME_NOT_EFFECTIVE_ENVIRONMENT"));}Ok(root.join("attachments").join("pasted-text-attachments.json"))
+crates/workstation-platform/src/repairs.rs:47:   let local=std::env::var_os("LOCALAPPDATA").ok_or(Error::new("LOCALAPPDATA_MISSING"))?;let expected=PathBuf::from(local).join("Docker");if root!=expected{return Err(Error::new("DOCKER_RUNTIME_ROOT_NOT_DEFAULT_LOCAL_PROFILE"));}Ok(root.join("run"))
+crates/workstation-platform/src/repairs.rs:50:   let local=std::env::var_os("LOCALAPPDATA").ok_or(Error::new("LOCALAPPDATA_MISSING"))?;if root!=PathBuf::from(local){return Err(Error::new("DOCKER_SECRETS_ROOT_NOT_LOCAL_PROFILE"));}Ok(root.join("docker-secrets-engine"))
+crates/workstation-platform/src/repairs.rs:56: let mut pattern:Vec<u16>=path.join("*").as_os_str().encode_wide().collect();pattern.push(0);
+crates/workstation-platform/src/repairs.rs:127: let desktop=cli.parent().and_then(Path::parent).and_then(Path::parent).ok_or(Error::new("DESKTOP_ROOT"))?.join("Docker Desktop.exe");
+crates/workstation-platform/src/profile_health.rs:20:  Adapter::CursorAcp=>if let Some(p)=configured(i,"APPDATA"){roots.push((p.join("Cursor"),"cursor"));}else{notices.push("EDITOR_USER_DATA_NOT_DECLARED");},
+crates/workstation-platform/src/profile_health.rs:23:   if let Some(p)=configured(i,"APPDATA"){roots.push((p.join("Code"),"vscode"));}
+crates/workstation-platform/src/profile_health.rs:26:  Adapter::GeminiAcp=>if let Some(p)=configured(i,"GEMINI_CLI_HOME"){roots.push((p.join(".gemini"),"gemini"));}else{notices.push("GEMINI_HOME_NOT_DECLARED");},
+crates/workstation-platform/src/profile_health.rs:27:  Adapter::OpenCode=>if let Some(p)=configured(i,"XDG_DATA_HOME"){roots.push((p.join("opencode"),"opencode"));}else{notices.push("OPENCODE_HOME_NOT_DECLARED");},
+crates/workstation-platform/src/profile_health.rs:28:  Adapter::Windsurf=>if let Some(p)=configured(i,"APPDATA"){roots.push((p.join("Windsurf"),"windsurf"));},
+crates/workstation-platform/src/profile_health.rs:33:  signals.insert("staging".into(),staging_metadata(&local.join("OpenAI").join("Codex").join("runtimes")));
+crates/workstation-platform/src/profile_health.rs:42:  for name in subpaths{let p=root.join(name);let e=entry(&p);if name.ends_with("state.vscdb"){signals.insert("state_db_logical_bytes".into(),e.get("logical_bytes_if_file").cloned().unwrap_or(Value::Null));

@@ -1,0 +1,8 @@
+{
+  "operation": "assign",
+  "work_id": "sample-task",
+  "session_id": "example-session",
+  "role": "primary",
+  "expected_version": 0,
+  "lease_seconds": 600
+}

@@ -1,0 +1,95 @@
+{
+  "cargo_manifests_parsed": [
+    "Cargo.toml",
+    "crates/workstation-cli/Cargo.toml",
+    "crates/workstation-core/Cargo.toml",
+    "crates/workstation-platform/Cargo.toml"
+  ],
+  "include_targets": [
+    {
+      "from": "crates/workstation-cli/src/operations_cli.rs",
+      "relative_target": "../../../fingerprints/rules-v1.json",
+      "exists": true
+    },
+    {
+      "from": "crates/workstation-core/tests/control_vectors.rs",
+      "relative_target": "../../../fixtures/control/economics-vectors.json",
+      "exists": true
+    },
+    {
+      "from": "crates/workstation-core/tests/control_vectors.rs",
+      "relative_target": "../../../fixtures/control/codex-rate-limits.json",
+      "exists": true
+    },
+    {
+      "from": "crates/workstation-core/tests/control_vectors.rs",
+      "relative_target": "../../../fixtures/control/claude-statusline.json",
+      "exists": true
+    },
+    {
+      "from": "crates/workstation-core/tests/control_vectors.rs",
+      "relative_target": "../../../fixtures/control/models.json",
+      "exists": true
+    },
+    {
+      "from": "crates/workstation-core/tests/control_vectors.rs",
+      "relative_target": "../../../fixtures/control/plan-cycles.json",
+      "exists": true
+    },
+    {
+      "from": "crates/workstation-core/tests/control_vectors.rs",
+      "relative_target": "../../../catalog/resources.json",
+      "exists": true
+    },
+    {
+      "from": "crates/workstation-platform/src/capability_context.rs",
+      "relative_target": "../../../catalog/resources.json",
+      "exists": true
+    },
+    {
+      "from": "crates/workstation-platform/src/control_store.rs",
+      "relative_target": "../../../schema/002_control_plane.sql",
+      "exists": true
+    },
+    {
+      "from": "crates/workstation-platform/src/control_store.rs",
+      "relative_target": "../../../schema/current_decisions.sql",
+      "exists": true
+    },
+    {
+      "from": "crates/workstation-platform/src/control_store.rs",
+      "relative_target": "../../../catalog/resources.json",
+      "exists": true
+    },
+    {
+      "from": "crates/workstation-platform/src/control_store.rs",
+      "relative_target": "../../../catalog/resources.json",
+      "exists": true
+    },
+    {
+      "from": "crates/workstation-platform/src/health_scan.rs",
+      "relative_target": "../../../fingerprints/rules-v1.json",
+      "exists": true
+    },
+    {
+      "from": "crates/workstation-platform/src/integration_store.rs",
+      "relative_target": "../../../schema/003_integrations.sql",
+      "exists": true
+    },
+    {
+      "from": "crates/workstation-platform/src/operations_store.rs",
+      "relative_target": "../../../schema/004_lifecycle_completion.sql",
+      "exists": true
+    },
+    {
+      "from": "crates/workstation-platform/src/storage.rs",
+      "relative_target": "../../../schema/001_r0.sql",
+      "exists": true
+    }
+  ],
+  "schemas_checked": 16,
+  "whitespace_diff_exit": 0,
+  "errors": [],
+  "compiler_executed": false,
+  "scope": "TOML/JSON schema/include-presence/whitespace only; not Rust syntax/typecheck."
+}

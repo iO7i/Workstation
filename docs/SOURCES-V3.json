@@ -1,0 +1,118 @@
+{
+  "reviewed_at": "2026-09-18",
+  "scope": "Primary public documentation consulted during source authoring, not native/runtime compatibility certification",
+  "sources": [
+    {
+      "id": "openai-app-server",
+      "url": "https://developers.openai.com/codex/app-server/",
+      "used_for": "initialize; account/rateLimits/read; thread/list/start/resume; turn/start; sandbox/approval constraints",
+      "implementation": "crates/workstation-platform/src/adapters.rs",
+      "runtime_exercised": false
+    },
+    {
+      "id": "claude-cli",
+      "url": "https://code.claude.com/docs/en/cli-reference",
+      "used_for": "print JSON; session-id/resume; permission modes; bounded noninteractive interaction",
+      "implementation": "crates/workstation-platform/src/adapters.rs",
+      "runtime_exercised": false
+    },
+    {
+      "id": "claude-hooks",
+      "url": "https://code.claude.com/docs/en/hooks",
+      "used_for": "SessionStart/SessionEnd versus Stop; metadata projection; no transcript following",
+      "implementation": "crates/workstation-core/src/lifecycle.rs",
+      "runtime_exercised": false
+    },
+    {
+      "id": "cursor-acp",
+      "url": "https://cursor.com/docs/cli/acp",
+      "used_for": "agent acp; initialize/auth/session/load conditional capability",
+      "implementation": "crates/workstation-platform/src/adapters.rs",
+      "runtime_exercised": false
+    },
+    {
+      "id": "grok-stdio",
+      "url": "https://docs.x.ai/build/cli/headless-scripting",
+      "used_for": "grok --no-auto-update agent stdio; documented ACP flow",
+      "implementation": "crates/workstation-platform/src/adapters.rs",
+      "runtime_exercised": false
+    },
+    {
+      "id": "acp-v1-tool-calls",
+      "url": "https://agentclientprotocol.com/protocol/v1/tool-calls",
+      "used_for": "permission option kinds; absolute locations[].path; tool kinds",
+      "implementation": "crates/workstation-platform/src/rpc.rs",
+      "runtime_exercised": false
+    },
+    {
+      "id": "doppler-cli",
+      "url": "https://docs.doppler.com/docs/accessing-secrets",
+      "used_for": "one named secret via CLI with explicit project/config",
+      "implementation": "crates/workstation-platform/src/tasks.rs",
+      "runtime_exercised": false
+    },
+    {
+      "id": "onepassword-read",
+      "url": "https://developer.1password.com/docs/cli/reference/commands/read/",
+      "used_for": "op read op://... --no-newline; exact one reference",
+      "implementation": "crates/workstation-platform/src/tasks.rs",
+      "runtime_exercised": false
+    },
+    {
+      "id": "openai-org-costs",
+      "url": "https://developers.openai.com/api/reference/resources/organization/subresources/usage",
+      "used_for": "documented organization costs endpoint; decimal USD; page boundaries",
+      "implementation": "crates/workstation-platform/src/http_provider.rs",
+      "runtime_exercised": false
+    },
+    {
+      "id": "anthropic-admin-cost",
+      "url": "https://platform.claude.com/docs/en/manage-claude/usage-cost-api",
+      "used_for": "organization admin cost_report; decimal cents; provider exclusions, not consumer quota",
+      "implementation": "crates/workstation-platform/src/http_provider.rs",
+      "runtime_exercised": false
+    },
+    {
+      "id": "anthropic-cost-shape",
+      "url": "https://platform.claude.com/docs/fr/api/http/admin/cost_report/retrieve",
+      "used_for": "decimal cent string precision, currency and RFC3339 bucket boundaries",
+      "implementation": "crates/workstation-core/src/usage_import.rs",
+      "runtime_exercised": false
+    },
+    {
+      "id": "copilot-sdk-quota",
+      "url": "https://docs.github.com/en/copilot/how-tos/copilot-sdk/features/usage-and-billing",
+      "used_for": "quotaSnapshots entitlement/used/reset; explicit-import-only here",
+      "implementation": "crates/workstation-core/src/usage_import.rs",
+      "runtime_exercised": false
+    },
+    {
+      "id": "reqwest-api",
+      "url": "https://docs.rs/reqwest/0.13.5/reqwest/",
+      "used_for": "blocking TLS client features; explicit query; no_proxy/no_redirect and bounded reads",
+      "implementation": "Cargo.toml",
+      "runtime_exercised": false
+    },
+    {
+      "id": "win-afunix-tag",
+      "url": "https://learn.microsoft.com/ja-jp/openspecs/windows_protocols/ms-fscc/c8e77b37-3909-4fe6-a4ea-2b9d423b1ee4",
+      "used_for": "IO_REPARSE_TAG_AF_UNIX 0x80000023, restricted socket-entry handling",
+      "implementation": "crates/workstation-platform/src/repairs.rs",
+      "runtime_exercised": false
+    },
+    {
+      "id": "docker-contexts",
+      "url": "https://docs.docker.com/engine/manage-resources/contexts/",
+      "used_for": "contexts may target remote daemons; explicitly use local Linux-engine pipe",
+      "implementation": "crates/workstation-platform/src/adapters.rs",
+      "runtime_exercised": false
+    },
+    {
+      "id": "windows-job-objects",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects",
+      "used_for": "owned process lifecycle, job containment versus persistent GUI start",
+      "implementation": "crates/workstation-platform/src/external.rs",
+      "runtime_exercised": false
+    }
+  ]
+}

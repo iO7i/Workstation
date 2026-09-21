@@ -1,0 +1,8 @@
+{
+  "operation": "continue",
+  "integration_id": "example-codex",
+  "checkpoint_id": "REPLACE_CHECKPOINT_ID",
+  "resume_external_id": null,
+  "permission_mode": "read_only",
+  "timeout_seconds": 300
+}

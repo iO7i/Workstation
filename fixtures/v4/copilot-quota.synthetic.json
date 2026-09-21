@@ -1,0 +1,13 @@
+{
+  "quotaSnapshots": {
+    "premium_interactions": {
+      "remainingPercentage": 90,
+      "isUnlimitedEntitlement": false,
+      "overageAllowed": false,
+      "overage": 0,
+      "resetDate": "2026-10-01T00:00:00Z",
+      "entitlementRequests": 300,
+      "usedRequests": 30
+    }
+  }
+}

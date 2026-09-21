@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FS-1.0-D1 recommendation-packet: R4 design contract",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "source": {
+      "const": "offline_local_catalog"
+    },
+    "generated_at": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40,
+      "format": "date-time"
+    },
+    "useful_discoveries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "resource_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[a-z0-9][a-z0-9._-]{0,99}$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "existing_capability",
+              "tool",
+              "integration",
+              "skill",
+              "workflow",
+              "documentation",
+              "reference_implementation",
+              "dataset",
+              "benchmark"
+            ]
+          },
+          "canonical_url": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 600,
+            "format": "uri",
+            "pattern": "^https://[^\\s@?#]+(?:#[^\\s]*)?$"
+          },
+          "matched_need": {
+            "type": "string",
+            "enum": [
+              "parallel_work",
+              "interface_review",
+              "accessibility_review",
+              "reproducible_evaluation",
+              "decision_context",
+              "credential_location",
+              "runtime_recovery",
+              "storage_attribution"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100,
+              "pattern": "^[a-z0-9][a-z0-9._-]{0,99}$"
+            },
+            "maxItems": 20,
+            "minItems": 1
+          },
+          "why_now": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "potential_benefit": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 600
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 300
+            },
+            "maxItems": 12,
+            "minItems": 1
+          },
+          "availability": {
+            "type": "string",
+            "enum": [
+              "available",
+              "absent",
+              "unknown"
+            ]
+          },
+          "review_freshness": {
+            "type": "string",
+            "enum": [
+              "current",
+              "stale"
+            ]
+          },
+          "reviewed_revision": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "compatibility_status": {
+            "type": "string",
+            "enum": [
+              "documented",
+              "needs_review"
+            ]
+          },
+          "benefit_status": {
+            "type": "string",
+            "enum": [
+              "potential",
+              "observed_useful_here",
+              "evaluated_not_useful_here",
+              "inconclusive_here"
+            ]
+          },
+          "next_step": {
+            "type": "string",
+            "enum": [
+              "use_existing_reference",
+              "read_and_evaluate",
+              "review_applicability"
+            ]
+          },
+          "adoption_mode": {
+            "type": "string",
+            "enum": [
+              "reference_only",
+              "certified_adapter"
+            ]
+          },
+          "authorized_actions": {
+            "type": "array",
+            "maxItems": 0
+          },
+          "license": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "documented",
+                  "unknown",
+                  "mixed"
+                ]
+              },
+              "scope": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              },
+              "source_url": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 600,
+                    "format": "uri",
+                    "pattern": "^https://[^\\s@?#]+(?:#[^\\s]*)?$"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "status",
+              "scope",
+              "source_url"
+            ]
+          }
+        },
+        "required": [
+          "resource_id",
+          "title",
+          "kind",
+          "canonical_url",
+          "matched_need",
+          "evidence_refs",
+          "why_now",
+          "potential_benefit",
+          "limitations",
+          "availability",
+          "review_freshness",
+          "reviewed_revision",
+          "compatibility_status",
+          "benefit_status",
+          "next_step",
+          "adoption_mode",
+          "authorized_actions",
+          "license"
+        ]
+      },
+      "maxItems": 3
+    },
+    "catalog_status": {
+      "type": "string",
+      "enum": [
+        "reviewed_local",
+        "empty"
+      ]
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 300
+      },
+      "maxItems": 6
+    }
+  },
+  "required": [
+    "schema_version",
+    "source",
+    "generated_at",
+    "useful_discoveries",
+    "catalog_status",
+    "limitations"
+  ]
+}

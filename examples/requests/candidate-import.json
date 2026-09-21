@@ -1,0 +1,17 @@
+{
+  "operation": "candidate_import",
+  "candidates": [
+    {
+      "title": "Reserved example reference",
+      "kind": "documentation",
+      "source": "https://example.org/reference",
+      "needs": [
+        "parallel_work"
+      ],
+      "purpose": "Synthetic import fixture, not an actual recommendation",
+      "limitations": [
+        "Unreviewed example only"
+      ]
+    }
+  ]
+}

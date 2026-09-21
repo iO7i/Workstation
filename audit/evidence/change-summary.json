@@ -1,0 +1,16 @@
+{
+  "baseline_git_commit": "c596bbd2b5472380d737dcfd838a8352b2155c33",
+  "version": "0.4.0-alpha.2",
+  "source_config_fixture_files_changed": 27,
+  "lines_added": 463,
+  "lines_removed": 105,
+  "source_defects_or_hardening_gaps_patched": 23,
+  "severity": {
+    "high": 8,
+    "medium": 14,
+    "low": 1
+  },
+  "open_gates": 9,
+  "schema_files_changed": [],
+  "no_readiness_percentage_claim": true
+}

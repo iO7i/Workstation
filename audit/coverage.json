@@ -1,0 +1,131 @@
+{
+  "kind": "source_review_and_selected_non_native_verification",
+  "domains": [
+    {
+      "domain": "Compile/static risk",
+      "review_scope": "Manifests, cfg paths, imports, module/include references, unwrap/unsafe surfaces",
+      "evidence_and_limits": "Name-resolution fix A11; structural checks only. Compiler/linter still unavailable."
+    },
+    {
+      "domain": "Dependencies",
+      "review_scope": "All direct pins/features and their usage; targeted advisory verification",
+      "evidence_and_limits": "A21 patched direct pin; no complete resolved graph, lockfile, audit or SBOM. O05 remains open."
+    },
+    {
+      "domain": "Three-crate boundaries",
+      "review_scope": "Core/platform/CLI effects direction and MCP interface",
+      "evidence_and_limits": "Core does not gain process/network/DB effects; no new crate or service."
+    },
+    {
+      "domain": "SQLite/data model",
+      "review_scope": "All four schema migrations, keys, immutability/CAS and temporal query",
+      "evidence_and_limits": "A09; actual Python SQLite tests including schema4, one-shot runs, keys, leases and secret CAS."
+    },
+    {
+      "domain": "Migrations/restore",
+      "review_scope": "Version1/2/3/4 upgrade/backup/restore paths and archive dependencies",
+      "evidence_and_limits": "A08/A09; SQL rollback/backup exercised; Rust restore/crash tests deferred."
+    },
+    {
+      "domain": "Workspaces",
+      "review_scope": "Capture, hidden flags, local-only/ignored work, operation markers and cleanup eligibility",
+      "evidence_and_limits": "A01; real destructive Git edge case reproduced twice, fixed guard recipe protects it."
+    },
+    {
+      "domain": "Cleanup/repairs",
+      "review_scope": "Typed plans, exact targets, expiry, quarantine, undo, preservation",
+      "evidence_and_limits": "A05/A06; no live external repair; time-of-check/use races O03 remain."
+    },
+    {
+      "domain": "Docker",
+      "review_scope": "Local named-pipe target, data-root exclusion, stopped-state quarantine and bounded startup",
+      "evidence_and_limits": "No broadened recipe or WSL shutdown; source review only, actual sockets deferred."
+    },
+    {
+      "domain": "Codex recovery",
+      "review_scope": "Declared home, error freshness, invalid JSON, UUID payload preservation",
+      "evidence_and_limits": "Existing recipe remains narrow; valid-but-stale registry recovery is not added."
+    },
+    {
+      "domain": "Process ownership",
+      "review_scope": "Birth identity, indexed bindings, prior samples and coverage",
+      "evidence_and_limits": "A18/A19/A20; no process termination authority. Windows graph unrun."
+    },
+    {
+      "domain": "Chronicle",
+      "review_scope": "Current/effective/known time, immutable decisions and lifecycle provenance",
+      "evidence_and_limits": "Temporal SQL exercised; A20 closes timestamp arithmetic/lease errors; no autoacceptance."
+    },
+    {
+      "domain": "Atlas/environments",
+      "review_scope": "Exact environment references, manifests, freshness and provider claims",
+      "evidence_and_limits": "Cross-environment SQL constraints exercised; HTTP success remains not ownership proof."
+    },
+    {
+      "domain": "Vault/secrets",
+      "review_scope": "DPAPI sizes, binding, rotation/CAS, provider/task output handling",
+      "evidence_and_limits": "A10/A11/A22; serialization boundary demonstrated; DPAPI and provider operations unrun."
+    },
+    {
+      "domain": "Capabilities",
+      "review_scope": "Matching budget, scoped feedback, catalog review/import and optional context",
+      "evidence_and_limits": "A14/A15/A16; no autoactivation or runtime Python dependency."
+    },
+    {
+      "domain": "Economics",
+      "review_scope": "Meter/account identity, reset boundaries, finite arithmetic, model/scenario ratios",
+      "evidence_and_limits": "A12/A13; 28 inherited Python oracle tests plus new reference boundaries; real quotas absent."
+    },
+    {
+      "domain": "Continuity",
+      "review_scope": "Checkpoint invariants, leases, Codex/ACP/Copilot event handling",
+      "evidence_and_limits": "A02/A03/A04/A20; no real agents/resume/handoff performed."
+    },
+    {
+      "domain": "MCP",
+      "review_scope": "13 fixed read-only tools, parameter scope, line/result bounds and error output",
+      "evidence_and_limits": "Static contract retained; native stdio fuzz/runtime tests not run."
+    },
+    {
+      "domain": "CLI",
+      "review_scope": "Explicit home, command wiring, JSON sizes, static report behavior",
+      "evidence_and_limits": "A14/A23; no native --help/exit-code smoke evidence."
+    },
+    {
+      "domain": "Error handling",
+      "review_scope": "Absent vs denied, uncertainty after effects, bounded sanitized failures",
+      "evidence_and_limits": "A05/A08/A14/A22. No raw credential output added."
+    },
+    {
+      "domain": "Panics/unsafe",
+      "review_scope": "Occurrence inventory, checked time/size arithmetic, OS boundary handles",
+      "evidence_and_limits": "A11/A13/A20; no Miri, Rust compiler, sanitizer or native crash evidence."
+    },
+    {
+      "domain": "Concurrency",
+      "review_scope": "Primary uniqueness, CAS heads, immutable exact approval and archive selection",
+      "evidence_and_limits": "A06; actual SQL primary/secret/one-shot behavior exercised; OS effect race still open."
+    },
+    {
+      "domain": "Own storage",
+      "review_scope": "Observation budgets, archive aggregate memory, backup dependency validation",
+      "evidence_and_limits": "A07/A15/A17; no physical shrink or full peak-memory claim."
+    },
+    {
+      "domain": "Privacy",
+      "review_scope": "Allowlist share output, metadata projections, candidate content and secret boundaries",
+      "evidence_and_limits": "A03 minimizes queued event content; no transcripts/accounts/cookies read."
+    },
+    {
+      "domain": "Docs vs code",
+      "review_scope": "Current docs vs baseline, misleading report and new input/policy changes",
+      "evidence_and_limits": "A23; current audit overrides old milestone/test claims; baseline retained as history."
+    },
+    {
+      "domain": "Packaging",
+      "review_scope": "Original ZIP/manifest, changed-files diff, new member hashes and exclusions",
+      "evidence_and_limits": "Rebuilt source-only ZIP; no executable/lockfile, vault blobs, test homes or .git directory."
+    }
+  ],
+  "not_a_certification_checklist": true
+}

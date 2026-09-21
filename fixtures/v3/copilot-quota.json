@@ -1,0 +1,10 @@
+{
+  "quotaSnapshots": {
+    "chat": {
+      "usedRequests": 25,
+      "entitlementRequests": 100,
+      "remainingPercentage": 75,
+      "resetDate": "2026-10-01T00:00:00Z"
+    }
+  }
+}

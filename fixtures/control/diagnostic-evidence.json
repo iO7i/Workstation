@@ -1,0 +1,20 @@
+{
+  "product": "docker",
+  "reported_version": "synthetic-only",
+  "platform": "windows",
+  "observed_at": 100,
+  "coverage": "complete",
+  "facts": {
+    "matched_processes": null,
+    "parent_exit_observed": null,
+    "live_session_dependency": null,
+    "intentionally_shared_daemon": null,
+    "repeated_runtime_staging": null,
+    "bootstrap_running": null,
+    "local_docker_endpoint": true,
+    "current_start_error_matches_socket": true,
+    "current_registry_parse_failed": null,
+    "registry_layout_verified": null,
+    "application_stopped": true
+  }
+}

@@ -1,0 +1,250 @@
+{
+  "catalog_entries": 27,
+  "review_status": "purpose_review_only",
+  "certified_integrations": 0,
+  "sources": [
+    {
+      "resource_id": "worktrunk",
+      "url": "https://github.com/max-sixty/worktrunk",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "entire",
+      "url": "https://github.com/entireio/cli",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "codbash",
+      "url": "https://github.com/vakovalskii/codbash",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "context7",
+      "url": "https://github.com/upstash/context7",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "agent-skills-spec",
+      "url": "https://agentskills.io/specification",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "vercel-skills",
+      "url": "https://github.com/vercel-labs/agent-skills",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "wcag-quickref",
+      "url": "https://www.w3.org/WAI/WCAG22/quickref/",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "playwright",
+      "url": "https://playwright.dev/docs/intro",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "doppler-cli",
+      "url": "https://docs.doppler.com/docs/cli",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "onepassword-references",
+      "url": "https://developer.1password.com/docs/cli/secret-references",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "infisical",
+      "url": "https://github.com/Infisical/infisical",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "bitwarden-secrets",
+      "url": "https://bitwarden.com/help/secrets-manager-overview/",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "windows-dpapi",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/dpapi/nf-dpapi-cryptprotectdata",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "git-worktree",
+      "url": "https://git-scm.com/docs/git-worktree",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "git-status",
+      "url": "https://git-scm.com/docs/git-status",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "sqlite-backup",
+      "url": "https://sqlite.org/backup.html",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "mcp-inspector",
+      "url": "https://modelcontextprotocol.io/docs/tools/inspector",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "mcp-registry",
+      "url": "https://modelcontextprotocol.io/registry/about",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "gitleaks",
+      "url": "https://github.com/gitleaks/gitleaks",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "codex-app-server",
+      "url": "https://developers.openai.com/codex/app-server",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "claude-statusline",
+      "url": "https://code.claude.com/docs/en/statusline",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "pytest",
+      "url": "https://docs.pytest.org/en/stable/",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "nextest",
+      "url": "https://nexte.st/",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "criterion",
+      "url": "https://github.com/bheisler/criterion.rs",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "adr-tools",
+      "url": "https://github.com/npryce/adr-tools",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "swe-bench",
+      "url": "https://www.swebench.com/",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    },
+    {
+      "resource_id": "openai-evals",
+      "url": "https://github.com/openai/evals",
+      "reviewed_date": "2026-09-18",
+      "review_scope": "primary source existence and documented purpose only",
+      "runtime_tested": false,
+      "license_audited": false,
+      "source_content_redistributed": false
+    }
+  ]
+}

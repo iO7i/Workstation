@@ -1,0 +1,29 @@
+{
+  "schema_version": "workstation.r0.v1",
+  "product": "workstation-r0",
+  "observed_at": "2026-09-18T12:00:00.000Z",
+  "coverage": "partial",
+  "roots": [
+    {
+      "kind": "codex",
+      "coverage": "partial",
+      "logical_entry_bytes": 536870912,
+      "skipped_count": 2
+    }
+  ],
+  "selected_process_count": 1,
+  "process_coverage": "partial",
+  "worktree_count": 1,
+  "finding_codes": [
+    "storage.incomplete_coverage"
+  ],
+  "omitted": [
+    "paths",
+    "project_and_root_names",
+    "installation_and_process_ids",
+    "command_lines",
+    "raw_errors",
+    "file_contents",
+    "branch_names"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "direct_pins": {
+    "reqwest": {
+      "version": "=0.13.5",
+      "default-features": false,
+      "features": [
+        "blocking",
+        "rustls",
+        "json",
+        "query"
+      ]
+    },
+    "serde": {
+      "version": "=1.0.229",
+      "features": [
+        "derive"
+      ]
+    },
+    "serde_json": {
+      "version": "=1.0.151",
+      "features": [
+        "arbitrary_precision"
+      ]
+    },
+    "clap": {
+      "version": "=4.6.6",
+      "features": [
+        "derive",
+        "env"
+      ]
+    },
+    "rusqlite": {
+      "version": "=0.40.2",
+      "features": [
+        "bundled",
+        "backup"
+      ]
+    },
+    "uuid": {
+      "version": "=1.24.0",
+      "features": [
+        "v4"
+      ]
+    },
+    "time": {
+      "version": "=0.3.47",
+      "features": [
+        "formatting",
+        "parsing"
+      ]
+    },
+    "tempfile": "=3.27.0",
+    "sha2": "=0.10.9",
+    "windows-sys": {
+      "version": "=0.61.2",
+      "features": [
+        "Win32_Foundation",
+        "Win32_Security",
+        "Win32_Security_Cryptography",
+        "Win32_System_Console",
+        "Win32_Security_Authorization",
+        "Win32_Storage_FileSystem",
+        "Win32_System_Diagnostics_ToolHelp",
+        "Win32_System_Threading",
+        "Win32_System_JobObjects",
+        "Win32_System_ProcessStatus",
+        "Win32_System_SystemInformation"
+      ]
+    }
+  },
+  "direct_time_fix": {
+    "before": "=0.3.44",
+    "after": "=0.3.47",
+    "advisory": "RUSTSEC-2026-0009",
+    "reachable_exploit_demonstrated": false
+  },
+  "transitive_rustls": {
+    "advisory": "RUSTSEC-2026-0285",
+    "affected": ">=0.23.13,<0.23.45",
+    "resolved_version": null,
+    "status": "unknown_until_lockfile_resolution"
+  },
+  "lockfile_generated": false,
+  "cargo_audit_executed": false,
+  "license_review": "Manifest/source context only; resolved transitive notices/licenses and SBOM not available",
+  "release_requirement": "After native-phase approval, resolve the real graph, audit all dependencies and review the lock before tests/package. No automatic install or network action added to this source."
+}

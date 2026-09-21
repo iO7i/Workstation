@@ -1,0 +1,32 @@
+{
+    "version":  "0.4.0-alpha.4",
+    "status":  "PARTIAL_NATIVE_CERTIFICATION",
+    "green":  false,
+    "passed_groups":  [
+                          "native_build",
+                          "rust_tests",
+                          "windows_smokes",
+                          "schema4_backup_restore",
+                          "path_and_reparse",
+                          "worktree_hidden_state",
+                          "active_agent_noninterference",
+                          "read_only_mcp",
+                          "dependency_audit",
+                          "codex_readonly_adapter",
+                          "docker_local_adapter",
+                          "ownership_reservation_and_release"
+                      ],
+    "partial_groups":  [
+                           "codex_continuation",
+                           "grok_continuation",
+                           "claude_continuation"
+                       ],
+    "blocked_groups":  [
+                           "grok_authentication",
+                           "claude_authentication",
+                           "cursor_acp_agent_cli",
+                           "destructive_repair_apply",
+                           "clean_machine_install",
+                           "code_signing"
+                       ]
+}

@@ -1,0 +1,8 @@
+{
+  "operation": "billing",
+  "provider": "open_ai_costs",
+  "credential_resource_id": "example-admin-key",
+  "account_alias": "example-account",
+  "start_time": 1789516800,
+  "end_time": 1789603200
+}

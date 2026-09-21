@@ -1,0 +1,54 @@
+{
+  "version": "0.3.0-alpha.1",
+  "baseline": {
+    "file": "workstation-0.2.0-alpha.1-source.zip",
+    "sha256": "a9a6d24bce37aaf68e8bcafcbace0d2d26e037b92a819a00b0195c68efe2da06"
+  },
+  "status": "IMPLEMENTED_SOURCE_UNVERIFIED",
+  "completion_percentage": null,
+  "percentage_note": "Original 93% was an unmeasured forecast, not a defensible completion metric. See feature ledger for actual code and gaps.",
+  "seven_modules": [
+    "Health",
+    "Workspaces",
+    "Chronicle",
+    "Resource Atlas",
+    "Capabilities",
+    "Economics",
+    "Continuity"
+  ],
+  "three_crates": [
+    "crates/workstation-core",
+    "crates/workstation-platform",
+    "crates/workstation-cli"
+  ],
+  "database_schema": 3,
+  "authored_rust_test_annotations": 202,
+  "tests_executed_this_pass": 0,
+  "windows_device_tool_calls": 0,
+  "authenticated_provider_calls": 0,
+  "live_agent_executions": 0,
+  "existing_windows_files_or_tasks_changed": false,
+  "next_phase_requires_user_green_light": true,
+  "executable_included": false,
+  "real_cargo_lock_included": false,
+  "source_can_contain_unresolved_compile_or_behavior_errors": true,
+  "public_documentation_researched": true,
+  "checks_performed": "Source inspection and archive/member-integrity checks only; no runtime certification.",
+  "source_state": {
+    "implementation_commit": "0df5cb68d8f179d109e732bf468e556bde1d877e",
+    "baseline_import_commit": "f1189b0e1753364793933fb9b62059868b8bf5c6",
+    "git_history_packaged_as": "evidence/git-log.txt",
+    "package_metadata_generated_after_commit": true,
+    "version": "0.3.0-alpha.1",
+    "rust_source_files": 45,
+    "authored_rust_test_annotations": 202,
+    "code_and_schema_line_changes": {
+      "added": 1649,
+      "removed": 20,
+      "not_a_completion_metric": true
+    },
+    "application_executed": false,
+    "windows_accessed": false
+  },
+  "archive_integrity_scope": "ZIP CRC and member hashes only; not software validation"
+}

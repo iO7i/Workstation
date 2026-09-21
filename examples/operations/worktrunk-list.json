@@ -1,0 +1,5 @@
+{
+  "operation": "query",
+  "integration_id": "fixture-worktrunk",
+  "query": "worktrunk_list"
+}

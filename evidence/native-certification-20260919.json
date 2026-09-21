@@ -1,0 +1,183 @@
+{
+    "schema_version":  2,
+    "candidate_version":  "0.4.0-alpha.4",
+    "disposition":  "PARTIAL_NATIVE_CERTIFICATION",
+    "audit_date":  "2026-09-19",
+    "baseline_archive":  {
+                             "version":  "0.4.0-alpha.2",
+                             "sha256":  "5e7d05bf66a88ec7db539c8b0d15d1a2cc13835de8cfd222c95fde1fdf4bbb94",
+                             "exact_match":  true
+                         },
+    "source":  {
+                   "implementation_commit":  "4627a85ffc2b5a7e338fc7e53c03307f0ccf4feb",
+                   "evidence_commit":  null
+               },
+    "platform":  {
+                     "os":  "Windows 11 Pro",
+                     "build":  "26200",
+                     "arch":  "x64",
+                     "powershell":  "5.1.26100.9444"
+                 },
+    "toolchain":  {
+                      "rust":  "1.97.1",
+                      "target":  "x86_64-pc-windows-msvc",
+                      "visual_studio":  "17.14.37628.2",
+                      "msvc":  "19.44.35228",
+                      "vc_tools":  "14.44.35207",
+                      "windows_sdk":  "10.0.26100.0"
+                  },
+    "build":  {
+                  "rustfmt":  "passed",
+                  "check":  "passed",
+                  "clippy_deny_warnings":  "passed",
+                  "rust_tests_passed":  321,
+                  "rust_tests_failed":  0,
+                  "release_build":  "passed",
+                  "windows_smoke_suites_passed":  2,
+                  "windows_smoke_suites_failed":  0,
+                  "binary_sha256":  "e1ff0d0dc33e7c28658a04b8a9d2c06d284fbc524856a8790d27bc3684d7c509",
+                  "binary_bytes":  12380160,
+                  "lockfile_sha256":  "3c1f63681bff3634b4e4a0d000e8bbb26ea305d418466d341960ee532359a41b",
+                  "code_signing":  "UNSIGNED"
+              },
+    "database":  {
+                     "schema":  4,
+                     "sqlite":  "3.53.2",
+                     "backup_restore":  "passed",
+                     "foreign_key_integrity":  "passed",
+                     "restore_pending_cleared":  true,
+                     "repeated_upgrade_noop":  true
+                 },
+    "security":  {
+                     "locked_dependencies":  209,
+                     "rustsec_advisories":  1251,
+                     "rustsec_database_commit":  "2b34578f89884736e0fcbd42f7ba8d6b10b4a0ce",
+                     "vulnerabilities":  0,
+                     "dpapi_roundtrip":  "passed",
+                     "dpapi_tamper":  "passed",
+                     "job_object_descendant_cleanup":  "passed",
+                     "active_agent_noninterference":  {
+                                                          "before":  34,
+                                                          "after":  34,
+                                                          "lost":  0,
+                                                          "added":  0
+                                                      }
+                 },
+    "paths":  {
+                  "junction_rejected":  true,
+                  "unicode_path_passed":  true,
+                  "missing_drive_no_fallback":  true,
+                  "hidden_assume_unchanged_blocks_cleanup":  true
+              },
+    "repair_safety":  {
+                          "codex_prepare_refused_while_live":  true,
+                          "codex_registry_unchanged":  true,
+                          "docker_prepare_refused_while_live":  true,
+                          "docker_quarantine_not_created":  true,
+                          "destructive_repair_apply":  "not_run_active_applications_preserved"
+                      },
+    "mcp":  {
+                "protocol":  "2025-11-25",
+                "tools":  13,
+                "read_only":  true,
+                "unknown_write_tool_rejected":  true,
+                "arbitrary_path_argument_rejected":  true,
+                "p95_ms":  0.752
+            },
+    "performance":  {
+                        "cached_context_p95_ms":  59.82,
+                        "doctor_p95_ms":  189.92,
+                        "mcp_project_context_p95_ms":  0.752
+                    },
+    "adapters":  {
+                     "codex":  {
+                                   "version":  "codex-cli 0.155.0-alpha.2.6",
+                                   "exact_pin":  true,
+                                   "version_probe":  "passed",
+                                   "app_server_initialize":  "passed",
+                                   "quota_read":  "passed",
+                                   "scoped_session_query":  "passed",
+                                   "continuation":  "partial_real_edit_then_external_timeout",
+                                   "real_external_session":  "01a0b740-3560-7143-a39d-ed9bfd3e519c"
+                               },
+                     "claude":  {
+                                    "version":  "2.1.223 (Claude Code)",
+                                    "exact_pin":  true,
+                                    "version_probe":  "passed",
+                                    "continuation":  "blocked_not_logged_in",
+                                    "real_external_session":  "fe5a0c81-5b92-4b72-9bd7-70921b1d9fce"
+                                },
+                     "grok":  {
+                                  "version":  "grok 0.2.112 (9bbd559437) [stable]",
+                                  "exact_pin":  true,
+                                  "acp_initialize":  "passed",
+                                  "advertised_auth_method_ids":  [
+                                                                     "grok.com"
+                                                                 ],
+                                  "continuation":  "blocked_not_signed_in",
+                                  "headless_auth_probe":  "not_signed_in"
+                              },
+                     "docker":  {
+                                    "cli_version":  "29.8.0",
+                                    "server_version":  "29.8.0",
+                                    "exact_pin":  true,
+                                    "local_endpoint":  "npipe:////./pipe/dockerDesktopLinuxEngine",
+                                    "local_engine_probe":  "passed"
+                                },
+                     "cursor":  {
+                                    "editor_version":  "2.3.34",
+                                    "cursor_agent_cli":  "absent",
+                                    "acp":  "blocked_missing_agent_cli"
+                                }
+                 },
+    "continuity":  {
+                       "disposable_repo":  true,
+                       "single_primary_reservation":  "passed",
+                       "codex_primary_visible":  "passed",
+                       "codex_partial_edit":  "multiply_only",
+                       "test_file_unchanged":  true,
+                       "codex_timeout_handling":  "indeterminate_and_retained_until_explicit_release",
+                       "target_reservations_visible":  "passed",
+                       "failed_assignment_history_retained":  true,
+                       "explicit_release_after_failure":  "passed",
+                       "successful_cross_agent_completion":  false,
+                       "blockers":  [
+                                        "Grok CLI not signed in",
+                                        "Claude Code not logged in",
+                                        "Cursor Agent CLI absent"
+                                    ]
+                   },
+    "native_fixes":  [
+                         {
+                             "id":  "NATIVE-001",
+                             "severity":  "high",
+                             "title":  "Executable pin limit rejected current Codex/Claude binaries",
+                             "fix":  "bounded pin ceiling 256 MiB -\u003e 1 GiB plus accept/reject tests",
+                             "status":  "fixed_and_full_gate_retested"
+                         },
+                         {
+                             "id":  "NATIVE-002",
+                             "severity":  "high",
+                             "title":  "Codex thread sandbox enum used turn-level camelCase spelling",
+                             "fix":  "thread sandbox uses kebab-case, turn sandboxPolicy uses camelCase; installed schema + regression tests",
+                             "status":  "fixed_and_full_gate_retested"
+                         }
+                     ],
+    "hardening":  [
+                      {
+                          "id":  "CERT-H001",
+                          "title":  "ACP protocol health now exposes bounded advertised authentication method IDs only",
+                          "status":  "implemented_and_tested"
+                      }
+                  ],
+    "open_gates":  [
+                       "Successful authenticated cross-agent completion",
+                       "Codex continuation clean completion without timeout",
+                       "Cursor ACP requires Cursor Agent CLI",
+                       "Interactive vault-put requires a true Windows console",
+                       "Actual destructive repair application",
+                       "Clean-machine installation",
+                       "Code signing",
+                       "Uncertified provider adapters"
+                   ]
+}

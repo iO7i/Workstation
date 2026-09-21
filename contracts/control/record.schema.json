@@ -1,0 +1,1299 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Typed Workstation metadata requests; schema validity never grants authority",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "environment_add"
+        },
+        "project_id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 8192
+        }
+      },
+      "required": [
+        "operation",
+        "project_id",
+        "name"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "event_record"
+        },
+        "project_id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "event_kind": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "details": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 8192
+          },
+          "maxItems": 256
+        }
+      },
+      "required": [
+        "operation",
+        "project_id",
+        "event_kind",
+        "title",
+        "details",
+        "evidence_refs"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "focus_set"
+        },
+        "project_id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "focus": {
+          "$ref": "#/$defs/Focus"
+        }
+      },
+      "required": [
+        "operation",
+        "project_id",
+        "focus"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "economics_preference"
+        },
+        "project_id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "profile": {
+          "$ref": "#/$defs/economics::PreferenceProfile"
+        }
+      },
+      "required": [
+        "operation",
+        "project_id",
+        "profile"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "work_create"
+        },
+        "id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "project_id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "objective": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "workspace_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 8192
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "operation",
+        "id",
+        "project_id",
+        "objective",
+        "priority"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "work_update"
+        },
+        "id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "expected_version": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "state": {
+          "$ref": "#/$defs/WorkState"
+        },
+        "completed": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 8192
+          },
+          "maxItems": 256
+        },
+        "remaining": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 8192
+          },
+          "maxItems": 256
+        },
+        "blockers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 8192
+          },
+          "maxItems": 256
+        }
+      },
+      "required": [
+        "operation",
+        "id",
+        "expected_version",
+        "state",
+        "completed",
+        "remaining",
+        "blockers"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "session_report"
+        },
+        "id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "project_id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "agent": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "external_id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "adapter_version": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "role": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "workspace_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 8192
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "ended": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "operation",
+        "id",
+        "project_id",
+        "agent",
+        "external_id",
+        "adapter_version",
+        "role",
+        "ended"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "assign"
+        },
+        "work_id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "session_id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "role": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "expected_version": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "lease_seconds": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "operation",
+        "work_id",
+        "session_id",
+        "role",
+        "expected_version",
+        "lease_seconds"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "release_assignment"
+        },
+        "assignment_id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "work_id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "expected_version": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "operation",
+        "assignment_id",
+        "work_id",
+        "expected_version"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "decision_propose"
+        },
+        "id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "project_id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "topic": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "scope": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "statement": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "rationale": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 8192
+          },
+          "maxItems": 256
+        },
+        "consequences": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 8192
+          },
+          "maxItems": 256
+        },
+        "predecessor": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 8192
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "effective_at": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 253402300799
+        }
+      },
+      "required": [
+        "operation",
+        "id",
+        "project_id",
+        "topic",
+        "scope",
+        "statement",
+        "rationale",
+        "alternatives",
+        "consequences",
+        "effective_at"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "decision_accept"
+        },
+        "decision_id": {
+          "type": "string",
+          "maxLength": 8192
+        }
+      },
+      "required": [
+        "operation",
+        "decision_id"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "decision_dispose"
+        },
+        "decision_id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "disposition": {
+          "type": "string",
+          "maxLength": 8192
+        }
+      },
+      "required": [
+        "operation",
+        "decision_id",
+        "disposition"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "resource_add"
+        },
+        "id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "project_id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "environment": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "kind": {
+          "$ref": "#/$defs/ResourceKind"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "locator": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "provider": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 8192
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "fresh_for_secs": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "operation",
+        "id",
+        "project_id",
+        "environment",
+        "kind",
+        "name",
+        "locator",
+        "fresh_for_secs"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "resource_confirm"
+        },
+        "resource_id": {
+          "type": "string",
+          "maxLength": 8192
+        }
+      },
+      "required": [
+        "operation",
+        "resource_id"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "quota_import"
+        },
+        "project_id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "samples": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/QuotaSample"
+          },
+          "maxItems": 256
+        }
+      },
+      "required": [
+        "operation",
+        "project_id",
+        "samples"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "feedback"
+        },
+        "feedback": {
+          "$ref": "#/$defs/Feedback"
+        }
+      },
+      "required": [
+        "operation",
+        "feedback"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "candidate_import"
+        },
+        "candidates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CandidateInput"
+          },
+          "maxItems": 256
+        }
+      },
+      "required": [
+        "operation",
+        "candidates"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "candidate_review"
+        },
+        "id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "expected_digest": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "reviewed": {
+          "$ref": "#/$defs/Capability"
+        }
+      },
+      "required": [
+        "operation",
+        "id",
+        "expected_digest",
+        "reviewed"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "plan_propose"
+        },
+        "plan": {
+          "$ref": "#/$defs/RepairPlan"
+        }
+      },
+      "required": [
+        "operation",
+        "plan"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "plan_approve"
+        },
+        "plan_id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "digest": {
+          "type": "string",
+          "maxLength": 8192
+        }
+      },
+      "required": [
+        "operation",
+        "plan_id",
+        "digest"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "const": "handoff_result"
+        },
+        "handoff_id": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "state": {
+          "type": "string",
+          "maxLength": 8192
+        }
+      },
+      "required": [
+        "operation",
+        "handoff_id",
+        "state"
+      ]
+    }
+  ],
+  "$defs": {
+    "Evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "observed",
+            "agent_reported",
+            "inferred",
+            "user_approved",
+            "provider_verified",
+            "unknown"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "at": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 253402300799
+        },
+        "coverage": {
+          "type": "string",
+          "enum": [
+            "complete",
+            "partial",
+            "denied",
+            "unsupported",
+            "timed_out"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "source",
+        "at",
+        "coverage"
+      ]
+    },
+    "Focus": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "needs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "maxItems": 32
+        },
+        "free_only": {
+          "type": "boolean"
+        },
+        "local_only": {
+          "type": "boolean"
+        },
+        "platform": {
+          "type": "string",
+          "enum": [
+            "windows",
+            "linux",
+            "macos"
+          ]
+        },
+        "existing": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "maxItems": 32
+        },
+        "blocked": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "maxItems": 32
+        },
+        "evidence_ref": {
+          "type": "string",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "needs",
+        "free_only",
+        "local_only",
+        "platform",
+        "existing",
+        "blocked",
+        "evidence_ref"
+      ]
+    },
+    "WorkState": {
+      "type": "string",
+      "enum": [
+        "planned",
+        "active",
+        "paused",
+        "blocked",
+        "review",
+        "done",
+        "cancelled"
+      ]
+    },
+    "ResourceKind": {
+      "type": "string",
+      "enum": [
+        "service",
+        "endpoint",
+        "deployment",
+        "database",
+        "runbook",
+        "secret_reference",
+        "reference"
+      ]
+    },
+    "economics::PreferenceProfile": {
+      "type": "string",
+      "enum": [
+        "maximum_intelligence",
+        "balanced",
+        "stretch",
+        "economy"
+      ]
+    },
+    "QuotaSample": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "provider": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "account_alias": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "bucket": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "meter": {
+          "type": "string",
+          "enum": [
+            "context",
+            "subscription",
+            "dollars"
+          ]
+        },
+        "unit": {
+          "type": "string",
+          "enum": [
+            "percent",
+            "credits",
+            "tokens",
+            "usd"
+          ]
+        },
+        "window_id": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "used": {
+          "type": "number",
+          "minimum": 0
+        },
+        "limit": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reset_at": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 253402300799
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "observed_at": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 253402300799
+        },
+        "precision": {
+          "type": "string",
+          "enum": [
+            "exact",
+            "estimated",
+            "provider_reported"
+          ]
+        },
+        "evidence": {
+          "$ref": "#/$defs/Evidence"
+        }
+      },
+      "required": [
+        "id",
+        "provider",
+        "account_alias",
+        "bucket",
+        "meter",
+        "unit",
+        "window_id",
+        "used",
+        "observed_at",
+        "precision",
+        "evidence"
+      ]
+    },
+    "Feedback": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "project_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "resource_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "need": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "disposition": {
+          "type": "string",
+          "enum": [
+            "saved",
+            "dismissed",
+            "snoozed",
+            "evaluated",
+            "adopted"
+          ]
+        },
+        "until": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 253402300799
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "outcome": {
+          "type": "string",
+          "enum": [
+            "not_recorded",
+            "useful",
+            "not_useful",
+            "inconclusive"
+          ]
+        },
+        "evidence_ref": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 256
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "revision": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 128
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recorded_at": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 253402300799
+        }
+      },
+      "required": [
+        "id",
+        "project_id",
+        "resource_id",
+        "need",
+        "disposition",
+        "outcome",
+        "recorded_at"
+      ]
+    },
+    "Capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "existing_capability",
+            "tool",
+            "integration",
+            "mcp_server",
+            "skill",
+            "workflow",
+            "documentation",
+            "reference_implementation",
+            "dataset",
+            "benchmark"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "maxLength": 2048
+        },
+        "needs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "maxItems": 32
+        },
+        "platforms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "windows",
+              "linux",
+              "macos",
+              "platform_neutral"
+            ]
+          },
+          "maxItems": 4
+        },
+        "cost": {
+          "type": "string",
+          "enum": [
+            "free",
+            "paid",
+            "unknown",
+            "not_applicable"
+          ]
+        },
+        "privacy": {
+          "type": "string",
+          "enum": [
+            "local",
+            "external",
+            "unknown"
+          ]
+        },
+        "equivalence": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 128
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "purpose": {
+          "type": "string",
+          "maxLength": 600
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "maxItems": 32
+        },
+        "review_status": {
+          "type": "string",
+          "enum": [
+            "reviewed",
+            "unverified",
+            "rejected"
+          ]
+        },
+        "review_revision": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "reviewed_at": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 253402300799
+        },
+        "fresh_for_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 31536000
+        },
+        "license_scope": {
+          "type": "string",
+          "maxLength": 400
+        },
+        "adoption_mode": {
+          "const": "reference_only"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "kind",
+        "source",
+        "needs",
+        "platforms",
+        "cost",
+        "privacy",
+        "purpose",
+        "limitations",
+        "review_status",
+        "review_revision",
+        "reviewed_at",
+        "fresh_for_seconds",
+        "license_scope",
+        "adoption_mode"
+      ]
+    },
+    "CandidateInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "existing_capability",
+            "tool",
+            "integration",
+            "mcp_server",
+            "skill",
+            "workflow",
+            "documentation",
+            "reference_implementation",
+            "dataset",
+            "benchmark"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "maxLength": 2048
+        },
+        "needs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "maxItems": 32
+        },
+        "purpose": {
+          "type": "string",
+          "maxLength": 600
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "maxItems": 32
+        }
+      },
+      "required": [
+        "title",
+        "kind",
+        "source",
+        "needs",
+        "purpose",
+        "limitations"
+      ]
+    },
+    "RepairPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "project_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "policy_version": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "docker_runtime_quarantine",
+            "codex_attachment_registry_reset"
+          ]
+        },
+        "created_at": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 253402300799
+        },
+        "expires_at": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 253402300799
+        },
+        "target": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "object_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64,
+              "pattern": "^[A-Za-z0-9_.-]+$"
+            },
+            "identity_digest": {
+              "type": "string",
+              "maxLength": 256
+            },
+            "coverage": {
+              "type": "string",
+              "enum": [
+                "complete",
+                "partial",
+                "denied",
+                "unsupported",
+                "timed_out"
+              ]
+            },
+            "active_dependencies": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "object_id",
+            "identity_digest",
+            "coverage",
+            "active_dependencies"
+          ]
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "maxItems": 32
+        },
+        "backup_required": {
+          "const": true
+        }
+      },
+      "required": [
+        "id",
+        "project_id",
+        "policy_version",
+        "action",
+        "created_at",
+        "expires_at",
+        "target",
+        "evidence_refs",
+        "backup_required"
+      ]
+    }
+  }
+}

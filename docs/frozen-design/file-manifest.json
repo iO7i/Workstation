@@ -1,0 +1,142 @@
+{
+  "design": "FS-1.0 + FS-1.0-D1",
+  "created_on": "2026-09-18",
+  "artifact_kind": "amended_design_not_product",
+  "files": [
+    {
+      "path": "ACCEPTANCE-MATRIX.md",
+      "bytes": 11337,
+      "sha256": "476e39eb5b924efff103c21526efa971f5f668575bf6c349d292400396bfda32"
+    },
+    {
+      "path": "FS-1.0-D1-ACCEPTANCE.md",
+      "bytes": 4859,
+      "sha256": "753766817b64d95b847b45257e5960824fc1c097dcbbf321b134fcee4dc68318"
+    },
+    {
+      "path": "FS-1.0-D1.md",
+      "bytes": 12925,
+      "sha256": "a70ec9406c3bc1cbc802b4a5fe7f9d93784201e624ca7d750be3de0c2ddf45af"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2760,
+      "sha256": "9219625bf542febda017b092899c5b536a1af8e8b3b52be4365b2516d1289ef0"
+    },
+    {
+      "path": "SYSTEM-DESIGN.md",
+      "bytes": 77399,
+      "sha256": "5b5db3f29919f665bac9d29a3cbbf3fac5a0c6149106580d7feece91a72ac20c"
+    },
+    {
+      "path": "VALIDATION.md",
+      "bytes": 2263,
+      "sha256": "ff01535d987e7247b4ad9c2308eaf30deb586038417c629f6d41457369c74289"
+    },
+    {
+      "path": "contracts/README.md",
+      "bytes": 1428,
+      "sha256": "88a76f8869b3d4d7a5c0d6783877e5d9dc1ad65b8de1b7239300c90b945ceb15"
+    },
+    {
+      "path": "contracts/action-plan.schema.json",
+      "bytes": 4357,
+      "sha256": "7ba7053f2e82d863a66a3a5d9a28671a24fc0cf42d3913a00636cabf6e9efbc2"
+    },
+    {
+      "path": "contracts/decision.schema.json",
+      "bytes": 2762,
+      "sha256": "45d36e1fce3f489c9328f76a3f1312f50eb8d43890bdf98775b50c6482ae1731"
+    },
+    {
+      "path": "contracts/finding.schema.json",
+      "bytes": 2660,
+      "sha256": "f4842ec87ecedc41c064806f84fb1db4dacc5b1ab0a5ec9d26935dde46e2276e"
+    },
+    {
+      "path": "contracts/fingerprint.schema.json",
+      "bytes": 2233,
+      "sha256": "010a88d24bd26983864539f0b2dbd289166de676fb8685cd96ca07c2261ea06a"
+    },
+    {
+      "path": "contracts/observation.schema.json",
+      "bytes": 3619,
+      "sha256": "541fccd399f4146744ca3cda916a78904112bd31cf03612a50b3d77f0942210f"
+    },
+    {
+      "path": "contracts/project-manifest.schema.json",
+      "bytes": 3025,
+      "sha256": "d81a51f643f844f063a6b22ecca7648df8ad60b4a14302371a520576bbdc8f65"
+    },
+    {
+      "path": "contracts/resource.schema.json",
+      "bytes": 2955,
+      "sha256": "6b2c2e0cfc270301080ce2338794564b294bfb81647a43f5b288ee18ac450b02"
+    },
+    {
+      "path": "contracts/secret-reference.schema.json",
+      "bytes": 1695,
+      "sha256": "37c82f8fd612172c133f99705b4cff5d249d4670087d14d212eb9e1b2e0eeb6e"
+    },
+    {
+      "path": "examples/action-plan.json",
+      "bytes": 1206,
+      "sha256": "2c48a45455cf8a8bb5b911cf88fdaaf855e498d0fd8dde0014cecee38e0de938"
+    },
+    {
+      "path": "examples/decision.json",
+      "bytes": 731,
+      "sha256": "684eb8c6e493de7ff0039bae5904c874f6db925d1ab5d22d871feb2276e036be"
+    },
+    {
+      "path": "examples/finding.json",
+      "bytes": 601,
+      "sha256": "a7da0123e7b5907e6a1088098ed76e01378fa6160f21755206c1c6ce0e934508"
+    },
+    {
+      "path": "examples/fingerprint.json",
+      "bytes": 709,
+      "sha256": "ded4783bccfb059d2f9c191b2560113cf8b558e7af13087c1d5b805de7eeb365"
+    },
+    {
+      "path": "examples/observation.json",
+      "bytes": 750,
+      "sha256": "7e19147cedf0bb44a30a908caa3884ad1abcf644c5d11690b8a5bd4caaeaaa12"
+    },
+    {
+      "path": "examples/project-manifest.json",
+      "bytes": 573,
+      "sha256": "00c9918afecf11af1da567b39cef4f7f92bb203aabfff7b1490c9d61cce6dfc3"
+    },
+    {
+      "path": "examples/resource.json",
+      "bytes": 417,
+      "sha256": "6e1c5f5ce146ff425ca18067895dcbdae2365985ef3ab041de8f8356616ef9a4"
+    },
+    {
+      "path": "examples/secret-reference.json",
+      "bytes": 318,
+      "sha256": "e8cd4a960632503cb4053c57aae11be290475a1f6d4c1675a204611173881bf9"
+    },
+    {
+      "path": "schema/001_initial.sql",
+      "bytes": 13626,
+      "sha256": "0d12b7066c1346a3c5ac1fbbb32a80eac4eb61afb05be2adb7f1a0a42e03cd8d"
+    },
+    {
+      "path": "sources.json",
+      "bytes": 8573,
+      "sha256": "bb88143aea2801eb43fa044a9678128ac94658a1ab17959ab6fe5eacd7633263"
+    },
+    {
+      "path": "validate_design.py",
+      "bytes": 9534,
+      "sha256": "67df6bf718ab387ec27bdea3e624248821129fee45e6a517e33180d2f27350c3"
+    },
+    {
+      "path": "validation-results.json",
+      "bytes": 2246,
+      "sha256": "46252a7766aeb33799d23034ea6d2506c086f1cec2a9888eb689db2222303cc7"
+    }
+  ]
+}

@@ -1,0 +1,658 @@
+{
+  "version": "0.3.0-alpha.1",
+  "basis": "0.2.0-alpha.1 delivered source, seven-module execution brief and latest implementation-first instruction",
+  "percentage": null,
+  "percentage_reason": "Previous 93% was a subjective planning estimate, not a measured or weighted feature denominator. Families below are not equally sized and cannot be averaged into product completion.",
+  "status_meanings": {
+    "implemented_source": "Concrete source path exists and is wired into a callable path; source may still contain defects. No runtime certification implied.",
+    "partial_source": "A substantive subset exists; missing implementation is named.",
+    "reference_only": "Metadata/import/reference support; the external implementation is not provided.",
+    "not_implemented": "Still missing code or integration, not merely unexecuted tests.",
+    "verification_deferred": "An actual behavior demonstration requires the next user-authorized phase."
+  },
+  "modules": [
+    {
+      "name": "Health",
+      "counts": {
+        "implemented_source": 5,
+        "not_implemented": 1,
+        "partial_source": 1,
+        "reference_only": 0,
+        "verification_deferred": 0
+      }
+    },
+    {
+      "name": "Workspaces",
+      "counts": {
+        "implemented_source": 3,
+        "not_implemented": 1,
+        "partial_source": 1,
+        "reference_only": 1,
+        "verification_deferred": 0
+      }
+    },
+    {
+      "name": "Chronicle",
+      "counts": {
+        "implemented_source": 4,
+        "not_implemented": 0,
+        "partial_source": 1,
+        "reference_only": 0,
+        "verification_deferred": 0
+      }
+    },
+    {
+      "name": "Resource Atlas",
+      "counts": {
+        "implemented_source": 6,
+        "not_implemented": 1,
+        "partial_source": 0,
+        "reference_only": 1,
+        "verification_deferred": 0
+      }
+    },
+    {
+      "name": "Capabilities",
+      "counts": {
+        "implemented_source": 5,
+        "not_implemented": 0,
+        "partial_source": 0,
+        "reference_only": 1,
+        "verification_deferred": 0
+      }
+    },
+    {
+      "name": "Economics",
+      "counts": {
+        "implemented_source": 6,
+        "not_implemented": 1,
+        "partial_source": 0,
+        "reference_only": 1,
+        "verification_deferred": 0
+      }
+    },
+    {
+      "name": "Continuity",
+      "counts": {
+        "implemented_source": 6,
+        "not_implemented": 1,
+        "partial_source": 0,
+        "reference_only": 0,
+        "verification_deferred": 1
+      }
+    }
+  ],
+  "shared_foundation": [
+    {
+      "name": "Shared foundation",
+      "counts": {
+        "implemented_source": 4,
+        "not_implemented": 0,
+        "partial_source": 1,
+        "reference_only": 0,
+        "verification_deferred": 0
+      }
+    }
+  ],
+  "features": [
+    {
+      "module": "Health",
+      "feature": "Bounded host/storage/process observations",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/filesystem.rs",
+        "crates/workstation-platform/src/windows.rs",
+        "crates/workstation-cli/src/main.rs"
+      ],
+      "remaining_or_limit": "Native behavior is unverified; not every vendor/state path is inferred.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Health",
+      "feature": "Registered executable and declared home inspection",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/profile_health.rs",
+        "crates/workstation-cli/src/advanced_cli.rs"
+      ],
+      "remaining_or_limit": "Exact hash/selected metadata only; does not authenticate session ownership.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Health",
+      "feature": "Birth-qualified ownership correlation",
+      "implementation_status": "partial_source",
+      "source_paths": [
+        "crates/workstation-core/src/ownership.rs",
+        "crates/workstation-cli/src/advanced_cli.rs"
+      ],
+      "remaining_or_limit": "Correlates explicit evidence. Full automatic multi-vendor observation/handle attribution is not implemented. All candidates protected.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Health",
+      "feature": "Typed symptoms and contradictory evidence",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/diagnostics.rs"
+      ],
+      "remaining_or_limit": "Reported symptoms are not a certified exhaustive vendor failure corpus.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Health",
+      "feature": "Scoped Codex corrupt-JSON registry quarantine",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/repairs.rs",
+        "crates/workstation-platform/src/engine.rs"
+      ],
+      "remaining_or_limit": "Stopped-state invalid JSON only. Valid-but-stale/oversized registries and visual snippet verification remain outside this recipe.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Health",
+      "feature": "Scoped Docker runtime quarantine, undo and separate startup",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/repairs.rs",
+        "crates/workstation-platform/src/engine.rs"
+      ],
+      "remaining_or_limit": "No data reset, global WSL shutdown or retry loop. Source was not executed on real Windows sockets.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Health",
+      "feature": "Universal certified first-class vendor diagnostics",
+      "implementation_status": "not_implemented",
+      "source_paths": [],
+      "remaining_or_limit": "Per-version full coverage, automatic private-state parsers and certified repair fingerprints still need independent implementation/evidence.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Workspaces",
+      "feature": "Git content-state and operation observations",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/control_workspace.rs",
+        "crates/workstation-core/src/continuity.rs"
+      ],
+      "remaining_or_limit": "Dirty/untracked/ignored/local-only metadata stays protected, no cleanup permission inferred.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Workspaces",
+      "feature": "Work Item/session/workspace associations",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/control_store.rs",
+        "crates/workstation-platform/src/integration_store.rs"
+      ],
+      "remaining_or_limit": "Lifecycle reports are advisory/agent-reported, not an OS-exclusive lock.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Workspaces",
+      "feature": "Pre-continuation identity/HEAD/state revalidation",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/engine.rs",
+        "crates/workstation-core/src/continuity.rs"
+      ],
+      "remaining_or_limit": "Metadata-only digest can miss same-size same-mtime edits; receiver must inspect content/tests.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Workspaces",
+      "feature": "Work Item/workspace collision warnings",
+      "implementation_status": "partial_source",
+      "source_paths": [
+        "crates/workstation-core/src/continuity.rs",
+        "crates/workstation-platform/src/integration_store.rs"
+      ],
+      "remaining_or_limit": "Work Item/workspace primary conflicts implemented; comprehensive branch/file-level conflict analysis is not.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Workspaces",
+      "feature": "Worktrunk workflow integration",
+      "implementation_status": "reference_only",
+      "source_paths": [
+        "crates/workstation-core/src/integrations.rs"
+      ],
+      "remaining_or_limit": "Explicit profile/version discovery exists; create/merge/remove backend not implemented.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Workspaces",
+      "feature": "Safe general worktree cleanup",
+      "implementation_status": "not_implemented",
+      "source_paths": [],
+      "remaining_or_limit": "No worktree removal command. Protection is intentional until reliable dependency/unique-work coverage and reviewed operations exist.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Chronicle",
+      "feature": "Immutable decision proposal/acceptance/supersession",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/control.rs",
+        "crates/workstation-platform/src/control_store.rs",
+        "schema/002_control_plane.sql"
+      ],
+      "remaining_or_limit": "Unverified runtime wrapper; decisions are not auto-accepted from agents.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Chronicle",
+      "feature": "Effective-time and known-time queries",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "schema/current_decisions.sql",
+        "crates/workstation-platform/src/control_store.rs"
+      ],
+      "remaining_or_limit": "Historical SQL tests belong to the prior version; current source not rerun.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Chronicle",
+      "feature": "History/compare/export interfaces",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/project_tools.rs",
+        "crates/workstation-cli/src/advanced_cli.rs"
+      ],
+      "remaining_or_limit": "Bounded records; no automatic natural-language fact extraction.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Chronicle",
+      "feature": "Metadata lifecycle and execution audit ingestion",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/lifecycle.rs",
+        "crates/workstation-platform/src/integration_store.rs"
+      ],
+      "remaining_or_limit": "Claude/Codex/ACP metadata projection only; hooks require explicit user configuration.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Chronicle",
+      "feature": "General automatic event-source integration",
+      "implementation_status": "partial_source",
+      "source_paths": [
+        "crates/workstation-core/src/lifecycle.rs"
+      ],
+      "remaining_or_limit": "No full all-vendor hook deployment, deployment observer or arbitrary transcript ingestion.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Resource Atlas",
+      "feature": "Explicit environment lookup and confirmation/freshness",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/control_store.rs",
+        "crates/workstation-platform/src/tasks.rs"
+      ],
+      "remaining_or_limit": "No production-to-dev fallback. A user confirmation is not provider-identity verification.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Resource Atlas",
+      "feature": "Descriptive transactional manifest import",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/project_tools.rs",
+        "crates/workstation-cli/src/advanced_cli.rs"
+      ],
+      "remaining_or_limit": "Does not silently replace chosen resources, confirm production authority or approve decisions.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Resource Atlas",
+      "feature": "Scope-bound local DPAPI vault",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/vault.rs"
+      ],
+      "remaining_or_limit": "Native unverified; same-user programs are not isolated; metadata backup is not portable credential backup.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Resource Atlas",
+      "feature": "Doppler and 1Password exact secret resolution",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/tasks.rs",
+        "crates/workstation-core/src/integrations.rs"
+      ],
+      "remaining_or_limit": "Pinned CLI, one key, scoped profile; bootstrap local DPAPI only; no provider administration.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Resource Atlas",
+      "feature": "Approved executable/script task with secret environment",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/integrations.rs",
+        "crates/workstation-platform/src/tasks.rs",
+        "crates/workstation-platform/src/external.rs"
+      ],
+      "remaining_or_limit": "Outputs discarded. Authorized program/imports can read/exfiltrate values; no full dependency sandbox.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Resource Atlas",
+      "feature": "Public HTTPS endpoint response observation",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/http_provider.rs",
+        "crates/workstation-platform/src/engine.rs"
+      ],
+      "remaining_or_limit": "Public:443 HEAD only; no redirect. Not proof of provider ownership or production correctness.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Resource Atlas",
+      "feature": "Infisical and Bitwarden execution adapters",
+      "implementation_status": "reference_only",
+      "source_paths": [
+        "crates/workstation-core/src/control.rs"
+      ],
+      "remaining_or_limit": "Provider references exist; live secret resolution not implemented.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Resource Atlas",
+      "feature": "General rotation/revocation/portable vault recovery",
+      "implementation_status": "not_implemented",
+      "source_paths": [],
+      "remaining_or_limit": "Local values use immutable resource identity. Full lifecycle/admin/portable recovery workflows not implemented.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Capabilities",
+      "feature": "Project focus and constraints-based local matching",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/discovery.rs",
+        "crates/workstation-platform/src/control_store.rs"
+      ],
+      "remaining_or_limit": "No native runtime test; unknown applicability stays unknown.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Capabilities",
+      "feature": "Three-card cap and existing-resource preference",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/discovery.rs"
+      ],
+      "remaining_or_limit": "No popularity-only ranking or mandatory extra dependencies.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Capabilities",
+      "feature": "Scoped save/dismiss/snooze/evaluate/adopt",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/control_store.rs",
+        "crates/workstation-core/src/discovery.rs"
+      ],
+      "remaining_or_limit": "A disposition is not installation authority or a Chronicle acceptance.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Capabilities",
+      "feature": "Research brief and candidate import/review",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/discovery.rs",
+        "crates/workstation-platform/src/control_store.rs"
+      ],
+      "remaining_or_limit": "Unverified leads stay inert. No automatic search, watched skill writes or arbitrary installer.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Capabilities",
+      "feature": "27-entry reference catalog",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "catalog/resources.json",
+        "catalog/REVIEW-REGISTER.json"
+      ],
+      "remaining_or_limit": "Inherited existence/purpose review only; no new license/effectiveness/Windows certification claim.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Capabilities",
+      "feature": "Automatic specialist activation/integration certification",
+      "implementation_status": "reference_only",
+      "source_paths": [
+        "crates/workstation-core/src/integrations.rs"
+      ],
+      "remaining_or_limit": "No generic installation engine. Unsupported specialists remain descriptions.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Economics",
+      "feature": "Separated meters and reset-aware forecasts",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/economics.rs"
+      ],
+      "remaining_or_limit": "Estimates remain estimates; providers with no usable quota remain unknown.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Economics",
+      "feature": "Plan fit, model Pareto/filters and explicit counterfactuals",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/economics.rs"
+      ],
+      "remaining_or_limit": "No automatic model/subscription switch or unlicensed benchmark redistribution.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Economics",
+      "feature": "Codex documented App Server quota read/persistence",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/adapters.rs",
+        "crates/workstation-platform/src/project_tools.rs"
+      ],
+      "remaining_or_limit": "No real account exercised; imported responses and local received observations retain different provenance.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Economics",
+      "feature": "OpenAI/Anthropic organization cost HTTP readers",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/http_provider.rs",
+        "crates/workstation-core/src/usage_import.rs"
+      ],
+      "remaining_or_limit": "Bounded admin API; org scope not project attribution; provider exclusions/delay not invoice truth.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Economics",
+      "feature": "Exact USD/cents normalization and overlap checks",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/usage_import.rs"
+      ],
+      "remaining_or_limit": "Nano-USD precision bound, rejects unsupported finer precision; authored tests unrun.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Economics",
+      "feature": "Copilot SDK and strict CSV fallback normalization",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/usage_import.rs",
+        "crates/workstation-cli/src/advanced_cli.rs"
+      ],
+      "remaining_or_limit": "Explicit import only; not a live SDK client.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Economics",
+      "feature": "Other live consumer quota/provider SDK collectors",
+      "implementation_status": "not_implemented",
+      "source_paths": [],
+      "remaining_or_limit": "No real live Cursor/Copilot/Gemini/Grok/Claude consumer quota collector; unsupported APIs not invented.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Economics",
+      "feature": "Licensed benchmark network feed",
+      "implementation_status": "reference_only",
+      "source_paths": [
+        "crates/workstation-core/src/economics.rs"
+      ],
+      "remaining_or_limit": "Pluggable imported data/metadata remains; no licensed live Artificial Analysis feed integrated.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Continuity",
+      "feature": "Work Items, checkpoints and bounded fallback packet",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/continuity.rs",
+        "crates/workstation-platform/src/control_store.rs"
+      ],
+      "remaining_or_limit": "No transcript transfer or semantic completion certification.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Continuity",
+      "feature": "Primary/reviewer lease/reservation/binding lifecycle",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/integration_store.rs",
+        "crates/workstation-platform/src/engine.rs"
+      ],
+      "remaining_or_limit": "Clean interaction release; failures retain uncertainty. Does not replace existing live primary.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Continuity",
+      "feature": "Codex new/resumed App Server turn",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/adapters.rs",
+        "crates/workstation-platform/src/rpc.rs"
+      ],
+      "remaining_or_limit": "Exact installed version/provider state untested; thread metadata is not automatically active session.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Continuity",
+      "feature": "Claude print/JSON new and resumed interaction",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/adapters.rs"
+      ],
+      "remaining_or_limit": "Permission mode and bounded turns; no native run or proven continuation outcome.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Continuity",
+      "feature": "Cursor/Grok ACP new/load/prompt",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/adapters.rs",
+        "crates/workstation-platform/src/rpc.rs"
+      ],
+      "remaining_or_limit": "Load/auth/plan mode conditional; permission callback metadata does not create OS sandbox.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Continuity",
+      "feature": "Metadata hooks and explicit lease renewal",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/lifecycle.rs",
+        "crates/workstation-cli/src/advanced_cli.rs",
+        "crates/workstation-platform/src/integration_store.rs"
+      ],
+      "remaining_or_limit": "Preconfigured reports remain agent-reported; not writable MCP.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Continuity",
+      "feature": "Other vendor native continuation",
+      "implementation_status": "not_implemented",
+      "source_paths": [],
+      "remaining_or_limit": "Gemini/Copilot/OpenCode/Cline/Windsurf native resume/continuation missing; packet fallback only.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Continuity",
+      "feature": "Real multi-agent task acceptance",
+      "implementation_status": "verification_deferred",
+      "source_paths": [],
+      "remaining_or_limit": "Requires installed authenticated agents and user green light; never substituted with synthetic success.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Shared foundation",
+      "feature": "Backed-up schema1/2\u21923 migrations and new-home restore",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/integration_store.rs",
+        "crates/workstation-platform/src/storage.rs",
+        "schema/003_integrations.sql"
+      ],
+      "remaining_or_limit": "Source not executed; intermediate successful v2 migration can remain after v3 failure, explicitly reported.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Shared foundation",
+      "feature": "Immutable exact plans and one-shot execution journal",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/effects.rs",
+        "crates/workstation-platform/src/engine.rs",
+        "crates/workstation-platform/src/integration_store.rs"
+      ],
+      "remaining_or_limit": "Same-user consent accounting, not human-authentication enforcement. Failed/interrupted effects not replayed.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Shared foundation",
+      "feature": "Owned bounded process/RPC interaction",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/external.rs",
+        "crates/workstation-platform/src/rpc.rs"
+      ],
+      "remaining_or_limit": "Windows Job Objects and pipe teardown untested. Docker GUI is an intentional persistent separate launch.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Shared foundation",
+      "feature": "Cached project context, static reports and 13 read-only MCP tools",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/control_store.rs",
+        "crates/workstation-cli/src/mcp.rs"
+      ],
+      "remaining_or_limit": "Optional context sections may be omitted to fit bound; MCP cannot apply plans or resolve secrets.",
+      "verification_status": "not_executed_this_delivery"
+    },
+    {
+      "module": "Shared foundation",
+      "feature": "Long-term archive/retention UX for immutable effect journals",
+      "implementation_status": "partial_source",
+      "source_paths": [
+        "schema/003_integrations.sql",
+        "crates/workstation-platform/src/storage.rs"
+      ],
+      "remaining_or_limit": "Hard own-DB budget exists; no full archive/rotation interface for permanent new effect records.",
+      "verification_status": "not_executed_this_delivery"
+    }
+  ]
+}

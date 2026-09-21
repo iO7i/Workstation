@@ -1,0 +1,31 @@
+{
+    "version":  "0.4.0-alpha.4",
+    "prior_certified_candidate":  "0.4.0-alpha.3",
+    "implementation_commit":  "4627a85ffc2b5a7e338fc7e53c03307f0ccf4feb",
+    "native_defects_fixed":  [
+                                 {
+                                     "id":  "NATIVE-001",
+                                     "summary":  "Executable pin limit raised from bounded 256 MiB to bounded 1 GiB for current Codex/Claude binaries",
+                                     "introduced_in":  "alpha.3 lineage",
+                                     "retested":  "full alpha.4 gate"
+                                 },
+                                 {
+                                     "id":  "NATIVE-002",
+                                     "summary":  "Codex thread sandbox uses installed protocol kebab-case while turn policy remains camelCase",
+                                     "retested":  "full alpha.4 gate"
+                                 }
+                             ],
+    "certification_hardening":  [
+                                    "ACP protocol health exposes bounded advertised auth method IDs",
+                                    "Static adapter declarations no longer claim certification status"
+                                ],
+    "real_continuity":  {
+                            "codex":  "real session + intended partial edit + timeout",
+                            "grok":  "blocked because local CLI is not signed in",
+                            "claude":  "blocked because local CLI is not logged in",
+                            "cross_agent_completion":  false,
+                            "ownership_reservation_and_explicit_release":  "passed"
+                        },
+    "test_count":  321,
+    "rustsec_vulnerabilities":  0
+}

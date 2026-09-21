@@ -1,0 +1,8 @@
+{
+  "operation": "work_create",
+  "id": "sample-task",
+  "project_id": "example",
+  "objective": "Repair one failing test in a disposable example repository",
+  "priority": 2,
+  "workspace_id": null
+}

@@ -1,0 +1,5 @@
+d6a5dc0001eb356dcf01771b2687e1abe1a9057f Document partial native status, independent evidence, provider boundaries and native handoff
+59218916eea93510d7d37efe83168ff3fec32d1e Implement independent control-plane flows, typed diagnostics and adversarial SQL/Git/economics tests
+5c0ad4a9c131c1bcca43adc90a7f0abce8ba39cc Add seven-module control domain, explicit schema upgrade and offline local interfaces
+a10d14a312e37eb09b4e3c21d186f839dd421071 Keep native test homes outside registered source checkout
+add4db9757ef6e4ce6c46349c67b6258131a449d Import selected R0 plus D1 source baseline

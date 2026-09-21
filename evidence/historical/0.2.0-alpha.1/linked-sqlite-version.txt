@@ -1,0 +1,3 @@
+NOT_BUILT: there is no linked Rust executable in this delivery.
+Independent test host Python SQLite: 3.46.1.
+The source runtime gate excludes unpatched/withdrawn releases; native linked version must be recorded by build-info.

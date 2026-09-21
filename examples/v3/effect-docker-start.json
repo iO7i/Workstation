@@ -1,0 +1,4 @@
+{
+  "operation": "docker_start",
+  "integration_id": "example-docker"
+}

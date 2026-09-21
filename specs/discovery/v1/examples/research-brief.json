@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "purpose": "find_relevant_resources",
+  "needs": [
+    "interface_review"
+  ],
+  "platform": "windows",
+  "constraints": {
+    "free_only": true,
+    "local_only": true,
+    "allow_network_dependency": false
+  },
+  "max_candidates": 5,
+  "allowed_kinds": [
+    "documentation",
+    "skill",
+    "workflow"
+  ]
+}

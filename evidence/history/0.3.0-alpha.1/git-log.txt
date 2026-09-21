@@ -1,0 +1,4 @@
+0df5cb68d8f179d109e732bf468e556bde1d877e Document implementation ledger, remaining gaps and explicit certification hold
+ffa1c860f1dc5931a5104b45d564e11ad0adfe28 Harden v3 scopes, metadata claims and lifecycle; author deferred tests and inputs
+35339f1c9f55767c8b48cd04da716b6b35d3d37a Implement explicit integrations, effects, credential tasks and continuation transports
+f1189b0e1753364793933fb9b62059868b8bf5c6 Import 0.2.0-alpha.1 exact delivered source

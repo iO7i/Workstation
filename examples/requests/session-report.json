@@ -1,0 +1,11 @@
+{
+  "operation": "session_report",
+  "id": "example-session",
+  "project_id": "example",
+  "agent": "codex",
+  "external_id": "opaque-synthetic-session-id",
+  "adapter_version": "manual-fixture",
+  "role": "worker",
+  "workspace_id": null,
+  "ended": false
+}

@@ -1,0 +1,796 @@
+{
+  "version": "0.4.0-alpha.1",
+  "basis": "Exact 0.3 source + user-approved implementation-first gap plan. Same 52 coarse source families; certification excluded. Exact operational scope and exclusions stated per row.",
+  "percentage": null,
+  "percentage_reason": "No defensible percentage of total product effort/correctness. The scoped milestone tally below is bookkeeping over unequal families, not end-to-end completion.",
+  "status_meanings": {
+    "implemented_source": "Concrete source path exists and is wired into a callable path; source may still contain defects. No runtime certification implied.",
+    "partial_source": "A substantive subset exists; missing implementation is named.",
+    "reference_only": "Metadata/import/reference support; the external implementation is not provided.",
+    "not_implemented": "Still missing code or integration, not merely unexecuted tests.",
+    "verification_deferred": "An actual behavior demonstration requires the next user-authorized phase."
+  },
+  "modules": [
+    {
+      "name": "Health",
+      "counts": {
+        "implemented_source": 7
+      }
+    },
+    {
+      "name": "Workspaces",
+      "counts": {
+        "implemented_source": 6
+      }
+    },
+    {
+      "name": "Chronicle",
+      "counts": {
+        "implemented_source": 5
+      }
+    },
+    {
+      "name": "Resource Atlas",
+      "counts": {
+        "implemented_source": 7,
+        "reference_only": 1
+      }
+    },
+    {
+      "name": "Capabilities",
+      "counts": {
+        "implemented_source": 5,
+        "reference_only": 1
+      }
+    },
+    {
+      "name": "Economics",
+      "counts": {
+        "implemented_source": 7,
+        "reference_only": 1
+      }
+    },
+    {
+      "name": "Continuity",
+      "counts": {
+        "implemented_source": 6,
+        "partial_source": 1,
+        "verification_deferred": 1
+      }
+    },
+    {
+      "name": "Shared foundation",
+      "counts": {
+        "implemented_source": 5
+      }
+    }
+  ],
+  "features": [
+    {
+      "module": "Health",
+      "feature": "Bounded host/storage/process observations",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/filesystem.rs",
+        "crates/workstation-platform/src/windows.rs",
+        "crates/workstation-cli/src/main.rs"
+      ],
+      "remaining_or_limit": "Native behavior is unverified; not every vendor/state path is inferred.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F01",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Health",
+      "feature": "Registered executable and declared home inspection",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/profile_health.rs",
+        "crates/workstation-cli/src/advanced_cli.rs",
+        "crates/workstation-platform/src/health_scan.rs"
+      ],
+      "remaining_or_limit": "Exact hash/selected metadata only; does not authenticate session ownership.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F02",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Health",
+      "feature": "Birth-qualified ownership correlation",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/ownership.rs",
+        "crates/workstation-platform/src/process_graph.rs",
+        "crates/workstation-platform/src/operations_store.rs",
+        "crates/workstation-platform/src/health_scan.rs"
+      ],
+      "remaining_or_limit": "Observed native process births/ancestry plus owned protocol-session binding and optional configured-hook ancestry. Shared/unknown remain protected. Uninstrumented native sessions, loaded-image authenticity and full OS handle ownership are not inferred.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F03",
+      "previous_status": "partial_source"
+    },
+    {
+      "module": "Health",
+      "feature": "Typed symptoms and contradictory evidence",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/diagnostics.rs",
+        "crates/workstation-core/src/health_rules.rs",
+        "fingerprints/rules-v1.json"
+      ],
+      "remaining_or_limit": "Reported symptoms are not a certified exhaustive vendor failure corpus.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F04",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Health",
+      "feature": "Scoped Codex corrupt-JSON registry quarantine",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/repairs.rs",
+        "crates/workstation-platform/src/engine.rs"
+      ],
+      "remaining_or_limit": "Stopped-state invalid JSON only. Valid-but-stale/oversized registries and visual snippet verification remain outside this recipe.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F05",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Health",
+      "feature": "Scoped Docker runtime quarantine, undo and separate startup",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/repairs.rs",
+        "crates/workstation-platform/src/engine.rs"
+      ],
+      "remaining_or_limit": "No data reset, global WSL shutdown or retry loop. Source was not executed on real Windows sockets.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F06",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Health",
+      "feature": "Universal certified first-class vendor diagnostics",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/profile_health.rs",
+        "crates/workstation-platform/src/health_scan.rs",
+        "crates/workstation-core/src/health_rules.rs",
+        "fingerprints/rules-v1.json"
+      ],
+      "remaining_or_limit": "Source scope is the planned bounded registered-profile diagnostics for Codex/Claude/Cursor/Copilot and conditional protocol checks. The legacy title includes certification: NO universal vendor diagnosis, exhaustive private-state parser or certified defect corpus is claimed. Unknown evidence and unsupported versions are explicit.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F07",
+      "previous_status": "not_implemented"
+    },
+    {
+      "module": "Workspaces",
+      "feature": "Git content-state and operation observations",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/control_workspace.rs",
+        "crates/workstation-core/src/continuity.rs"
+      ],
+      "remaining_or_limit": "Dirty/untracked/ignored/local-only metadata stays protected, no cleanup permission inferred.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F08",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Workspaces",
+      "feature": "Work Item/session/workspace associations",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/control_store.rs",
+        "crates/workstation-platform/src/integration_store.rs"
+      ],
+      "remaining_or_limit": "Lifecycle reports are advisory/agent-reported, not an OS-exclusive lock.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F09",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Workspaces",
+      "feature": "Pre-continuation identity/HEAD/state revalidation",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/engine.rs",
+        "crates/workstation-core/src/continuity.rs"
+      ],
+      "remaining_or_limit": "Metadata-only digest can miss same-size same-mtime edits; receiver must inspect content/tests.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F10",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Workspaces",
+      "feature": "Work Item/workspace collision warnings",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/workspace_policy.rs",
+        "crates/workstation-platform/src/operations_store.rs"
+      ],
+      "remaining_or_limit": "Work Item, workspace, branch and file-path overlap; stale leases remain uncertain. File overlap uses Git changed paths/current reported scope, not prediction of future edits. Coordination warnings do not lock or terminate another agent.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F11",
+      "previous_status": "partial_source"
+    },
+    {
+      "module": "Workspaces",
+      "feature": "Worktrunk workflow integration",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/specialists.rs",
+        "crates/workstation-platform/src/workspace_lifecycle.rs"
+      ],
+      "remaining_or_limit": "Optional pinned schema2 local inventory and exact approved new-worktree creation with hooks disabled. Merge/rebase/background branch-deleting removal remain intentionally excluded; conservative removal uses native Git.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F12",
+      "previous_status": "reference_only"
+    },
+    {
+      "module": "Workspaces",
+      "feature": "Safe general worktree cleanup",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/workspace_policy.rs",
+        "crates/workstation-core/src/operations.rs",
+        "crates/workstation-platform/src/workspace_lifecycle.rs",
+        "crates/workstation-platform/src/operation_runtime.rs"
+      ],
+      "remaining_or_limit": "An explicit non-force secondary-worktree operation only after fresh complete evidence, released work, explicit external-writer quiescence and HEAD preservation. No unattended general cleaner; no branch deletion. No same-user adversarial race-proof claim or automatic dirty-work recovery.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F13",
+      "previous_status": "not_implemented"
+    },
+    {
+      "module": "Chronicle",
+      "feature": "Immutable decision proposal/acceptance/supersession",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/control.rs",
+        "crates/workstation-platform/src/control_store.rs",
+        "schema/002_control_plane.sql"
+      ],
+      "remaining_or_limit": "Unverified runtime wrapper; decisions are not auto-accepted from agents.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F14",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Chronicle",
+      "feature": "Effective-time and known-time queries",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "schema/current_decisions.sql",
+        "crates/workstation-platform/src/control_store.rs"
+      ],
+      "remaining_or_limit": "Historical SQL tests belong to the prior version; current source not rerun.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F15",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Chronicle",
+      "feature": "History/compare/export interfaces",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/project_tools.rs",
+        "crates/workstation-cli/src/advanced_cli.rs"
+      ],
+      "remaining_or_limit": "Bounded records; no automatic natural-language fact extraction.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F16",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Chronicle",
+      "feature": "Metadata lifecycle and execution audit ingestion",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/lifecycle.rs",
+        "crates/workstation-platform/src/integration_store.rs"
+      ],
+      "remaining_or_limit": "Claude/Codex/ACP metadata projection only; hooks require explicit user configuration.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F17",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Chronicle",
+      "feature": "General automatic event-source integration",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/lifecycle.rs",
+        "crates/workstation-platform/src/integration_store.rs",
+        "crates/workstation-cli/src/advanced_cli.rs"
+      ],
+      "remaining_or_limit": "Normalized Claude/Gemini hooks, Codex notifications, ACP and Copilot session events; CLI ingestion plus protocol-execution audit. Hooks must be explicitly configured. No silent hook deployment, background transcript ingestion or automatic decision acceptance.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F18",
+      "previous_status": "partial_source"
+    },
+    {
+      "module": "Resource Atlas",
+      "feature": "Explicit environment lookup and confirmation/freshness",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/control_store.rs",
+        "crates/workstation-platform/src/tasks.rs",
+        "crates/workstation-platform/src/capability_context.rs"
+      ],
+      "remaining_or_limit": "Atlas status separates user confirmation, network observation and provider identity. No provider identity verifier implemented; no environment fallback.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F19",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Resource Atlas",
+      "feature": "Descriptive transactional manifest import",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/project_tools.rs",
+        "crates/workstation-cli/src/advanced_cli.rs"
+      ],
+      "remaining_or_limit": "Does not silently replace chosen resources, confirm production authority or approve decisions.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F20",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Resource Atlas",
+      "feature": "Scope-bound local DPAPI vault",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/vault.rs"
+      ],
+      "remaining_or_limit": "Native unverified; same-user programs are not isolated; metadata backup is not portable credential backup.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F21",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Resource Atlas",
+      "feature": "Doppler and 1Password exact secret resolution",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/tasks.rs",
+        "crates/workstation-core/src/integrations.rs"
+      ],
+      "remaining_or_limit": "Pinned CLI, one key, scoped profile; bootstrap local DPAPI only; no provider administration.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F22",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Resource Atlas",
+      "feature": "Approved executable/script task with secret environment",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/integrations.rs",
+        "crates/workstation-platform/src/tasks.rs",
+        "crates/workstation-platform/src/external.rs"
+      ],
+      "remaining_or_limit": "Outputs discarded. Authorized program/imports can read/exfiltrate values; no full dependency sandbox.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F23",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Resource Atlas",
+      "feature": "Public HTTPS endpoint response observation",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/http_provider.rs",
+        "crates/workstation-platform/src/engine.rs"
+      ],
+      "remaining_or_limit": "Public:443 HEAD only; no redirect. Not proof of provider ownership or production correctness.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F24",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Resource Atlas",
+      "feature": "Infisical and Bitwarden execution adapters",
+      "implementation_status": "reference_only",
+      "source_paths": [
+        "crates/workstation-core/src/control.rs"
+      ],
+      "remaining_or_limit": "Provider references exist; live secret resolution not implemented.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F25",
+      "previous_status": "reference_only"
+    },
+    {
+      "module": "Resource Atlas",
+      "feature": "General rotation/revocation/portable vault recovery",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/secret_lifecycle.rs",
+        "crates/workstation-platform/src/operations_store.rs",
+        "schema/004_lifecycle_completion.sql"
+      ],
+      "remaining_or_limit": "Planned scope is local encrypted version rotation, CAS head, local revoke/no legacy fallback, history and recovery inventory. DPAPI is NOT portable credential backup; restoring metadata can require secret reentry. Does not rotate/revoke the actual remote-provider token.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F26",
+      "previous_status": "not_implemented"
+    },
+    {
+      "module": "Capabilities",
+      "feature": "Project focus and constraints-based local matching",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/discovery.rs",
+        "crates/workstation-platform/src/control_store.rs",
+        "crates/workstation-platform/src/capability_context.rs"
+      ],
+      "remaining_or_limit": "No native runtime test; unknown applicability stays unknown.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F27",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Capabilities",
+      "feature": "Three-card cap and existing-resource preference",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/discovery.rs"
+      ],
+      "remaining_or_limit": "Cached registered/pinned executable availability now informs preference. Existence is not compatibility or usefulness. Cached context does not launch live probes.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F28",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Capabilities",
+      "feature": "Scoped save/dismiss/snooze/evaluate/adopt",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/control_store.rs",
+        "crates/workstation-core/src/discovery.rs",
+        "crates/workstation-platform/src/capability_context.rs"
+      ],
+      "remaining_or_limit": "Separate Atlas record and Chronicle proposal drafts are offered for reviewed revisions. No automatic acceptance, registration or installation from feedback.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F29",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Capabilities",
+      "feature": "Research brief and candidate import/review",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/discovery.rs",
+        "crates/workstation-platform/src/control_store.rs"
+      ],
+      "remaining_or_limit": "Unverified leads stay inert. No automatic search, watched skill writes or arbitrary installer.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F30",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Capabilities",
+      "feature": "27-entry reference catalog",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "catalog/resources.json",
+        "catalog/REVIEW-REGISTER.json"
+      ],
+      "remaining_or_limit": "Inherited existence/purpose review only; no new license/effectiveness/Windows certification claim.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F31",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Capabilities",
+      "feature": "Automatic specialist activation/integration certification",
+      "implementation_status": "reference_only",
+      "source_paths": [
+        "crates/workstation-core/src/integrations.rs"
+      ],
+      "remaining_or_limit": "No generic installation engine. Unsupported specialists remain descriptions.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F32",
+      "previous_status": "reference_only"
+    },
+    {
+      "module": "Economics",
+      "feature": "Separated meters and reset-aware forecasts",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/economics.rs"
+      ],
+      "remaining_or_limit": "Estimates remain estimates; providers with no usable quota remain unknown.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F33",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Economics",
+      "feature": "Plan fit, model Pareto/filters and explicit counterfactuals",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/economics.rs"
+      ],
+      "remaining_or_limit": "No automatic model/subscription switch or unlicensed benchmark redistribution.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F34",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Economics",
+      "feature": "Codex documented App Server quota read/persistence",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/adapters.rs",
+        "crates/workstation-platform/src/project_tools.rs"
+      ],
+      "remaining_or_limit": "No real account exercised; imported responses and local received observations retain different provenance.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F35",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Economics",
+      "feature": "OpenAI/Anthropic organization cost HTTP readers",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/http_provider.rs",
+        "crates/workstation-core/src/usage_import.rs"
+      ],
+      "remaining_or_limit": "Bounded admin API; org scope not project attribution; provider exclusions/delay not invoice truth.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F36",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Economics",
+      "feature": "Exact USD/cents normalization and overlap checks",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/usage_import.rs"
+      ],
+      "remaining_or_limit": "Nano-USD precision bound, rejects unsupported finer precision; authored tests unrun.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F37",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Economics",
+      "feature": "Copilot SDK and strict CSV fallback normalization",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/usage_import.rs",
+        "crates/workstation-cli/src/advanced_cli.rs"
+      ],
+      "remaining_or_limit": "Explicit import only; not a live SDK client.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F38",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Economics",
+      "feature": "Other live consumer quota/provider SDK collectors",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/copilot.rs",
+        "crates/workstation-platform/src/telemetry_store.rs",
+        "crates/workstation-core/src/telemetry.rs",
+        "crates/workstation-core/src/usage_import.rs"
+      ],
+      "remaining_or_limit": "Adds real optional Copilot SDK-wire quota/models code and configured Claude statusline quota path; Gemini session token input is not subscription quota. Codex/organization readers retained. Unavailable Cursor/Grok/Gemini consumer quota endpoints remain unsupported/import-only; no scraping. No account calls executed.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F39",
+      "previous_status": "not_implemented"
+    },
+    {
+      "module": "Economics",
+      "feature": "Licensed benchmark network feed",
+      "implementation_status": "reference_only",
+      "source_paths": [
+        "crates/workstation-core/src/economics.rs"
+      ],
+      "remaining_or_limit": "Pluggable imported data/metadata remains; no licensed live Artificial Analysis feed integrated.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F40",
+      "previous_status": "reference_only"
+    },
+    {
+      "module": "Continuity",
+      "feature": "Work Items, checkpoints and bounded fallback packet",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/continuity.rs",
+        "crates/workstation-platform/src/control_store.rs"
+      ],
+      "remaining_or_limit": "No transcript transfer or semantic completion certification.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F41",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Continuity",
+      "feature": "Primary/reviewer lease/reservation/binding lifecycle",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/integration_store.rs",
+        "crates/workstation-platform/src/engine.rs"
+      ],
+      "remaining_or_limit": "Clean interaction release; failures retain uncertainty. Does not replace existing live primary.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F42",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Continuity",
+      "feature": "Codex new/resumed App Server turn",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/adapters.rs",
+        "crates/workstation-platform/src/rpc.rs"
+      ],
+      "remaining_or_limit": "Exact installed version/provider state untested; thread metadata is not automatically active session.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F43",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Continuity",
+      "feature": "Claude print/JSON new and resumed interaction",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/adapters.rs"
+      ],
+      "remaining_or_limit": "Permission mode and bounded turns; no native run or proven continuation outcome.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F44",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Continuity",
+      "feature": "Cursor/Grok ACP new/load/prompt",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/adapters.rs",
+        "crates/workstation-platform/src/rpc.rs"
+      ],
+      "remaining_or_limit": "Load/auth/plan mode conditional; permission callback metadata does not create OS sandbox.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F45",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Continuity",
+      "feature": "Metadata hooks and explicit lease renewal",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/lifecycle.rs",
+        "crates/workstation-cli/src/advanced_cli.rs",
+        "crates/workstation-platform/src/integration_store.rs"
+      ],
+      "remaining_or_limit": "Preconfigured reports remain agent-reported; not writable MCP.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F46",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Continuity",
+      "feature": "Other vendor native continuation",
+      "implementation_status": "partial_source",
+      "source_paths": [
+        "crates/workstation-platform/src/acp_driver.rs",
+        "crates/workstation-platform/src/copilot.rs",
+        "crates/workstation-platform/src/adapters.rs"
+      ],
+      "remaining_or_limit": "Gemini/OpenCode/Cline conditional ACP plus Copilot wire new/resume implemented. Roo and Windsurf remain packet-only because no applicable source-reviewed native transport was implemented. All native paths unexecuted.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F47",
+      "previous_status": "not_implemented"
+    },
+    {
+      "module": "Continuity",
+      "feature": "Real multi-agent task acceptance",
+      "implementation_status": "verification_deferred",
+      "source_paths": [],
+      "remaining_or_limit": "Requires installed authenticated agents and user green light; never substituted with synthetic success.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F48",
+      "previous_status": "verification_deferred"
+    },
+    {
+      "module": "Shared foundation",
+      "feature": "Backed-up schema1/2\u21923 migrations and new-home restore",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/integration_store.rs",
+        "crates/workstation-platform/src/storage.rs",
+        "schema/003_integrations.sql"
+      ],
+      "remaining_or_limit": "Source not executed; intermediate successful v2 migration can remain after v3 failure, explicitly reported.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F49",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Shared foundation",
+      "feature": "Immutable exact plans and one-shot execution journal",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-core/src/effects.rs",
+        "crates/workstation-platform/src/engine.rs",
+        "crates/workstation-platform/src/integration_store.rs"
+      ],
+      "remaining_or_limit": "Same-user consent accounting, not human-authentication enforcement. Failed/interrupted effects not replayed.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F50",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Shared foundation",
+      "feature": "Owned bounded process/RPC interaction",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/external.rs",
+        "crates/workstation-platform/src/rpc.rs"
+      ],
+      "remaining_or_limit": "Windows Job Objects and pipe teardown untested. Docker GUI is an intentional persistent separate launch.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F51",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Shared foundation",
+      "feature": "Cached project context, static reports and 13 read-only MCP tools",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/control_store.rs",
+        "crates/workstation-cli/src/mcp.rs"
+      ],
+      "remaining_or_limit": "Optional context sections may be omitted to fit bound; MCP cannot apply plans or resolve secrets.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F52",
+      "previous_status": "implemented_source"
+    },
+    {
+      "module": "Shared foundation",
+      "feature": "Long-term archive/retention UX for immutable effect journals",
+      "implementation_status": "implemented_source",
+      "source_paths": [
+        "crates/workstation-platform/src/journal_archive.rs",
+        "crates/workstation-platform/src/operations_store.rs",
+        "crates/workstation-platform/src/storage.rs",
+        "schema/004_lifecycle_completion.sql"
+      ],
+      "remaining_or_limit": "Explicit old terminal-run payload archive, digest-checked hydration, dependency-aware backup/restore, bounded packs and inventory. Running/indeterminate records are retained. No guaranteed physical file shrink, secure erasure, infinite log storage or silent deletion of authoritative history.",
+      "verification_status": "not_executed_v0.4_delivery",
+      "ledger_id": "F53",
+      "previous_status": "partial_source"
+    }
+  ],
+  "scoped_milestone_accounting": {
+    "denominator_families": 52,
+    "full_source_families": 48,
+    "partial_source_families": 1,
+    "reference_only_families": 3,
+    "missing_families": 0,
+    "full_credit": 1,
+    "partial_credit": 0.5,
+    "points": 48.5,
+    "percent": 93.27,
+    "scope_warning": "93.27% refers ONLY to the agreed bounded source-family tally. Some legacy titles are broader than the implementable v1 plan; their source scope and exclusions are explicitly retained in remaining_or_limit. It does not measure correctness, remaining engineering effort, exhaustive vendor support or production readiness."
+  },
+  "measurement_disclosure": {
+    "full_original_scope_percentage": null,
+    "scoped_source_milestone": "48.5 of 52 coarse families under the concrete boundaries of the implementation plan",
+    "not_equal_effort_or_importance": true,
+    "broader_original_families_not_fully_delivered": [
+      "universal fully automatic all-vendor diagnostics/private-state parsing",
+      "all external uninstrumented process/session ownership",
+      "portable DPAPI or remote credential administration",
+      "every consumer provider quota API",
+      "Roo/Windsurf native continuation"
+    ],
+    "certification_excluded_not_waived": true
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "kind": "direct_manifest_pins_not_resolved_sbom",
+  "cargo_lock_present": false,
+  "dependency_resolution_executed": false,
+  "dependencies": {
+    "serde": {
+      "version": "=1.0.229",
+      "features": [
+        "derive"
+      ]
+    },
+    "serde_json": "=1.0.151",
+    "clap": {
+      "version": "=4.6.6",
+      "features": [
+        "derive",
+        "env"
+      ]
+    },
+    "rusqlite": {
+      "version": "=0.40.2",
+      "features": [
+        "bundled",
+        "backup"
+      ]
+    },
+    "uuid": {
+      "version": "=1.24.0",
+      "features": [
+        "v4"
+      ]
+    },
+    "time": {
+      "version": "=0.3.44",
+      "features": [
+        "formatting"
+      ]
+    },
+    "tempfile": "=3.27.0",
+    "sha2": "=0.10.9",
+    "windows-sys": {
+      "version": "=0.61.2",
+      "features": [
+        "Win32_Foundation",
+        "Win32_Security",
+        "Win32_Security_Cryptography",
+        "Win32_System_Console",
+        "Win32_Security_Authorization",
+        "Win32_Storage_FileSystem",
+        "Win32_System_Diagnostics_ToolHelp",
+        "Win32_System_Threading",
+        "Win32_System_JobObjects",
+        "Win32_System_ProcessStatus",
+        "Win32_System_SystemInformation"
+      ]
+    }
+  },
+  "rust_toolchain_declaration": "[toolchain]\nchannel = \"1.97.1\"\nprofile = \"minimal\"\ncomponents = [\"rustfmt\", \"clippy\"]\n",
+  "license_audit_complete": false
+}

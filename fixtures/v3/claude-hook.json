@@ -1,0 +1,7 @@
+{
+  "hook_event_name": "SessionStart",
+  "session_id": "fixture-session",
+  "source": "startup",
+  "transcript_path": "NEVER_READ_THIS_PATH",
+  "prompt": "NEVER_COPY_THIS_PROMPT"
+}

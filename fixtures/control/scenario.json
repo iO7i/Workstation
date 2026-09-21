@@ -1,0 +1,16 @@
+{
+  "buckets": [
+    {
+      "id": "synthetic-weekly",
+      "unit": "percent",
+      "remaining": 40,
+      "current_rate_per_second": 0.002777777777777778,
+      "proposed_rate_multiplier": 0.5,
+      "resets_in_seconds": 86400
+    }
+  ],
+  "assumptions": [
+    "Synthetic example only: routine workload is assumed to consume half this bucket.",
+    "Alternative provider consumption is not measured; allowances are not added."
+  ]
+}

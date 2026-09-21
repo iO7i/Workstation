@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "project_id": "example",
+  "environments": [
+    "dev",
+    "prod"
+  ],
+  "resources": [
+    {
+      "id": "example-api",
+      "environment": "prod",
+      "kind": "endpoint",
+      "name": "Example production API",
+      "locator": "https://api.example.org",
+      "provider": null,
+      "fresh_for_secs": 86400
+    },
+    {
+      "id": "example-db",
+      "environment": "dev",
+      "kind": "secret_reference",
+      "name": "Development database reference",
+      "locator": "doppler://example/dev/DATABASE_URL",
+      "provider": "doppler",
+      "fresh_for_secs": 86400
+    }
+  ]
+}

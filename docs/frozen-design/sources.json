@@ -1,0 +1,234 @@
+[
+  {
+    "id": "S01",
+    "title": "Rust Windows MSVC platform support",
+    "url": "https://doc.rust-lang.org/rustc/platform-support/windows-msvc.html",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Native Windows target support informs the Windows-first binary choice."
+  },
+  {
+    "id": "S02",
+    "title": "Microsoft windows-rs",
+    "url": "https://github.com/microsoft/windows-rs",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Official Rust bindings to Windows APIs."
+  },
+  {
+    "id": "S03",
+    "title": "SQLite write-ahead logging",
+    "url": "https://www.sqlite.org/wal.html",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "WAL coordination, locality, and concurrency constraints."
+  },
+  {
+    "id": "S04",
+    "title": "SQLite release news",
+    "url": "https://www.sqlite.org/news.html",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Verify the WAL-reset fix and avoid the withdrawn 3.52.0 release."
+  },
+  {
+    "id": "S05",
+    "title": "rusqlite documentation",
+    "url": "https://docs.rs/rusqlite/latest/rusqlite/",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Candidate Rust SQLite interface; resolve and test an explicit bundled version."
+  },
+  {
+    "id": "S06",
+    "title": "Win32_Process",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-process",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Process creation/parent/identity fields; PID reuse requires birth identity."
+  },
+  {
+    "id": "S07",
+    "title": "Windows Job Objects",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Owned subprocess lifecycle and nested-job/breakaway caveats."
+  },
+  {
+    "id": "S08",
+    "title": "Windows reparse points",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/reparse-points",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Reparse-aware collection and path-validation boundaries."
+  },
+  {
+    "id": "S09",
+    "title": "CryptProtectData",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/api/dpapi/nf-dpapi-cryptprotectdata",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "User/machine decryption scope and integrity; not isolation from same-user software."
+  },
+  {
+    "id": "S10",
+    "title": "Windows process inheritance",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/inheritance",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Child environment inheritance and explicit environment construction."
+  },
+  {
+    "id": "S11",
+    "title": "Docker contexts",
+    "url": "https://docs.docker.com/engine/manage-resources/contexts/",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Daemon selection can be overridden; validate the actual local endpoint."
+  },
+  {
+    "id": "S12",
+    "title": "WSL basic commands",
+    "url": "https://learn.microsoft.com/en-us/windows/wsl/basic-commands",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Global shutdown, targeted termination, and destructive unregister are distinct."
+  },
+  {
+    "id": "S13",
+    "title": "Worktrunk",
+    "url": "https://github.com/max-sixty/worktrunk",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Specialist worktree integration; Windows git-wt naming and command side effects."
+  },
+  {
+    "id": "S14",
+    "title": "Entire CLI",
+    "url": "https://github.com/entireio/cli",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Optional agent-session/checkpoint provenance source, not a required runtime."
+  },
+  {
+    "id": "S15",
+    "title": "Codbash",
+    "url": "https://github.com/vakovalskii/codbash",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Optional session navigation; do not duplicate a session dashboard."
+  },
+  {
+    "id": "S16",
+    "title": "Codex environment variables",
+    "url": "https://learn.chatgpt.com/docs/config-file/environment-variables",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "CODEX_HOME and documented location overrides; effective GUI state must still be discovered."
+  },
+  {
+    "id": "S17",
+    "title": "Claude Code hooks",
+    "url": "https://code.claude.com/docs/en/hooks",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Lifecycle integration; WorktreeCreate replaces creation rather than observing it."
+  },
+  {
+    "id": "S18",
+    "title": "Git worktree",
+    "url": "https://git-scm.com/docs/git-worktree",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Porcelain discovery, locking, pruning and removal semantics."
+  },
+  {
+    "id": "S19",
+    "title": "Git status",
+    "url": "https://git-scm.com/docs/git-status",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Machine-readable state and explicit handling of untracked/ignored content."
+  },
+  {
+    "id": "S20",
+    "title": "MADR",
+    "url": "https://adr.github.io/madr/",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Lightweight structured architecture-decision record convention."
+  },
+  {
+    "id": "S21",
+    "title": "Backstage catalog descriptor format",
+    "url": "https://backstage.io/docs/features/software-catalog/descriptor-format/",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Service/resource ownership model used as a conceptual catalog reference."
+  },
+  {
+    "id": "S22",
+    "title": "Doppler CLI",
+    "url": "https://docs.doppler.com/docs/cli",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Provider CLI integration and credentialed environment execution."
+  },
+  {
+    "id": "S23",
+    "title": "1Password op run",
+    "url": "https://www.1password.dev/cli/reference/commands/run",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Scoped subprocess secret-reference resolution and output behavior."
+  },
+  {
+    "id": "S24",
+    "title": "Infisical run",
+    "url": "https://infisical.com/docs/cli/commands/run",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Future provider execution adapter contract."
+  },
+  {
+    "id": "S25",
+    "title": "Bitwarden Secrets Manager CLI",
+    "url": "https://bitwarden.com/help/secrets-manager-cli/",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Provider reference/integration surface."
+  },
+  {
+    "id": "S26",
+    "title": "MCP server development",
+    "url": "https://modelcontextprotocol.io/docs/2026-07-28/develop/build-server",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Local stdio server protocol, SDKs, and output discipline."
+  },
+  {
+    "id": "S27",
+    "title": "MCP security best practices",
+    "url": "https://modelcontextprotocol.io/docs/2025-11-25/tutorials/security/security_best_practices",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Trust boundaries and safe authorization handling; source version recorded explicitly."
+  },
+  {
+    "id": "S28",
+    "title": "SQLite online backup API",
+    "url": "https://sqlite.org/backup.html",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Consistent live-database backup instead of copying only the main database file."
+  },
+  {
+    "id": "S29",
+    "title": "SQLite FTS5",
+    "url": "https://www.sqlite.org/fts5.html",
+    "accessed_on": "2026-09-18",
+    "type": "primary_documentation_or_project",
+    "relevance": "Local lexical search rather than mandatory vector infrastructure."
+  }
+]

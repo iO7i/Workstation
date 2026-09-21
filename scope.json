@@ -1,0 +1,32 @@
+{
+  "version": "0.4.0-alpha.1",
+  "baseline_version": "0.3.0-alpha.1",
+  "module_count": 7,
+  "modules": [
+    "Health",
+    "Workspaces",
+    "Chronicle",
+    "Resource Atlas",
+    "Capabilities",
+    "Economics",
+    "Continuity"
+  ],
+  "architecture": "three-crate Rust monolith + SQLite",
+  "mode": "implementation_only",
+  "certification_authorized": false,
+  "windows_access_authorized_this_delivery": false,
+  "read_only_mcp_tool_count": 13,
+  "schema_version": 4,
+  "source_milestone_accounting": {
+    "denominator_families": 52,
+    "full_source_families": 48,
+    "partial_source_families": 1,
+    "reference_only_families": 3,
+    "missing_families": 0,
+    "full_credit": 1,
+    "partial_credit": 0.5,
+    "points": 48.5,
+    "percent": 93.27,
+    "scope_warning": "93.27% refers ONLY to the agreed bounded source-family tally. Some legacy titles are broader than the implementable v1 plan; their source scope and exclusions are explicitly retained in remaining_or_limit. It does not measure correctness, remaining engineering effort, exhaustive vendor support or production readiness."
+  }
+}

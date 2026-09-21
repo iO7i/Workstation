@@ -1,0 +1,13 @@
+{
+  "version": "0.3.0-alpha.1",
+  "artifact_type": "source",
+  "implementation_commit": "0df5cb68d8f179d109e732bf468e556bde1d877e",
+  "scope": "seven_module_implementation_first",
+  "certification": "not_started_user_green_light_required",
+  "executable_included": false,
+  "dependency_lock_included": false,
+  "signature": "unsigned",
+  "feature_ledger": "IMPLEMENTATION-LEDGER.json",
+  "current_delivery_evidence": "evidence/delivery-status.json",
+  "data_state_included": false
+}

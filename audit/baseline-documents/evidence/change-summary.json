@@ -1,0 +1,8 @@
+{
+  "version": "0.4.0-alpha.1",
+  "code_and_schema_lines_added": 1840,
+  "code_and_schema_lines_removed": 116,
+  "metric_scope": "Git text diff, not completeness or quality",
+  "baseline_import_commit": "7ec1146b858390e205c821c75438dc900c59e677",
+  "implementation_commit": "119aaed81130dc705d0fe7a79262dc46975ea631"
+}

@@ -1,0 +1,172 @@
+{
+  "baseline_archive": "workstation-r0-first-slice-source.zip",
+  "baseline_sha256": "25b75ccaf030053e0ba5c3222b268b89eb3e8ce666a1d2053d0eac25f2cfe1aa",
+  "preserved_files": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "1f51076320e4b698a6af31cdd7783d5d2e396b0b8e9a07d34c919e642b42eaec"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "a6bc5c09715a9f29a4fde7dab18afecf8545ab8654d46fc129df8a81e7c40a3d"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "e3d5d461d3532b940c2f2b2545e2992de137e50e9f16a3032c858fde71bba1f1"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "3ea30dbd7d3f9c114a5fd5745b18e8251870f3e3721d5bd6c6704db81105a9c9"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "d9e731b1ba3c4c214cabb605c1cead745d84f97437fdb4728fea7b8748dd266c"
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "00cf7298b80e79c39a2d0de6389bf5edff6d3b31b1fa7c1324dc534c89d84231"
+    },
+    {
+      "path": "contracts/envelope.schema.json",
+      "sha256": "cc604b4d3ce51bd54d993775a5ec06b296a1a2f93f1ce098c56de026d205742b"
+    },
+    {
+      "path": "contracts/incident.schema.json",
+      "sha256": "2ed815ade4773c03aab99ce36f3a6e117a7b52607e93ab79d5f3eb35f700d16f"
+    },
+    {
+      "path": "contracts/share-report.schema.json",
+      "sha256": "87505e86fbad6f3054e2f9824eedcbf0bf8ceea898ddbdfa263f9cfec6b27ee0"
+    },
+    {
+      "path": "contracts/snapshot.schema.json",
+      "sha256": "92bd1c5778cac0c166ec384948ae0e6b87929253c83f0e49f98e7598135bd4d6"
+    },
+    {
+      "path": "crates/workstation-cli/Cargo.toml",
+      "sha256": "2a36760216b6e7343ce8c75fd61f1a24733e3e02804238afacfc7c0f88bae052"
+    },
+    {
+      "path": "crates/workstation-cli/src/main.rs",
+      "sha256": "dcd5f0aa7e329ddfada7cec5055a48627054fcc5a6b4ac26b42a94e17b0e4462"
+    },
+    {
+      "path": "crates/workstation-cli/tests/cli.rs",
+      "sha256": "2630b9c78583c8de12ece53678a006dc27a0d5022cc45aae3a9e0950bda30867"
+    },
+    {
+      "path": "crates/workstation-core/Cargo.toml",
+      "sha256": "03f5584147ecb5ccc680074020007c54ac3688e3adbd53f0fc7a094bf72d0738"
+    },
+    {
+      "path": "crates/workstation-core/src/lib.rs",
+      "sha256": "a2a2a71bbffbeccf9c8aba0882e16f14296b49e1eee6f8e5b90d0698da7e10aa"
+    },
+    {
+      "path": "crates/workstation-core/src/model.rs",
+      "sha256": "9c12e0e54a77df491832e50e596197705634ef22fdc529df5b57cfbb40e95868"
+    },
+    {
+      "path": "crates/workstation-core/src/policy.rs",
+      "sha256": "274f34b7925f70413fc0b2320ccad56875fbb0b6595656de195e93f40591bb55"
+    },
+    {
+      "path": "crates/workstation-core/src/render.rs",
+      "sha256": "6390ee1f6a06a4f45c5d2cb021901df07e2b9f2a39dbb1aa2275c31a65bdfa88"
+    },
+    {
+      "path": "crates/workstation-platform/Cargo.toml",
+      "sha256": "4e218cba3ac1275f9e9925c4bd6b51acc68c85e5636917959cdf5d69cceef741"
+    },
+    {
+      "path": "crates/workstation-platform/src/filesystem.rs",
+      "sha256": "20d7214ca9e2f418a9431cfeeb014e2cf4667872fa14a8b52bcd473b99368f13"
+    },
+    {
+      "path": "crates/workstation-platform/src/git.rs",
+      "sha256": "8790a56434be65d09e8b14e8554b0f33c335d4173e3471a9a4fff24db14f962e"
+    },
+    {
+      "path": "crates/workstation-platform/src/lib.rs",
+      "sha256": "2acbd036e93f0e5a82cb876227da204ff1631f7258da2ba483ab4f787a813908"
+    },
+    {
+      "path": "crates/workstation-platform/src/paths.rs",
+      "sha256": "e0504f557105d4fdce95f92161892cc332167737fd752990945c9b88cbd58cc0"
+    },
+    {
+      "path": "crates/workstation-platform/src/runner.rs",
+      "sha256": "8aa6b08666fbc23dc1e39dacc6b9a0c608adf32365029139d48bf40f82bf2e18"
+    },
+    {
+      "path": "crates/workstation-platform/src/storage.rs",
+      "sha256": "35edb1866fe6f6bf91abe8e3ccdb36c8244cad2ff97987a46f8fc6df7bfafe32"
+    },
+    {
+      "path": "crates/workstation-platform/src/windows.rs",
+      "sha256": "d23f0108956cdfefffd5067b7dd6b89dfb587347b8ba63506f9cf50f8453a299"
+    },
+    {
+      "path": "fixtures/README.md",
+      "sha256": "28061ccb3aebf0a250020063f4eda41c06ce044763d7a4b03113225361309a31"
+    },
+    {
+      "path": "fixtures/examples/envelope.json",
+      "sha256": "c772b680976c2aadfd5b39e3c9869f2560c7f5aaf3f05a7f9a7e87768dee787a"
+    },
+    {
+      "path": "fixtures/examples/share-report.json",
+      "sha256": "8880ba3aac80dd94b54f1427d89370584e0055f6e62c599bd847a26aecc890f1"
+    },
+    {
+      "path": "fixtures/examples/snapshot.json",
+      "sha256": "e54ad4a311574c020af582221097501daa1dd97872369174227836a733aca9b7"
+    },
+    {
+      "path": "fixtures/incidents/codex-ui-test-unverified.json",
+      "sha256": "3ec36d160094415cc802bd5253b5c82efc12a80436df3649a968f43a11786372"
+    },
+    {
+      "path": "fixtures/incidents/codex-wrong-registry-path.json",
+      "sha256": "e95ba9785717741e196a06f1ac5c57421bbf35bee1c313e36f827217e91029ad"
+    },
+    {
+      "path": "fixtures/incidents/docker-current-runtime-error.json",
+      "sha256": "f8b6b99cc9165a4aec14b8573ff41c207c5380617f71702de2c38a99eb2bacbb"
+    },
+    {
+      "path": "fixtures/incidents/docker-old-error-healthy-owner.json",
+      "sha256": "a7fd009d6d3d36c614f63810622bc03ad318a80d443e12dd6f436cdd9b09af6c"
+    },
+    {
+      "path": "fixtures/incidents/old-worktree-aged-but-active.json",
+      "sha256": "7fe6185d32675740685a0575c21547327b70bcac2c713408674020fc3a54bfbc"
+    },
+    {
+      "path": "fixtures/incidents/old-worktree-owner-unknown.json",
+      "sha256": "8bd0da2af8912d18571dad38471ec662865e80ca5a903a6642718cc4bd3634a4"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "sha256": "559f488c181e0e9e77cf17c29de663977f036ec7ff2e2060585714bf53c52d62"
+    },
+    {
+      "path": "schema/001_r0.sql",
+      "sha256": "62c34319d1f38c36dc3d28466f72429b9293c3b4b1293fbd8d096c5601c729a7"
+    },
+    {
+      "path": "scripts/build.ps1",
+      "sha256": "c920ac1a892572a1f54a242305954857f144661b8f3835f927481b6afa7f475c"
+    },
+    {
+      "path": "scripts/validate_artifacts.py",
+      "sha256": "31108685b859d4ed77dc700e45a6c0f121d77497a4055130312c9c5ff46af6f3"
+    },
+    {
+      "path": "scripts/windows-smoke.ps1",
+      "sha256": "8d64f76c301add81a440ddfe5fe1012dee9bc9b0e55ad7eadeffe55329bbcb4f"
+    }
+  ],
+  "runtime_changes": false,
+  "note": "All original non-document/non-validation artifacts remain byte-identical, including Rust, build scripts, runtime contracts and applied schema."
+}

@@ -1,0 +1,6 @@
+{
+  "all_files_in_this_directory": "synthetic_not_live_provider_evidence",
+  "source_runtime_executed": false,
+  "vendor_versions_tested": [],
+  "purpose": "authoring fixtures for future native and parser tests"
+}

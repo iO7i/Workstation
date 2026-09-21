@@ -1,0 +1,219 @@
+[
+  {
+    "platforms": [
+      "windows",
+      "linux"
+    ],
+    "applicable_versions": [],
+    "freshness_seconds": 60,
+    "severity": "warning",
+    "classification": "observable_condition_not_vendor_root_cause",
+    "repair_recipe": null,
+    "id": "profile.executable_changed",
+    "product": "any",
+    "requires": [
+      "executable_changed"
+    ],
+    "contradicts": [],
+    "sources": [
+      "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-process"
+    ]
+  },
+  {
+    "platforms": [
+      "windows",
+      "linux"
+    ],
+    "applicable_versions": [],
+    "freshness_seconds": 60,
+    "severity": "warning",
+    "classification": "observable_condition_not_vendor_root_cause",
+    "repair_recipe": null,
+    "id": "process.retained_after_end",
+    "product": "any",
+    "requires": [
+      "exact_birth_seen_twice",
+      "own_protocol_session_ended",
+      "same_executable"
+    ],
+    "contradicts": [
+      "shared_daemon",
+      "active_session",
+      "partial_process_coverage"
+    ],
+    "sources": [
+      "https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects"
+    ]
+  },
+  {
+    "platforms": [
+      "windows",
+      "linux"
+    ],
+    "applicable_versions": [],
+    "freshness_seconds": 60,
+    "severity": "warning",
+    "classification": "observable_condition_not_vendor_root_cause",
+    "repair_recipe": null,
+    "id": "state.repeat_staging",
+    "product": "codex",
+    "requires": [
+      "repeated_staging",
+      "positive_comparable_growth"
+    ],
+    "contradicts": [
+      "active_update",
+      "migration_in_progress"
+    ],
+    "sources": [
+      "https://developers.openai.com/codex/windows/"
+    ]
+  },
+  {
+    "platforms": [
+      "windows",
+      "linux"
+    ],
+    "applicable_versions": [],
+    "freshness_seconds": 60,
+    "severity": "warning",
+    "classification": "observable_condition_not_vendor_root_cause",
+    "repair_recipe": null,
+    "id": "state.large_editor_db",
+    "product": "cursor_acp",
+    "requires": [
+      "large_state_database",
+      "positive_comparable_growth"
+    ],
+    "contradicts": [
+      "intentional_import"
+    ],
+    "sources": [
+      "https://cursor.com/docs/troubleshooting/common-issues"
+    ]
+  },
+  {
+    "platforms": [
+      "windows",
+      "linux"
+    ],
+    "applicable_versions": [],
+    "freshness_seconds": 60,
+    "severity": "warning",
+    "classification": "observable_condition_not_vendor_root_cause",
+    "repair_recipe": null,
+    "id": "runtime.stale_socket",
+    "product": "docker",
+    "requires": [
+      "fresh_socket_error",
+      "same_start_attempt",
+      "local_desktop_endpoint",
+      "owners_stopped"
+    ],
+    "contradicts": [
+      "remote_context",
+      "active_desktop_owner"
+    ],
+    "sources": [
+      "https://docs.docker.com/desktop/troubleshoot-and-support/troubleshoot/"
+    ]
+  },
+  {
+    "platforms": [
+      "windows",
+      "linux"
+    ],
+    "applicable_versions": [],
+    "freshness_seconds": 60,
+    "severity": "warning",
+    "classification": "observable_condition_not_vendor_root_cause",
+    "repair_recipe": null,
+    "id": "state.invalid_attachment_json",
+    "product": "codex",
+    "requires": [
+      "invalid_registry_json",
+      "explicit_effective_home",
+      "owners_stopped"
+    ],
+    "contradicts": [
+      "active_codex_owner",
+      "registry_layout_unknown"
+    ],
+    "sources": [
+      "https://developers.openai.com/codex/config-advanced/"
+    ]
+  },
+  {
+    "platforms": [
+      "windows",
+      "linux"
+    ],
+    "applicable_versions": [],
+    "freshness_seconds": 60,
+    "severity": "warning",
+    "classification": "observable_condition_not_vendor_root_cause",
+    "repair_recipe": null,
+    "id": "claude.retained_mcp",
+    "product": "claude",
+    "requires": [
+      "duplicate_mcp_invocations",
+      "exact_ended_session_binding",
+      "same_births_in_two_samples"
+    ],
+    "contradicts": [
+      "shared_daemon",
+      "active_session"
+    ],
+    "sources": [
+      "https://code.claude.com/docs/en/mcp"
+    ]
+  },
+  {
+    "platforms": [
+      "windows",
+      "linux"
+    ],
+    "applicable_versions": [],
+    "freshness_seconds": 60,
+    "severity": "warning",
+    "classification": "observable_condition_not_vendor_root_cause",
+    "repair_recipe": null,
+    "id": "copilot.terminal_accumulation",
+    "product": "copilot",
+    "requires": [
+      "terminal_growth",
+      "exact_ended_session_binding",
+      "same_births_in_two_samples"
+    ],
+    "contradicts": [
+      "shared_terminal",
+      "active_session"
+    ],
+    "sources": [
+      "https://docs.github.com/en/copilot/how-tos/copilot-sdk/features/streaming-events"
+    ]
+  },
+  {
+    "platforms": [
+      "windows",
+      "linux"
+    ],
+    "applicable_versions": [],
+    "freshness_seconds": 60,
+    "severity": "warning",
+    "classification": "observable_condition_not_vendor_root_cause",
+    "repair_recipe": null,
+    "id": "state.large_copilot_editor_db",
+    "product": "copilot",
+    "requires": [
+      "large_state_database",
+      "positive_comparable_growth"
+    ],
+    "contradicts": [
+      "intentional_import"
+    ],
+    "sources": [
+      "https://cursor.com/docs/troubleshooting/common-issues"
+    ]
+  }
+]

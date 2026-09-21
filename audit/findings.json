@@ -1,0 +1,425 @@
+{
+  "baseline": "0.4.0-alpha.1",
+  "candidate": "0.4.0-alpha.2",
+  "findings": [
+    {
+      "id": "A01",
+      "severity": "high",
+      "title": "Hidden index flags allow destructive worktree misclassification",
+      "before": "A tracked file modified behind assume-unchanged or skip-worktree can yield an empty status. Non-force Git worktree removal still deletes it; preserving HEAD does not preserve that uncommitted content.",
+      "source_fix": "Capture the -v NUL index stream before/after observation, protect both flags, include flags in the metadata digest, and block sparse-checkout or unreadable operation markers.",
+      "files": [
+        "crates/workstation-platform/src/control_workspace.rs"
+      ],
+      "regression_checks": [
+        "GitBehavior.test_baseline_assume_unchanged_loses_data",
+        "GitBehavior.test_baseline_skip_worktree_loses_data",
+        "GitBehavior.test_patched_recipe_blocks_assume_unchanged",
+        "GitBehavior.test_patched_recipe_blocks_skip_worktree"
+      ],
+      "status": "source_fix_applied",
+      "verification_scope": "Actual Git reproduction and independent guarded-recipe check; Rust capture/removal wrapper unrun. Same-user concurrent writes still require coordination.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A02",
+      "severity": "high",
+      "title": "ACP path guard rejects normal Windows roots but under-validates nonexistent file names",
+      "before": "Canonicalizing a Windows root creates a verbatim path that the local path validator rejects. A nonexistent target was checked through its parent without first validating the complete target spelling (including ADS/ambiguous names).",
+      "source_fix": "Keep a validated normal root spelling, lexically validate the whole requested path, distinguish true NotFound from other errors, reject dangling links and protected configuration directories.",
+      "files": [
+        "crates/workstation-platform/src/rpc.rs"
+      ],
+      "regression_checks": [
+        "SourceWiring.test_permission_root_no_extended_path_roundtrip",
+        "SourceWiring.test_ads_validation_precedes_new_file_fallback",
+        "ReferenceModels.test_local_file_presence_distinguishes_dangling_symlink"
+      ],
+      "status": "source_fix_applied",
+      "verification_scope": "Source trace plus Rust canonicalize documentation. Native Windows path, ADS and provider callback tests are authored, not run. This is policy, not filesystem isolation.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A03",
+      "severity": "medium",
+      "title": "Codex completion notification can be lost before the turn/start reply",
+      "before": "The RPC request loop discarded a terminal turn notification arriving before the request response. The subsequent waiter could wait until timeout for an event already received.",
+      "source_fix": "Retain only bounded terminal thread/turn/status metadata, consume it in the turn waiter, and cap the pending terminal queue at 32.",
+      "files": [
+        "crates/workstation-platform/src/rpc.rs"
+      ],
+      "regression_checks": [
+        "ReferenceModels.test_early_turn_terminal_must_survive_rpc_reply"
+      ],
+      "status": "source_fix_applied",
+      "verification_scope": "Control-flow review and independent event-order reference; real Codex/Rust transport unrun.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A04",
+      "severity": "medium",
+      "title": "Known unsupported Gemini read-only continuation fails after starting a session",
+      "before": "The pre-existing unsupported read-only guard occurred only after connecting, authenticating and creating/loading a vendor session.",
+      "source_fix": "Reject this known unsupported combination before connect or session creation.",
+      "files": [
+        "crates/workstation-platform/src/acp_driver.rs"
+      ],
+      "regression_checks": [
+        "SourceWiring.test_gemini_readonly_rejected_before_connect"
+      ],
+      "status": "source_fix_applied",
+      "verification_scope": "Static call-order verification. Does not certify another provider mode as a sandbox.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A05",
+      "severity": "high",
+      "title": "Quarantine undo and absence checks could conflate lookup failures with absence",
+      "before": "Path.exists/is_ok patterns hide errors or dangling entries; restore also lacked full post-rename verification.",
+      "source_fix": "Introduce strict entry_exists/require_absent, validate the original path, and recheck restored identity/content plus source disappearance. Preserve uncertainty after partial effects.",
+      "files": [
+        "crates/workstation-platform/src/paths.rs",
+        "crates/workstation-platform/src/repairs.rs",
+        "crates/workstation-platform/src/engine.rs"
+      ],
+      "regression_checks": [
+        "SourceWiring.test_undo_refuses_false_missing_and_checks_postcondition",
+        "ReferenceModels.test_local_file_presence_distinguishes_dangling_symlink"
+      ],
+      "status": "source_fix_applied",
+      "verification_scope": "Source checks and Linux filesystem semantics; no real quarantine/Windows socket action executed. Rename races are not claimed eliminated.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A06",
+      "severity": "high",
+      "title": "Archive approval did not bind exact selected records",
+      "before": "The approved archive operation contained only cutoff and count. New qualifying records or payload changes could change what execution archived after approval.",
+      "source_fix": "Add an exact bounded selection digest to the operation, deterministic tie-breaking and execution-time re-selection before any archive write. Change the effects policy ID to require replanning.",
+      "files": [
+        "crates/workstation-core/src/operations.rs",
+        "crates/workstation-core/src/effects.rs",
+        "crates/workstation-platform/src/journal_archive.rs",
+        "crates/workstation-platform/src/operation_runtime.rs"
+      ],
+      "regression_checks": [
+        "SqliteBehavior.test_exact_archive_selection_changes_when_new_run_qualifies",
+        "SqliteBehavior.test_archive_selection_order_has_stable_tie_break",
+        "ReferenceModels.test_archive_digest_binds_payload_not_just_row_ids"
+      ],
+      "status": "source_fix_applied",
+      "verification_scope": "Exact shipped SQL selection executed with Python SQLite; Rust plan digest/executor unrun.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A07",
+      "severity": "medium",
+      "title": "Archive builds oversized payload collections before enforcing its byte budget",
+      "before": "Record count was checked too late (including an off-by-one), and the aggregate byte ceiling was enforced only after retaining/serializing the full pack.",
+      "source_fix": "Enforce aggregate encoded-entry and record limits before retaining each entry, reserve header space, use checked arithmetic, and verify hydrated pack size/project binding.",
+      "files": [
+        "crates/workstation-platform/src/journal_archive.rs"
+      ],
+      "regression_checks": [
+        "ReferenceModels.test_archive_aggregate_budget_rejects_before_retaining_large_set",
+        "ReferenceModels.test_archive_record_limit_is_not_off_by_one"
+      ],
+      "status": "source_fix_applied",
+      "verification_scope": "Independent bounded reference plus static wiring; no native memory benchmark or archive executor run.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A08",
+      "severity": "high",
+      "title": "Failed restore can leave an apparently usable partial home",
+      "before": "After copying the database, a failure restoring required archive dependencies left a normal-looking initialized home; future opens did not know restore was unfinished.",
+      "source_fix": "Create and sync restore.pending before data copy, reject normal and read-only opens while present, and remove it only after dependencies and integrity checks succeed.",
+      "files": [
+        "crates/workstation-platform/src/storage.rs"
+      ],
+      "regression_checks": [
+        "ReferenceModels.test_restore_marker_is_independent_of_valid_database",
+        "SourceWiring.test_restore_block_marker_used_for_normal_open"
+      ],
+      "status": "source_fix_applied",
+      "verification_scope": "Marker/error-path source audit and reference fixture; crash-injection against the Rust restore is still required.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A09",
+      "severity": "high",
+      "title": "Backup/restore structural checks omit foreign-key integrity",
+      "before": "SQLite integrity_check/quick_check can return ok for broken foreign keys. The prior backup/restore health checks could accept internally inconsistent project/resource relationships.",
+      "source_fix": "Run PRAGMA foreign_key_check during owned DB health, backup validation and before restoring a source.",
+      "files": [
+        "crates/workstation-platform/src/storage.rs"
+      ],
+      "regression_checks": [
+        "SqliteBehavior.test_integrity_check_misses_foreign_key_breakage",
+        "SqliteBehavior.test_foreign_key_guard_accepts_valid_database",
+        "SqliteBehavior.test_backup_copies_committed_wal_state"
+      ],
+      "status": "source_fix_applied",
+      "verification_scope": "Actual SQLite reproduction with shipped schemas; Rust wrapper and Windows backup unrun.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A10",
+      "severity": "high",
+      "title": "Vault can write an accepted secret that its reader rejects",
+      "before": "A 16 KiB byte value serialized as decimal JSON can exceed 64 KiB before DPAPI overhead, but the ciphertext reader was capped at 64 KiB.",
+      "source_fix": "Share a 16 KiB plaintext and 128 KiB ciphertext limit across legacy/versioned paths; reject oversized ciphertext before writing and invalid plaintext after unprotect.",
+      "files": [
+        "crates/workstation-platform/src/vault.rs",
+        "crates/workstation-platform/src/secret_lifecycle.rs"
+      ],
+      "regression_checks": [
+        "ReferenceModels.test_baseline_max_secret_binding_exceeds_cipher_reader",
+        "SourceWiring.test_vault_read_write_cap_consistent"
+      ],
+      "status": "source_fix_applied",
+      "verification_scope": "Actual serialization-size reference using a valid UTF-8 secret. No DPAPI operation executed; native maximum-size roundtrip tests authored.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A11",
+      "severity": "high",
+      "title": "Windows secret-lifecycle branch references Path without importing it",
+      "before": "The Windows-only implementation names Path::new without std::path::Path in scope, a direct source-level name-resolution defect.",
+      "source_fix": "Add the cfg(windows) Path import alongside Read/Write.",
+      "files": [
+        "crates/workstation-platform/src/secret_lifecycle.rs"
+      ],
+      "regression_checks": [
+        "SourceWiring.test_vault_read_write_cap_consistent"
+      ],
+      "status": "source_fix_applied",
+      "verification_scope": "Static import/name audit, not an executed compiler diagnostic. The full tree may still contain other compilation defects.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A12",
+      "severity": "medium",
+      "title": "Plan-fit utilization can combine different accounts",
+      "before": "Completed cycles had provider and bucket but no explicit account identity, so apparently comparable cycles from different subscriptions could be aggregated.",
+      "source_fix": "Add optional account_alias to the wire shape; missing identity produces unknown, mixed accounts reject, and complete-cycle keys include account.",
+      "files": [
+        "crates/workstation-core/src/economics.rs",
+        "fixtures/control/plan-cycles.json"
+      ],
+      "regression_checks": [
+        "ReferenceModels.test_accountless_plan_fit_reference_is_unknown",
+        "ReferenceModels.test_mixed_accounts_plan_fit_reference_is_rejected",
+        "SourceWiring.test_plan_fit_has_explicit_account_boundary"
+      ],
+      "status": "source_fix_applied",
+      "verification_scope": "Independent identity references and source assertions. Old imports are still parseable, but now need explicit account identity for a plan-fit verdict.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A13",
+      "severity": "medium",
+      "title": "Finite economic inputs can produce nonfinite derived results",
+      "before": "Tiny positive denominators and large even-median sums can create infinity; some derived outputs could then be serialized as null or reported without an explicit numeric boundary.",
+      "source_fix": "Use finite-ratio guards, overflow-safe median arithmetic, reject impossible scenario rates and withhold unsupported ratios.",
+      "files": [
+        "crates/workstation-core/src/economics.rs"
+      ],
+      "regression_checks": [
+        "ReferenceModels.test_finite_ratio_withholds_overflow",
+        "ReferenceModels.test_nonfinite_ratio_arguments_are_rejected",
+        "ReferenceModels.test_even_median_no_overflow"
+      ],
+      "status": "source_fix_applied",
+      "verification_scope": "Independent IEEE-754 reference checks; no claim of executed Rust math or calibrated forecast confidence.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A14",
+      "severity": "medium",
+      "title": "Optional context sections can prevent all project context",
+      "before": "A failing discovery/economics/cache/timeline helper propagated its error, hiding essential decisions/resources/Work Items too.",
+      "source_fix": "Collect optional sections as bounded success or typed failure metadata; preserve essential authoritative lookups as fail-closed.",
+      "files": [
+        "crates/workstation-platform/src/control_store.rs"
+      ],
+      "regression_checks": [
+        "SourceWiring.test_optional_context_is_not_all_or_nothing"
+      ],
+      "status": "source_fix_applied",
+      "verification_scope": "Static flow review; authored Rust optional-section tests remain unrun.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A15",
+      "severity": "medium",
+      "title": "Reviewed candidate count can exceed the discovery matcher budget",
+      "before": "The query allowed 77 imported entries on top of 27 builtins (104) while the matcher rejects more than 100, potentially disabling discovery for a growing catalog.",
+      "source_fix": "Enforce builtin-aware capacity during review and query, retain excess existing records rather than deleting them, and report omitted capacity.",
+      "files": [
+        "crates/workstation-platform/src/control_store.rs"
+      ],
+      "regression_checks": [
+        "SqliteBehavior.test_catalog_room_includes_builtins"
+      ],
+      "status": "source_fix_applied",
+      "verification_scope": "Packaged catalog counted plus source capacity review; actual Rust review/import transaction unrun.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A16",
+      "severity": "medium",
+      "title": "Empty strings can masquerade as trial evidence or reviewed resource metadata",
+      "before": "Option presence was accepted even for blank evidence/revision strings, allowing a claimed usefulness outcome without a meaningful reference.",
+      "source_fix": "Reject blank or oversized evidence/revision and empty reviewed resource fields; validate equivalence and feedback times.",
+      "files": [
+        "crates/workstation-core/src/discovery.rs"
+      ],
+      "regression_checks": [
+        "SourceWiring.test_empty_trial_evidence_rejected"
+      ],
+      "status": "source_fix_applied",
+      "verification_scope": "Input validation source fix; references still need genuine operator evaluation, not automated truth inference.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A17",
+      "severity": "medium",
+      "title": "Collision detection performs repeated all-pairs path normalization",
+      "before": "Large accepted actor/path inputs caused an actors-squared times paths-squared loop with repeated allocation.",
+      "source_fix": "Normalize once into bounded sets; use exact, ancestor and indexed-descendant checks; limit aggregate path bytes and validate actor roles/times.",
+      "files": [
+        "crates/workstation-core/src/workspace_policy.rs"
+      ],
+      "regression_checks": [
+        "ReferenceModels.test_collision_index_equivalent_to_pairwise_reference"
+      ],
+      "status": "source_fix_applied",
+      "verification_scope": "Independent reference equivalence over 2,048 path/set comparisons; not a Rust/Windows performance benchmark.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A18",
+      "severity": "medium",
+      "title": "Ownership correlation repeatedly scans bindings and accepts ambiguous prior identities",
+      "before": "Each ancestry step re-scanned the binding list; duplicate prior process keys and ill-ordered evidence times were insufficiently rejected.",
+      "source_fix": "Pre-index fresh bindings, cap ended-session evidence, validate binding time ordering, and reject duplicate previous process identities.",
+      "files": [
+        "crates/workstation-core/src/ownership.rs"
+      ],
+      "regression_checks": [],
+      "status": "source_fix_applied",
+      "verification_scope": "Source/dataflow inspection and authored Rust regression; runtime matching untested. All processes remain protected.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A19",
+      "severity": "medium",
+      "title": "Process graph can claim complete coverage with unreadable fields",
+      "before": "Unreadable executable or resource fields did not always reduce coverage; resource observations used a second handle without an explicit birth consistency check.",
+      "source_fix": "Track field readability, reduce per-process and graph coverage, and compare handle creation time before merging resource observations.",
+      "files": [
+        "crates/workstation-platform/src/process_graph.rs"
+      ],
+      "regression_checks": [],
+      "status": "source_fix_applied",
+      "verification_scope": "Native source review only. A PID-reuse exploit is not claimed reproduced; Windows collection must still be exercised.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A20",
+      "severity": "medium",
+      "title": "Malformed or future timestamps can overflow arithmetic or appear fresh",
+      "before": "Signal time subtraction accepted negative extreme values, and a future last-observed timestamp could produce recently-reported ownership.",
+      "source_fix": "Validate signal, checkpoint and lease timestamps before subtraction; exact expiry/future observations remain uncertain.",
+      "files": [
+        "crates/workstation-core/src/health_rules.rs",
+        "crates/workstation-core/src/continuity.rs"
+      ],
+      "regression_checks": [
+        "ReferenceModels.test_lease_future_timestamp_remains_unknown",
+        "SourceWiring.test_signal_and_lease_timestamps_checked"
+      ],
+      "status": "source_fix_applied",
+      "verification_scope": "Source reasoning/reference boundary checks; native execution and clock-jump integration deferred.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A21",
+      "severity": "medium",
+      "title": "Pinned time dependency is in a published affected version range",
+      "before": "time=0.3.44 falls in RUSTSEC-2026-0009 affected versions; the advisory concerns RFC2822 recursion/stack exhaustion.",
+      "source_fix": "Move the exact direct pin to 0.3.47, the advisory patch floor; preserve features and record the unresolved transitive audit.",
+      "files": [
+        "Cargo.toml"
+      ],
+      "regression_checks": [
+        "SourceWiring.test_dependency_pin_moves_out_of_known_advisory_range"
+      ],
+      "status": "source_fix_applied",
+      "verification_scope": "Primary advisory checked. Current code uses RFC3339; exploit reachability is NOT established. No Cargo resolution or advisory scan of a real lockfile ran.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A22",
+      "severity": "medium",
+      "title": "Some supposedly bounded config reads can block on special files or allocate without limit",
+      "before": "Worktrunk empty-config verification used an unbounded fs::read; config/database opens did not consistently reject non-regular files before open.",
+      "source_fix": "Add regular-file prechecks, exact-size bounded Worktrunk config reading and strict project-config presence checks.",
+      "files": [
+        "crates/workstation-platform/src/paths.rs",
+        "crates/workstation-platform/src/storage.rs",
+        "crates/workstation-platform/src/specialists.rs"
+      ],
+      "regression_checks": [
+        "ReferenceModels.test_unix_socket_is_not_a_regular_file"
+      ],
+      "status": "source_fix_applied",
+      "verification_scope": "Linux special-file semantics and source checks. Path replacement races against malicious same-user writers remain outside this guard.",
+      "rust_executed": false,
+      "windows_executed": false
+    },
+    {
+      "id": "A23",
+      "severity": "low",
+      "title": "Read-only report says no repairs are implemented anywhere",
+      "before": "The inherited report wording described the entire product as lacking cleanup/repair despite added explicit operation paths.",
+      "source_fix": "Clarify that this particular read-only assessment performed no cleanup or repairs.",
+      "files": [
+        "crates/workstation-core/src/render.rs"
+      ],
+      "regression_checks": [],
+      "status": "source_fix_applied",
+      "verification_scope": "Documentation/output consistency correction only; not a change in authority or capability.",
+      "rust_executed": false,
+      "windows_executed": false
+    }
+  ],
+  "counts": {
+    "high": 8,
+    "medium": 14,
+    "low": 1
+  },
+  "counts_are_findings_not_test_passes": true
+}

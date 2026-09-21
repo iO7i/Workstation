@@ -2,6 +2,17 @@
 
 All notable changes are documented here. This project uses semantic versioning with prerelease identifiers while the public API is still evolving.
 
+## 0.5.0-alpha.2 — 2026-09-21
+
+### Fixed
+
+- Restored clean compilation and warning-free Clippy checks on non-Windows CI runners by isolating Windows-only ownership imports and correcting the DPAPI fallback path.
+
+### Notes
+
+- Windows runtime behavior and the schema-v5 durable execution model are unchanged from alpha.1.
+- Alpha.2 supersedes alpha.1 for public evaluation.
+
 ## 0.5.0-alpha.1 — 2026-09-21
 
 ### Added

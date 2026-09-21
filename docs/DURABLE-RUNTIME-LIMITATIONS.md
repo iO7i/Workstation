@@ -1,6 +1,6 @@
 # Durable runtime limitations
 
-Workstation 0.5.0-alpha.1 is intentionally conservative.
+Workstation 0.5.0-alpha.2 is intentionally conservative.
 
 - Windows 11 x64 is the primary runtime target. Ubuntu CI provides portability feedback, not production support. macOS is untested.
 - The packaged Windows executable is unsigned. There is no installer or automatic updater.

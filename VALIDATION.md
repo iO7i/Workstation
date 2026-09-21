@@ -1,10 +1,10 @@
-# Validation status — Workstation 0.5.0-alpha.1
+# Validation status — Workstation 0.5.0-alpha.2
 
-**Disposition: locally validated public alpha candidate.** This is evidence for the checked-out source on 21 September 2026, not a claim about an unpublished GitHub commit or every live provider.
+**Disposition: locally validated public alpha candidate.** This is evidence for the checked-out source on 21 September 2026, not a claim about every live provider.
 
 ## Passed gates
 
-- Repository base: named branch `feature/durable-runtime`, base commit `59fa1b6b152aadd93d56ca3b7a03944d8e6f7fe7`; no Git remote is configured.
+- Source identity is bound by the public release tag and `SOURCE-MANIFEST.sha256` rather than an embedded pre-publication commit identifier.
 - Rust toolchain: `1.97.1-x86_64-pc-windows-msvc`.
 - `cargo fmt --all -- --check`.
 - `cargo check --workspace --all-targets --all-features --locked --offline`.

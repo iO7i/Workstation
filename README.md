@@ -1,4 +1,4 @@
-# Workstation 0.5.0-alpha.1
+# Workstation 0.5.0-alpha.2
 
 Workstation is a local-first Rust control plane for inspecting development environments and coordinating bounded work across supported coding agents. Version 0.5 adds a durable execution layer: run state survives process exits, progress is append-only, cancellation is revision-checked, and completion remains separate from verification and ownership release.
 

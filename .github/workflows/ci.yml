@@ -31,7 +31,7 @@ jobs:
       - name: Lint
         run: cargo +1.97.1 clippy --workspace --all-targets --all-features --locked -- -D warnings
       - name: Rust tests
-        run: cargo +1.97.1 test --workspace --all-features --locked
+        run: cargo +1.97.1 test --workspace --all-features --locked -- --test-threads=1
       - name: Release build
         run: cargo +1.97.1 build --release --package workstation-cli --locked
       - name: Windows isolated smoke

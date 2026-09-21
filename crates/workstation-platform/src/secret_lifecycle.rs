@@ -48,7 +48,7 @@ pub fn rotate(
     }
     #[cfg(not(windows))]
     {
-        let _ = (run, epoch, sha);
+        let _ = (run, sha);
         Err(Error::new("DPAPI_WINDOWS_REQUIRED"))
     }
     #[cfg(windows)]

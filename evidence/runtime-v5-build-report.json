@@ -1,12 +1,12 @@
 {
   "schema_version": "workstation.runtime-v5-build-report.v1",
-  "version": "0.5.0-alpha.1",
-  "recorded_at_utc": "2026-09-21T00:44:58.4926708Z",
+  "version": "0.5.0-alpha.2",
+  "recorded_at_utc": "2026-09-21T01:35:19.4678956Z",
   "platform": "windows-x64",
   "toolchain": "1.97.1-x86_64-pc-windows-msvc",
-  "base_commit": "59fa1b6b152aadd93d56ca3b7a03944d8e6f7fe7",
-  "source_state": "uncommitted_release_candidate",
-  "network_mode": "offline",
+  "source_identity": "bound_by_release_tag_and_source_manifest",
+  "source_state": "public_release_candidate_pre_tag",
+  "network_mode": "dependency_access_permitted",
   "live_provider_calls": 0,
   "commands": [
     "cargo fmt --all -- --check",
@@ -35,6 +35,6 @@
   "limitations": [
     "unsigned binary",
     "offline fixtures are not live-provider certification",
-    "clean public GitHub Actions run pending repository publication"
+    "clean public GitHub Actions run recorded separately by GitHub"
   ]
 }

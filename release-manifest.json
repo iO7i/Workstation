@@ -1,9 +1,9 @@
 {
-  "version": "0.5.0-alpha.1",
+  "version": "0.5.0-alpha.2",
   "artifact_type": "source_candidate",
   "scope": "durable_runtime_schema_v5",
-  "base_commit": "59fa1b6b152aadd93d56ca3b7a03944d8e6f7fe7",
-  "implementation_state": "uncommitted_release_candidate",
+  "source_identity": "bound_by_release_tag_and_source_manifest",
+  "implementation_state": "public_release_candidate",
   "executable_included": false,
   "dependency_lock_included": true,
   "signature": "unsigned",

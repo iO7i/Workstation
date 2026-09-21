@@ -68,7 +68,7 @@ fn stopped(kind: RepairKind) -> Result<()> {
     #[cfg(not(windows))]
     {
         let _ = kind;
-        return Err(Error::new("REPAIR_WINDOWS_REQUIRED"));
+        Err(Error::new("REPAIR_WINDOWS_REQUIRED"))
     }
     #[cfg(windows)]
     {

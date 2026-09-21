@@ -107,12 +107,12 @@ try {
     $null = New-Item -ItemType Directory -Force -Path $EvidencePath
     $BuildReport = [ordered]@{
         schema_version = 'workstation.runtime-v5-build-report.v1'
-        version = '0.5.0-alpha.1'
+        version = '0.5.0-alpha.2'
         recorded_at_utc = [DateTime]::UtcNow.ToString('o')
         platform = 'windows-x64'
         toolchain = $Toolchain
-        base_commit = '59fa1b6b152aadd93d56ca3b7a03944d8e6f7fe7'
-        source_state = 'uncommitted_release_candidate'
+        source_identity = 'bound_by_release_tag_and_source_manifest'
+        source_state = 'public_release_candidate_pre_tag'
         network_mode = $(if ($Offline) { 'offline' } else { 'dependency_access_permitted' })
         live_provider_calls = 0
         commands = @(
@@ -137,17 +137,17 @@ try {
         limitations = @(
             'unsigned binary',
             'offline fixtures are not live-provider certification',
-            'clean public GitHub Actions run pending repository publication'
+            'clean public GitHub Actions run recorded separately by GitHub'
         )
     }
     $Utf8 = New-Object System.Text.UTF8Encoding($false)
     [IO.File]::WriteAllText((Join-Path $EvidencePath 'runtime-v5-build-report.json'), ($BuildReport | ConvertTo-Json -Depth 12), $Utf8)
-    $Release = Join-Path $Root ('dist\workstation-0.5.0-alpha.1-windows-x64-' + (Get-Date -Format 'yyyyMMdd-HHmmss'))
+    $Release = Join-Path $Root ('dist\workstation-0.5.0-alpha.2-windows-x64-' + (Get-Date -Format 'yyyyMMdd-HHmmss'))
     $null = New-Item -ItemType Directory -Path $Release -Force
     Copy-Item -LiteralPath $Exe -Destination $Release
     Copy-Item -LiteralPath $Lock, (Join-Path $Root 'README.md'), (Join-Path $Root 'LICENSE') -Destination $Release
     $Manifest = [ordered]@{
-        version = '0.5.0-alpha.1'
+        version = '0.5.0-alpha.2'
         scope = 'Durable execution alpha with schema-v5 persistence, bounded supervision, reconciliation, and verification; live-provider certification remains separate'
         toolchain = $Toolchain
         build_utc = [DateTime]::UtcNow.ToString('o')

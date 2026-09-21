@@ -1,6 +1,6 @@
 # Build and release gate
 
-Workstation 0.5.0-alpha.1 pins Rust 1.97.1. The Windows package script requires an already installed `1.97.1-x86_64-pc-windows-msvc` toolchain and Visual Studio Build Tools; it does not install or modify either one.
+Workstation 0.5.0-alpha.2 pins Rust 1.97.1. The Windows package script requires an already installed `1.97.1-x86_64-pc-windows-msvc` toolchain and Visual Studio Build Tools; it does not install or modify either one.
 
 Run from a 64-bit PowerShell process:
 

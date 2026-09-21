@@ -1,4 +1,4 @@
-# Current capabilities — 0.5.0-alpha.1
+# Current capabilities — 0.5.0-alpha.2
 
 The current candidate adds durable execution without broadening automatic authority. The table distinguishes local test evidence from live-provider evidence.
 

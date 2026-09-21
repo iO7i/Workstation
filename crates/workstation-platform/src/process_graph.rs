@@ -1,7 +1,9 @@
 //! Win32 process metadata collected only inside a bounded owned collector.
 //! Paths/digests identify on-disk executables, not their loaded bytes or semantic sessions.
 use crate::{Error, Result};
-use workstation_core::{host_graph::*, integrations::Integration, ownership::*, Coverage};
+#[cfg(windows)]
+use workstation_core::ownership::*;
+use workstation_core::{host_graph::*, integrations::Integration, Coverage};
 #[cfg(windows)]
 pub fn uptime_ms() -> Result<u64> {
     Ok(unsafe { windows_sys::Win32::System::SystemInformation::GetTickCount64() })

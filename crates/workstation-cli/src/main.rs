@@ -854,7 +854,11 @@ fn main() -> std::process::ExitCode {
     {
         return match worker() {
             Ok(()) => std::process::ExitCode::SUCCESS,
-            Err(_) => std::process::ExitCode::from(2),
+            Err(e) => {
+                let _ =
+                    serde_json::to_writer(std::io::stdout().lock(), &json!({"error_code": e.code}));
+                std::process::ExitCode::from(2)
+            }
         };
     }
     let cli = match Cli::try_parse() {

@@ -14,6 +14,7 @@ use workstation_core::Coverage;
 pub(crate) const SECRET_BYTES_LIMIT: usize = 16 * 1024;
 // A Vec<u8> serialized as decimal JSON can occupy four bytes per input byte,
 // before binding fields and DPAPI overhead. Read and write bounds must agree.
+#[cfg(windows)]
 pub(crate) const CIPHER_BYTES_LIMIT: usize = 128 * 1024;
 pub struct SecretBytes(pub(crate) Vec<u8>);
 impl Drop for SecretBytes {

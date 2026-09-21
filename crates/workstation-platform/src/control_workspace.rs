@@ -225,7 +225,11 @@ pub fn capture(project: Project, workspace_id: String, path: PathBuf) -> Result<
     let selected = registered
         .worktrees
         .iter()
-        .find(|w| same_path(Path::new(&w.path), &path))
+        .find(|w| {
+            let candidate = Path::new(&w.path);
+            same_path(candidate, &path)
+                || directory_identity(candidate).is_ok_and(|identity| identity == initial)
+        })
         .ok_or_else(|| Error::new("WORKSPACE_NOT_REGISTERED_WITH_GIT"))?;
     if selected.bare || selected.prunable {
         return Err(Error::new("WORKSPACE_UNUSABLE"));

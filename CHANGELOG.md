@@ -7,6 +7,7 @@ All notable changes are documented here. This project uses semantic versioning w
 ### Fixed
 
 - Restored clean compilation and warning-free Clippy checks on non-Windows CI runners by isolating Windows-only ownership imports and correcting the DPAPI fallback path.
+- Matched Git worktrees by validated directory identity when Windows exposes equivalent short and long path spellings.
 
 ### Notes
 

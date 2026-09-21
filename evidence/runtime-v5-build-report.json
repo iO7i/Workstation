@@ -1,7 +1,7 @@
 {
   "schema_version": "workstation.runtime-v5-build-report.v1",
   "version": "0.5.0-alpha.2",
-  "recorded_at_utc": "2026-09-21T01:09:10.483989Z",
+  "recorded_at_utc": "2026-09-21T01:35:19.4678956Z",
   "platform": "windows-x64",
   "toolchain": "1.97.1-x86_64-pc-windows-msvc",
   "source_identity": "bound_by_release_tag_and_source_manifest",

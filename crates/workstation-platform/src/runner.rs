@@ -13,6 +13,41 @@ use std::{
 };
 use workstation_core::{WorkerRequest, MAX_WIRE_BYTES};
 
+fn reported_worker_error(bytes: &[u8]) -> &'static str {
+    let code = serde_json::from_slice::<serde_json::Value>(bytes)
+        .ok()
+        .and_then(|value| value.get("error_code")?.as_str().map(str::to_owned));
+    match code.as_deref() {
+        Some("DIRECTORY_ID_FAILED") => "DIRECTORY_ID_FAILED",
+        Some("DIRECTORY_REDIRECTED") => "DIRECTORY_REDIRECTED",
+        Some("GIT_MEMBERSHIP_UNKNOWN") => "GIT_MEMBERSHIP_UNKNOWN",
+        Some("GIT_OUTPUT_LIMIT") => "GIT_OUTPUT_LIMIT",
+        Some("GIT_PATH_ENCODING_UNSUPPORTED") => "GIT_PATH_ENCODING_UNSUPPORTED",
+        Some("GIT_PIPE_MISSING") => "GIT_PIPE_MISSING",
+        Some("GIT_QUERY_FAILED") => "GIT_QUERY_FAILED",
+        Some("GIT_START_FAILED") => "GIT_START_FAILED",
+        Some("GIT_WAIT_FAILED") => "GIT_WAIT_FAILED",
+        Some("INDEX_FLAGS_CHANGED_DURING_OBSERVATION") => "INDEX_FLAGS_CHANGED_DURING_OBSERVATION",
+        Some("INDEX_FLAGS_TRUNCATED") => "INDEX_FLAGS_TRUNCATED",
+        Some("INDEX_FLAGS_UNSUPPORTED") => "INDEX_FLAGS_UNSUPPORTED",
+        Some("NATIVE_GIT_EXE_REQUIRED") => "NATIVE_GIT_EXE_REQUIRED",
+        Some("PATH_ENCODING_UNSUPPORTED") => "PATH_ENCODING_UNSUPPORTED",
+        Some("PATH_REDIRECTION_BLOCKED") => "PATH_REDIRECTION_BLOCKED",
+        Some("PATH_UNAVAILABLE") => "PATH_UNAVAILABLE",
+        Some("STATUS_CHANGED_DURING_OBSERVATION") => "STATUS_CHANGED_DURING_OBSERVATION",
+        Some("STATUS_PATH_LIMIT") => "STATUS_PATH_LIMIT",
+        Some("STATUS_PATH_UNSAFE") => "STATUS_PATH_UNSAFE",
+        Some("STATUS_RENAME_TRUNCATED") => "STATUS_RENAME_TRUNCATED",
+        Some("STATUS_SCHEMA_UNSUPPORTED") => "STATUS_SCHEMA_UNSUPPORTED",
+        Some("STATUS_TRUNCATED") => "STATUS_TRUNCATED",
+        Some("WORKSPACE_CHANGED_DURING_OBSERVATION") => "WORKSPACE_CHANGED_DURING_OBSERVATION",
+        Some("WORKSPACE_HEAD_UNKNOWN") => "WORKSPACE_HEAD_UNKNOWN",
+        Some("WORKSPACE_NOT_REGISTERED_WITH_GIT") => "WORKSPACE_NOT_REGISTERED_WITH_GIT",
+        Some("WORKSPACE_UNUSABLE") => "WORKSPACE_UNUSABLE",
+        _ => "WORKER_FAILED",
+    }
+}
+
 pub struct Output {
     pub bytes: Vec<u8>,
     pub exit_code: i32,
@@ -208,7 +243,7 @@ pub fn collect(
         return Err(Error::new(reason));
     }
     if code != 0 {
-        return Err(Error::new("WORKER_FAILED"));
+        return Err(Error::new(reported_worker_error(&bytes)));
     }
     Ok(Output {
         bytes,
